@@ -716,7 +716,7 @@ static void tcp_echoserver_send(struct tcp_pcb *tpcb, struct tcp_echoserver_stru
 
       /* Update tcp window size to be advertized : should be called when received
       data (with the amount plen) has been processed by the application layer */
-//      tcp_recved(tpcb, plen);
+      tcp_recved(tpcb, plen);
    } else if(wr_err == ERR_MEM) {
       /* we are low on memory, try later / harder, defer to poll */
      es->p = ptr;
@@ -939,7 +939,9 @@ static err_t grltcpServerRecv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, e
       //Grl-Edit,19ul'22
 //      mem_free_count++;
 //      pbuf_free(p);//GRL_EDIT 19Jul'22
-      tcp_recved(tpcb, p->tot_len);
+//      tcp_recved(tpcb, p->tot_len);
+      tcp_sent(tpcb, tcp_echoserver_sent);
+
       tcp_echoserver_connection_close(tpcb, es);
       ret_err = ERR_OK;
     }
@@ -949,13 +951,25 @@ static err_t grltcpServerRecv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, e
 
         /* store reference to incoming pbuf (chain) */
         es->p = p;
-        //Pranay,18March'22
-        tcp_recved(tpcb, p->tot_len);
+
+        tcp_sent(tpcb, tcp_echoserver_sent);
 
         grl_tcp_recv_data_pop(tpcb,p);
 
-        //Pranay,18March'22
-        pbuf_free(p);
+
+
+        if( isEchobackReq )//Dont echo back
+            tcp_echoserver_send(tpcb, es);
+        else
+        {
+
+            //Pranay,20Sep'22
+            tcp_recved(tpcb, p->tot_len);
+
+            //Pranay,18March'22
+            pbuf_free(p);
+        }
+
 
         ret_err = ERR_OK;
     }
@@ -1236,6 +1250,7 @@ static int llen,gDatalength ;
 err_t grlTcpDataTx(uint16_t * aTxBuf, uint16_t aDataLength)
 {
     err_t err;
+//    gReadAPI = false;
 
 #if 0
     gReadAPI = false;
@@ -1328,6 +1343,7 @@ err_t grlTcpDataTx(uint16_t * aTxBuf, uint16_t aDataLength)
         err = tcp_output (Rxtcb);
         if(ERR_OK != err )
         {
+
          //  __asm("   bkpt #0");//GRL-EDIT debugging
         }
     }
@@ -1669,7 +1685,6 @@ void delay()
 }
 void grlFWVarInitializations()
 {
-    gReadPollingData = false;
     gReadAPI = false;
 
     /**Pranay,03Sept'22, Handling the echoback and msg ID sequence during FW udpates, If prev and present MSG ID is same then ignore received FW packet
@@ -1677,7 +1692,7 @@ void grlFWVarInitializations()
      * */
     gFWupdPresentRxMsgID = 0x00;
     gFWupdPrevMsgID = 0x0F;
-
+    isEchobackReq = false;
 }
 
 int main(void)
@@ -1790,6 +1805,9 @@ int main(void)
     delay();
     TxIPAddr();
     GPIO_togglePin(DEVICE_GPIO_PIN_GREENLED36);
+
+//    tcp_nagle_enable(tcp_echoserver_pcb);
+
     MsgTimerStart(1000, 0, TIMER0);
 
     while (1)

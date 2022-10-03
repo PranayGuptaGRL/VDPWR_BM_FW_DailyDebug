@@ -223,6 +223,8 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
     switch(lRxCmdType)
     {
         case RX_API_IS_SET://0x01
+
+            isEchobackReq = true;
 #if 0
             if(atcpRxBuf[2] == 0x03)//CPU2
             {
@@ -240,7 +242,7 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
 
             //Pranay,12Sept'22, As per raja inputs inorder to avoid data loss of Set commands if any rogue Hub is used for connecting Eth cable to test PC,
             //As CM FW pushes the received API back to SW (Echo back), and if SW validate the received command and confirms that command has been sent to tester safely....
-            grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending data back to client
+//            grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending data back to client
 
             if( (atcpRxBuf[2] == 0x01) && (atcpRxBuf[3] == 0x0F)) //if FRAM DATA Write
             {
@@ -263,6 +265,8 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
 
         case RX_API_IS_PGM: //0x02
 
+            isEchobackReq = true;
+
             if(atcpRxBuf[2] == Ti_FW_UPDATE)//For Ti Cores FW update
             {
                  //no. of Bytes actually present in the FW payload received will be indicated in this Bytes, So for transfering over IPC adding actual header to the received FW payload Count
@@ -273,12 +277,12 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
                      lAPILength += (FW_UPDATE_HEADER_BYTECNT + HEADER_BYTE_CNT);
 
                      //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to app for validation
-                     grlTcpDataTx(atcpRxBuf,lAPILength);//Sending back data to client
+//                     grlTcpDataTx(atcpRxBuf,lAPILength);//Sending back data to client
                   }
                   else
                   {
                       //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to app for validation
-                        grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending back data to client
+//                        grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending back data to client
                   }
 
                   /**Pranay,03Sept'22, Handling the echoback and msg ID sequence during FW udpates, If prev and present MSG ID is same then ignore received FW packet*/
@@ -353,7 +357,7 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
             {
 
                 //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to app for validation
-                grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending data back to client
+//                grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending data back to client
 
                 /**Pranay,03Sept'22, Handling the echoback and msg ID sequence during FW udpates, If prev and present MSG ID is same then ignore received FW packet*/
 //                gFWupdPresentRxMsgID = ( (atcpRxBuf[0] & 0xF0) >> 4);
@@ -376,6 +380,8 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
 
         case Rx_API_IS_GET://0x07
 
+            isEchobackReq = false;
+
 //            GPIO_writePin(37, 1);
 
             //
@@ -396,14 +402,16 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
             }
             else if(atcpRxBuf[2] == 0x83)//For polling data read
             {
-                gReadPollingData = true;
+                gReadAPI = true;
+
+//                gReadPollingData = true;
             }
             else if( (atcpRxBuf[2] == 0x01) && (atcpRxBuf[3] == 0x07) )//CM core FW version read
             {
                 TxBuf[0] = 0x0617;
                 TxBuf[1] = 0x0601;
                 TxBuf[2] = 0x0701;
-                TxBuf[3] = 0x0206;//FW Version 6.0
+                TxBuf[3] = 0x0906;//FW Version 6.0
 //                TxBuf[4] = 0x04;//FW Version
 //                TxBuf[5] = 0x00;
 //                memcpy( &TxBuf[4], glFirmwareID, 3);

@@ -72,7 +72,8 @@ struct tcp_pcb *Rxtcb;
 struct tcp_pcb *Rxtcb_5003;
 
 volatile bool gReadAPI;
-volatile bool gReadPollingData;
+volatile bool isEchobackReq;
+//volatile bool gReadPollingData;
 
 /**Pranay,03Sept'22, Handling the echoback and msg ID sequence during FW udpates, If prev and present MSG ID is same then ignore received FW packet*/
 volatile u8_t gFWupdPresentRxMsgID;
