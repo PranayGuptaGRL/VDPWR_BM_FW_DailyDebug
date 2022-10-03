@@ -98,7 +98,6 @@ const uint16_t Timer0Count[]=
 		30,				//Timer_tGetBatteryS0CTempDetails	//23
 		30,				//Timer_tGetStatusMsgInfo	 		//24
 		30,				//Timer_tGetBatterystatusInfo 		//25
-
 };
 
 const uint16_t Timer3Count[]=

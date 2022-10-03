@@ -156,6 +156,7 @@ typedef enum
 
 typedef enum
 {
+	SPECREV_1_0 = 0,
 	SPECREV_2_0 = 1,
 	SPECREV_3_0 = 2,
 }DUT_Spec_rev;
@@ -166,7 +167,7 @@ typedef struct
 		CyBool_t CapMismatch;
 		uint8_t IsPDCdone;
 		uint8_t PDCStatus;
-		uint8_t gDUTSpecRev;
+		volatile uint8_t gDUTSpecRev;
 		uint8_t PDC_PDOSupplyType;
 		uint8_t PDC_PDOIndex;
 		uint16_t PDC_CurPwr;
@@ -203,7 +204,7 @@ typedef struct
 		CyBool_t gReadPortVerfVconnDataFrom; /**if port verification is in progress, read and give data from asked CC lines irrespective of Active CC**/
 		uint16_t gMinutesCount;
 		uint16_t gElapsedTicks;
-		uint8_t gPollingIterCnt;
+		volatile uint8_t gPollingIterCnt;
 		CyBool_t isOCPTriggered;
 		uint8_t OCPTriggerCount;
 

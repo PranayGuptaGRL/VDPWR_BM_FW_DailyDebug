@@ -8,7 +8,7 @@
 
 #include "PDManufacturerStruct.h"
 
-uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.2.0";
+uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.3.5";
 
 gFunctStruct * gFunctStruct_t;
 
@@ -136,7 +136,8 @@ void VBUSDetection_Handler(CyBool_t aVar)
 		LinkSpeedCommIndicationHandle(CY_U3P_NOT_CONNECTED);//1:HighSpped,2.FullSpeed; 3:SuperSpeed,0:NC
 		DpDmSwitchHandle(2);
 		DataErrorLEDIndicator(0);// turn off the data error indicator LED.
-		DataLockIndicator(1); //off
+
+		//DataLockIndicator(1); //off
 		HandleEload(Eload_TurnOFF,0);/*Pranay, Turning off eload incase if detach**/
 		gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBStatus = CyFalse; // USB disconnected.
 		ResetUSBErrorCount(CLR_PRESENT_ERRCOUNT); // clear present USB error count.
@@ -1225,6 +1226,16 @@ void PDSS_InterruptHandler(uint8_t *aBuffer)
 	gFunctStruct_t->gPDCStatus.gPDCStatus_t.PDC_MinVolt = (aBuffer[Bufindex++] | (aBuffer[Bufindex++]<<8));//1mV p.u
 	gFunctStruct_t->gPD_Struct.gActiveCC = (aBuffer[13] & 0x01);//0:CC1,1:CC2
 	gFunctStruct_t->gPDCStatus.gPDCStatus_t.gDUTSpecRev = ((aBuffer[13] >> 1) & 0x03);
+
+	if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gDUTSpecRev != SPECREV_3_0)
+	{
+		memset(gBattStatusBuf,0x00,32);//For 2.0 Spec rev DUTs there is no GeBattStatus msgs so resetting buffer incase of 2.0 DUTs, making it not to send old data
+	}
+	else
+	{
+		gFunctStruct_t->gPD_Struct.gPollingIterCnt = POLLING_ITER_BATTCAP_INIT_COUNT;//Pranay,29Sept'22, Inorder to reset and initiate GetBatteryCaps everytime after PDC
+
+	}
 
 	gFunctStruct_t->gPDCStatus.gPDCStatus_t.isAttachDetach = ATTACH;
 
@@ -2737,7 +2748,6 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 	else
 		lIsCmdValid =CyTrue;
 
-	Toggle_TxinProgressLEDindicator();//PRanay,16Spet'22, Turning on Data lock LED when any transcations are happening
 
 	if(lIsCmdValid)
 	{
@@ -2746,6 +2756,9 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 		switch(aBuffer[0] & 0x0F)
 		{
 		case Cmd_Set://0x01
+
+			Toggle_TxinProgressLEDindicator();//PRanay,16Spet'22, Turning on Data lock LED when any transcations are happening
+
 			switch(aBuffer[3])
 			{
 			case (0x01):
@@ -2766,18 +2779,18 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 					SrcCapsUpdateHandler(gMiscBuf);
 					break;
 				case VUP_AS_SINK://0x03
-		        	DetachStateVbusHandler();
 					CcgI2cdataTransfer(gMiscBuf);
+		        	DetachStateVbusHandler();
 
 					break;
 				case VUP_AS_SRC://0x04
-		        	DetachStateVbusHandler();
 					CcgI2cdataTransfer(gMiscBuf);
+		        	DetachStateVbusHandler();
 
 					break;
 				case VUP_AS_DRP://0x06
-		        	DetachStateVbusHandler();
 					CcgI2cdataTransfer(gMiscBuf);
+		        	DetachStateVbusHandler();
 
 					break;
 				default:
@@ -2959,6 +2972,9 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 		case Cmd_Polling://0x0F
 		case Cmd_Get://0x07
 
+			if(aBuffer[2] != 0x0C)
+				Toggle_TxinProgressLEDindicator();//PRanay,16Spet'22, Turning on Data lock LED when any transcations are happening
+
 			switch(aBuffer[2])
 			{
 			case (0x01)://FW version fetch
@@ -3097,7 +3113,9 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 			case (0x0C): //Reading the Status information of function card .
 
 				//Pranay,16Septt'22, Provsion to configure if GettBattCaps are required to be initiated or not
-				if(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EnableGetBatteryCapsFetching )
+				if( (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EnableGetBatteryCapsFetching) &&
+							(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gDUTSpecRev == SPECREV_3_0)
+					)
 				{
 					if( (gFunctStruct_t->gPD_Struct.gPollingIterCnt == POLLING_ITER_BATTCAP_INIT_COUNT)
 						&& (gFunctStruct_t->gPDCStatus.gPDCStatus_t.PDCStatus)
