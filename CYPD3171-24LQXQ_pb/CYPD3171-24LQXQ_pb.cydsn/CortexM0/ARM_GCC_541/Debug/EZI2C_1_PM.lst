@@ -1,0 +1,1619 @@
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"EZI2C_1_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.section	.gnu.lto_.profile.b369f51a,"",%progbits
+  19 0000 789C6361 		.ascii	"x\234ca`d`a`\000\222\012<\000\000\266\0007"
+  19      60646061 
+  19      6000920A 
+  19      3C0000B6 
+  19      0037
+  20              		.text
+  21              		.section	.gnu.lto_.icf.b369f51a,"",%progbits
+  22 0000 789C6361 		.ascii	"x\234ca`d\000\001\021\006\004`f88e\363\"6\306cW\333"
+  22      60640001 
+  22      11060460 
+  22      66383865 
+  22      F32236C6 
+  23 0017 BEF23175 		.ascii	"\276\3621u\\\376\367\206\215\001\000^\374\011?"
+  23      5CFEF786 
+  23      8D01005E 
+  23      FC093F
+  24              		.text
+  25              		.section	.gnu.lto_.jmpfuncs.b369f51a,"",%progbits
+  26 0000 789C6361 		.ascii	"x\234ca`d\000\001.\006\004`\202\023\000\001\254\000"
+  26      60640001 
+  26      2E060460 
+  26      82130001 
+  26      AC00
+  27 0012 14       		.ascii	"\024"
+  28              		.text
+  29              		.section	.gnu.lto_.inline.b369f51a,"",%progbits
+  30 0000 789C6361 		.ascii	"x\234ca`d\000\001#\006\004`b`\340\344fd`\342\232\340"
+  30      60640001 
+  30      23060460 
+  30      6260E0E4 
+  30      666460E2 
+  31 0016 C7C0B640 		.ascii	"\307\300\266@\236\011$\306\310\005\226`\347\004\212"
+  31      9E0924C6 
+  31      C8059660 
+  31      E7048A
+  32 0025 B37DD043 		.ascii	"\263}\320C\025g\000\000tV\004\026"
+  32      15670000 
+  32      74560416 
+  33              		.text
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 2
+
+
+  34              		.section	.gnu.lto_.pureconst.b369f51a,"",%progbits
+  35 0000 789C6361 		.ascii	"x\234ca`d`e```b\220b\222\000\000\000\355\000A"
+  35      60646065 
+  35      60606062 
+  35      90629200 
+  35      0000ED00 
+  36              		.text
+  37              		.section	.gnu.lto_EZI2C_1_Sleep.b369f51a,"",%progbits
+  38 0000 789C6550 		.ascii	"x\234eP1K\034A\030\375\336\314\334\336\271\306`\257"
+  38      314B1C41 
+  38      18FDDECC 
+  38      DCDEB9C6 
+  38      60AF
+  39 0012 88850836 		.ascii	"\210\205\0106^\022\374\007\022\202\202 \332\005\341"
+  39      5E12FC07 
+  39      12828220 
+  39      DA05E1
+  40 0021 08E6DA08 		.ascii	"\010\346\332\010b\352\033\335[\214\026\222\"\212\202"
+  40      62EA1BDD 
+  40      5B8C1692 
+  40      228A82
+  41 0030 725888A7 		.ascii	"rX\210\247F\357\224\010\236\244\330\034!\004\011I\025"
+  41      46EF9408 
+  41      9EA4D81C 
+  41      21040949 
+  41      15
+  42 0041 1B1B93E2 		.ascii	"\033\033\223\342\010b\241b\012\005\335|\337\256\205"
+  42      0862A162 
+  42      0A05DD7C 
+  42      DFAE85
+  43 0050 90819D99 		.ascii	"\220\201\235\231\357\315\373\276\367\366\031\002\311"
+  43      EFCDFBBE 
+  43      F7F61902 
+  43      C9
+  44 005d 528AA89D 		.ascii	"R\212\250\235\317.\376\220 \250\267\337\211\306SJ\351"
+  44      CF2EFE90 
+  44      20A8B7DF 
+  44      89C6534A 
+  44      E9
+  45 006e FD16B2AE 		.ascii	"\375\026\262\2569L\223}\240ab\330\000r\261)PNi\203\034"
+  45      394C937D 
+  45      A06162D8 
+  45      0072B129 
+  45      504E6983 
+  46 0083 FEAA1B85 		.ascii	"\376\252\033\205\352d\255\242:V-\257\343\225\332#[\014"
+  46      EA64ADA2 
+  46      3A562DAF 
+  46      E395DA23 
+  46      5B0C
+  47 0095 E06BA250 		.ascii	"\340k\242PE\022\204Ut\020\323~o\337\31668y\241\265\306"
+  47      45128455 
+  47      7410D37E 
+  47      6FDFCE36 
+  47      3879A1B5 
+  48 00aa 8F28C211 		.ascii	"\217(\302\021\037\245\201\300\206\241g\203]\347\323"
+  48      1FA581C0 
+  48      86A16783 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 3
+
+
+  48      5DE7D3
+  49 00b9 07B74E93 		.ascii	"\007\267N\223\317\222\274\251\004o\332\341\315\020\235"
+  49      CF92BCA9 
+  49      046FDAE1 
+  49      CD109D
+  50 00c8 7187A89F 		.ascii	"q\207\250\237\263g>u\015\325\353\351/\305\217\220)\236"
+  50      B3673E75 
+  50      0DD5EBE9 
+  50      2FC58F90 
+  50      299E
+  51 00da D6AC30E7 		.ascii	"\326\2540\347W\177$/\225\257\023\020\301\260\360u\307"
+  51      577F242F 
+  51      95AF1310 
+  51      C1B0F075 
+  51      C7
+  52 00eb 8D4B6BE7 		.ascii	"\215Kk\347\255a\350 (\317\326\027\2604\236g\213\016"
+  52      AD61E820 
+  52      28CFD617 
+  52      B0349E67 
+  52      8B0E
+  53 00fd D6D18C35 		.ascii	"\326\321\21454\263\223\015\024@5L\\L^\232x\240\341\231"
+  53      34B3930D 
+  53      1440354C 
+  53      5C4C5E9A 
+  53      78A0E199 
+  54 0111 8C788BC9 		.ascii	"\214x\213\311\270N0t_C\201\360\236{\245\351\216\",\251"
+  54      B84E3074 
+  54      5F4381F0 
+  54      9E7BA5E9 
+  54      8E222CA9 
+  55 0125 E796DB05 		.ascii	"\347\226\333\005\270\317NF\216*\225\323\243d\356\306"
+  55      B8CF4E46 
+  55      8E2A95D3 
+  55      A364EEC6 
+  56 0135 BEB1B691 		.ascii	"\276\261\266\221\261)NI\340\223o??\273\342\312Fx\012"
+  56      B1294E49 
+  56      E0936F3F 
+  56      3FBBE2CA 
+  56      46780A
+  57 0148 5B1CEDA6 		.ascii	"[\034\355\246\370\342\307\231\275\362T*\275)\261\331"
+  57      F8E2C799 
+  57      BDF2542A 
+  57      BD29B1D9 
+  58 0158 8CAFEB50 		.ascii	"\214\257\353Pb\253\267Q\266(#\315\252\364\013\371#o"
+  58      62ABB751 
+  58      B62823CD 
+  58      AAF40BF9 
+  58      236F
+  59 016a E35DD39D 		.ascii	"\343]\323\235\013n*\235V\256\032D\327\260\313m\231D"
+  59      0B6E2A9D 
+  59      56AE1A44 
+  59      D7B0CB6D 
+  59      9944
+  60 017c 929CA6FD 		.ascii	"\222\234\246\375\026\375\007^\260p\360P\310\377{rC\376"
+  60      16FD075E 
+  60      B070F050 
+  60      C8FF7B72 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 4
+
+
+  60      43FE
+  61 018e 2FC20E72 		.ascii	"/\302\016r\234z}\324d\242\270O0\021\354\366FM\262\316"
+  61      9C7A7DD4 
+  61      64A2B84F 
+  61      3011ECF6 
+  61      464DB2CE 
+  62 01a2 98C630DB 		.ascii	"\230\3060\333h{\226}\225\035}1\226}\231\031\034y=:\234"
+  62      687B967D 
+  62      951D7D31 
+  62      967D9919 
+  62      1C793D3A 
+  63 01b7 1DEA1F1C 		.ascii	"\035\352\037\034\351\356\032z\372\274\347Iw\346q\246"
+  63      E9EE1A7A 
+  63      FABCE749 
+  63      77E671A6 
+  64 01c7 BFAF7398 		.ascii	"\277\257s\230\376\001\004\221\272\233"
+  64      FE010491 
+  64      BA9B
+  65              		.text
+  66              		.section	.gnu.lto_EZI2C_1_backup.b369f51a,"",%progbits
+  67 0000 789C6361 		.ascii	"x\234ca`d\000\001] \206\260\030\030\37621\256\177\263"
+  67      60640001 
+  67      5D2086B0 
+  67      1818FE32 
+  67      31AE7FB3 
+  68 0014 F327EF17 		.ascii	"\363'\357\027\246Vf\240 \220\273sn\373m>\213m\015\035"
+  68      A65666A0 
+  68      2090BB73 
+  68      6EFB6D3E 
+  68      8B6D0D1D 
+  69 0028 0B1A045A 		.ascii	"\013\032\004Z\231\031\377110.g\224a`\\\301h\301\000"
+  69      9919FF31 
+  69      31302E67 
+  69      9461605C 
+  69      C168C100 
+  70 003c 00C3A010 		.ascii	"\000\303\240\020)"
+  70      29
+  71              		.text
+  72              		.section	.gnu.lto_EZI2C_1_Wakeup.b369f51a,"",%progbits
+  73 0000 789C658F 		.ascii	"x\234e\217\277KBQ\024\307\317\271\367\371#K\351\017"
+  73      BF4B4251 
+  73      14C7CFB9 
+  73      F7F9234B 
+  73      E90F
+  74 0012 086988C0 		.ascii	"\010i\210\300\241\304\360?\220\210\206B\222\226\020"
+  74      A1C4F03F 
+  74      90888642 
+  74      929610
+  75 0021 24ECAD0A 		.ascii	"$\354\255\012R\363\273\372|\224K\324P[8j?\315-\235^"
+  75      52F3BBFA 
+  75      7C944BD4 
+  75      505B386A 
+  75      3FCD2D9D 
+  76 0036 D21836E5 		.ascii	"\322\0306\345\"A\005I\210\203AA\015\372:\36794t\340"
+  76      22410549 
+  76      88834141 
+  76      0DFA3AF7 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 5
+
+
+  76      393474E0 
+  77 004a 722EDFFB 		.ascii	"r.\337\373=\367\3739\012 \310Z\2476K=L\007\035\200\354"
+  77      3DF7FB39 
+  77      0A20C85A 
+  77      A7364B3D 
+  77      4C071D80 
+  78 005f A0099075 		.ascii	"\240\011\220u3\306\353~\020\036\245\025\0041\301Q\031"
+  78      33C6EB7E 
+  78      101EA515 
+  78      0431C151 
+  78      19
+  79 0070 C90AA2BC 		.ascii	"\311\012\242\274\0107\202\306\270\202\032~\261\001\303"
+  79      083782C6 
+  79      B8821A7E 
+  79      B101C3
+  80 007f C66EA7C6 		.ascii	"\306n\247\306\002%A\365\374V\011\211\262\211\006\007"
+  80      022541F5 
+  80      FC560989 
+  80      B2890607 
+  81 008f B0981D01 		.ascii	"\260\230\035\001X\302\000\220\355\265:<\362:\363\322"
+  81      58C20090 
+  81      EDB53A3C 
+  81      F23AF3D2 
+  82 009f 363D7AC4 		.ascii	"6=z\3042:%Ge\315\024\226\245\013\363p\374\366\333\347"
+  82      323A2547 
+  82      65CD1496 
+  82      A50BF370 
+  82      FCF6DBE7 
+  83 00b3 E0607092 		.ascii	"\340`p\222\373d\221q\037\214\311\316;\230\253W[\372"
+  83      FB649171 
+  83      1F8CC9CE 
+  83      3B98AB57 
+  83      5BFA
+  84 00c5 989CD239 		.ascii	"\230\234\3229\247\037\217\215\306\203\353\223\031\234"
+  84      A71F8F8D 
+  84      C683EB93 
+  84      199C
+  85 00d3 A10CA8D5 		.ascii	"\241\014\250\325zm\2276\020{BL\222V \006)w\357\037\357"
+  85      7A6D9736 
+  85      107B424C 
+  85      92562006 
+  85      2977EF1F 
+  86 00e8 3C453CC9 		.ascii	"<E<\311\012[\347xF\340\2478e?\356\337\\\027\334\301"
+  86      0A5BE778 
+  86      46E0A738 
+  86      653FEEDF 
+  86      5C17DCC1 
+  87 00fc 3983B639 		.ascii	"9\203\2669\307\"\016mf\274\300 \274`\276\255\247\376"
+  87      C7220E6D 
+  87      66BCC020 
+  87      BC60BEAD 
+  87      A7FE
+  88 010e C22ABDDA 		.ascii	"\302*\275\332\217W\206!\002^\312q\220l\034\352~\376"
+  88      8F578621 
+  88      025ECA71 
+  88      906C1CEA 
+  88      7EFE
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 6
+
+
+  89 0120 8EBAF9D4 		.ascii	"\216\272\371\324\364I\363\177\020\207Ex\200W\250\321"
+  89      F449F37F 
+  89      10874578 
+  89      8057A8D1 
+  90 0130 5E4E7B48 		.ascii	"^N{H\261\027\352b\316\374Y\265\207d\365\311F2\021\314"
+  90      B117EA62 
+  90      CEFC59B5 
+  90      8764F5C9 
+  90      463211CC 
+  91 0144 2CA92935 		.ascii	",\251)5\263\271\255n%b\351\235LR\215Gc\351H8\276\270"
+  91      B3B9AD6E 
+  91      2562E99D 
+  91      4C528D47 
+  91      63E94838 
+  92 015a B1BC1049 		.ascii	"\261\274\020I\204\022\321\225\371$\374\002\336\237\206"
+  92      8412D195 
+  92      F924FC02 
+  92      DE9F86
+  93 0169 3B       		.ascii	";"
+  94              		.text
+  95              		.section	.gnu.lto_.symbol_nodes.b369f51a,"",%progbits
+  96 0000 789C6361 		.ascii	"x\234ca`d\210b\000\002&\306z\006\206\011\347\030\030"
+  96      60648862 
+  96      000226C6 
+  96      7A068609 
+  96      E71818
+  97 0013 80D4AE06 		.ascii	"\200\324\256\006E\006\006V\006\206F!\220\004S=#\212"
+  97      45060656 
+  97      06864621 
+  97      9004533D 
+  97      238A
+  98 0025 0423733D 		.ascii	"\004#s=\023X\200\201\241\241A\001\310g\251gF\3463\003"
+  98      13588081 
+  98      A1A14101 
+  98      C867A967 
+  98      46E63303 
+  99 0039 E193AD26 		.ascii	"\341\223\255&\314L,\014O\266\2300\000\000#\304\022\036"
+  99      CC4C2C0C 
+  99      4FB69830 
+  99      000023C4 
+  99      121E
+ 100              		.text
+ 101              		.section	.gnu.lto_.refs.b369f51a,"",%progbits
+ 102 0000 789C6361 		.ascii	"x\234ca`d\340f`\000\222\214\214\254\214L@\222\001\000"
+ 102      6064E066 
+ 102      6000928C 
+ 102      8CAC8C4C 
+ 102      40920100 
+ 103 0014 0169001E 		.ascii	"\001i\000\036"
+ 104              		.text
+ 105              		.section	.gnu.lto_.decls.b369f51a,"",%progbits
+ 106 0000 789C8D54 		.ascii	"x\234\215TkL\\E\024\236s\357\262\260\227\013%E\0151"
+ 106      6B4C5C45 
+ 106      149E73EF 
+ 106      B2B0970B 
+ 106      25450D31 
+ 107 0014 FB031B1A 		.ascii	"\373\003\033\032\366\027\025\360\207\277\214\026kkL"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 7
+
+
+ 107      F61715F0 
+ 107      87BF8C16 
+ 107      6B6B4C
+ 108 0023 0D918749 		.ascii	"\015\221\207I\323d\013\364FM\011l\020~41qd[\213b\014"
+ 108      D3640BF4 
+ 108      464D096C 
+ 108      107E3431 
+ 108      71645B8B 
+ 109 0039 DB045A68 		.ascii	"\333\004Zh\033)\265<\344\261\013U+\264\266K-O\241\245"
+ 109      1B29B53C 
+ 109      E4B10B55 
+ 109      2BB4B64B 
+ 109      2D4FA1A5 
+ 110 004d BC1AAD95 		.ascii	"\274\032\255\225\255`L\265& \210\242\302zf\346\336\275"
+ 110      AD604CB5 
+ 110      262088A2 
+ 110      C27A66E6 
+ 110      DEBD
+ 111 005f 5B85A693 		.ascii	"[\205\246\223=\367\316\231\373}\3379s\346\314Z\010\020"
+ 111      3DF7CE99 
+ 111      FB7DDF39 
+ 111      73E6CC5A 
+ 111      0810
+ 112 0071 361AAC84 		.ascii	"6\032\254\204,\343;\016\335 \016\013\316s\2119\230\337"
+ 112      2CE33B0E 
+ 112      DD200E0B 
+ 112      CE738939 
+ 112      98DF
+ 113 0083 8EE645EB 		.ascii	"\216\346E\353D;\207\306\230\275\344\376\3010\252\316"
+ 113      443B87C6 
+ 113      98BDE4FE 
+ 113      C130AACE 
+ 114 0093 4D46EB47 		.ascii	"MF\353G\033D\263\243M\241M\242M\243]F\353A\273\211\326"
+ 114      1B44B3A3 
+ 114      4DA14DA2 
+ 114      4DA35D46 
+ 114      EB41BB89 
+ 115 00a8 A66B5D40 		.ascii	"\246k]@\223t\215\316\015\364{u\214]\3270x\353\015\226"
+ 115      93748DCE 
+ 115      0DF47B75 
+ 115      8C5DD730 
+ 115      78EB0D96 
+ 116 00bc 6BA49E8B 		.ascii	"k\244\236\213\375!\342z\037\260\257U\011\202\247:\232"
+ 116      FD21E27A 
+ 116      1FB0AF55 
+ 116      0982A73A 
+ 116      9A
+ 117 00cd 6DB7E01B 		.ascii	"m\267\340\033\220@/\032\001\020O\340F\204q\027'\022"
+ 117      90402F1A 
+ 117      01104FE0 
+ 117      46847117 
+ 117      2712
+ 118 00df 7F92D052 		.ascii	"\177\222\320R\350E\330\223\010<_3\305\370\317x\007\215"
+ 118      E845D893 
+ 118      083C5F33 
+ 118      C5F8CF78 
+ 118      078D
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 8
+
+
+ 119 00f1 C1454C75 		.ascii	"\301ELu\320I\020\312@\260\304wI\207\021!.\231\2040="
+ 119      D04910CA 
+ 119      40B0C477 
+ 119      49871121 
+ 119      2E998430 
+ 120 0106 916E584E 		.ascii	"\221nXNp\377\236\300\330t\240\342v\225UFM\234\317\254"
+ 120      70FF9EC0 
+ 120      D874A0E2 
+ 120      76955546 
+ 120      4D9CCFAC 
+ 121 011a 34BF90D2 		.ascii	"4\277\220\322FqTQ*9\314\312\364\005\377\360oZ\222`\263"
+ 121      46715451 
+ 121      2A39CCCA 
+ 121      F405FFF0 
+ 121      6F5A9260 
+ 122 012f 0212BAE3 		.ascii	"\002\022\272\343\363#\247\242\321}D\2018t\177\271T\033"
+ 122      F323A7A2 
+ 122      D17D4481 
+ 122      38747FB9 
+ 122      541B
+ 123 0141 8C49A861 		.ascii	"\214I\250a<\352\246\211\022\344>\006\255`\207O\000\017"
+ 123      3CEAA689 
+ 123      12E43E06 
+ 123      AD60874F 
+ 123      000F
+ 124 0153 05DA2001 		.ascii	"\005\332 \001\237\371\026\241\364^\340\372Z\314\226"
+ 124      9FF916A1 
+ 124      F45EE0FA 
+ 124      5ACC96
+ 125 0162 7A5AEFA3 		.ascii	"zZ\357\243\201\3059\265\306M\233\221\225\310P\320\014"
+ 125      81C539B5 
+ 125      C64D9B91 
+ 125      95C850D0 
+ 125      0C
+ 126 0173 32B4400A 		.ascii	"2\264@\012\313\016\247\354\325\004\2670\355v\330\202"
+ 126      CB0EA7EC 
+ 126      D504B730 
+ 126      ED76D882 
+ 127 0183 CC9AC595 		.ascii	"\314\232\305\225\263\261\3623<\321\263=\277\216\253"
+ 127      B3B1F233 
+ 127      3CD1B33D 
+ 127      BF8EAB
+ 128 0192 42C5BF36 		.ascii	"B\305\2776\254\3221\324x\226kt\230\032\035\341\032^"
+ 128      ACD231D4 
+ 128      78966B74 
+ 128      981A1DE1 
+ 128      1A5E
+ 129 01a4 AEE15D38 		.ascii	"\256\341]8\361\203,\357\346\032]C}\313Q\250\021\240"
+ 129      F1832CEF 
+ 129      E61A5D43 
+ 129      7DCB51A8 
+ 129      11A0
+ 130 01b6 34B0D45F 		.ascii	"4\260\324_\346q\327;\270\202\317T\360q\005\234tr\366"
+ 130      E671D73B 
+ 130      B882CF54 
+ 130      F071059C 
+ 130      7472F6
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 9
+
+
+ 131 01c9 9D137F7D 		.ascii	"\235\023\177}\024#\277\305\331\377\0147\255X\005\333"
+ 131      1423BFC5 
+ 131      D9FF0C37 
+ 131      AD5805DB 
+ 132 01d9 3F3EA0FA 		.ascii	"?>\240\37239\267\313\344v\031\334s\234\333\355~\307"
+ 132      3339B7CB 
+ 132      E47619DC 
+ 132      739CDBED 
+ 132      7EC7
+ 133 01eb 67912B81 		.ascii	"g\221+\201\223\257\324|7\251\312u\302\361\036\236k\211"
+ 133      93AFD47C 
+ 133      37A9CA75 
+ 133      C2F11E9E 
+ 133      6B89
+ 134 01fd C262DA15 		.ascii	"\302b\332\025\010\002\363\357u\257\304\010\237}\256"
+ 134      0802F3EF 
+ 134      75AFC408 
+ 134      9F7DAE
+ 135 020c F5CCAE45 		.ascii	"\365\314\256E\313\215\034+M\314\266\336\265\200Cid\245"
+ 135      CB8D1C2B 
+ 135      4DCCB6DE 
+ 135      B5804369 
+ 135      64A5
+ 136 021e 0E7457E6 		.ascii	"\016tW\346\034;\202\007\005=\240\300\027fh\273\202\317"
+ 136      1C3B8207 
+ 136      053DA0C0 
+ 136      176668BB 
+ 136      82CF
+ 137 0230 0A4ACBE9 		.ascii	"\012J\313\351|\003\265&\020H\267\303\223v\002\335\340"
+ 137      7C03B526 
+ 137      1048B7C3 
+ 137      937602DD 
+ 137      E0
+ 138 0241 60AA0C05 		.ascii	"`\252\014\005\347\361|>\307\363Y\225\344\323\356\351"
+ 138      E7F17C3E 
+ 138      C7F35995 
+ 138      E4D3EEE9 
+ 139 0251 42488A77 		.ascii	"BH\212w40F\340\367w\265\316\331\303\324\267\217\253"
+ 139      343046E0 
+ 139      F777B5CE 
+ 139      D9C3D4B7 
+ 139      8FAB
+ 140 0263 7E86AA17 		.ascii	"~\206\252\027!\336P\330\306\0164\225]5\017\313`\276"
+ 140      21DE50D8 
+ 140      C60E3495 
+ 140      5D350FCB 
+ 140      60BE
+ 141 0275 9C52D657 		.ascii	"\234R\326W\342+\341HT\207/1\320\005H\342\373\347\251"
+ 141      E22BE148 
+ 141      54872F31 
+ 141      D00548E2 
+ 141      FBE7A9
+ 142 0288 FA3D032A 		.ascii	"\372=\003*\245Q\014@\364,\365\316:\352\256\356\263\311"
+ 142      A5510C40 
+ 142      F42CF5CE 
+ 142      3AEAAEEE 
+ 142      B3C9
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 10
+
+
+ 143 029a D7C4F646 		.ascii	"\327\304\366F\306\206\256FB\274c\035q\360\243\346\306"
+ 143      C686AE46 
+ 143      42BC631D 
+ 143      71F0A3E6 
+ 143      C6
+ 144 02ab FAC70680 		.ascii	"\372\307\006\200\351_F\300%\263\020,\034\217rc\354\303"
+ 144      E95F46C0 
+ 144      25B3102C 
+ 144      1C8F7263 
+ 144      ECC3
+ 145 02bd C1E8AD67 		.ascii	"\301\350\255gh=\036\330\342\322\236\305r\232\300\261"
+ 145      683D1ED8 
+ 145      E2D29EC5 
+ 145      729AC0B1 
+ 146 02cd 9F0A6C68 		.ascii	"\237\012lh\003\314\317\306k\335\013[\031\353\220\357"
+ 146      03CCCFC6 
+ 146      6BDD0B5B 
+ 146      19EB90EF 
+ 147 02dd A42CBADE 		.ascii	"\244,\272\336\202\356\302h\335l\254\350\372D,\333\231"
+ 147      82EEC268 
+ 147      DD6CACE8 
+ 147      FA442CDB 
+ 147      99
+ 148 02ee F6BF1B63 		.ascii	"\366\277\033c\261\212\354\247\324Q\254\367|0\370v0\030"
+ 148      B18AECA7 
+ 148      D451ACF7 
+ 148      7C30F876 
+ 148      3018
+ 149 0300 09FDA010 		.ascii	"\011\375\240\020\276@=\015\317Wx\036\347\013\025\374"
+ 149      BE403D0D 
+ 149      CF57781E 
+ 149      E70B15FC 
+ 150 0310 5AB9E9E6 		.ascii	"Z\271\351\346]\004\276B\316\025~9\330\027\002}\350_"
+ 150      5D04BE42 
+ 150      CE157E39 
+ 150      D817027D 
+ 150      E85F
+ 151 0322 459FB918 		.ascii	"E\237\271\030h\264o\342x\244<\307kb\271\353=]\243\200"
+ 151      68B46FE2 
+ 151      78A43CC7 
+ 151      6B62B9EB 
+ 151      3D5DA380 
+ 152 0336 4DC4711C 		.ascii	"M\304q\034\341\247Z^\237h\026\346k,\306 \330Pf\010!"
+ 152      E1A75A5E 
+ 152      9F6816E6 
+ 152      6B2CC620 
+ 152      D8506608 
+ 153 034b C3285387 		.ascii	"\303(S\207\225`+<\2078>m4.5a.\014\350\315\311\212\204"
+ 153      95602B3C 
+ 153      87383E6D 
+ 153      342E3561 
+ 153      2E0CE8CD 
+ 154 0362 3EC6BC3D 		.ascii	">\306\274=\330\322\312\366\232\214]\210cSX#&\213F\034"
+ 154      D8D2CAF6 
+ 154      9A8C5D88 
+ 154      63535823 
+ 154      268B461C 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 11
+
+
+ 155 0376 9EF9F137 		.ascii	"\236\371\3617\233\374\2638\251\361\332{3VP\034\274\313"
+ 155      9BFCB338 
+ 155      A9F1DA7B 
+ 155      3356501C 
+ 155      BCCB
+ 156 0388 FEB32B18 		.ascii	"\376\263+\030\303\214\222\365>\033\305\305\021\\4:6"
+ 156      C38C92F5 
+ 156      3E1BC5C5 
+ 156      115C343A 
+ 156      36
+ 157 0399 5774EC75 		.ascii	"Wt\354u\354\255k\346A%+\372\277\303\235\352o#\224\012"
+ 157      ECAD6BE6 
+ 157      41252BFA 
+ 157      BFC39DEA 
+ 157      6F23940A 
+ 158 03ad F637F230 		.ascii	"\3667\3620\242\310\350\371\236\236\214\220\027DVS\225"
+ 158      A2C8E8F9 
+ 158      9E9E8C90 
+ 158      17445653 
+ 158      95
+ 159 03be E78FCBC6 		.ascii	"\347\217\313\306\365\360\257\376\264\353\020k\241I\214"
+ 159      F5F0AFFE 
+ 159      B4EB106B 
+ 159      A1498C
+ 160 03cd 356EC6BA 		.ascii	"5n\306\272\001\372\365\370\177\214\211\365c,\3779\364"
+ 160      01FAF5F8 
+ 160      7F8C89F5 
+ 160      632CFF39 
+ 160      F4
+ 161 03de 81AABE1F 		.ascii	"\201\252\276\037\332*W4\317p\012T^H|#\270\352\343@e"
+ 161      DA2A5734 
+ 161      CF700A54 
+ 161      5E487C23 
+ 161      B8EAE340 
+ 162 03f3 543898F5 		.ascii	"T8\230\365\231\011\236\326\301\323\034|\264\332\335"
+ 162      99099ED6 
+ 162      C1D31C7C 
+ 162      B4DADD
+ 163 0402 14190E66 		.ascii	"\024\031\016f\177\"&\370&\250F\3268%1;\366\274\230\226"
+ 163      7F2226F8 
+ 163      26A846D6 
+ 163      3825313B 
+ 163      F6BC9896 
+ 164 0416 E14C7566 		.ascii	"\341Luf\025j\232+j\347\3139\211\031\251\251$i\247V\244"
+ 164      156A9A2B 
+ 164      6AE7CB39 
+ 164      8919A9A9 
+ 164      2469A756 
+ 165 042b 95E4956A 		.ascii	"\225\344\225j\373\235Y\305e%\005\332\336\314\254\342"
+ 165      FB9D59C5 
+ 165      652505DA 
+ 165      DECCACE2 
+ 166 043b 8CA7F61A 		.ascii	"\214\247\366\032\350\314\335)\005$\326\360^\315;\240"
+ 166      E8CCDD29 
+ 166      0524D6F0 
+ 166      5ECD3BA0 
+ 167 044b 95B9D490 		.ascii	"\225\271\324\220Ti\261\353\211\007\013\244\274n\262"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 12
+
+
+ 167      5469B1EB 
+ 167      89070BA4 
+ 167      BC6EB2
+ 168 045a 7714E5E5 		.ascii	"w\024\345\345\027j!7?\257\340@\231+Z\343\253Y\245(\021"
+ 168      176A2137 
+ 168      3FAFE040 
+ 168      992B5AE3 
+ 168      AB59A528 
+ 169 046f 51F64651 		.ascii	"Q\366FQ\351\323\033(n+8Xz\320\245\275\211\212\217\032"
+ 169      E9D31B28 
+ 169      6E2B3858 
+ 169      7AD0A5BD 
+ 169      898A8F1A 
+ 170 0483 12DB9FCB 		.ascii	"\022\333\237\313x)'\323\231\225\375JNFv\204s{qq\241"
+ 170      782927D3 
+ 170      9995FD4A 
+ 170      4E467684 
+ 170      737B7171 
+ 171 0498 9569A4A7 		.ascii	"\225i\244\247E\224h\257\245\247\375\013\233\262=M"
+ 171      459468AF 
+ 171      A5A7FD0B 
+ 171      9BB23D4D 
+ 172              		.text
+ 173              		.section	.gnu.lto_.symtab.b369f51a,"",%progbits
+ 174 0000 455A4932 		.ascii	"EZI2C_1_Sleep\000"
+ 174      435F315F 
+ 174      536C6565 
+ 174      7000
+ 175 000e 00       		.ascii	"\000"
+ 176 000f 00       		.ascii	"\000"
+ 177 0010 00       		.ascii	"\000"
+ 178 0011 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 178      00000000 
+ 179 0019 AD000000 		.ascii	"\255\000\000\000"
+ 180 001d 455A4932 		.ascii	"EZI2C_1_backup\000"
+ 180      435F315F 
+ 180      6261636B 
+ 180      757000
+ 181 002c 00       		.ascii	"\000"
+ 182 002d 00       		.ascii	"\000"
+ 183 002e 00       		.ascii	"\000"
+ 184 002f 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 184      00000000 
+ 185 0037 C1000000 		.ascii	"\301\000\000\000"
+ 186 003b 455A4932 		.ascii	"EZI2C_1_Wakeup\000"
+ 186      435F315F 
+ 186      57616B65 
+ 186      757000
+ 187 004a 00       		.ascii	"\000"
+ 188 004b 00       		.ascii	"\000"
+ 189 004c 00       		.ascii	"\000"
+ 190 004d 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 190      00000000 
+ 191 0055 AF000000 		.ascii	"\257\000\000\000"
+ 192 0059 455A4932 		.ascii	"EZI2C_1_Stop\000"
+ 192      435F315F 
+ 192      53746F70 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 13
+
+
+ 192      00
+ 193 0066 00       		.ascii	"\000"
+ 194 0067 02       		.ascii	"\002"
+ 195 0068 00       		.ascii	"\000"
+ 196 0069 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 196      00000000 
+ 197 0071 B1000000 		.ascii	"\261\000\000\000"
+ 198 0075 455A4932 		.ascii	"EZI2C_1_Enable\000"
+ 198      435F315F 
+ 198      456E6162 
+ 198      6C6500
+ 199 0084 00       		.ascii	"\000"
+ 200 0085 02       		.ascii	"\002"
+ 201 0086 00       		.ascii	"\000"
+ 202 0087 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 202      00000000 
+ 203 008f B3000000 		.ascii	"\263\000\000\000"
+ 204              		.text
+ 205              		.section	.gnu.lto_.opts,"",%progbits
+ 206 0000 272D666D 		.ascii	"'-fmath-errno' '-fsigned-zeros' '-ftrapping-math' '"
+ 206      6174682D 
+ 206      6572726E 
+ 206      6F272027 
+ 206      2D667369 
+ 207 0033 2D666E6F 		.ascii	"-fno-trapv' '-fno-openmp' '-fno-openacc' '-mcpu=cor"
+ 207      2D747261 
+ 207      70762720 
+ 207      272D666E 
+ 207      6F2D6F70 
+ 208 0066 7465782D 		.ascii	"tex-m0' '-mthumb' '-g' '-Os' '-Werror' '-ffunction-"
+ 208      6D302720 
+ 208      272D6D74 
+ 208      68756D62 
+ 208      2720272D 
+ 209 0099 73656374 		.ascii	"sections' '-ffat-lto-objects' '-finline-functions' "
+ 209      696F6E73 
+ 209      2720272D 
+ 209      66666174 
+ 209      2D6C746F 
+ 210 00cc 272D666C 		.ascii	"'-flto' '-fno-strict-aliasing'\000"
+ 210      746F2720 
+ 210      272D666E 
+ 210      6F2D7374 
+ 210      72696374 
+ 211              		.text
+ 212              		.cfi_sections	.debug_frame
+ 213              		.section	.text.EZI2C_1_Sleep,"ax",%progbits
+ 214              		.align	1
+ 215              		.global	EZI2C_1_Sleep
+ 216              		.code	16
+ 217              		.thumb_func
+ 218              		.type	EZI2C_1_Sleep, %function
+ 219              	EZI2C_1_Sleep:
+ 220              	.LFB0:
+ 221              		.file 1 "Generated_Source\\PSoC4\\EZI2C_1_PM.c"
+   1:Generated_Source\PSoC4/EZI2C_1_PM.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC4/EZI2C_1_PM.c **** * \file EZI2C_1_PM.c
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 14
+
+
+   3:Generated_Source\PSoC4/EZI2C_1_PM.c **** * \version 4.0
+   4:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+   5:Generated_Source\PSoC4/EZI2C_1_PM.c **** * \brief
+   6:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  This file provides the source code to the Power Management support for
+   7:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  the SCB Component.
+   8:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+   9:Generated_Source\PSoC4/EZI2C_1_PM.c **** * Note:
+  10:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+  11:Generated_Source\PSoC4/EZI2C_1_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC4/EZI2C_1_PM.c **** * \copyright
+  13:Generated_Source\PSoC4/EZI2C_1_PM.c **** * Copyright 2013-2017, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC4/EZI2C_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  15:Generated_Source\PSoC4/EZI2C_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  16:Generated_Source\PSoC4/EZI2C_1_PM.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC4/EZI2C_1_PM.c **** *******************************************************************************/
+  18:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  19:Generated_Source\PSoC4/EZI2C_1_PM.c **** #include "EZI2C_1.h"
+  20:Generated_Source\PSoC4/EZI2C_1_PM.c **** #include "EZI2C_1_PVT.h"
+  21:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  22:Generated_Source\PSoC4/EZI2C_1_PM.c **** #if(EZI2C_1_SCB_MODE_I2C_INC)
+  23:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #include "EZI2C_1_I2C_PVT.h"
+  24:Generated_Source\PSoC4/EZI2C_1_PM.c **** #endif /* (EZI2C_1_SCB_MODE_I2C_INC) */
+  25:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  26:Generated_Source\PSoC4/EZI2C_1_PM.c **** #if(EZI2C_1_SCB_MODE_EZI2C_INC)
+  27:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #include "EZI2C_1_EZI2C_PVT.h"
+  28:Generated_Source\PSoC4/EZI2C_1_PM.c **** #endif /* (EZI2C_1_SCB_MODE_EZI2C_INC) */
+  29:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  30:Generated_Source\PSoC4/EZI2C_1_PM.c **** #if(EZI2C_1_SCB_MODE_SPI_INC || EZI2C_1_SCB_MODE_UART_INC)
+  31:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #include "EZI2C_1_SPI_UART_PVT.h"
+  32:Generated_Source\PSoC4/EZI2C_1_PM.c **** #endif /* (EZI2C_1_SCB_MODE_SPI_INC || EZI2C_1_SCB_MODE_UART_INC) */
+  33:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  34:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  35:Generated_Source\PSoC4/EZI2C_1_PM.c **** /***************************************
+  36:Generated_Source\PSoC4/EZI2C_1_PM.c **** *   Backup Structure declaration
+  37:Generated_Source\PSoC4/EZI2C_1_PM.c **** ***************************************/
+  38:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  39:Generated_Source\PSoC4/EZI2C_1_PM.c **** #if(EZI2C_1_SCB_MODE_UNCONFIG_CONST_CFG || \
+  40:Generated_Source\PSoC4/EZI2C_1_PM.c ****    (EZI2C_1_SCB_MODE_I2C_CONST_CFG   && (!EZI2C_1_I2C_WAKE_ENABLE_CONST))   || \
+  41:Generated_Source\PSoC4/EZI2C_1_PM.c ****    (EZI2C_1_SCB_MODE_EZI2C_CONST_CFG && (!EZI2C_1_EZI2C_WAKE_ENABLE_CONST)) || \
+  42:Generated_Source\PSoC4/EZI2C_1_PM.c ****    (EZI2C_1_SCB_MODE_SPI_CONST_CFG   && (!EZI2C_1_SPI_WAKE_ENABLE_CONST))   || \
+  43:Generated_Source\PSoC4/EZI2C_1_PM.c ****    (EZI2C_1_SCB_MODE_UART_CONST_CFG  && (!EZI2C_1_UART_WAKE_ENABLE_CONST)))
+  44:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  45:Generated_Source\PSoC4/EZI2C_1_PM.c ****     EZI2C_1_BACKUP_STRUCT EZI2C_1_backup =
+  46:Generated_Source\PSoC4/EZI2C_1_PM.c ****     {
+  47:Generated_Source\PSoC4/EZI2C_1_PM.c ****         0u, /* enableState */
+  48:Generated_Source\PSoC4/EZI2C_1_PM.c ****     };
+  49:Generated_Source\PSoC4/EZI2C_1_PM.c **** #endif
+  50:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  51:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  52:Generated_Source\PSoC4/EZI2C_1_PM.c **** /*******************************************************************************
+  53:Generated_Source\PSoC4/EZI2C_1_PM.c **** * Function Name: EZI2C_1_Sleep
+  54:Generated_Source\PSoC4/EZI2C_1_PM.c **** ****************************************************************************//**
+  55:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+  56:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  Prepares the EZI2C_1 component to enter Deep Sleep.
+  57:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  The “Enable wakeup from Deep Sleep Mode” selection has an influence on this 
+  58:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  function implementation:
+  59:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  - Checked: configures the component to be wakeup source from Deep Sleep.
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 15
+
+
+  60:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  - Unchecked: stores the current component state (enabled or disabled) and 
+  61:Generated_Source\PSoC4/EZI2C_1_PM.c **** *    disables the component. See SCB_Stop() function for details about component 
+  62:Generated_Source\PSoC4/EZI2C_1_PM.c **** *    disabling.
+  63:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+  64:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  Call the EZI2C_1_Sleep() function before calling the 
+  65:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  CyPmSysDeepSleep() function. 
+  66:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  Refer to the PSoC Creator System Reference Guide for more information about 
+  67:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  power management functions and Low power section of this document for the 
+  68:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  selected mode.
+  69:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+  70:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  This function should not be called before entering Sleep.
+  71:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+  72:Generated_Source\PSoC4/EZI2C_1_PM.c **** *******************************************************************************/
+  73:Generated_Source\PSoC4/EZI2C_1_PM.c **** void EZI2C_1_Sleep(void)
+  74:Generated_Source\PSoC4/EZI2C_1_PM.c **** {
+ 222              		.loc 1 74 0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226 0000 10B5     		push	{r4, lr}
+ 227              		.cfi_def_cfa_offset 8
+ 228              		.cfi_offset 4, -8
+ 229              		.cfi_offset 14, -4
+  75:Generated_Source\PSoC4/EZI2C_1_PM.c **** #if(EZI2C_1_SCB_MODE_UNCONFIG_CONST_CFG)
+  76:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+  77:Generated_Source\PSoC4/EZI2C_1_PM.c ****     if(EZI2C_1_SCB_WAKE_ENABLE_CHECK)
+  78:Generated_Source\PSoC4/EZI2C_1_PM.c ****     {
+  79:Generated_Source\PSoC4/EZI2C_1_PM.c ****         if(EZI2C_1_SCB_MODE_I2C_RUNTM_CFG)
+  80:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+  81:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_I2CSaveConfig();
+  82:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+  83:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else if(EZI2C_1_SCB_MODE_EZI2C_RUNTM_CFG)
+  84:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+  85:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_EzI2CSaveConfig();
+  86:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+  87:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #if(!EZI2C_1_CY_SCBIP_V1)
+  88:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else if(EZI2C_1_SCB_MODE_SPI_RUNTM_CFG)
+  89:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+  90:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_SpiSaveConfig();
+  91:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+  92:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else if(EZI2C_1_SCB_MODE_UART_RUNTM_CFG)
+  93:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+  94:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_UartSaveConfig();
+  95:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+  96:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #endif /* (!EZI2C_1_CY_SCBIP_V1) */
+  97:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else
+  98:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+  99:Generated_Source\PSoC4/EZI2C_1_PM.c ****             /* Unknown mode */
+ 100:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 101:Generated_Source\PSoC4/EZI2C_1_PM.c ****     }
+ 102:Generated_Source\PSoC4/EZI2C_1_PM.c ****     else
+ 103:Generated_Source\PSoC4/EZI2C_1_PM.c ****     {
+ 104:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_backup.enableState = (uint8) EZI2C_1_GET_CTRL_ENABLED;
+ 105:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 106:Generated_Source\PSoC4/EZI2C_1_PM.c ****         if(0u != EZI2C_1_backup.enableState)
+ 107:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 108:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_Stop();
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 16
+
+
+ 109:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 110:Generated_Source\PSoC4/EZI2C_1_PM.c ****     }
+ 111:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 112:Generated_Source\PSoC4/EZI2C_1_PM.c **** #else
+ 113:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 114:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #if (EZI2C_1_SCB_MODE_I2C_CONST_CFG && EZI2C_1_I2C_WAKE_ENABLE_CONST)
+ 115:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_I2CSaveConfig();
+ 116:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 117:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #elif (EZI2C_1_SCB_MODE_EZI2C_CONST_CFG && EZI2C_1_EZI2C_WAKE_ENABLE_CONST)
+ 118:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_EzI2CSaveConfig();
+ 119:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 120:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #elif (EZI2C_1_SCB_MODE_SPI_CONST_CFG && EZI2C_1_SPI_WAKE_ENABLE_CONST)
+ 121:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_SpiSaveConfig();
+ 122:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 123:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #elif (EZI2C_1_SCB_MODE_UART_CONST_CFG && EZI2C_1_UART_WAKE_ENABLE_CONST)
+ 124:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_UartSaveConfig();
+ 125:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 126:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #else
+ 127:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 128:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_backup.enableState = (uint8) EZI2C_1_GET_CTRL_ENABLED;
+ 230              		.loc 1 128 0
+ 231 0002 054B     		ldr	r3, .L4
+ 232 0004 054A     		ldr	r2, .L4+4
+ 233 0006 1B68     		ldr	r3, [r3]
+ 234 0008 D90F     		lsrs	r1, r3, #31
+ 235 000a 1170     		strb	r1, [r2]
+ 129:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 130:Generated_Source\PSoC4/EZI2C_1_PM.c ****         if(0u != EZI2C_1_backup.enableState)
+ 236              		.loc 1 130 0
+ 237 000c 002B     		cmp	r3, #0
+ 238 000e 01DA     		bge	.L1
+ 131:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 132:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_Stop();
+ 239              		.loc 1 132 0
+ 240 0010 FFF7FEFF 		bl	EZI2C_1_Stop
+ 241              	.LVL0:
+ 242              	.L1:
+ 133:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 134:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 135:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #endif /* defined (EZI2C_1_SCB_MODE_I2C_CONST_CFG) && (EZI2C_1_I2C_WAKE_ENABLE_CONST) */
+ 136:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 137:Generated_Source\PSoC4/EZI2C_1_PM.c **** #endif /* (EZI2C_1_SCB_MODE_UNCONFIG_CONST_CFG) */
+ 138:Generated_Source\PSoC4/EZI2C_1_PM.c **** }
+ 243              		.loc 1 138 0
+ 244              		@ sp needed
+ 245 0014 10BD     		pop	{r4, pc}
+ 246              	.L5:
+ 247 0016 C046     		.align	2
+ 248              	.L4:
+ 249 0018 00000640 		.word	1074135040
+ 250 001c 00000000 		.word	.LANCHOR0
+ 251              		.cfi_endproc
+ 252              	.LFE0:
+ 253              		.size	EZI2C_1_Sleep, .-EZI2C_1_Sleep
+ 254              		.section	.text.EZI2C_1_Wakeup,"ax",%progbits
+ 255              		.align	1
+ 256              		.global	EZI2C_1_Wakeup
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 17
+
+
+ 257              		.code	16
+ 258              		.thumb_func
+ 259              		.type	EZI2C_1_Wakeup, %function
+ 260              	EZI2C_1_Wakeup:
+ 261              	.LFB1:
+ 139:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 140:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 141:Generated_Source\PSoC4/EZI2C_1_PM.c **** /*******************************************************************************
+ 142:Generated_Source\PSoC4/EZI2C_1_PM.c **** * Function Name: EZI2C_1_Wakeup
+ 143:Generated_Source\PSoC4/EZI2C_1_PM.c **** ****************************************************************************//**
+ 144:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+ 145:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  Prepares the EZI2C_1 component for Active mode operation after 
+ 146:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  Deep Sleep.
+ 147:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  The “Enable wakeup from Deep Sleep Mode” selection has influence on this 
+ 148:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  function implementation:
+ 149:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  - Checked: restores the component Active mode configuration.
+ 150:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  - Unchecked: enables the component if it was enabled before enter Deep Sleep.
+ 151:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+ 152:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  This function should not be called after exiting Sleep.
+ 153:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+ 154:Generated_Source\PSoC4/EZI2C_1_PM.c **** *  \sideeffect
+ 155:Generated_Source\PSoC4/EZI2C_1_PM.c **** *   Calling the EZI2C_1_Wakeup() function without first calling the 
+ 156:Generated_Source\PSoC4/EZI2C_1_PM.c **** *   EZI2C_1_Sleep() function may produce unexpected behavior.
+ 157:Generated_Source\PSoC4/EZI2C_1_PM.c **** *
+ 158:Generated_Source\PSoC4/EZI2C_1_PM.c **** *******************************************************************************/
+ 159:Generated_Source\PSoC4/EZI2C_1_PM.c **** void EZI2C_1_Wakeup(void)
+ 160:Generated_Source\PSoC4/EZI2C_1_PM.c **** {
+ 262              		.loc 1 160 0
+ 263              		.cfi_startproc
+ 264              		@ args = 0, pretend = 0, frame = 0
+ 265              		@ frame_needed = 0, uses_anonymous_args = 0
+ 266 0000 10B5     		push	{r4, lr}
+ 267              		.cfi_def_cfa_offset 8
+ 268              		.cfi_offset 4, -8
+ 269              		.cfi_offset 14, -4
+ 161:Generated_Source\PSoC4/EZI2C_1_PM.c **** #if(EZI2C_1_SCB_MODE_UNCONFIG_CONST_CFG)
+ 162:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 163:Generated_Source\PSoC4/EZI2C_1_PM.c ****     if(EZI2C_1_SCB_WAKE_ENABLE_CHECK)
+ 164:Generated_Source\PSoC4/EZI2C_1_PM.c ****     {
+ 165:Generated_Source\PSoC4/EZI2C_1_PM.c ****         if(EZI2C_1_SCB_MODE_I2C_RUNTM_CFG)
+ 166:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 167:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_I2CRestoreConfig();
+ 168:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 169:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else if(EZI2C_1_SCB_MODE_EZI2C_RUNTM_CFG)
+ 170:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 171:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_EzI2CRestoreConfig();
+ 172:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 173:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #if(!EZI2C_1_CY_SCBIP_V1)
+ 174:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else if(EZI2C_1_SCB_MODE_SPI_RUNTM_CFG)
+ 175:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 176:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_SpiRestoreConfig();
+ 177:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 178:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else if(EZI2C_1_SCB_MODE_UART_RUNTM_CFG)
+ 179:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 180:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_UartRestoreConfig();
+ 181:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 182:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #endif /* (!EZI2C_1_CY_SCBIP_V1) */
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 18
+
+
+ 183:Generated_Source\PSoC4/EZI2C_1_PM.c ****         else
+ 184:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 185:Generated_Source\PSoC4/EZI2C_1_PM.c ****             /* Unknown mode */
+ 186:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 187:Generated_Source\PSoC4/EZI2C_1_PM.c ****     }
+ 188:Generated_Source\PSoC4/EZI2C_1_PM.c ****     else
+ 189:Generated_Source\PSoC4/EZI2C_1_PM.c ****     {
+ 190:Generated_Source\PSoC4/EZI2C_1_PM.c ****         if(0u != EZI2C_1_backup.enableState)
+ 191:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 192:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_Enable();
+ 193:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 194:Generated_Source\PSoC4/EZI2C_1_PM.c ****     }
+ 195:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 196:Generated_Source\PSoC4/EZI2C_1_PM.c **** #else
+ 197:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 198:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #if (EZI2C_1_SCB_MODE_I2C_CONST_CFG  && EZI2C_1_I2C_WAKE_ENABLE_CONST)
+ 199:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_I2CRestoreConfig();
+ 200:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 201:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #elif (EZI2C_1_SCB_MODE_EZI2C_CONST_CFG && EZI2C_1_EZI2C_WAKE_ENABLE_CONST)
+ 202:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_EzI2CRestoreConfig();
+ 203:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 204:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #elif (EZI2C_1_SCB_MODE_SPI_CONST_CFG && EZI2C_1_SPI_WAKE_ENABLE_CONST)
+ 205:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_SpiRestoreConfig();
+ 206:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 207:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #elif (EZI2C_1_SCB_MODE_UART_CONST_CFG && EZI2C_1_UART_WAKE_ENABLE_CONST)
+ 208:Generated_Source\PSoC4/EZI2C_1_PM.c ****         EZI2C_1_UartRestoreConfig();
+ 209:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 210:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #else
+ 211:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 212:Generated_Source\PSoC4/EZI2C_1_PM.c ****         if(0u != EZI2C_1_backup.enableState)
+ 270              		.loc 1 212 0
+ 271 0002 034B     		ldr	r3, .L11
+ 272 0004 1B78     		ldrb	r3, [r3]
+ 273 0006 002B     		cmp	r3, #0
+ 274 0008 01D0     		beq	.L6
+ 213:Generated_Source\PSoC4/EZI2C_1_PM.c ****         {
+ 214:Generated_Source\PSoC4/EZI2C_1_PM.c ****             EZI2C_1_Enable();
+ 275              		.loc 1 214 0
+ 276 000a FFF7FEFF 		bl	EZI2C_1_Enable
+ 277              	.LVL1:
+ 278              	.L6:
+ 215:Generated_Source\PSoC4/EZI2C_1_PM.c ****         }
+ 216:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 217:Generated_Source\PSoC4/EZI2C_1_PM.c ****     #endif /* (EZI2C_1_I2C_WAKE_ENABLE_CONST) */
+ 218:Generated_Source\PSoC4/EZI2C_1_PM.c **** 
+ 219:Generated_Source\PSoC4/EZI2C_1_PM.c **** #endif /* (EZI2C_1_SCB_MODE_UNCONFIG_CONST_CFG) */
+ 220:Generated_Source\PSoC4/EZI2C_1_PM.c **** }
+ 279              		.loc 1 220 0
+ 280              		@ sp needed
+ 281 000e 10BD     		pop	{r4, pc}
+ 282              	.L12:
+ 283              		.align	2
+ 284              	.L11:
+ 285 0010 00000000 		.word	.LANCHOR0
+ 286              		.cfi_endproc
+ 287              	.LFE1:
+ 288              		.size	EZI2C_1_Wakeup, .-EZI2C_1_Wakeup
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 19
+
+
+ 289              		.global	EZI2C_1_backup
+ 290              		.bss
+ 291              		.set	.LANCHOR0,. + 0
+ 292              		.type	EZI2C_1_backup, %object
+ 293              		.size	EZI2C_1_backup, 1
+ 294              	EZI2C_1_backup:
+ 295 0000 00       		.space	1
+ 296              		.text
+ 297              	.Letext0:
+ 298              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+ 299              		.file 3 "Generated_Source\\PSoC4\\EZI2C_1.h"
+ 300              		.section	.debug_info,"",%progbits
+ 301              	.Ldebug_info0:
+ 302 0000 39010000 		.4byte	0x139
+ 303 0004 0400     		.2byte	0x4
+ 304 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 305 000a 04       		.byte	0x4
+ 306 000b 01       		.uleb128 0x1
+ 307 000c 96000000 		.4byte	.LASF22
+ 308 0010 0C       		.byte	0xc
+ 309 0011 AF010000 		.4byte	.LASF23
+ 310 0015 D3010000 		.4byte	.LASF24
+ 311 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 312 001d 00000000 		.4byte	0
+ 313 0021 00000000 		.4byte	.Ldebug_line0
+ 314 0025 02       		.uleb128 0x2
+ 315 0026 01       		.byte	0x1
+ 316 0027 06       		.byte	0x6
+ 317 0028 A3010000 		.4byte	.LASF0
+ 318 002c 02       		.uleb128 0x2
+ 319 002d 01       		.byte	0x1
+ 320 002e 08       		.byte	0x8
+ 321 002f 58010000 		.4byte	.LASF1
+ 322 0033 02       		.uleb128 0x2
+ 323 0034 02       		.byte	0x2
+ 324 0035 05       		.byte	0x5
+ 325 0036 24020000 		.4byte	.LASF2
+ 326 003a 02       		.uleb128 0x2
+ 327 003b 02       		.byte	0x2
+ 328 003c 07       		.byte	0x7
+ 329 003d 90010000 		.4byte	.LASF3
+ 330 0041 02       		.uleb128 0x2
+ 331 0042 04       		.byte	0x4
+ 332 0043 05       		.byte	0x5
+ 333 0044 6B010000 		.4byte	.LASF4
+ 334 0048 02       		.uleb128 0x2
+ 335 0049 04       		.byte	0x4
+ 336 004a 07       		.byte	0x7
+ 337 004b 50000000 		.4byte	.LASF5
+ 338 004f 02       		.uleb128 0x2
+ 339 0050 08       		.byte	0x8
+ 340 0051 05       		.byte	0x5
+ 341 0052 00000000 		.4byte	.LASF6
+ 342 0056 02       		.uleb128 0x2
+ 343 0057 08       		.byte	0x8
+ 344 0058 07       		.byte	0x7
+ 345 0059 71000000 		.4byte	.LASF7
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 20
+
+
+ 346 005d 03       		.uleb128 0x3
+ 347 005e 04       		.byte	0x4
+ 348 005f 05       		.byte	0x5
+ 349 0060 696E7400 		.ascii	"int\000"
+ 350 0064 02       		.uleb128 0x2
+ 351 0065 04       		.byte	0x4
+ 352 0066 07       		.byte	0x7
+ 353 0067 21000000 		.4byte	.LASF8
+ 354 006b 04       		.uleb128 0x4
+ 355 006c 4A000000 		.4byte	.LASF9
+ 356 0070 02       		.byte	0x2
+ 357 0071 D201     		.2byte	0x1d2
+ 358 0073 2C000000 		.4byte	0x2c
+ 359 0077 04       		.uleb128 0x4
+ 360 0078 0E000000 		.4byte	.LASF10
+ 361 007c 02       		.byte	0x2
+ 362 007d D401     		.2byte	0x1d4
+ 363 007f 48000000 		.4byte	0x48
+ 364 0083 02       		.uleb128 0x2
+ 365 0084 04       		.byte	0x4
+ 366 0085 04       		.byte	0x4
+ 367 0086 52010000 		.4byte	.LASF11
+ 368 008a 02       		.uleb128 0x2
+ 369 008b 08       		.byte	0x8
+ 370 008c 04       		.byte	0x4
+ 371 008d 83010000 		.4byte	.LASF12
+ 372 0091 02       		.uleb128 0x2
+ 373 0092 01       		.byte	0x1
+ 374 0093 08       		.byte	0x8
+ 375 0094 66010000 		.4byte	.LASF13
+ 376 0098 04       		.uleb128 0x4
+ 377 0099 8A010000 		.4byte	.LASF14
+ 378 009d 02       		.byte	0x2
+ 379 009e 7E02     		.2byte	0x27e
+ 380 00a0 A4000000 		.4byte	0xa4
+ 381 00a4 05       		.uleb128 0x5
+ 382 00a5 77000000 		.4byte	0x77
+ 383 00a9 02       		.uleb128 0x2
+ 384 00aa 08       		.byte	0x8
+ 385 00ab 04       		.byte	0x4
+ 386 00ac 18020000 		.4byte	.LASF15
+ 387 00b0 02       		.uleb128 0x2
+ 388 00b1 04       		.byte	0x4
+ 389 00b2 07       		.byte	0x7
+ 390 00b3 44020000 		.4byte	.LASF16
+ 391 00b7 06       		.uleb128 0x6
+ 392 00b8 01       		.byte	0x1
+ 393 00b9 03       		.byte	0x3
+ 394 00ba 60       		.byte	0x60
+ 395 00bb CC000000 		.4byte	0xcc
+ 396 00bf 07       		.uleb128 0x7
+ 397 00c0 15000000 		.4byte	.LASF25
+ 398 00c4 03       		.byte	0x3
+ 399 00c5 62       		.byte	0x62
+ 400 00c6 6B000000 		.4byte	0x6b
+ 401 00ca 00       		.byte	0
+ 402 00cb 00       		.byte	0
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 21
+
+
+ 403 00cc 08       		.uleb128 0x8
+ 404 00cd 2E020000 		.4byte	.LASF17
+ 405 00d1 03       		.byte	0x3
+ 406 00d2 63       		.byte	0x63
+ 407 00d3 B7000000 		.4byte	0xb7
+ 408 00d7 09       		.uleb128 0x9
+ 409 00d8 88000000 		.4byte	.LASF18
+ 410 00dc 01       		.byte	0x1
+ 411 00dd 49       		.byte	0x49
+ 412 00de 00000000 		.4byte	.LFB0
+ 413 00e2 20000000 		.4byte	.LFE0-.LFB0
+ 414 00e6 01       		.uleb128 0x1
+ 415 00e7 9C       		.byte	0x9c
+ 416 00e8 F6000000 		.4byte	0xf6
+ 417 00ec 0A       		.uleb128 0xa
+ 418 00ed 14000000 		.4byte	.LVL0
+ 419 00f1 26010000 		.4byte	0x126
+ 420 00f5 00       		.byte	0
+ 421 00f6 09       		.uleb128 0x9
+ 422 00f7 74010000 		.4byte	.LASF19
+ 423 00fb 01       		.byte	0x1
+ 424 00fc 9F       		.byte	0x9f
+ 425 00fd 00000000 		.4byte	.LFB1
+ 426 0101 14000000 		.4byte	.LFE1-.LFB1
+ 427 0105 01       		.uleb128 0x1
+ 428 0106 9C       		.byte	0x9c
+ 429 0107 15010000 		.4byte	0x115
+ 430 010b 0A       		.uleb128 0xa
+ 431 010c 0E000000 		.4byte	.LVL1
+ 432 0110 31010000 		.4byte	0x131
+ 433 0114 00       		.byte	0
+ 434 0115 0B       		.uleb128 0xb
+ 435 0116 3B000000 		.4byte	.LASF26
+ 436 011a 01       		.byte	0x1
+ 437 011b 2D       		.byte	0x2d
+ 438 011c CC000000 		.4byte	0xcc
+ 439 0120 05       		.uleb128 0x5
+ 440 0121 03       		.byte	0x3
+ 441 0122 00000000 		.4byte	EZI2C_1_backup
+ 442 0126 0C       		.uleb128 0xc
+ 443 0127 2E000000 		.4byte	.LASF20
+ 444 012b 2E000000 		.4byte	.LASF20
+ 445 012f 03       		.byte	0x3
+ 446 0130 73       		.byte	0x73
+ 447 0131 0C       		.uleb128 0xc
+ 448 0132 62000000 		.4byte	.LASF21
+ 449 0136 62000000 		.4byte	.LASF21
+ 450 013a 03       		.byte	0x3
+ 451 013b 71       		.byte	0x71
+ 452 013c 00       		.byte	0
+ 453              		.section	.debug_abbrev,"",%progbits
+ 454              	.Ldebug_abbrev0:
+ 455 0000 01       		.uleb128 0x1
+ 456 0001 11       		.uleb128 0x11
+ 457 0002 01       		.byte	0x1
+ 458 0003 25       		.uleb128 0x25
+ 459 0004 0E       		.uleb128 0xe
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 22
+
+
+ 460 0005 13       		.uleb128 0x13
+ 461 0006 0B       		.uleb128 0xb
+ 462 0007 03       		.uleb128 0x3
+ 463 0008 0E       		.uleb128 0xe
+ 464 0009 1B       		.uleb128 0x1b
+ 465 000a 0E       		.uleb128 0xe
+ 466 000b 55       		.uleb128 0x55
+ 467 000c 17       		.uleb128 0x17
+ 468 000d 11       		.uleb128 0x11
+ 469 000e 01       		.uleb128 0x1
+ 470 000f 10       		.uleb128 0x10
+ 471 0010 17       		.uleb128 0x17
+ 472 0011 00       		.byte	0
+ 473 0012 00       		.byte	0
+ 474 0013 02       		.uleb128 0x2
+ 475 0014 24       		.uleb128 0x24
+ 476 0015 00       		.byte	0
+ 477 0016 0B       		.uleb128 0xb
+ 478 0017 0B       		.uleb128 0xb
+ 479 0018 3E       		.uleb128 0x3e
+ 480 0019 0B       		.uleb128 0xb
+ 481 001a 03       		.uleb128 0x3
+ 482 001b 0E       		.uleb128 0xe
+ 483 001c 00       		.byte	0
+ 484 001d 00       		.byte	0
+ 485 001e 03       		.uleb128 0x3
+ 486 001f 24       		.uleb128 0x24
+ 487 0020 00       		.byte	0
+ 488 0021 0B       		.uleb128 0xb
+ 489 0022 0B       		.uleb128 0xb
+ 490 0023 3E       		.uleb128 0x3e
+ 491 0024 0B       		.uleb128 0xb
+ 492 0025 03       		.uleb128 0x3
+ 493 0026 08       		.uleb128 0x8
+ 494 0027 00       		.byte	0
+ 495 0028 00       		.byte	0
+ 496 0029 04       		.uleb128 0x4
+ 497 002a 16       		.uleb128 0x16
+ 498 002b 00       		.byte	0
+ 499 002c 03       		.uleb128 0x3
+ 500 002d 0E       		.uleb128 0xe
+ 501 002e 3A       		.uleb128 0x3a
+ 502 002f 0B       		.uleb128 0xb
+ 503 0030 3B       		.uleb128 0x3b
+ 504 0031 05       		.uleb128 0x5
+ 505 0032 49       		.uleb128 0x49
+ 506 0033 13       		.uleb128 0x13
+ 507 0034 00       		.byte	0
+ 508 0035 00       		.byte	0
+ 509 0036 05       		.uleb128 0x5
+ 510 0037 35       		.uleb128 0x35
+ 511 0038 00       		.byte	0
+ 512 0039 49       		.uleb128 0x49
+ 513 003a 13       		.uleb128 0x13
+ 514 003b 00       		.byte	0
+ 515 003c 00       		.byte	0
+ 516 003d 06       		.uleb128 0x6
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 23
+
+
+ 517 003e 13       		.uleb128 0x13
+ 518 003f 01       		.byte	0x1
+ 519 0040 0B       		.uleb128 0xb
+ 520 0041 0B       		.uleb128 0xb
+ 521 0042 3A       		.uleb128 0x3a
+ 522 0043 0B       		.uleb128 0xb
+ 523 0044 3B       		.uleb128 0x3b
+ 524 0045 0B       		.uleb128 0xb
+ 525 0046 01       		.uleb128 0x1
+ 526 0047 13       		.uleb128 0x13
+ 527 0048 00       		.byte	0
+ 528 0049 00       		.byte	0
+ 529 004a 07       		.uleb128 0x7
+ 530 004b 0D       		.uleb128 0xd
+ 531 004c 00       		.byte	0
+ 532 004d 03       		.uleb128 0x3
+ 533 004e 0E       		.uleb128 0xe
+ 534 004f 3A       		.uleb128 0x3a
+ 535 0050 0B       		.uleb128 0xb
+ 536 0051 3B       		.uleb128 0x3b
+ 537 0052 0B       		.uleb128 0xb
+ 538 0053 49       		.uleb128 0x49
+ 539 0054 13       		.uleb128 0x13
+ 540 0055 38       		.uleb128 0x38
+ 541 0056 0B       		.uleb128 0xb
+ 542 0057 00       		.byte	0
+ 543 0058 00       		.byte	0
+ 544 0059 08       		.uleb128 0x8
+ 545 005a 16       		.uleb128 0x16
+ 546 005b 00       		.byte	0
+ 547 005c 03       		.uleb128 0x3
+ 548 005d 0E       		.uleb128 0xe
+ 549 005e 3A       		.uleb128 0x3a
+ 550 005f 0B       		.uleb128 0xb
+ 551 0060 3B       		.uleb128 0x3b
+ 552 0061 0B       		.uleb128 0xb
+ 553 0062 49       		.uleb128 0x49
+ 554 0063 13       		.uleb128 0x13
+ 555 0064 00       		.byte	0
+ 556 0065 00       		.byte	0
+ 557 0066 09       		.uleb128 0x9
+ 558 0067 2E       		.uleb128 0x2e
+ 559 0068 01       		.byte	0x1
+ 560 0069 3F       		.uleb128 0x3f
+ 561 006a 19       		.uleb128 0x19
+ 562 006b 03       		.uleb128 0x3
+ 563 006c 0E       		.uleb128 0xe
+ 564 006d 3A       		.uleb128 0x3a
+ 565 006e 0B       		.uleb128 0xb
+ 566 006f 3B       		.uleb128 0x3b
+ 567 0070 0B       		.uleb128 0xb
+ 568 0071 27       		.uleb128 0x27
+ 569 0072 19       		.uleb128 0x19
+ 570 0073 11       		.uleb128 0x11
+ 571 0074 01       		.uleb128 0x1
+ 572 0075 12       		.uleb128 0x12
+ 573 0076 06       		.uleb128 0x6
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 24
+
+
+ 574 0077 40       		.uleb128 0x40
+ 575 0078 18       		.uleb128 0x18
+ 576 0079 9742     		.uleb128 0x2117
+ 577 007b 19       		.uleb128 0x19
+ 578 007c 01       		.uleb128 0x1
+ 579 007d 13       		.uleb128 0x13
+ 580 007e 00       		.byte	0
+ 581 007f 00       		.byte	0
+ 582 0080 0A       		.uleb128 0xa
+ 583 0081 898201   		.uleb128 0x4109
+ 584 0084 00       		.byte	0
+ 585 0085 11       		.uleb128 0x11
+ 586 0086 01       		.uleb128 0x1
+ 587 0087 31       		.uleb128 0x31
+ 588 0088 13       		.uleb128 0x13
+ 589 0089 00       		.byte	0
+ 590 008a 00       		.byte	0
+ 591 008b 0B       		.uleb128 0xb
+ 592 008c 34       		.uleb128 0x34
+ 593 008d 00       		.byte	0
+ 594 008e 03       		.uleb128 0x3
+ 595 008f 0E       		.uleb128 0xe
+ 596 0090 3A       		.uleb128 0x3a
+ 597 0091 0B       		.uleb128 0xb
+ 598 0092 3B       		.uleb128 0x3b
+ 599 0093 0B       		.uleb128 0xb
+ 600 0094 49       		.uleb128 0x49
+ 601 0095 13       		.uleb128 0x13
+ 602 0096 3F       		.uleb128 0x3f
+ 603 0097 19       		.uleb128 0x19
+ 604 0098 02       		.uleb128 0x2
+ 605 0099 18       		.uleb128 0x18
+ 606 009a 00       		.byte	0
+ 607 009b 00       		.byte	0
+ 608 009c 0C       		.uleb128 0xc
+ 609 009d 2E       		.uleb128 0x2e
+ 610 009e 00       		.byte	0
+ 611 009f 3F       		.uleb128 0x3f
+ 612 00a0 19       		.uleb128 0x19
+ 613 00a1 3C       		.uleb128 0x3c
+ 614 00a2 19       		.uleb128 0x19
+ 615 00a3 6E       		.uleb128 0x6e
+ 616 00a4 0E       		.uleb128 0xe
+ 617 00a5 03       		.uleb128 0x3
+ 618 00a6 0E       		.uleb128 0xe
+ 619 00a7 3A       		.uleb128 0x3a
+ 620 00a8 0B       		.uleb128 0xb
+ 621 00a9 3B       		.uleb128 0x3b
+ 622 00aa 0B       		.uleb128 0xb
+ 623 00ab 00       		.byte	0
+ 624 00ac 00       		.byte	0
+ 625 00ad 00       		.byte	0
+ 626              		.section	.debug_aranges,"",%progbits
+ 627 0000 24000000 		.4byte	0x24
+ 628 0004 0200     		.2byte	0x2
+ 629 0006 00000000 		.4byte	.Ldebug_info0
+ 630 000a 04       		.byte	0x4
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 25
+
+
+ 631 000b 00       		.byte	0
+ 632 000c 0000     		.2byte	0
+ 633 000e 0000     		.2byte	0
+ 634 0010 00000000 		.4byte	.LFB0
+ 635 0014 20000000 		.4byte	.LFE0-.LFB0
+ 636 0018 00000000 		.4byte	.LFB1
+ 637 001c 14000000 		.4byte	.LFE1-.LFB1
+ 638 0020 00000000 		.4byte	0
+ 639 0024 00000000 		.4byte	0
+ 640              		.section	.debug_ranges,"",%progbits
+ 641              	.Ldebug_ranges0:
+ 642 0000 00000000 		.4byte	.LFB0
+ 643 0004 20000000 		.4byte	.LFE0
+ 644 0008 00000000 		.4byte	.LFB1
+ 645 000c 14000000 		.4byte	.LFE1
+ 646 0010 00000000 		.4byte	0
+ 647 0014 00000000 		.4byte	0
+ 648              		.section	.debug_line,"",%progbits
+ 649              	.Ldebug_line0:
+ 650 0000 85000000 		.section	.debug_str,"MS",%progbits,1
+ 650      02005400 
+ 650      00000201 
+ 650      FB0E0D00 
+ 650      01010101 
+ 651              	.LASF6:
+ 652 0000 6C6F6E67 		.ascii	"long long int\000"
+ 652      206C6F6E 
+ 652      6720696E 
+ 652      7400
+ 653              	.LASF10:
+ 654 000e 75696E74 		.ascii	"uint32\000"
+ 654      333200
+ 655              	.LASF25:
+ 656 0015 656E6162 		.ascii	"enableState\000"
+ 656      6C655374 
+ 656      61746500 
+ 657              	.LASF8:
+ 658 0021 756E7369 		.ascii	"unsigned int\000"
+ 658      676E6564 
+ 658      20696E74 
+ 658      00
+ 659              	.LASF20:
+ 660 002e 455A4932 		.ascii	"EZI2C_1_Stop\000"
+ 660      435F315F 
+ 660      53746F70 
+ 660      00
+ 661              	.LASF26:
+ 662 003b 455A4932 		.ascii	"EZI2C_1_backup\000"
+ 662      435F315F 
+ 662      6261636B 
+ 662      757000
+ 663              	.LASF9:
+ 664 004a 75696E74 		.ascii	"uint8\000"
+ 664      3800
+ 665              	.LASF5:
+ 666 0050 6C6F6E67 		.ascii	"long unsigned int\000"
+ 666      20756E73 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 26
+
+
+ 666      69676E65 
+ 666      6420696E 
+ 666      7400
+ 667              	.LASF21:
+ 668 0062 455A4932 		.ascii	"EZI2C_1_Enable\000"
+ 668      435F315F 
+ 668      456E6162 
+ 668      6C6500
+ 669              	.LASF7:
+ 670 0071 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 670      206C6F6E 
+ 670      6720756E 
+ 670      7369676E 
+ 670      65642069 
+ 671              	.LASF18:
+ 672 0088 455A4932 		.ascii	"EZI2C_1_Sleep\000"
+ 672      435F315F 
+ 672      536C6565 
+ 672      7000
+ 673              	.LASF22:
+ 674 0096 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 674      43313120 
+ 674      352E342E 
+ 674      31203230 
+ 674      31363036 
+ 675 00c9 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 675      20726576 
+ 675      6973696F 
+ 675      6E203233 
+ 675      37373135 
+ 676 00fc 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects -finline-fu"
+ 676      66756E63 
+ 676      74696F6E 
+ 676      2D736563 
+ 676      74696F6E 
+ 677 012f 6E637469 		.ascii	"nctions -flto -fno-strict-aliasing\000"
+ 677      6F6E7320 
+ 677      2D666C74 
+ 677      6F202D66 
+ 677      6E6F2D73 
+ 678              	.LASF11:
+ 679 0152 666C6F61 		.ascii	"float\000"
+ 679      7400
+ 680              	.LASF1:
+ 681 0158 756E7369 		.ascii	"unsigned char\000"
+ 681      676E6564 
+ 681      20636861 
+ 681      7200
+ 682              	.LASF13:
+ 683 0166 63686172 		.ascii	"char\000"
+ 683      00
+ 684              	.LASF4:
+ 685 016b 6C6F6E67 		.ascii	"long int\000"
+ 685      20696E74 
+ 685      00
+ 686              	.LASF19:
+ 687 0174 455A4932 		.ascii	"EZI2C_1_Wakeup\000"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccU2SciS.s 			page 27
+
+
+ 687      435F315F 
+ 687      57616B65 
+ 687      757000
+ 688              	.LASF12:
+ 689 0183 646F7562 		.ascii	"double\000"
+ 689      6C6500
+ 690              	.LASF14:
+ 691 018a 72656733 		.ascii	"reg32\000"
+ 691      3200
+ 692              	.LASF3:
+ 693 0190 73686F72 		.ascii	"short unsigned int\000"
+ 693      7420756E 
+ 693      7369676E 
+ 693      65642069 
+ 693      6E7400
+ 694              	.LASF0:
+ 695 01a3 7369676E 		.ascii	"signed char\000"
+ 695      65642063 
+ 695      68617200 
+ 696              	.LASF23:
+ 697 01af 47656E65 		.ascii	"Generated_Source\\PSoC4\\EZI2C_1_PM.c\000"
+ 697      72617465 
+ 697      645F536F 
+ 697      75726365 
+ 697      5C50536F 
+ 698              	.LASF24:
+ 699 01d3 443A5C56 		.ascii	"D:\\V-TE-PWR\\PDSS_SRC_SNK\\CYPD3171-24LQXQ_pb\\CYP"
+ 699      2D54452D 
+ 699      5057525C 
+ 699      50445353 
+ 699      5F535243 
+ 700 0202 44333137 		.ascii	"D3171-24LQXQ_pb.cydsn\000"
+ 700      312D3234 
+ 700      4C515851 
+ 700      5F70622E 
+ 700      63796473 
+ 701              	.LASF15:
+ 702 0218 6C6F6E67 		.ascii	"long double\000"
+ 702      20646F75 
+ 702      626C6500 
+ 703              	.LASF2:
+ 704 0224 73686F72 		.ascii	"short int\000"
+ 704      7420696E 
+ 704      7400
+ 705              	.LASF17:
+ 706 022e 455A4932 		.ascii	"EZI2C_1_BACKUP_STRUCT\000"
+ 706      435F315F 
+ 706      4241434B 
+ 706      55505F53 
+ 706      54525543 
+ 707              	.LASF16:
+ 708 0244 73697A65 		.ascii	"sizetype\000"
+ 708      74797065 
+ 708      00
+ 709              		.comm	__gnu_lto_v1,1,1
+ 710              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

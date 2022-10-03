@@ -1,0 +1,1730 @@
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"PWM_A_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.section	.gnu.lto_.profile.95e21b5d,"",%progbits
+  19 0000 789C6361 		.ascii	"x\234ca`d`a`\000\222\252\374\000\000\303\000?"
+  19      60646061 
+  19      600092AA 
+  19      FC0000C3 
+  19      003F
+  20              		.text
+  21              		.section	.gnu.lto_.icf.95e21b5d,"",%progbits
+  22 0000 789C6361 		.ascii	"x\234ca`d\000\001\005\006\004`eX?\363A\013\023\343\241"
+  22      60640001 
+  22      05060460 
+  22      65583FF3 
+  22      410B13E3 
+  23 0015 ED3F0F31 		.ascii	"\355?\01713M\332\276\370.33X\204\245\343\362\2777l\014"
+  23      334DDABE 
+  23      F82E3333 
+  23      5884A5E3 
+  23      F2BF376C 
+  24 002a 00F4860E 		.ascii	"\000\364\206\016\337"
+  24      DF
+  25              		.text
+  26              		.section	.gnu.lto_.jmpfuncs.95e21b5d,"",%progbits
+  27 0000 789C6361 		.ascii	"x\234ca`d\000\001\001\006\004`\001b\220(3\204\311\000"
+  27      60640001 
+  27      01060460 
+  27      01629028 
+  27      3384C900 
+  28 0014 00030E00 		.ascii	"\000\003\016\000\""
+  28      22
+  29              		.text
+  30              		.section	.gnu.lto_.inline.95e21b5d,"",%progbits
+  31 0000 789C6361 		.ascii	"x\234ca`d\000\2010\006\004`a``fbd`\0022\331\026\310"
+  31      60640081 
+  31      30060460 
+  31      61606066 
+  31      62646002 
+  32 0018 8328A022 		.ascii	"\203(\240\".A\240\010\317\004?\204\020\027\220`\306"
+  32      2E41A008 
+  32      CF043F84 
+  32      10179060 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 2
+
+
+  32      C6
+  33 0029 50C9C2C0 		.ascii	"P\311\302\300\316\011\024a\373\240\207\252\222\001\000"
+  33      CE091461 
+  33      FBA087AA 
+  33      920100
+  34 0038 04D605E9 		.ascii	"\004\326\005\351"
+  35              		.text
+  36              		.section	.gnu.lto_.pureconst.95e21b5d,"",%progbits
+  37 0000 789C6361 		.ascii	"x\234ca`d\340d```a``\224bf`\221\000\000\001\261\000"
+  37      6064E064 
+  37      60606061 
+  37      60609462 
+  37      66609100 
+  38 0018 4D       		.ascii	"M"
+  39              		.text
+  40              		.section	.gnu.lto_PWM_A_SaveConfig.95e21b5d,"",%progbits
+  41 0000 789C6361 		.ascii	"x\234ca`d\000\201j V\001bi fdf`d\232p\216\201\241\221"
+  41      60640081 
+  41      6A205601 
+  41      62692066 
+  41      64666064 
+  42 001a 83899111 		.ascii	"\203\211\221\021\304h\340`d\250gb\254g\374\312\364\227"
+  42      C468E060 
+  42      64A86762 
+  42      AC67FCCA 
+  42      F497
+  43 002c 89F150FB 		.ascii	"\211\361P\373\263\235L\232\313\033\200\340\301\321\311"
+  43      B39D4C9A 
+  43      CB1B80E0 
+  43      C1D1C9
+  44 003b CC0D2B0E 		.ascii	"\314\015+\0160\266230\374g\002\233\304\300\270\234Q"
+  44      30B63233 
+  44      30FC6702 
+  44      9BC4C0B8 
+  44      9C51
+  45 004d 9301A8EC 		.ascii	"\223\001\250\354\321\306\177Sy\331Z@\312\024 \222\214"
+  45      D1C67F53 
+  45      79D95A40 
+  45      CA142092 
+  45      8C
+  46 005e 2B18D940 		.ascii	"+\030\331@\326\255\017:\320\360\377\177s\303\201\371"
+  46      D6AD0F3A 
+  46      D0F0FF7F 
+  46      73C381F9 
+  47 006e AC4F9980 		.ascii	"\254O\231\200\022\037\200\030d\315G \007H3\277bd\002"
+  47      121F8018 
+  47      64CD4720 
+  47      074833BF 
+  47      626402
+  48 0081 29059BF6 		.ascii	")\005\233\366\201\211\021$\006T\241\344\236\232\227"
+  48      81891124 
+  48      0654A1E4 
+  48      9E9A97
+  49 0090 5A945892 		.ascii	"Z\224X\222\232\022\037\234_Z\224\234\032\023\020\234"
+  49      9A121F9C 
+  49      5F5A949C 
+  49      1A13109C 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 3
+
+
+  50 00a0 EF6C1213 		.ascii	"\357l\022\023\020\356\033\357\030\037\340\253\227\314"
+  50      10EE1BEF 
+  50      181FE0AB 
+  50      97CC
+  51 00ae 0000CC54 		.ascii	"\000\000\314T8b"
+  51      3862
+  52              		.text
+  53              		.section	.gnu.lto_PWM_A_Sleep.95e21b5d,"",%progbits
+  54 0000 789C8D51 		.ascii	"x\234\215Q\317KTQ\024>\337\275\367\275y\015\032\375"
+  54      CF4B5451 
+  54      143EDFBD 
+  54      F7BD790D 
+  54      1AFD
+  55 0012 013248B4 		.ascii	"\0012H\264q\323lZ\007\021\024\010\302\220\213\026\011"
+  55      71D36C5A 
+  55      07111408 
+  55      C2908B16 
+  55      09
+  56 0023 43E86C15 		.ascii	"C\350l\025\244\326s\365\315\323l\021n\012\"j\010\004"
+  56      A4D673F5 
+  56      CDD36C11 
+  56      6E0A226A 
+  56      0804
+  57 0035 2DB399F1 		.ascii	"-\263\231\361G6`\364\030\2646R\213le\213\212\030B\\"
+  57      473660F4 
+  57      18B43652 
+  57      8B6C658B 
+  57      8A18425C 
+  58 0049 281862FE 		.ascii	"(\030b\376\230\316yo\372\001At\340\335\037\347|\357"
+  58      98CE796F 
+  58      FA014174 
+  58      E0DD1FE7 
+  58      7CEF
+  59 005b FBBE7B8E 		.ascii	"\373\276{\216!\220D\237\":\305\373Y\376\340\022\324"
+  59      2190449F 
+  59      223AC5FB 
+  59      59FEE012 
+  59      D4
+  60 006c F81BA221 		.ascii	"\370\033\242!O)\275\224\"\2334ki\262-\032N\2346?\017"
+  60      4F29BD94 
+  60      229B346B 
+  60      69B22D1A 
+  60      4E9C363F 
+  61 0081 0E2007EB 		.ascii	"\016 \007\353\201\362J\033\007y|S\207\012\265\321zU"
+  61      81F24A1B 
+  61      07797C53 
+  61      870AB5D1 
+  61      7A55
+  62 0093 754C5A8E 		.ascii	"uLZ\216\217+\017\264\235\012\021h\242\206\212\304\010"
+  62      8F2B0FB4 
+  62      9D0A1168 
+  62      A2868AC4 
+  62      08
+  63 00a4 93E82086 		.ascii	"\223\350 \206}\256\034\335nu\013\002k\217\213\230\202"
+  63      7DAE1CDD 
+  63      6E750B02 
+  63      6B8F8B98 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 4
+
+
+  63      82
+  64 00b5 2B8E4A97 		.ascii	"+\216J\227B\333h\3706\334u^\264x\232\002\015#\013\321"
+  64      42DB68F8 
+  64      36DC755E 
+  64      B4789A02 
+  64      0D230BD1 
+  65 00c9 16C34473 		.ascii	"\026\303Ds[)\331u\035\265\3577\353\273Z\376\364\265"
+  65      5B29D975 
+  65      1DB5EF37 
+  65      EBBB5AFE 
+  65      F4B5
+  66 00db 66D63B41 		.ascii	"f\326;A\355mbG\005ZAD&\366?\334\325\361\325\332\011"
+  66      ED6D6247 
+  66      055A4144 
+  66      26F63FDC 
+  66      D5F1D5DA 
+  67 00f0 6B38F565 		.ascii	"k8\365e\377\335\336\361\"\356\017\025\330\226\306c\264"
+  67      FFDDDEF1 
+  67      22EE0F15 
+  67      D896C663 
+  67      B4
+  68 0101 E111DA58 		.ascii	"\341\021\332X}\032EP\035\376\301\310\201\211\011M\314"
+  68      7D1A4550 
+  68      1DFEC1C8 
+  68      8189094D 
+  68      CC
+  69 0112 39BFFC7A 		.ascii	"9\277\374z\304\023\022p<a\354'\024\326\375T\023\303"
+  69      C4131270 
+  69      3C61EC27 
+  69      14D6FD54 
+  69      13C3
+  70 0124 80D26675 		.ascii	"\200\322fu\2575\006\020f\204\214\304\243\246\245\024"
+  70      AF350610 
+  70      66848CC4 
+  70      A3A6A514 
+  71 0134 5B1CDE29 		.ascii	"[\034\336)\277\354\024\360\237\366Ld\257Z\335\\O\344"
+  71      BFEC14F0 
+  71      9FF64C64 
+  71      AF5ADD5C 
+  71      4FE4
+  72 0146 0FED0D6B 		.ascii	"\017\355\015kOpn\214\333$\351\215\325\367\313I\261h"
+  72      4F706E8C 
+  72      DB24E98D 
+  72      D5F7CB49 
+  72      B168
+  73 0158 A3BC8312 		.ascii	"\243\274\203\022\367\366\251\360r\361\326\363\362\230"
+  73      F7F6A9F0 
+  73      72F1D6F3 
+  73      F298
+  74 0166 979E91BE 		.ascii	"\227\236\221\276\331+\201vQf\337GQsQA\232\021\013\243"
+  74      D92B8176 
+  74      5166DF47 
+  74      51735141 
+  74      9A110BA3 
+  75 017a AB95A488 		.ascii	"\253\225\244\210\270\354w6\262\263\255\014\255\245c"
+  75      B8EC7736 
+  75      B2B3AD0C 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 5
+
+
+  75      ADA563
+  76 0189 332B0F8F 		.ascii	"3+\017\2175\335\374\257\374\334\277\344\347\177\313"
+  76      35DDFCAF 
+  76      FCDCBFE4 
+  76      E77FCB
+  77 0198 2F44F2BF 		.ascii	"/D\362\277\336\310\303\304\263\246\274\023\315\353+"
+  77      DEC8C3C4 
+  77      B3A6BC13 
+  77      CDEB2B
+  78 01a7 FCF0DE2B 		.ascii	"\374\360\336+%\362\177??\321\340\231\021\026\221\347"
+  78      25F27F3F 
+  78      3FD1E099 
+  78      111691E7 
+  79 01b7 617BB481 		.ascii	"a{\264\201\341\260x!\202Jlq\221)X\350\344\305\\\177"
+  79      E1B07821 
+  79      824A6C71 
+  79      912958E8 
+  79      E4C55C7F 
+  80 01cb 6EF0EAB5 		.ascii	"n\360\352\265\\_\266{\340\372`o\256'\323=p\376LO\346"
+  80      5C5FB67B 
+  80      E0FA606F 
+  80      AE27D33D 
+  80      70FE4C4F 
+  81 01e0 7257F65C 		.ascii	"rW\366\\6\323u\272\227~\000O\372\3445"
+  81      36D375BA 
+  81      977E004F 
+  81      FAE435
+  82              		.text
+  83              		.section	.gnu.lto_PWM_A_RestoreConfig.95e21b5d,"",%progbits
+  84 0000 789C6361 		.ascii	"x\234ca`d\000\201\032 V\001bi fdf`d\232p\216\201\241"
+  84      60640081 
+  84      1A205601 
+  84      62692066 
+  84      64666064 
+  85 0019 91838991 		.ascii	"\221\203\211\221\021\304h\340`d\250gb\254g\374\312\364"
+  85      11C468E0 
+  85      6064A867 
+  85      62AC67FC 
+  85      CAF4
+  86 002b 9789F150 		.ascii	"\227\211\361P\373\263\235L\232\313\033\200\340A\353"
+  86      FBB39D4C 
+  86      9ACB1B80 
+  86      E041EB
+  87 003a 3B838615 		.ascii	";\203\206\025\007\030[\231\031\030\3763\201Mb`\\\316"
+  87      07185B99 
+  87      1918FE33 
+  87      814D6260 
+  87      5CCE
+  88 004c A8C90054 		.ascii	"\250\311\000T\366h\343\277\251\274l- e\012\020I\306"
+  88      F668E3BF 
+  88      A9BC6C2D 
+  88      20650A10 
+  88      49C6
+  89 005e 158C6C20 		.ascii	"\025\214l \353\326\007\035h\370\377\277\271\341\300"
+  89      EBD6071D 
+  89      68F8FFBF 
+  89      B9E1C0
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 6
+
+
+  90 006d 67B683DF 		.ascii	"g\266\203\337\330\2002\037\200\030d\317G&&\020\315\374"
+  90      D880321F 
+  90      801864CF 
+  90      47262610 
+  90      CDFC
+  91 007f 8A9109A4 		.ascii	"\212\221\011\244\026l\334\007&F\220\030P\205\222{j^"
+  91      166CDC07 
+  91      26469018 
+  91      5085927B 
+  91      6A5E
+  92 0091 6A516249 		.ascii	"jQbIjJ|p~iQrjL@p\276\263IL@\270o\274c|\200\257^2\003"
+  92      6A4A7C70 
+  92      7E695172 
+  92      6A4C4070 
+  92      BEB3494C 
+  93 00b0 00748239 		.ascii	"\000t\2029\326"
+  93      D6
+  94              		.text
+  95              		.section	.gnu.lto_PWM_A_Wakeup.95e21b5d,"",%progbits
+  96 0000 789C658F 		.ascii	"x\234e\217\277KBQ\024\307\317\367\336\247O$\241? $\242"
+  96      BF4B4251 
+  96      14C7CFF7 
+  96      DEA74F24 
+  96      A13F2024 
+  97 0015 C5A16CF0 		.ascii	"\305\241l\360\037\210\006'A\212h\021$\3145Aj\366\232"
+  97      1F880627 
+  97      418A6811 
+  97      24CC3541 
+  97      6AF69A
+  98 0028 3ECA255A 		.ascii	">\312%Zj\013i\322~\327\226\266\274$h\211\232\214\302"
+  98      6A0B69D2 
+  98      7ED796B6 
+  98      BC246889 
+  98      9A8CC2
+  99 003b A51A24C4 		.ascii	"\245\032$\304\301\300\210\006\265s\237CC\007.\347\362"
+  99      C1C08806 
+  99      B5739F43 
+  99      43072EE7 
+  99      F2
+ 100 004c BDDF73BF 		.ascii	"\275\337s\277\237c\020H\327\"\267I\356!>p\021\304\316"
+ 100      9F631048 
+ 100      D722B749 
+ 100      EE213E70 
+ 100      11C4CE
+ 101 005f 0351D623 		.ascii	"\003Q\326#\204\254\372Iy\215\247 \251\021\011c(\033"
+ 101      84ACFA49 
+ 101      798DA720 
+ 101      A9110963 
+ 101      281B
+ 102 0071 80BE280F 		.ascii	"\200\276(\017(#\244\201\014\276DO\240\266\331\254\210"
+ 102      2823A481 
+ 102      0CBE444F 
+ 102      A0B6D9AC 
+ 102      88
+ 103 0082 404971BD 		.ascii	"@Iq\275Z\3373\252l\303\222D\003\341D\020J\010\020\333"
+ 103      5ADF33AA 
+ 103      6CC39244 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 7
+
+
+ 103      03E14410 
+ 103      4A0810DB 
+ 104 0096 DE2FFBBB 		.ascii	"\336/\373\273>w^\333\306\207\217(\303\2559\316\347m"
+ 104      3E775EDB 
+ 104      C6878F28 
+ 104      C3AD39CE 
+ 104      E76D
+ 105 00a8 3518E494 		.ascii	"5\030\344\224}m\336<\233.I\226d\271\303\026\035\367"
+ 105      7D6DDE3C 
+ 105      9B2E4996 
+ 105      64B9C316 
+ 105      1DF7
+ 106 00ba 2984EEB2 		.ascii	")\204\356\262\211\215\352e\367\300\324S9)\371\307=\253"
+ 106      898DEA65 
+ 106      F7C0D453 
+ 106      3929F9C7 
+ 106      3DAB
+ 107 00cc F6687685 		.ascii	"\366hv\205%\005t@\245\322n\230\231\236\332Rj\224\265"
+ 107      25057440 
+ 107      A5D26E98 
+ 107      999EDA52 
+ 107      6A94B5
+ 108 00df 023368B9 		.ascii	"\0023h\271u_\277\365\026\261\237U\216.q\304\340\207"
+ 108      755FBFF5 
+ 108      16B19F55 
+ 108      8E2E71C4 
+ 108      E087
+ 109 00f1 18731EB7 		.ascii	"\030s\036\267\257.\012\236\340\224\305\333\034\243\210"
+ 109      AF2E0A9E 
+ 109      E094C5DB 
+ 109      1CA388
+ 110 0100 BEC38C13 		.ascii	"\276\303\214\023\004\351\015\371F\316\377\027v\336\256"
+ 110      04E90DF9 
+ 110      46CEFF17 
+ 110      76DEAE
+ 111 010f FCF87418 		.ascii	"\374\370t\030@8\325\343\244\331$U\375\362\0039\273~"
+ 111      4038D5E3 
+ 111      A4D92455 
+ 111      FDF20339 
+ 111      BB7E
+ 112 0121 37A2CDFF 		.ascii	"7\242\315\377A\\\003\306#\234!\303{\271\235!\303Y\250"
+ 112      415C03C6 
+ 112      239C21C3 
+ 112      7BB99D21 
+ 112      C359A8
+ 113 0134 850DFB25 		.ascii	"\205\015\373%\354\014\351\352\260\215e&\230\010'W\223"
+ 113      EC0CE9EA 
+ 113      B08D6526 
+ 113      98082757 
+ 113      93
+ 114 0145 E9E5B5E4 		.ascii	"\351\345\265\344J|!\265\236N$c\321\205\324\\(\026]\212"
+ 114      4A7C21B5 
+ 114      9E4E2463 
+ 114      D185D45C 
+ 114      28165D8A 
+ 115 0159 C467E3D1 		.ascii	"\304g\343\321\310t\202~\001\2508\205v"
+ 115      C874827E 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 8
+
+
+ 115      01A83885 
+ 115      76
+ 116              		.text
+ 117              		.section	.gnu.lto_.symbol_nodes.95e21b5d,"",%progbits
+ 118 0000 789C558B 		.ascii	"x\234U\213\261\015\2000\014\004\317\261\235\001\230"
+ 118      B10D8030 
+ 118      0C04CFB1 
+ 118      9D0198
+ 119 000f 0076603D 		.ascii	"\000v`=\344\214\3000T\324\324\354\200\304\034\010\213"
+ 119      E48CC030 
+ 119      54D4D4EC 
+ 119      80C41C08 
+ 119      8B
+ 120 0020 8A7CF3BA 		.ascii	"\212|\363\272\323\277!,d\212\004\254'd\355mJQB:\341"
+ 120      D3BF212C 
+ 120      648A04AC 
+ 120      2764ED6D 
+ 120      4A51423A 
+ 121 0035 D006D0A2 		.ascii	"\320\006\320\242Q\372\245\205vB<\354\023\371hcr\015"
+ 121      51FAA585 
+ 121      76423CEC 
+ 121      13F96863 
+ 121      720D
+ 122 0047 FFB38A73 		.ascii	"\377\263\212s\\\217\250U\356m\346\005l\361\032\247"
+ 122      5C8FA855 
+ 122      EE6DE605 
+ 122      6CF11AA7 
+ 123              		.text
+ 124              		.section	.gnu.lto_.refs.95e21b5d,"",%progbits
+ 125 0000 789C6361 		.ascii	"x\234ca`d\340c```bddbadbed\0012\031\000\002O\000."
+ 125      6064E063 
+ 125      60606062 
+ 125      64646261 
+ 125      64626564 
+ 126              		.text
+ 127              		.section	.gnu.lto_.decls.95e21b5d,"",%progbits
+ 128 0000 789C8D94 		.ascii	"x\234\215\224kL\\E\024\200\347\334\273\273\205\313\""
+ 128      6B4C5C45 
+ 128      1480E7DC 
+ 128      BBBB85CB 
+ 128      22
+ 129 0011 4D31861F 		.ascii	"M1\206\037\233\210\244\004\022\023Z\300\037\376\323"
+ 129      9B88A404 
+ 129      12135AC0 
+ 129      1FFED3
+ 130 0020 4AB44D9A 		.ascii	"J\264M\232\232M)4&M\310\202\327\266)\001B\027\223\376"
+ 130      9A4D2934 
+ 130      264DC882 
+ 130      D7B62901 
+ 130      421793FE 
+ 131 0034 1B79D46A 		.ascii	"\033y\324j\253\026\315v\245\322\204R\303C\236\313\273"
+ 131      AB16CD76 
+ 131      A5D28452 
+ 131      C3439ECB 
+ 131      BB
+ 132 0045 D4D25B2A 		.ascii	"\324\322[*\205\326\266\302\202\215\026+\030\254\265"
+ 132      85D6B6C2 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 9
+
+
+ 132      828D162B 
+ 132      18ACB5
+ 133 0054 4AE2B612 		.ascii	"J\342\266\022\224(\256g\036\227\273Uh:\3313w\036\347"
+ 133      9428AE67 
+ 133      1E97BB55 
+ 133      683AD933 
+ 133      771EE7
+ 134 0067 7CE7CC9C 		.ascii	"|\347\314\2343k#@X{\315A\210\035\207\233Q\302\330\354"
+ 134      336B2340 
+ 134      587BCD41 
+ 134      881D879B 
+ 134      51C2D8EC 
+ 135 007b B8964BAC 		.ascii	"\270\226K\254\206\333\244\015\245\003%\200\322\215\322"
+ 135      86DBA40D 
+ 135      A5032580 
+ 135      D28DD2
+ 136 008a 8BD28FC2 		.ascii	"\213\322\217\302\010#\344\341\326&\327M\006\310\265"
+ 136      0823E4E1 
+ 136      D626D74D 
+ 136      06C8B5
+ 137 0099 FF36C68B 		.ascii	"\3776\306\213\226z)(\023(\343(A\224K(C(\223(\255\222"
+ 137      967A2928 
+ 137      1328E328 
+ 137      41944B28 
+ 137      43289328 
+ 138 00af 71014591 		.ascii	"q\001E\221v\275k\370\016\254\342;\260\212ov\206uR\317"
+ 138      76BD6BF8 
+ 138      0EACE23B 
+ 138      B08A6F76 
+ 138      867552CF 
+ 139 00c3 F5183EBB 		.ascii	"\365\030>\273\037q\336e\005\302\247\332\233\242\247"
+ 139      1F71DE65 
+ 139      05C2A7DA 
+ 139      9BA2A7
+ 140 00d2 E15B5040 		.ascii	"\341[P@^*\001\020=p!B\370\024\007\012\357\311\312\322"
+ 140      5E2A0110 
+ 140      3D702142 
+ 140      F814070A 
+ 140      EFC9CAD2 
+ 141 00e6 CA87B09E 		.ascii	"\312\207\260\236\010}\276f\301\370\317\374\206\315\306"
+ 141      087DBE66 
+ 141      C1F8CFFC 
+ 141      86CDC6
+ 142 00f5 21161DA4 		.ascii	"!\026\035\244\021\254D \254\304\276\"\325\210\200+\226"
+ 142      11AC4420 
+ 142      ACC4BE22 
+ 142      D588802B 
+ 142      96
+ 143 0106 41044F84 		.ascii	"A\004O\204\033\021\023<|&0\017\035\034\364\177\343P"
+ 143      1B11133C 
+ 143      7C26300F 
+ 143      1D1CF47F 
+ 143      E350
+ 144 0118 9189E399 		.ascii	"\221\211\343\231\245\246W\322Z)\266\343\224*\317Z73"
+ 144      A5A657D2 
+ 144      5A29B6E3 
+ 144      942ACF5A 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 10
+
+
+ 144      3733
+ 145 012a 12FEC388 		.ascii	"\022\376\303\210[P`\203\006\012\263\011];\025\203\323"
+ 145      5B506083 
+ 145      060AB309 
+ 145      5D3B1583 
+ 145      D3
+ 146 013b 2735588F 		.ascii	"'5X\217\323_\207j\302\261\011'\230\035\255\240\211\012"
+ 146      D35F876A 
+ 146      C2B10927 
+ 146      981DADA0 
+ 146      890A
+ 147 014d E43E052D 		.ascii	"\344>\005-\340\202\317\000\223\002\255\220\200}\276"
+ 147      E082CF00 
+ 147      9302AD90 
+ 147      807DBE
+ 148 015c 4DDE7163 		.ascii	"M\336qc\303\2423\251\216\206:\351\354\322@F\0155\312"
+ 148      C3A233A9 
+ 148      8E863AE9 
+ 148      ECD24046 
+ 148      0D35CA
+ 149 016f 297D4B61 		.ascii	")}KaZ\320\004*4C\032\213\016\207\354\323\010\323\030"
+ 149      5AD0042A 
+ 149      34431A8B 
+ 149      0E87ECD3 
+ 149      08D318
+ 150 0182 761B24A1 		.ascii	"v\033$\241\245\357\201\357\230S}\201\007\372\363\335"
+ 150      A5EF81EF 
+ 150      98537D81 
+ 150      07FAF3DD 
+ 151 0192 799F8294 		.ascii	"y\237\202\224\272Nj,\350\264\012\035\3338\242\335B\264"
+ 151      BA4E6A2C 
+ 151      E8B40A1D 
+ 151      DB38A2DD 
+ 151      42B4
+ 152 01a4 47223A38 		.ascii	"G\":8\342\247s\025\303\252\272\235#~\361\335:\034-\002"
+ 152      E2A77315 
+ 152      C3AABA9D 
+ 152      237EF1DD 
+ 152      3A1C2D02 
+ 153 01b8 3142979D 		.ascii	"1B\227\235t\234\322\272\0279\243\323btF2\002\234q\272"
+ 153      749CD2BA 
+ 153      1739A3D3 
+ 153      62744632 
+ 153      029C71BA 
+ 154 01cc FABDA938 		.ascii	"\372\275\25185\2173\214\345\226&3\214\201Q\316\240\202"
+ 154      358F338C 
+ 154      E5962633 
+ 154      8C8151CE 
+ 154      A082
+ 155 01de D16531BA 		.ascii	"\321e1\272\"\031\335\234q\257a\301\257\251\205\234q"
+ 155      2219DD9C 
+ 155      71AF61C1 
+ 155      AFA9859C 
+ 155      71
+ 156 01ef F3B6FF28 		.ascii	"\363\266\377( c\226\322\331\231\321\262\3123\207\015"
+ 156      206396D2 
+ 156      D999D1B2 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 11
+
+
+ 156      CA33870D 
+ 157 01ff 37BF34E8 		.ascii	"7\2774\350\261\030=\234\201\203^n\377\367\007\241)\207"
+ 157      B1183D9C 
+ 157      81835E6E 
+ 157      FFF707A1 
+ 157      2987
+ 158 0211 EA070E18 		.ascii	"\352\007\016\030X\350\352Q\005\300\010N:\01577\356\263"
+ 158      58E8EA51 
+ 158      05C0084E 
+ 158      3A0D3737 
+ 158      EEB3
+ 159 0223 8CFB4CE3 		.ascii	"\214\373L\343~n\334w#8\246\250\237\012\343\341\023\337"
+ 159      7E6EDC77 
+ 159      2338A6A8 
+ 159      9F0AE3E1 
+ 159      13DF
+ 160 0235 4D39D580 		.ascii	"M9\325\200\230tT\375\330\034\205iui\020\0066\237?\273"
+ 160      987454FD 
+ 160      D81C8569 
+ 160      75691006 
+ 160      369F3FBB 
+ 161 0249 142BE66C 		.ascii	"\024+\346l\273\246z\356\237\030\365<\327U&\347Z\356"
+ 161      BBA67AEE 
+ 161      9F18F53C 
+ 161      D75526E7 
+ 161      5AEE
+ 162 025b D920556B 		.ascii	"\331 Uk`I\237\365\277\237\343\177\033K\006\206@\203"
+ 162      60499FF5 
+ 162      BF9FE37F 
+ 162      1B4B0686 
+ 162      4083
+ 163 026d CF2DD72E 		.ascii	"\317-\327.\015\373#\224\226\323P=u$\020\310t\301f\027"
+ 163      0DFB2394 
+ 163      96D3503D 
+ 163      752410C8 
+ 163      74C16617 
+ 164 0281 81F390CA 		.ascii	"\201\363\220\312\250L\013\316a\245\014b\245,+\352\351"
+ 164      A84C0BCE 
+ 164      61A50C62 
+ 164      A52C2BEA 
+ 164      E9
+ 165 0292 8A9B85B0 		.ascii	"\212\233\205\2601>\265\236Y\340m$\327\266cE98\365,R"
+ 165      313EB59E 
+ 165      59E06D24 
+ 165      D7B66345 
+ 165      3938F52C 
+ 166 02a7 0D883709 		.ascii	"\015\2107\011\233Xi\245\263G_\315\"\010a\025\261\012"
+ 166      9B5869A5 
+ 166      B3475FCD 
+ 166      22086115 
+ 166      B10A
+ 167 02b9 17BB846B 		.ascii	"\027\273\204k\"\035.\242\243\013\260\221\237\237\207"
+ 167      221D2EA2 
+ 167      A30BB091 
+ 167      9F9F87
+ 168 02c8 6A7CA453 		.ascii	"j|\244S\032\305\366\211\014R\226\370'\027\177\353\211"
+ 168      1AC5F689 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 12
+
+
+ 168      0C5296F8 
+ 168      27177FEB 
+ 168      89
+ 169 02d9 52EF88D3 		.ascii	"R\357\210\323\375Uu\277\312\006\361\251\253\260\341"
+ 169      FD5575BF 
+ 169      CA06F1A9 
+ 169      ABB0E1
+ 170 02e8 0B44AE8D 		.ascii	"\013D\256\215\257\211\305[\270\204\333\303\326-0g\334"
+ 170      AF89C55B 
+ 170      B884DBC3 
+ 170      D62D3067 
+ 170      DC
+ 171 02f9 C76263E5 		.ascii	"\307bc\345tt\362\031\2544,\376\036\317\357\3454\201"
+ 171      7474F219 
+ 171      AC342CFE 
+ 171      1ECFEFE5 
+ 171      3481
+ 172 030b EB0E08DD 		.ascii	"\353\016\010\335\225\350\007X\306`\004\222\321f\242"
+ 172      95E80758 
+ 172      C6600492 
+ 172      D166A2
+ 173 031a B2B35615 		.ascii	"\262\263V\025O\317\206\323\373\327O\316=!\236^\"No\217"
+ 173      4FCF86D3 
+ 173      FBD74FCE 
+ 173      3D219E5E 
+ 173      224E6F8F 
+ 174 032e 35B7B0DD 		.ascii	"5\267\260\335\024L\031\266\270\210\254\245\210\254]"
+ 174      144C19B6 
+ 174      B888ACA5 
+ 174      88AC5D
+ 175 033d 9DB9F320 		.ascii	"\235\271\363 Z]\022\347\012\326\314\3178@K\345)9^A7"
+ 175      5A5D12E7 
+ 175      0AD6CCCF 
+ 175      38404BE5 
+ 175      29395E41 
+ 176 0352 6C23308A 		.ascii	"l#0\212\367\177\031\357\037\256\341aRdR\256\340\342"
+ 176      F77F19EF 
+ 176      1FAEE161 
+ 176      526452AE 
+ 176      E0E2
+ 177 0364 182E9AE9 		.ascii	"\030.\232\351\315\025\351\375\022\023q\325:X\212&\316"
+ 177      CD15E9FD 
+ 177      121371D5 
+ 177      3A588A26 
+ 177      CE
+ 178 0375 F5CE0FBE 		.ascii	"\365\316\017\276[v\355\010{\375\217\003E\213\301\357"
+ 178      5B76ED08 
+ 178      7BFD8F03 
+ 178      458BC1EF 
+ 179 0385 69AD5DA5 		.ascii	"i\255]\245\374oG\371\372h\377\307\252YK\306\362\335"
+ 179      FC6F47F9 
+ 179      FA68FFC7 
+ 179      AA594BC6 
+ 179      F2DD
+ 180 0397 6D95ECC2 		.ascii	"m\225\354\302\307\321\327\015\313\327u\220\265\364\177"
+ 180      C7D1D70D 
+ 180      CBD77590 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 13
+
+
+ 180      B5F47F
+ 181 03a6 1F5FADEE 		.ascii	"\037_\255\356c\361\317+\307\234\316wW\216\312\211\246"
+ 181      63F1CF2B 
+ 181      C79CCE77 
+ 181      578ECA89 
+ 181      A6
+ 182 03b7 11810970 		.ascii	"\021\201\011p\362W\201_T\236\234\253?\031\023\251\314"
+ 182      F257815F 
+ 182      549E9CAB 
+ 182      3F1913A9 
+ 182      CC
+ 183 03c8 F2622907 		.ascii	"\362b)\007\245r\220+\177\350\253h\\\027\251\314^\234"
+ 183      A572902B 
+ 183      7FE8AB68 
+ 183      5C17A9CC 
+ 183      5E9C
+ 184 03da A53C094E 		.ascii	"\245<\011N3j\034\222\365\356\335;\362\266\344e{\336"
+ 184      336A1C92 
+ 184      F5EEDD3B 
+ 184      F2B6E465 
+ 184      7BDE
+ 185 03ec D4B38A8B 		.ascii	"\324\263\212\213\336\330\2777j\353\2539\211Y\351\351"
+ 185      DED8BF37 
+ 185      6AEBAB39 
+ 185      8959E9E9 
+ 186 03fc 2469AB5E 		.ascii	"$i\253^\244\227z\274\372\353y\331\305e\245\005\372\036"
+ 186      A4977ABC 
+ 186      FAEB79D9 
+ 186      C565A505 
+ 186      FA1E
+ 187 040e 777671D6 		.ascii	"wvq\326s{\204\201{GZ\001\211\221\306\205\272^\022/\306"
+ 187      737B8481 
+ 187      7B475A01 
+ 187      8991C685 
+ 187      BA5E122F 
+ 188 0423 3BF583DE 		.ascii	";\365\203\336\342R\311r\212\265\335\236\003zY\211&\225"
+ 188      E252C972 
+ 188      8AB5DD9E 
+ 188      037A5989 
+ 188      2695
+ 189 0435 BDC5254F 		.ascii	"\275\305%O?\012\235\266\217H\273\227\213<\371\205\272"
+ 189      3F0A9DB6 
+ 189      8F48BB97 
+ 189      8B3CF985 
+ 189      BA
+ 190 0446 9CE47B0A 		.ascii	"\234\344{\012\016\224\225\304\350|-\333\213\306\366"
+ 190      0E9495C4 
+ 190      E87C2DDB 
+ 190      8BC6F6
+ 191 0455 B2FD45DE 		.ascii	"\262\375E\336\347\237Y\203Up\310{\250D?\2104\031\331"
+ 191      E79F5983 
+ 191      5570C87B 
+ 191      A8443F88 
+ 191      3419D9
+ 192 0468 4B5BB2B6 		.ascii	"K[\262\266\347\270\363\262w\355\314\311\332\345`\266"
+ 192      E7B8F3B2 
+ 192      77EDCCC9 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 14
+
+
+ 192      DAE560B6 
+ 193 0478 9919F652 		.ascii	"\231\031\366R}of\306\277Z\0254j"
+ 193      7D6F66C6 
+ 193      BF5A1534 
+ 193      6A
+ 194              		.text
+ 195              		.section	.gnu.lto_.symtab.95e21b5d,"",%progbits
+ 196 0000 50574D5F 		.ascii	"PWM_A_SaveConfig\000"
+ 196      415F5361 
+ 196      7665436F 
+ 196      6E666967 
+ 196      00
+ 197 0011 00       		.ascii	"\000"
+ 198 0012 00       		.ascii	"\000"
+ 199 0013 00       		.ascii	"\000"
+ 200 0014 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 200      00000000 
+ 201 001c AD000000 		.ascii	"\255\000\000\000"
+ 202 0020 50574D5F 		.ascii	"PWM_A_Sleep\000"
+ 202      415F536C 
+ 202      65657000 
+ 203 002c 00       		.ascii	"\000"
+ 204 002d 00       		.ascii	"\000"
+ 205 002e 00       		.ascii	"\000"
+ 206 002f 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 206      00000000 
+ 207 0037 AF000000 		.ascii	"\257\000\000\000"
+ 208 003b 50574D5F 		.ascii	"PWM_A_RestoreConfig\000"
+ 208      415F5265 
+ 208      73746F72 
+ 208      65436F6E 
+ 208      66696700 
+ 209 004f 00       		.ascii	"\000"
+ 210 0050 00       		.ascii	"\000"
+ 211 0051 00       		.ascii	"\000"
+ 212 0052 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 212      00000000 
+ 213 005a B1000000 		.ascii	"\261\000\000\000"
+ 214 005e 50574D5F 		.ascii	"PWM_A_Wakeup\000"
+ 214      415F5761 
+ 214      6B657570 
+ 214      00
+ 215 006b 00       		.ascii	"\000"
+ 216 006c 00       		.ascii	"\000"
+ 217 006d 00       		.ascii	"\000"
+ 218 006e 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 218      00000000 
+ 219 0076 B3000000 		.ascii	"\263\000\000\000"
+ 220 007a 50574D5F 		.ascii	"PWM_A_Stop\000"
+ 220      415F5374 
+ 220      6F7000
+ 221 0085 00       		.ascii	"\000"
+ 222 0086 02       		.ascii	"\002"
+ 223 0087 00       		.ascii	"\000"
+ 224 0088 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 224      00000000 
+ 225 0090 B5000000 		.ascii	"\265\000\000\000"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 15
+
+
+ 226 0094 50574D5F 		.ascii	"PWM_A_Enable\000"
+ 226      415F456E 
+ 226      61626C65 
+ 226      00
+ 227 00a1 00       		.ascii	"\000"
+ 228 00a2 02       		.ascii	"\002"
+ 229 00a3 00       		.ascii	"\000"
+ 230 00a4 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 230      00000000 
+ 231 00ac B7000000 		.ascii	"\267\000\000\000"
+ 232              		.text
+ 233              		.section	.gnu.lto_.opts,"",%progbits
+ 234 0000 272D666D 		.ascii	"'-fmath-errno' '-fsigned-zeros' '-ftrapping-math' '"
+ 234      6174682D 
+ 234      6572726E 
+ 234      6F272027 
+ 234      2D667369 
+ 235 0033 2D666E6F 		.ascii	"-fno-trapv' '-fno-openmp' '-fno-openacc' '-mcpu=cor"
+ 235      2D747261 
+ 235      70762720 
+ 235      272D666E 
+ 235      6F2D6F70 
+ 236 0066 7465782D 		.ascii	"tex-m0' '-mthumb' '-g' '-Os' '-Werror' '-ffunction-"
+ 236      6D302720 
+ 236      272D6D74 
+ 236      68756D62 
+ 236      2720272D 
+ 237 0099 73656374 		.ascii	"sections' '-ffat-lto-objects' '-finline-functions' "
+ 237      696F6E73 
+ 237      2720272D 
+ 237      66666174 
+ 237      2D6C746F 
+ 238 00cc 272D666C 		.ascii	"'-flto' '-fno-strict-aliasing'\000"
+ 238      746F2720 
+ 238      272D666E 
+ 238      6F2D7374 
+ 238      72696374 
+ 239              		.text
+ 240              		.cfi_sections	.debug_frame
+ 241              		.section	.text.PWM_A_SaveConfig,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	PWM_A_SaveConfig
+ 244              		.code	16
+ 245              		.thumb_func
+ 246              		.type	PWM_A_SaveConfig, %function
+ 247              	PWM_A_SaveConfig:
+ 248              	.LFB5:
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253              		@ sp needed
+ 254 0000 7047     		bx	lr
+ 255              		.cfi_endproc
+ 256              	.LFE5:
+ 257              		.size	PWM_A_SaveConfig, .-PWM_A_SaveConfig
+ 258              		.section	.text.PWM_A_Sleep,"ax",%progbits
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 16
+
+
+ 259              		.align	1
+ 260              		.global	PWM_A_Sleep
+ 261              		.code	16
+ 262              		.thumb_func
+ 263              		.type	PWM_A_Sleep, %function
+ 264              	PWM_A_Sleep:
+ 265              	.LFB1:
+ 266              		.file 1 "Generated_Source\\PSoC4\\PWM_A_PM.c"
+   1:Generated_Source\PSoC4/PWM_A_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC4/PWM_A_PM.c **** * File Name: PWM_A_PM.c
+   3:Generated_Source\PSoC4/PWM_A_PM.c **** * Version 2.10
+   4:Generated_Source\PSoC4/PWM_A_PM.c **** *
+   5:Generated_Source\PSoC4/PWM_A_PM.c **** * Description:
+   6:Generated_Source\PSoC4/PWM_A_PM.c **** *  This file contains the setup, control, and status commands to support
+   7:Generated_Source\PSoC4/PWM_A_PM.c **** *  the component operations in the low power mode.
+   8:Generated_Source\PSoC4/PWM_A_PM.c **** *
+   9:Generated_Source\PSoC4/PWM_A_PM.c **** * Note:
+  10:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+  11:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  12:Generated_Source\PSoC4/PWM_A_PM.c **** ********************************************************************************
+  13:Generated_Source\PSoC4/PWM_A_PM.c **** * Copyright 2013-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC4/PWM_A_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  15:Generated_Source\PSoC4/PWM_A_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  16:Generated_Source\PSoC4/PWM_A_PM.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC4/PWM_A_PM.c **** *******************************************************************************/
+  18:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  19:Generated_Source\PSoC4/PWM_A_PM.c **** #include "PWM_A.h"
+  20:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  21:Generated_Source\PSoC4/PWM_A_PM.c **** static PWM_A_BACKUP_STRUCT PWM_A_backup;
+  22:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  23:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  24:Generated_Source\PSoC4/PWM_A_PM.c **** /*******************************************************************************
+  25:Generated_Source\PSoC4/PWM_A_PM.c **** * Function Name: PWM_A_SaveConfig
+  26:Generated_Source\PSoC4/PWM_A_PM.c **** ********************************************************************************
+  27:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  28:Generated_Source\PSoC4/PWM_A_PM.c **** * Summary:
+  29:Generated_Source\PSoC4/PWM_A_PM.c **** *  All configuration registers are retention. Nothing to save here.
+  30:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  31:Generated_Source\PSoC4/PWM_A_PM.c **** * Parameters:
+  32:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+  33:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  34:Generated_Source\PSoC4/PWM_A_PM.c **** * Return:
+  35:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+  36:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  37:Generated_Source\PSoC4/PWM_A_PM.c **** *******************************************************************************/
+  38:Generated_Source\PSoC4/PWM_A_PM.c **** void PWM_A_SaveConfig(void)
+  39:Generated_Source\PSoC4/PWM_A_PM.c **** {
+  40:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  41:Generated_Source\PSoC4/PWM_A_PM.c **** }
+  42:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  43:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  44:Generated_Source\PSoC4/PWM_A_PM.c **** /*******************************************************************************
+  45:Generated_Source\PSoC4/PWM_A_PM.c **** * Function Name: PWM_A_Sleep
+  46:Generated_Source\PSoC4/PWM_A_PM.c **** ********************************************************************************
+  47:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  48:Generated_Source\PSoC4/PWM_A_PM.c **** * Summary:
+  49:Generated_Source\PSoC4/PWM_A_PM.c **** *  Stops the component operation and saves the user configuration.
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 17
+
+
+  50:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  51:Generated_Source\PSoC4/PWM_A_PM.c **** * Parameters:
+  52:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+  53:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  54:Generated_Source\PSoC4/PWM_A_PM.c **** * Return:
+  55:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+  56:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  57:Generated_Source\PSoC4/PWM_A_PM.c **** *******************************************************************************/
+  58:Generated_Source\PSoC4/PWM_A_PM.c **** void PWM_A_Sleep(void)
+  59:Generated_Source\PSoC4/PWM_A_PM.c **** {
+ 267              		.loc 1 59 0
+ 268              		.cfi_startproc
+ 269              		@ args = 0, pretend = 0, frame = 0
+ 270              		@ frame_needed = 0, uses_anonymous_args = 0
+  60:Generated_Source\PSoC4/PWM_A_PM.c ****     if(0u != (PWM_A_BLOCK_CONTROL_REG & PWM_A_MASK))
+ 271              		.loc 1 60 0
+ 272 0000 0121     		movs	r1, #1
+  59:Generated_Source\PSoC4/PWM_A_PM.c ****     if(0u != (PWM_A_BLOCK_CONTROL_REG & PWM_A_MASK))
+ 273              		.loc 1 59 0
+ 274 0002 10B5     		push	{r4, lr}
+ 275              		.cfi_def_cfa_offset 8
+ 276              		.cfi_offset 4, -8
+ 277              		.cfi_offset 14, -4
+ 278              		.loc 1 60 0
+ 279 0004 054B     		ldr	r3, .L6
+ 280 0006 064A     		ldr	r2, .L6+4
+ 281 0008 1B68     		ldr	r3, [r3]
+ 282 000a 0B40     		ands	r3, r1
+ 283 000c 01D0     		beq	.L3
+  61:Generated_Source\PSoC4/PWM_A_PM.c ****     {
+  62:Generated_Source\PSoC4/PWM_A_PM.c ****         PWM_A_backup.enableState = 1u;
+ 284              		.loc 1 62 0
+ 285 000e 1170     		strb	r1, [r2]
+ 286 0010 00E0     		b	.L4
+ 287              	.L3:
+  63:Generated_Source\PSoC4/PWM_A_PM.c ****     }
+  64:Generated_Source\PSoC4/PWM_A_PM.c ****     else
+  65:Generated_Source\PSoC4/PWM_A_PM.c ****     {
+  66:Generated_Source\PSoC4/PWM_A_PM.c ****         PWM_A_backup.enableState = 0u;
+ 288              		.loc 1 66 0
+ 289 0012 1370     		strb	r3, [r2]
+ 290              	.L4:
+  67:Generated_Source\PSoC4/PWM_A_PM.c ****     }
+  68:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  69:Generated_Source\PSoC4/PWM_A_PM.c ****     PWM_A_Stop();
+ 291              		.loc 1 69 0
+ 292 0014 FFF7FEFF 		bl	PWM_A_Stop
+ 293              	.LVL0:
+  70:Generated_Source\PSoC4/PWM_A_PM.c ****     PWM_A_SaveConfig();
+  71:Generated_Source\PSoC4/PWM_A_PM.c **** }
+ 294              		.loc 1 71 0
+ 295              		@ sp needed
+ 296 0018 10BD     		pop	{r4, pc}
+ 297              	.L7:
+ 298 001a C046     		.align	2
+ 299              	.L6:
+ 300 001c 00000940 		.word	1074331648
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 18
+
+
+ 301 0020 00000000 		.word	.LANCHOR0
+ 302              		.cfi_endproc
+ 303              	.LFE1:
+ 304              		.size	PWM_A_Sleep, .-PWM_A_Sleep
+ 305              		.section	.text.PWM_A_RestoreConfig,"ax",%progbits
+ 306              		.align	1
+ 307              		.global	PWM_A_RestoreConfig
+ 308              		.code	16
+ 309              		.thumb_func
+ 310              		.type	PWM_A_RestoreConfig, %function
+ 311              	PWM_A_RestoreConfig:
+ 312              	.LFB2:
+  72:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  73:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  74:Generated_Source\PSoC4/PWM_A_PM.c **** /*******************************************************************************
+  75:Generated_Source\PSoC4/PWM_A_PM.c **** * Function Name: PWM_A_RestoreConfig
+  76:Generated_Source\PSoC4/PWM_A_PM.c **** ********************************************************************************
+  77:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  78:Generated_Source\PSoC4/PWM_A_PM.c **** * Summary:
+  79:Generated_Source\PSoC4/PWM_A_PM.c **** *  All configuration registers are retention. Nothing to restore here.
+  80:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  81:Generated_Source\PSoC4/PWM_A_PM.c **** * Parameters:
+  82:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+  83:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  84:Generated_Source\PSoC4/PWM_A_PM.c **** * Return:
+  85:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+  86:Generated_Source\PSoC4/PWM_A_PM.c **** *
+  87:Generated_Source\PSoC4/PWM_A_PM.c **** *******************************************************************************/
+  88:Generated_Source\PSoC4/PWM_A_PM.c **** void PWM_A_RestoreConfig(void)
+  89:Generated_Source\PSoC4/PWM_A_PM.c **** {
+ 313              		.loc 1 89 0
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 0
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317              		@ link register save eliminated.
+  90:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  91:Generated_Source\PSoC4/PWM_A_PM.c **** }
+ 318              		.loc 1 91 0
+ 319              		@ sp needed
+ 320 0000 7047     		bx	lr
+ 321              		.cfi_endproc
+ 322              	.LFE2:
+ 323              		.size	PWM_A_RestoreConfig, .-PWM_A_RestoreConfig
+ 324              		.section	.text.PWM_A_Wakeup,"ax",%progbits
+ 325              		.align	1
+ 326              		.global	PWM_A_Wakeup
+ 327              		.code	16
+ 328              		.thumb_func
+ 329              		.type	PWM_A_Wakeup, %function
+ 330              	PWM_A_Wakeup:
+ 331              	.LFB3:
+  92:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  93:Generated_Source\PSoC4/PWM_A_PM.c **** 
+  94:Generated_Source\PSoC4/PWM_A_PM.c **** /*******************************************************************************
+  95:Generated_Source\PSoC4/PWM_A_PM.c **** * Function Name: PWM_A_Wakeup
+  96:Generated_Source\PSoC4/PWM_A_PM.c **** ********************************************************************************
+  97:Generated_Source\PSoC4/PWM_A_PM.c **** *
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 19
+
+
+  98:Generated_Source\PSoC4/PWM_A_PM.c **** * Summary:
+  99:Generated_Source\PSoC4/PWM_A_PM.c **** *  Restores the user configuration and restores the enable state.
+ 100:Generated_Source\PSoC4/PWM_A_PM.c **** *
+ 101:Generated_Source\PSoC4/PWM_A_PM.c **** * Parameters:
+ 102:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+ 103:Generated_Source\PSoC4/PWM_A_PM.c **** *
+ 104:Generated_Source\PSoC4/PWM_A_PM.c **** * Return:
+ 105:Generated_Source\PSoC4/PWM_A_PM.c **** *  None
+ 106:Generated_Source\PSoC4/PWM_A_PM.c **** *
+ 107:Generated_Source\PSoC4/PWM_A_PM.c **** *******************************************************************************/
+ 108:Generated_Source\PSoC4/PWM_A_PM.c **** void PWM_A_Wakeup(void)
+ 109:Generated_Source\PSoC4/PWM_A_PM.c **** {
+ 332              		.loc 1 109 0
+ 333              		.cfi_startproc
+ 334              		@ args = 0, pretend = 0, frame = 0
+ 335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 336 0000 10B5     		push	{r4, lr}
+ 337              		.cfi_def_cfa_offset 8
+ 338              		.cfi_offset 4, -8
+ 339              		.cfi_offset 14, -4
+ 110:Generated_Source\PSoC4/PWM_A_PM.c ****     PWM_A_RestoreConfig();
+ 111:Generated_Source\PSoC4/PWM_A_PM.c **** 
+ 112:Generated_Source\PSoC4/PWM_A_PM.c ****     if(0u != PWM_A_backup.enableState)
+ 340              		.loc 1 112 0
+ 341 0002 034B     		ldr	r3, .L14
+ 342 0004 1B78     		ldrb	r3, [r3]
+ 343 0006 002B     		cmp	r3, #0
+ 344 0008 01D0     		beq	.L9
+ 113:Generated_Source\PSoC4/PWM_A_PM.c ****     {
+ 114:Generated_Source\PSoC4/PWM_A_PM.c ****         PWM_A_Enable();
+ 345              		.loc 1 114 0
+ 346 000a FFF7FEFF 		bl	PWM_A_Enable
+ 347              	.LVL1:
+ 348              	.L9:
+ 115:Generated_Source\PSoC4/PWM_A_PM.c ****     }
+ 116:Generated_Source\PSoC4/PWM_A_PM.c **** }
+ 349              		.loc 1 116 0
+ 350              		@ sp needed
+ 351 000e 10BD     		pop	{r4, pc}
+ 352              	.L15:
+ 353              		.align	2
+ 354              	.L14:
+ 355 0010 00000000 		.word	.LANCHOR0
+ 356              		.cfi_endproc
+ 357              	.LFE3:
+ 358              		.size	PWM_A_Wakeup, .-PWM_A_Wakeup
+ 359              		.bss
+ 360              		.set	.LANCHOR0,. + 0
+ 361              		.type	PWM_A_backup, %object
+ 362              		.size	PWM_A_backup, 1
+ 363              	PWM_A_backup:
+ 364 0000 00       		.space	1
+ 365              		.text
+ 366              	.Letext0:
+ 367              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
+ 368              		.file 3 "Generated_Source\\PSoC4\\PWM_A.h"
+ 369              		.section	.debug_info,"",%progbits
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 20
+
+
+ 370              	.Ldebug_info0:
+ 371 0000 5A010000 		.4byte	0x15a
+ 372 0004 0400     		.2byte	0x4
+ 373 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 374 000a 04       		.byte	0x4
+ 375 000b 01       		.uleb128 0x1
+ 376 000c CC000000 		.4byte	.LASF24
+ 377 0010 0C       		.byte	0xc
+ 378 0011 00020000 		.4byte	.LASF25
+ 379 0015 2E000000 		.4byte	.LASF26
+ 380 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 381 001d 00000000 		.4byte	0
+ 382 0021 00000000 		.4byte	.Ldebug_line0
+ 383 0025 02       		.uleb128 0x2
+ 384 0026 01       		.byte	0x1
+ 385 0027 06       		.byte	0x6
+ 386 0028 F4010000 		.4byte	.LASF0
+ 387 002c 02       		.uleb128 0x2
+ 388 002d 01       		.byte	0x1
+ 389 002e 08       		.byte	0x8
+ 390 002f 8E010000 		.4byte	.LASF1
+ 391 0033 02       		.uleb128 0x2
+ 392 0034 02       		.byte	0x2
+ 393 0035 05       		.byte	0x5
+ 394 0036 2E020000 		.4byte	.LASF2
+ 395 003a 02       		.uleb128 0x2
+ 396 003b 02       		.byte	0x2
+ 397 003c 07       		.byte	0x7
+ 398 003d BD010000 		.4byte	.LASF3
+ 399 0041 02       		.uleb128 0x2
+ 400 0042 04       		.byte	0x4
+ 401 0043 05       		.byte	0x5
+ 402 0044 A1010000 		.4byte	.LASF4
+ 403 0048 02       		.uleb128 0x2
+ 404 0049 04       		.byte	0x4
+ 405 004a 07       		.byte	0x7
+ 406 004b 8F000000 		.4byte	.LASF5
+ 407 004f 02       		.uleb128 0x2
+ 408 0050 08       		.byte	0x8
+ 409 0051 05       		.byte	0x5
+ 410 0052 00000000 		.4byte	.LASF6
+ 411 0056 02       		.uleb128 0x2
+ 412 0057 08       		.byte	0x8
+ 413 0058 07       		.byte	0x7
+ 414 0059 B5000000 		.4byte	.LASF7
+ 415 005d 03       		.uleb128 0x3
+ 416 005e 04       		.byte	0x4
+ 417 005f 05       		.byte	0x5
+ 418 0060 696E7400 		.ascii	"int\000"
+ 419 0064 02       		.uleb128 0x2
+ 420 0065 04       		.byte	0x4
+ 421 0066 07       		.byte	0x7
+ 422 0067 38020000 		.4byte	.LASF8
+ 423 006b 04       		.uleb128 0x4
+ 424 006c 89000000 		.4byte	.LASF9
+ 425 0070 02       		.byte	0x2
+ 426 0071 D201     		.2byte	0x1d2
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 21
+
+
+ 427 0073 2C000000 		.4byte	0x2c
+ 428 0077 04       		.uleb128 0x4
+ 429 0078 0E000000 		.4byte	.LASF10
+ 430 007c 02       		.byte	0x2
+ 431 007d D401     		.2byte	0x1d4
+ 432 007f 48000000 		.4byte	0x48
+ 433 0083 02       		.uleb128 0x2
+ 434 0084 04       		.byte	0x4
+ 435 0085 04       		.byte	0x4
+ 436 0086 88010000 		.4byte	.LASF11
+ 437 008a 02       		.uleb128 0x2
+ 438 008b 08       		.byte	0x8
+ 439 008c 04       		.byte	0x4
+ 440 008d B6010000 		.4byte	.LASF12
+ 441 0091 02       		.uleb128 0x2
+ 442 0092 01       		.byte	0x1
+ 443 0093 08       		.byte	0x8
+ 444 0094 9C010000 		.4byte	.LASF13
+ 445 0098 04       		.uleb128 0x4
+ 446 0099 D0010000 		.4byte	.LASF14
+ 447 009d 02       		.byte	0x2
+ 448 009e 7E02     		.2byte	0x27e
+ 449 00a0 A4000000 		.4byte	0xa4
+ 450 00a4 05       		.uleb128 0x5
+ 451 00a5 77000000 		.4byte	0x77
+ 452 00a9 02       		.uleb128 0x2
+ 453 00aa 08       		.byte	0x8
+ 454 00ab 04       		.byte	0x4
+ 455 00ac 22020000 		.4byte	.LASF15
+ 456 00b0 02       		.uleb128 0x2
+ 457 00b1 04       		.byte	0x4
+ 458 00b2 07       		.byte	0x7
+ 459 00b3 45020000 		.4byte	.LASF16
+ 460 00b7 06       		.uleb128 0x6
+ 461 00b8 01       		.byte	0x1
+ 462 00b9 03       		.byte	0x3
+ 463 00ba 21       		.byte	0x21
+ 464 00bb CC000000 		.4byte	0xcc
+ 465 00bf 07       		.uleb128 0x7
+ 466 00c0 15000000 		.4byte	.LASF27
+ 467 00c4 03       		.byte	0x3
+ 468 00c5 23       		.byte	0x23
+ 469 00c6 6B000000 		.4byte	0x6b
+ 470 00ca 00       		.byte	0
+ 471 00cb 00       		.byte	0
+ 472 00cc 08       		.uleb128 0x8
+ 473 00cd A1000000 		.4byte	.LASF17
+ 474 00d1 03       		.byte	0x3
+ 475 00d2 24       		.byte	0x24
+ 476 00d3 B7000000 		.4byte	0xb7
+ 477 00d7 09       		.uleb128 0x9
+ 478 00d8 E3010000 		.4byte	.LASF18
+ 479 00dc 01       		.byte	0x1
+ 480 00dd 26       		.byte	0x26
+ 481 00de 01       		.byte	0x1
+ 482 00df 09       		.uleb128 0x9
+ 483 00e0 75000000 		.4byte	.LASF19
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 22
+
+
+ 484 00e4 01       		.byte	0x1
+ 485 00e5 58       		.byte	0x58
+ 486 00e6 01       		.byte	0x1
+ 487 00e7 0A       		.uleb128 0xa
+ 488 00e8 AA010000 		.4byte	.LASF20
+ 489 00ec 01       		.byte	0x1
+ 490 00ed 3A       		.byte	0x3a
+ 491 00ee 00000000 		.4byte	.LFB1
+ 492 00f2 24000000 		.4byte	.LFE1-.LFB1
+ 493 00f6 01       		.uleb128 0x1
+ 494 00f7 9C       		.byte	0x9c
+ 495 00f8 06010000 		.4byte	0x106
+ 496 00fc 0B       		.uleb128 0xb
+ 497 00fd 18000000 		.4byte	.LVL0
+ 498 0101 45010000 		.4byte	0x145
+ 499 0105 00       		.byte	0
+ 500 0106 0C       		.uleb128 0xc
+ 501 0107 DF000000 		.4byte	0xdf
+ 502 010b 00000000 		.4byte	.LFB2
+ 503 010f 02000000 		.4byte	.LFE2-.LFB2
+ 504 0113 01       		.uleb128 0x1
+ 505 0114 9C       		.byte	0x9c
+ 506 0115 0A       		.uleb128 0xa
+ 507 0116 59020000 		.4byte	.LASF21
+ 508 011a 01       		.byte	0x1
+ 509 011b 6C       		.byte	0x6c
+ 510 011c 00000000 		.4byte	.LFB3
+ 511 0120 14000000 		.4byte	.LFE3-.LFB3
+ 512 0124 01       		.uleb128 0x1
+ 513 0125 9C       		.byte	0x9c
+ 514 0126 34010000 		.4byte	0x134
+ 515 012a 0B       		.uleb128 0xb
+ 516 012b 0E000000 		.4byte	.LVL1
+ 517 012f 51010000 		.4byte	0x151
+ 518 0133 00       		.byte	0
+ 519 0134 0D       		.uleb128 0xd
+ 520 0135 D6010000 		.4byte	.LASF28
+ 521 0139 01       		.byte	0x1
+ 522 013a 15       		.byte	0x15
+ 523 013b CC000000 		.4byte	0xcc
+ 524 013f 05       		.uleb128 0x5
+ 525 0140 03       		.byte	0x3
+ 526 0141 00000000 		.4byte	PWM_A_backup
+ 527 0145 0E       		.uleb128 0xe
+ 528 0146 4E020000 		.4byte	.LASF22
+ 529 014a 4E020000 		.4byte	.LASF22
+ 530 014e 03       		.byte	0x3
+ 531 014f 3301     		.2byte	0x133
+ 532 0151 0E       		.uleb128 0xe
+ 533 0152 21000000 		.4byte	.LASF23
+ 534 0156 21000000 		.4byte	.LASF23
+ 535 015a 03       		.byte	0x3
+ 536 015b 3101     		.2byte	0x131
+ 537 015d 00       		.byte	0
+ 538              		.section	.debug_abbrev,"",%progbits
+ 539              	.Ldebug_abbrev0:
+ 540 0000 01       		.uleb128 0x1
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 23
+
+
+ 541 0001 11       		.uleb128 0x11
+ 542 0002 01       		.byte	0x1
+ 543 0003 25       		.uleb128 0x25
+ 544 0004 0E       		.uleb128 0xe
+ 545 0005 13       		.uleb128 0x13
+ 546 0006 0B       		.uleb128 0xb
+ 547 0007 03       		.uleb128 0x3
+ 548 0008 0E       		.uleb128 0xe
+ 549 0009 1B       		.uleb128 0x1b
+ 550 000a 0E       		.uleb128 0xe
+ 551 000b 55       		.uleb128 0x55
+ 552 000c 17       		.uleb128 0x17
+ 553 000d 11       		.uleb128 0x11
+ 554 000e 01       		.uleb128 0x1
+ 555 000f 10       		.uleb128 0x10
+ 556 0010 17       		.uleb128 0x17
+ 557 0011 00       		.byte	0
+ 558 0012 00       		.byte	0
+ 559 0013 02       		.uleb128 0x2
+ 560 0014 24       		.uleb128 0x24
+ 561 0015 00       		.byte	0
+ 562 0016 0B       		.uleb128 0xb
+ 563 0017 0B       		.uleb128 0xb
+ 564 0018 3E       		.uleb128 0x3e
+ 565 0019 0B       		.uleb128 0xb
+ 566 001a 03       		.uleb128 0x3
+ 567 001b 0E       		.uleb128 0xe
+ 568 001c 00       		.byte	0
+ 569 001d 00       		.byte	0
+ 570 001e 03       		.uleb128 0x3
+ 571 001f 24       		.uleb128 0x24
+ 572 0020 00       		.byte	0
+ 573 0021 0B       		.uleb128 0xb
+ 574 0022 0B       		.uleb128 0xb
+ 575 0023 3E       		.uleb128 0x3e
+ 576 0024 0B       		.uleb128 0xb
+ 577 0025 03       		.uleb128 0x3
+ 578 0026 08       		.uleb128 0x8
+ 579 0027 00       		.byte	0
+ 580 0028 00       		.byte	0
+ 581 0029 04       		.uleb128 0x4
+ 582 002a 16       		.uleb128 0x16
+ 583 002b 00       		.byte	0
+ 584 002c 03       		.uleb128 0x3
+ 585 002d 0E       		.uleb128 0xe
+ 586 002e 3A       		.uleb128 0x3a
+ 587 002f 0B       		.uleb128 0xb
+ 588 0030 3B       		.uleb128 0x3b
+ 589 0031 05       		.uleb128 0x5
+ 590 0032 49       		.uleb128 0x49
+ 591 0033 13       		.uleb128 0x13
+ 592 0034 00       		.byte	0
+ 593 0035 00       		.byte	0
+ 594 0036 05       		.uleb128 0x5
+ 595 0037 35       		.uleb128 0x35
+ 596 0038 00       		.byte	0
+ 597 0039 49       		.uleb128 0x49
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 24
+
+
+ 598 003a 13       		.uleb128 0x13
+ 599 003b 00       		.byte	0
+ 600 003c 00       		.byte	0
+ 601 003d 06       		.uleb128 0x6
+ 602 003e 13       		.uleb128 0x13
+ 603 003f 01       		.byte	0x1
+ 604 0040 0B       		.uleb128 0xb
+ 605 0041 0B       		.uleb128 0xb
+ 606 0042 3A       		.uleb128 0x3a
+ 607 0043 0B       		.uleb128 0xb
+ 608 0044 3B       		.uleb128 0x3b
+ 609 0045 0B       		.uleb128 0xb
+ 610 0046 01       		.uleb128 0x1
+ 611 0047 13       		.uleb128 0x13
+ 612 0048 00       		.byte	0
+ 613 0049 00       		.byte	0
+ 614 004a 07       		.uleb128 0x7
+ 615 004b 0D       		.uleb128 0xd
+ 616 004c 00       		.byte	0
+ 617 004d 03       		.uleb128 0x3
+ 618 004e 0E       		.uleb128 0xe
+ 619 004f 3A       		.uleb128 0x3a
+ 620 0050 0B       		.uleb128 0xb
+ 621 0051 3B       		.uleb128 0x3b
+ 622 0052 0B       		.uleb128 0xb
+ 623 0053 49       		.uleb128 0x49
+ 624 0054 13       		.uleb128 0x13
+ 625 0055 38       		.uleb128 0x38
+ 626 0056 0B       		.uleb128 0xb
+ 627 0057 00       		.byte	0
+ 628 0058 00       		.byte	0
+ 629 0059 08       		.uleb128 0x8
+ 630 005a 16       		.uleb128 0x16
+ 631 005b 00       		.byte	0
+ 632 005c 03       		.uleb128 0x3
+ 633 005d 0E       		.uleb128 0xe
+ 634 005e 3A       		.uleb128 0x3a
+ 635 005f 0B       		.uleb128 0xb
+ 636 0060 3B       		.uleb128 0x3b
+ 637 0061 0B       		.uleb128 0xb
+ 638 0062 49       		.uleb128 0x49
+ 639 0063 13       		.uleb128 0x13
+ 640 0064 00       		.byte	0
+ 641 0065 00       		.byte	0
+ 642 0066 09       		.uleb128 0x9
+ 643 0067 2E       		.uleb128 0x2e
+ 644 0068 00       		.byte	0
+ 645 0069 3F       		.uleb128 0x3f
+ 646 006a 19       		.uleb128 0x19
+ 647 006b 03       		.uleb128 0x3
+ 648 006c 0E       		.uleb128 0xe
+ 649 006d 3A       		.uleb128 0x3a
+ 650 006e 0B       		.uleb128 0xb
+ 651 006f 3B       		.uleb128 0x3b
+ 652 0070 0B       		.uleb128 0xb
+ 653 0071 27       		.uleb128 0x27
+ 654 0072 19       		.uleb128 0x19
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 25
+
+
+ 655 0073 20       		.uleb128 0x20
+ 656 0074 0B       		.uleb128 0xb
+ 657 0075 00       		.byte	0
+ 658 0076 00       		.byte	0
+ 659 0077 0A       		.uleb128 0xa
+ 660 0078 2E       		.uleb128 0x2e
+ 661 0079 01       		.byte	0x1
+ 662 007a 3F       		.uleb128 0x3f
+ 663 007b 19       		.uleb128 0x19
+ 664 007c 03       		.uleb128 0x3
+ 665 007d 0E       		.uleb128 0xe
+ 666 007e 3A       		.uleb128 0x3a
+ 667 007f 0B       		.uleb128 0xb
+ 668 0080 3B       		.uleb128 0x3b
+ 669 0081 0B       		.uleb128 0xb
+ 670 0082 27       		.uleb128 0x27
+ 671 0083 19       		.uleb128 0x19
+ 672 0084 11       		.uleb128 0x11
+ 673 0085 01       		.uleb128 0x1
+ 674 0086 12       		.uleb128 0x12
+ 675 0087 06       		.uleb128 0x6
+ 676 0088 40       		.uleb128 0x40
+ 677 0089 18       		.uleb128 0x18
+ 678 008a 9742     		.uleb128 0x2117
+ 679 008c 19       		.uleb128 0x19
+ 680 008d 01       		.uleb128 0x1
+ 681 008e 13       		.uleb128 0x13
+ 682 008f 00       		.byte	0
+ 683 0090 00       		.byte	0
+ 684 0091 0B       		.uleb128 0xb
+ 685 0092 898201   		.uleb128 0x4109
+ 686 0095 00       		.byte	0
+ 687 0096 11       		.uleb128 0x11
+ 688 0097 01       		.uleb128 0x1
+ 689 0098 31       		.uleb128 0x31
+ 690 0099 13       		.uleb128 0x13
+ 691 009a 00       		.byte	0
+ 692 009b 00       		.byte	0
+ 693 009c 0C       		.uleb128 0xc
+ 694 009d 2E       		.uleb128 0x2e
+ 695 009e 00       		.byte	0
+ 696 009f 31       		.uleb128 0x31
+ 697 00a0 13       		.uleb128 0x13
+ 698 00a1 11       		.uleb128 0x11
+ 699 00a2 01       		.uleb128 0x1
+ 700 00a3 12       		.uleb128 0x12
+ 701 00a4 06       		.uleb128 0x6
+ 702 00a5 40       		.uleb128 0x40
+ 703 00a6 18       		.uleb128 0x18
+ 704 00a7 9742     		.uleb128 0x2117
+ 705 00a9 19       		.uleb128 0x19
+ 706 00aa 00       		.byte	0
+ 707 00ab 00       		.byte	0
+ 708 00ac 0D       		.uleb128 0xd
+ 709 00ad 34       		.uleb128 0x34
+ 710 00ae 00       		.byte	0
+ 711 00af 03       		.uleb128 0x3
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 26
+
+
+ 712 00b0 0E       		.uleb128 0xe
+ 713 00b1 3A       		.uleb128 0x3a
+ 714 00b2 0B       		.uleb128 0xb
+ 715 00b3 3B       		.uleb128 0x3b
+ 716 00b4 0B       		.uleb128 0xb
+ 717 00b5 49       		.uleb128 0x49
+ 718 00b6 13       		.uleb128 0x13
+ 719 00b7 02       		.uleb128 0x2
+ 720 00b8 18       		.uleb128 0x18
+ 721 00b9 00       		.byte	0
+ 722 00ba 00       		.byte	0
+ 723 00bb 0E       		.uleb128 0xe
+ 724 00bc 2E       		.uleb128 0x2e
+ 725 00bd 00       		.byte	0
+ 726 00be 3F       		.uleb128 0x3f
+ 727 00bf 19       		.uleb128 0x19
+ 728 00c0 3C       		.uleb128 0x3c
+ 729 00c1 19       		.uleb128 0x19
+ 730 00c2 6E       		.uleb128 0x6e
+ 731 00c3 0E       		.uleb128 0xe
+ 732 00c4 03       		.uleb128 0x3
+ 733 00c5 0E       		.uleb128 0xe
+ 734 00c6 3A       		.uleb128 0x3a
+ 735 00c7 0B       		.uleb128 0xb
+ 736 00c8 3B       		.uleb128 0x3b
+ 737 00c9 05       		.uleb128 0x5
+ 738 00ca 00       		.byte	0
+ 739 00cb 00       		.byte	0
+ 740 00cc 00       		.byte	0
+ 741              		.section	.debug_aranges,"",%progbits
+ 742 0000 2C000000 		.4byte	0x2c
+ 743 0004 0200     		.2byte	0x2
+ 744 0006 00000000 		.4byte	.Ldebug_info0
+ 745 000a 04       		.byte	0x4
+ 746 000b 00       		.byte	0
+ 747 000c 0000     		.2byte	0
+ 748 000e 0000     		.2byte	0
+ 749 0010 00000000 		.4byte	.LFB1
+ 750 0014 24000000 		.4byte	.LFE1-.LFB1
+ 751 0018 00000000 		.4byte	.LFB2
+ 752 001c 02000000 		.4byte	.LFE2-.LFB2
+ 753 0020 00000000 		.4byte	.LFB3
+ 754 0024 14000000 		.4byte	.LFE3-.LFB3
+ 755 0028 00000000 		.4byte	0
+ 756 002c 00000000 		.4byte	0
+ 757              		.section	.debug_ranges,"",%progbits
+ 758              	.Ldebug_ranges0:
+ 759 0000 00000000 		.4byte	.LFB1
+ 760 0004 24000000 		.4byte	.LFE1
+ 761 0008 00000000 		.4byte	.LFB2
+ 762 000c 02000000 		.4byte	.LFE2
+ 763 0010 00000000 		.4byte	.LFB3
+ 764 0014 14000000 		.4byte	.LFE3
+ 765 0018 00000000 		.4byte	0
+ 766 001c 00000000 		.4byte	0
+ 767              		.section	.debug_line,"",%progbits
+ 768              	.Ldebug_line0:
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 27
+
+
+ 769 0000 90000000 		.section	.debug_str,"MS",%progbits,1
+ 769      02005000 
+ 769      00000201 
+ 769      FB0E0D00 
+ 769      01010101 
+ 770              	.LASF6:
+ 771 0000 6C6F6E67 		.ascii	"long long int\000"
+ 771      206C6F6E 
+ 771      6720696E 
+ 771      7400
+ 772              	.LASF10:
+ 773 000e 75696E74 		.ascii	"uint32\000"
+ 773      333200
+ 774              	.LASF27:
+ 775 0015 656E6162 		.ascii	"enableState\000"
+ 775      6C655374 
+ 775      61746500 
+ 776              	.LASF23:
+ 777 0021 50574D5F 		.ascii	"PWM_A_Enable\000"
+ 777      415F456E 
+ 777      61626C65 
+ 777      00
+ 778              	.LASF26:
+ 779 002e 453A5C56 		.ascii	"E:\\VSeries\\FW\\PDSS_SRC_SNK\\CYPD3171-24LQXQ_pb\\"
+ 779      53657269 
+ 779      65735C46 
+ 779      575C5044 
+ 779      53535F53 
+ 780 005c 43595044 		.ascii	"CYPD3171-24LQXQ_pb.cydsn\000"
+ 780      33313731 
+ 780      2D32344C 
+ 780      5158515F 
+ 780      70622E63 
+ 781              	.LASF19:
+ 782 0075 50574D5F 		.ascii	"PWM_A_RestoreConfig\000"
+ 782      415F5265 
+ 782      73746F72 
+ 782      65436F6E 
+ 782      66696700 
+ 783              	.LASF9:
+ 784 0089 75696E74 		.ascii	"uint8\000"
+ 784      3800
+ 785              	.LASF5:
+ 786 008f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 786      20756E73 
+ 786      69676E65 
+ 786      6420696E 
+ 786      7400
+ 787              	.LASF17:
+ 788 00a1 50574D5F 		.ascii	"PWM_A_BACKUP_STRUCT\000"
+ 788      415F4241 
+ 788      434B5550 
+ 788      5F535452 
+ 788      55435400 
+ 789              	.LASF7:
+ 790 00b5 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 790      206C6F6E 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 28
+
+
+ 790      6720756E 
+ 790      7369676E 
+ 790      65642069 
+ 791              	.LASF24:
+ 792 00cc 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 792      43313120 
+ 792      352E342E 
+ 792      31203230 
+ 792      31363036 
+ 793 00ff 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 793      20726576 
+ 793      6973696F 
+ 793      6E203233 
+ 793      37373135 
+ 794 0132 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects -finline-fu"
+ 794      66756E63 
+ 794      74696F6E 
+ 794      2D736563 
+ 794      74696F6E 
+ 795 0165 6E637469 		.ascii	"nctions -flto -fno-strict-aliasing\000"
+ 795      6F6E7320 
+ 795      2D666C74 
+ 795      6F202D66 
+ 795      6E6F2D73 
+ 796              	.LASF11:
+ 797 0188 666C6F61 		.ascii	"float\000"
+ 797      7400
+ 798              	.LASF1:
+ 799 018e 756E7369 		.ascii	"unsigned char\000"
+ 799      676E6564 
+ 799      20636861 
+ 799      7200
+ 800              	.LASF13:
+ 801 019c 63686172 		.ascii	"char\000"
+ 801      00
+ 802              	.LASF4:
+ 803 01a1 6C6F6E67 		.ascii	"long int\000"
+ 803      20696E74 
+ 803      00
+ 804              	.LASF20:
+ 805 01aa 50574D5F 		.ascii	"PWM_A_Sleep\000"
+ 805      415F536C 
+ 805      65657000 
+ 806              	.LASF12:
+ 807 01b6 646F7562 		.ascii	"double\000"
+ 807      6C6500
+ 808              	.LASF3:
+ 809 01bd 73686F72 		.ascii	"short unsigned int\000"
+ 809      7420756E 
+ 809      7369676E 
+ 809      65642069 
+ 809      6E7400
+ 810              	.LASF14:
+ 811 01d0 72656733 		.ascii	"reg32\000"
+ 811      3200
+ 812              	.LASF28:
+ 813 01d6 50574D5F 		.ascii	"PWM_A_backup\000"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\cc2v0ZKf.s 			page 29
+
+
+ 813      415F6261 
+ 813      636B7570 
+ 813      00
+ 814              	.LASF18:
+ 815 01e3 50574D5F 		.ascii	"PWM_A_SaveConfig\000"
+ 815      415F5361 
+ 815      7665436F 
+ 815      6E666967 
+ 815      00
+ 816              	.LASF0:
+ 817 01f4 7369676E 		.ascii	"signed char\000"
+ 817      65642063 
+ 817      68617200 
+ 818              	.LASF25:
+ 819 0200 47656E65 		.ascii	"Generated_Source\\PSoC4\\PWM_A_PM.c\000"
+ 819      72617465 
+ 819      645F536F 
+ 819      75726365 
+ 819      5C50536F 
+ 820              	.LASF15:
+ 821 0222 6C6F6E67 		.ascii	"long double\000"
+ 821      20646F75 
+ 821      626C6500 
+ 822              	.LASF2:
+ 823 022e 73686F72 		.ascii	"short int\000"
+ 823      7420696E 
+ 823      7400
+ 824              	.LASF8:
+ 825 0238 756E7369 		.ascii	"unsigned int\000"
+ 825      676E6564 
+ 825      20696E74 
+ 825      00
+ 826              	.LASF16:
+ 827 0245 73697A65 		.ascii	"sizetype\000"
+ 827      74797065 
+ 827      00
+ 828              	.LASF22:
+ 829 024e 50574D5F 		.ascii	"PWM_A_Stop\000"
+ 829      415F5374 
+ 829      6F7000
+ 830              	.LASF21:
+ 831 0259 50574D5F 		.ascii	"PWM_A_Wakeup\000"
+ 831      415F5761 
+ 831      6B657570 
+ 831      00
+ 832              		.comm	__gnu_lto_v1,1,1
+ 833              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

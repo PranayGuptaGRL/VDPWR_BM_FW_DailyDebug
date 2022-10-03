@@ -1,0 +1,844 @@
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"datamux_ctrl.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.section	.gnu.lto_.profile.b369aa86,"",%progbits
+  19 0000 789C6361 		.ascii	"x\234ca`d`a`\000\222L\214\000\000o\000\016"
+  19      60646061 
+  19      6000924C 
+  19      8C00006F 
+  19      000E
+  20              		.text
+  21              		.section	.gnu.lto_.icf.b369aa86,"",%progbits
+  22 0000 789C6361 		.ascii	"x\234ca`d\000\001\016\006\004`d\270\363\256\377&;\003"
+  22      60640001 
+  22      0E060460 
+  22      64B8F3AE 
+  22      FF263B03 
+  23 0014 000FF103 		.ascii	"\000\017\361\003H"
+  23      48
+  24              		.text
+  25              		.section	.gnu.lto_.jmpfuncs.b369aa86,"",%progbits
+  26 0000 789C6361 		.ascii	"x\234ca`d\000\001v\006\004`d`\004\011\002\000\0015\000"
+  26      60640001 
+  26      76060460 
+  26      64600409 
+  26      02000135 
+  27 0015 10       		.ascii	"\020"
+  28              		.text
+  29              		.section	.gnu.lto_.inline.b369aa86,"",%progbits
+  30 0000 789C6361 		.ascii	"x\234ca`d\000\001\021\006\004\000\21203120\001\231l"
+  30      60640001 
+  30      11060400 
+  30      8A303331 
+  30      32300199 
+  31 0015 0BE499C0 		.ascii	"\013\344\231\300b\000\012\031\000\352"
+  31      62000A19 
+  31      00EA
+  32              		.text
+  33              		.section	.gnu.lto_.pureconst.b369aa86,"",%progbits
+  34 0000 789C6361 		.ascii	"x\234ca`d`f`\000\222\014\000\000X\000\012"
+  34      60646066 
+  34      6000920C 
+  34      00005800 
+  34      0A
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 2
+
+
+  35              		.text
+  36              		.section	.gnu.lto_mux_ctrl_init.b369aa86,"",%progbits
+  37 0000 789C454E 		.ascii	"x\234EN1J\003\001\020\334\331\215!\234\330\012b\004"
+  37      314A0301 
+  37      10DCD98D 
+  37      219CD80A 
+  37      6204
+  38 0012 BB904604 		.ascii	"\273\220F\004\177b\035\220p\226\236g\302\011vY\243\207"
+  38      7F621D90 
+  38      70969E67 
+  38      C2097659 
+  38      A387
+  39 0024 08163692 		.ascii	"\010\0266\222\027\204D-$\205 hq\220F0\004\362\003\261"
+  39      1784442D 
+  39      24852068 
+  39      71904630 
+  39      04F203B1 
+  40 0038 4C630445 		.ascii	"Lc\004ER\350\271[\2710\354\260;3L\201@>#\303\232a\325"
+  40      52E8B95B 
+  40      B930ECB0 
+  40      3B334C81 
+  40      403E23C3 
+  41 004f 0021F0E5 		.ascii	"\000!\360\345\230\350\270\304\200\023-\201Z\214\026"
+  41      98E8B8C4 
+  41      80132D81 
+  41      5A8C16
+  42 005e BEF887F1 		.ascii	"\276\370\207\361\362\375|\021T{\252m}M;\322\351gH\205"
+  42      F2FD7C11 
+  42      547BAA6D 
+  42      7D4D3BD2 
+  42      E9674885 
+  43 0072 2867C256 		.ascii	"(g\302V\031\233e\217\350\241j\312\3418\177\010d\005"
+  43      199B658F 
+  43      E8A16ACA 
+  43      E1387F08 
+  43      6405
+  44 0084 64FCFCE9 		.ascii	"d\374\374\351}\276X\351\272K\3475\225T\200>\344\337"
+  44      7DBE58E9 
+  44      BA4BE735 
+  44      9554803E 
+  44      E4DF
+  45 0096 6507C235 		.ascii	"e\007\3025*.~\033\374^-\025O\325f\335\203-\361\006E"
+  45      2A2E7E1B 
+  45      FC5E2D15 
+  45      4FD566DD 
+  45      832DF106 
+  46 00ab AF7AB79D 		.ascii	"\257z\267\235i\236\237h\366\270\320\025{\314\014^\361"
+  46      699E9F68 
+  46      F6B8D015 
+  46      7BCC0C5E 
+  46      F1
+  47 00bc 83D9B74C 		.ascii	"\203\331\267L\321\316&\015W[\314\375\331h\020|\262\265"
+  47      D1CE260D 
+  47      575BCCFD 
+  47      D968107C 
+  47      B2B5
+  48 00ce 03700B6F 		.ascii	"\003p\013of\006\270\320l\313a\034E\361~m\267\236\324"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 3
+
+
+  48      6606B8D0 
+  48      6CCB611C 
+  48      45F17E6D 
+  48      B79ED4
+  49 00e1 A3C3A39D 		.ascii	"\243\303\243\2350i\356m\204T8\210\233\311\037\352\001"
+  49      3069EE6D 
+  49      84543888 
+  49      9BC91FEA 
+  49      01
+  50 00f2 5241     		.ascii	"RA"
+  51              		.text
+  52              		.section	.gnu.lto_.symbol_nodes.b369aa86,"",%progbits
+  53 0000 789C6361 		.ascii	"x\234ca`d\020f\000\002&\305z\006\206\011\347\030\030"
+  53      60641066 
+  53      000226C5 
+  53      7A068609 
+  53      E71818
+  54 0013 80D4AE06 		.ascii	"\200\324\256\006E\240\010\000)i\003\363"
+  54      45A00800 
+  54      296903F3 
+  55              		.text
+  56              		.section	.gnu.lto_.refs.b369aa86,"",%progbits
+  57 0000 789C6361 		.ascii	"x\234ca`\004B \000\000\0009\000\007"
+  57      60044220 
+  57      00000039 
+  57      0007
+  58              		.text
+  59              		.section	.gnu.lto_.decls.b369aa86,"",%progbits
+  60 0000 789CBD52 		.ascii	"x\234\275ROH\024a\024\377\336\314\232\273\023\246D\204"
+  60      4F481461 
+  60      14FFDECC 
+  60      9ABB13A6 
+  60      4484
+  61 0012 C11C064F 		.ascii	"\301\034\006O\333\301!i\013\351fA\335:U\247\201a\234"
+  61      DBC12169 
+  61      0BE96641 
+  61      DD3A55A7 
+  61      81619C
+  62 0025 1D756067 		.ascii	"\035u`gf\231\231\015\275})\221\320%(\264\004K\205l\315"
+  62      6699990D 
+  62      BD7D2991 
+  62      D02528B4 
+  62      044B856C 
+  63 003a 7F6B9A66 		.ascii	"\177k\232f\"x\320[\035\254\223x\310\300KT$e\204\207"
+  63      2278D05B 
+  63      1DAC9378 
+  63      C8C04B54 
+  63      24658487 
+  64 004e D8DE37B3 		.ascii	"\330\3367\263\273\243$t\3531\337\373\336{\363\373~\277"
+  64      BBA32474 
+  64      EB31DFFB 
+  64      DE7BF3FB 
+  64      7EBF
+  65 0060 F73DBE18 		.ascii	"\367=\276\030\001\302\254\212'\244\005\303k\030\027"
+  65      01C2AC8A 
+  65      27A405C3 
+  65      6B1817
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 4
+
+
+  66 006f D138DC6F 		.ascii	"\3218\334o\220\310\030j\211\374m\254\306\260\363\270"
+  66      90C8186A 
+  66      89FC6DAC 
+  66      C6B0F3B8 
+  67 007f 66FE81FD 		.ascii	"f\376\201\375\315Aqp*\237\330\204\015\340\240$L\000"
+  67      CD417170 
+  67      2A9FD884 
+  67      0DE0A024 
+  67      4C00
+  68 0091 420FC122 		.ascii	"B\017\301\"\341\012R\014\270\300\223J\251\262\021\346"
+  68      E10A520C 
+  68      B8C0934A 
+  68      A9B211E6 
+  69 00a1 49880F6A 		.ascii	"I\210\017j\021Y\360\225\367b\331\002\222\210\035J\207"
+  69      1159F095 
+  69      F762D902 
+  69      92881D4A 
+  69      87
+  70 00b2 A0D24178 		.ascii	"\240\322Ax*\374\317\225`$$\347\242\003\373\370\302v"
+  70      2AFCCF95 
+  70      602424E7 
+  70      A203FBF8 
+  70      C276
+  71 00c4 F7F50407 		.ascii	"\367\365\004\007\357\004\345K\017\257\356\026\216\361"
+  71      EF04E54B 
+  71      0FAFEE16 
+  71      8EF1
+  72 00d2 C889F187 		.ascii	"\310\211\361\207\275\374ey\202\242\335\243\224KF\223"
+  72      BDFC6579 
+  72      82A2DDA3 
+  72      944B4693 
+  73 00e2 99BEBD3D 		.ascii	"\231\276\275=\026\337\345@\024\240\010,\377\262\270"
+  73      16DFE540 
+  73      14A0082C 
+  73      FFB2B8
+  74 00f1 5713E6EC 		.ascii	"W\023\346\354\367\334\312\217\311\030\177\212\305\334"
+  74      F7DCCA8F 
+  74      C9187F8A 
+  74      C5DC
+  75 00ff FAECC65A 		.ascii	"\372\354\306Z\002\222\302(\243\331\352\377\331\322C"
+  75      0292C228 
+  75      A3D9EAFF 
+  75      D9D243
+  76 010e 29C01408 		.ascii	")\300\024\0100\001<\214\201\314\304E\001}/\245\335t"
+  76      30013C8C 
+  76      81CCC445 
+  76      017D2FA5 
+  76      DD74
+  77 0120 67841EA9 		.ascii	"g\204\036\251'pV\2043\"\201IH2N\206\202q\020\3419\210"
+  77      27705684 
+  77      33228149 
+  77      48324E86 
+  77      827110E1 
+  78 0136 8C7FEC49 		.ascii	"\214\177\354I~\265\206\037\205@\340\353\203\317\275"
+  78      7EB5861F 
+  78      8540E0EB 
+  78      83CFBD
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 5
+
+
+  79 0145 7C4560F9 		.ascii	"|E`\371\2568Ni\035\314\240\300t$\200z\207+\024\016W"
+  79      AE384E69 
+  79      1DCCA0C0 
+  79      7424807A 
+  79      872B140E 
+  80 015a F8F86DF9 		.ascii	"\370\370m\371Qu\014\337J@\324\032c\265\265\342\257\225"
+  80      51750CDF 
+  80      4A40D41A 
+  80      63B5B5E2 
+  80      AF95
+  81 016c 5ABCE471 		.ascii	"Z\274\344q\0018L\337\355\274\031<\212\351\011\001\352"
+  81      01384CDF 
+  81      EDBC193C 
+  81      8AE90901 
+  81      EA
+  82 017d 307DBBF6 		.ascii	"0}\273\366\376a5\3774\030\\\354\323\364p\237\000\011"
+  82      FE6135FF 
+  82      34185CEC 
+  82      D3F4709F 
+  82      0009
+  83 018f 11901192 		.ascii	"\021\220\021\222w\002\331\356!\011*\262\213(;\017\011"
+  83      7702D9EE 
+  83      21092AB2 
+  83      8B283B0F 
+  83      09
+  84 01a0 E45F40C8 		.ascii	"\344_@\310+\024\035\240\361\2402@{Y\377,\034-O\236\260"
+  84      2B141DA0 
+  84      F1A03240 
+  84      7B59FF2C 
+  84      1C2D4F9E 
+  85 01b5 145E02BF 		.ascii	"\024^\002\277\357q\216\254\177\337\214\327\3671\010"
+  85      EF718EAC 
+  85      7FDF8CD7 
+  85      F73108
+  86 01c4 EDA11217 		.ascii	"\355\241\022\027@\346\220l\026\311\010\274\206z\364"
+  86      40E6906C 
+  86      16C908BC 
+  86      867AF4
+  87 01d3 2F2016A2 		.ascii	"/ \026\242\373\007\366\036\3276\014\321B\201n-\334\227"
+  87      FB07F61E 
+  87      D7360CD1 
+  87      42816E2D 
+  87      DC97
+  88 01e5 FB7A681E 		.ascii	"\373zh\036\317I\014\006\371hL\371@\002\236\301&\266"
+  88      CF490C06 
+  88      F9684CF9 
+  88      40029EC1 
+  88      26B6
+  89 01f7 BA040DA4 		.ascii	"\272\004\015\244\306\312u\252\272\357fT\3236\375\370"
+  89      C6CA75AA 
+  89      BAEF6654 
+  89      D336FDF8 
+  90 0207 95ABD7A5 		.ascii	"\225\253\327\245KMM$\241\2529\323\366\233U\377\026\350"
+  90      4B4D4D24 
+  90      A1AA39D3 
+  90      F69B55FF 
+  90      16E8
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 6
+
+
+  91 0219 1794ACEB 		.ascii	"\027\224\254\353\264\273\232%\265\231\031\303\223\222"
+  91      B4BB9A25 
+  91      B59919C3 
+  91      9392
+  92 0227 9DCDE74F 		.ascii	"\235\315\347O+zW\3265<O\311z\216.\351\256\241\371\216"
+  92      2B7A57D6 
+  92      353C4FC9 
+  92      7A8E2EE9 
+  92      AEA1F98E 
+  93 023b ABA4E4D4 		.ascii	"\253\244\344\324\301\202ie\035\327W\332\355\234\242"
+  93      C1826965 
+  93      1DD757DA 
+  93      ED9CA2
+  94 024a B996724E 		.ascii	"\271\226rNN\311M,j\264\035\333h4\264VS1m=\223K\033\212"
+  94      4EC94D2C 
+  94      6AB41DDB 
+  94      6834B456 
+  94      53316D3D 
+  95 0262 A5E91DA6 		.ascii	"\245\351\035\246m(j\332h\323r\031_\365\273\262\206'"
+  95      6D286ADA 
+  95      68D37219 
+  95      5FF5BBB2 
+  95      8627
+  96 0274 7790EA52 		.ascii	"w\220\352R+7\377W'^\227\247\250\236\237FY\224\257R/"
+  96      2B37FF57 
+  96      275E97A7 
+  96      A89E9F46 
+  96      5994AF52 
+  97 0289 3A4EE6A4 		.ascii	":N\346\244\356X\226c+i\315\327\3123\223u\362\007*\315"
+  97      EE589663 
+  97      2B69CDD7 
+  97      CA339375 
+  97      F2072ACD 
+  98 029d 2F3B     		.ascii	"/;"
+  99              		.text
+ 100              		.section	.gnu.lto_.symtab.b369aa86,"",%progbits
+ 101 0000 6D75785F 		.ascii	"mux_ctrl_init\000"
+ 101      6374726C 
+ 101      5F696E69 
+ 101      7400
+ 102 000e 00       		.ascii	"\000"
+ 103 000f 00       		.ascii	"\000"
+ 104 0010 00       		.ascii	"\000"
+ 105 0011 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 105      00000000 
+ 106 0019 BB000000 		.ascii	"\273\000\000\000"
+ 107              		.text
+ 108              		.section	.gnu.lto_.opts,"",%progbits
+ 109 0000 272D666D 		.ascii	"'-fmath-errno' '-fsigned-zeros' '-ftrapping-math' '"
+ 109      6174682D 
+ 109      6572726E 
+ 109      6F272027 
+ 109      2D667369 
+ 110 0033 2D666E6F 		.ascii	"-fno-trapv' '-fno-openmp' '-fno-openacc' '-mcpu=cor"
+ 110      2D747261 
+ 110      70762720 
+ 110      272D666E 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 7
+
+
+ 110      6F2D6F70 
+ 111 0066 7465782D 		.ascii	"tex-m0' '-mthumb' '-g' '-Os' '-Werror' '-ffunction-"
+ 111      6D302720 
+ 111      272D6D74 
+ 111      68756D62 
+ 111      2720272D 
+ 112 0099 73656374 		.ascii	"sections' '-ffat-lto-objects' '-finline-functions' "
+ 112      696F6E73 
+ 112      2720272D 
+ 112      66666174 
+ 112      2D6C746F 
+ 113 00cc 272D666C 		.ascii	"'-flto' '-fno-strict-aliasing'\000"
+ 113      746F2720 
+ 113      272D666E 
+ 113      6F2D7374 
+ 113      72696374 
+ 114              		.text
+ 115              		.cfi_sections	.debug_frame
+ 116              		.section	.text.mux_ctrl_init,"ax",%progbits
+ 117              		.align	1
+ 118              		.global	mux_ctrl_init
+ 119              		.code	16
+ 120              		.thumb_func
+ 121              		.type	mux_ctrl_init, %function
+ 122              	mux_ctrl_init:
+ 123              	.LFB32:
+ 124              		.file 1 "common\\datamux_ctrl.c"
+   1:common/datamux_ctrl.c **** /**
+   2:common/datamux_ctrl.c ****  * @file datamux_ctrl.c
+   3:common/datamux_ctrl.c ****  *
+   4:common/datamux_ctrl.c ****  * @brief @{Source file containing the data MUX control functions for the
+   5:common/datamux_ctrl.c ****  * CCG firmware application.@}
+   6:common/datamux_ctrl.c ****  */
+   7:common/datamux_ctrl.c **** 
+   8:common/datamux_ctrl.c **** /*
+   9:common/datamux_ctrl.c ****  * Copyright (2014-2018), Cypress Semiconductor Corporation or a subsidiary of
+  10:common/datamux_ctrl.c ****  * Cypress Semiconductor Corporation. All rights reserved.
+  11:common/datamux_ctrl.c ****  *
+  12:common/datamux_ctrl.c ****  * This software, including source code, documentation and related materials
+  13:common/datamux_ctrl.c ****  * (“Software”), is owned by Cypress Semiconductor Corporation or one of its
+  14:common/datamux_ctrl.c ****  * subsidiaries (“Cypress”) and is protected by and subject to worldwide patent
+  15:common/datamux_ctrl.c ****  * protection (United States and foreign), United States copyright laws and
+  16:common/datamux_ctrl.c ****  * international treaty provisions. Therefore, you may use this Software only
+  17:common/datamux_ctrl.c ****  * as provided in the license agreement accompanying the software package from
+  18:common/datamux_ctrl.c ****  * which you obtained this Software (“EULA”).
+  19:common/datamux_ctrl.c ****  *
+  20:common/datamux_ctrl.c ****  * If no EULA applies, Cypress hereby grants you a personal, nonexclusive,
+  21:common/datamux_ctrl.c ****  * non-transferable license to copy, modify, and compile the Software source
+  22:common/datamux_ctrl.c ****  * code solely for use in connection with Cypress’s integrated circuit
+  23:common/datamux_ctrl.c ****  * products. Any reproduction, modification, translation, compilation, or
+  24:common/datamux_ctrl.c ****  * representation of this Software except as specified above is prohibited
+  25:common/datamux_ctrl.c ****  * without the express written permission of Cypress. Disclaimer: THIS SOFTWARE
+  26:common/datamux_ctrl.c ****  * IS PROVIDED AS-IS, WITH NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  27:common/datamux_ctrl.c ****  * INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT, IMPLIED WARRANTIES OF
+  28:common/datamux_ctrl.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. Cypress reserves the
+  29:common/datamux_ctrl.c ****  * right to make changes to the Software without notice. Cypress does not
+  30:common/datamux_ctrl.c ****  * assume any liability arising out of the application or use of the Software
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 8
+
+
+  31:common/datamux_ctrl.c ****  * or any product or circuit described in the Software. Cypress does not
+  32:common/datamux_ctrl.c ****  * authorize its products for use in any products where a malfunction or
+  33:common/datamux_ctrl.c ****  * failure of the Cypress product may reasonably be expected to result in
+  34:common/datamux_ctrl.c ****  * significant property damage, injury or death (“High Risk Product”). By
+  35:common/datamux_ctrl.c ****  * including Cypress’s product in a High Risk Product, the manufacturer of such
+  36:common/datamux_ctrl.c ****  * system or application assumes all risk of such use and in doing so agrees to
+  37:common/datamux_ctrl.c ****  * indemnify Cypress against all liability.
+  38:common/datamux_ctrl.c ****  */
+  39:common/datamux_ctrl.c **** 
+  40:common/datamux_ctrl.c **** #include <pd.h>
+  41:common/datamux_ctrl.c **** #include <alt_modes_mngr.h>
+  42:common/datamux_ctrl.c **** 
+  43:common/datamux_ctrl.c **** /* Initialize the MUX control SCB block. */
+  44:common/datamux_ctrl.c **** bool mux_ctrl_init(uint8_t port)
+  45:common/datamux_ctrl.c **** {
+ 125              		.loc 1 45 0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              		@ link register save eliminated.
+ 130              	.LVL0:
+  46:common/datamux_ctrl.c ****     /* There are no MUX in this design. */
+  47:common/datamux_ctrl.c **** 
+  48:common/datamux_ctrl.c ****     return true;
+  49:common/datamux_ctrl.c **** }
+ 131              		.loc 1 49 0
+ 132 0000 0120     		movs	r0, #1
+ 133              	.LVL1:
+ 134              		@ sp needed
+ 135 0002 7047     		bx	lr
+ 136              		.cfi_endproc
+ 137              	.LFE32:
+ 138              		.size	mux_ctrl_init, .-mux_ctrl_init
+ 139              		.text
+ 140              	.Letext0:
+ 141              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 142              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 143              		.section	.debug_info,"",%progbits
+ 144              	.Ldebug_info0:
+ 145 0000 CD000000 		.4byte	0xcd
+ 146 0004 0400     		.2byte	0x4
+ 147 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 148 000a 04       		.byte	0x4
+ 149 000b 01       		.uleb128 0x1
+ 150 000c 64000000 		.4byte	.LASF17
+ 151 0010 0C       		.byte	0xc
+ 152 0011 1B000000 		.4byte	.LASF18
+ 153 0015 8F010000 		.4byte	.LASF19
+ 154 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 155 001d 00000000 		.4byte	0
+ 156 0021 00000000 		.4byte	.Ldebug_line0
+ 157 0025 02       		.uleb128 0x2
+ 158 0026 01       		.byte	0x1
+ 159 0027 06       		.byte	0x6
+ 160 0028 77010000 		.4byte	.LASF0
+ 161 002c 03       		.uleb128 0x3
+ 162 002d 5A000000 		.4byte	.LASF9
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 9
+
+
+ 163 0031 02       		.byte	0x2
+ 164 0032 1D       		.byte	0x1d
+ 165 0033 37000000 		.4byte	0x37
+ 166 0037 02       		.uleb128 0x2
+ 167 0038 01       		.byte	0x1
+ 168 0039 08       		.byte	0x8
+ 169 003a 2D010000 		.4byte	.LASF1
+ 170 003e 02       		.uleb128 0x2
+ 171 003f 02       		.byte	0x2
+ 172 0040 05       		.byte	0x5
+ 173 0041 DA010000 		.4byte	.LASF2
+ 174 0045 02       		.uleb128 0x2
+ 175 0046 02       		.byte	0x2
+ 176 0047 07       		.byte	0x7
+ 177 0048 64010000 		.4byte	.LASF3
+ 178 004c 02       		.uleb128 0x2
+ 179 004d 04       		.byte	0x4
+ 180 004e 05       		.byte	0x5
+ 181 004f 40010000 		.4byte	.LASF4
+ 182 0053 02       		.uleb128 0x2
+ 183 0054 04       		.byte	0x4
+ 184 0055 07       		.byte	0x7
+ 185 0056 31000000 		.4byte	.LASF5
+ 186 005a 02       		.uleb128 0x2
+ 187 005b 08       		.byte	0x8
+ 188 005c 05       		.byte	0x5
+ 189 005d 00000000 		.4byte	.LASF6
+ 190 0061 02       		.uleb128 0x2
+ 191 0062 08       		.byte	0x8
+ 192 0063 07       		.byte	0x7
+ 193 0064 43000000 		.4byte	.LASF7
+ 194 0068 04       		.uleb128 0x4
+ 195 0069 04       		.byte	0x4
+ 196 006a 05       		.byte	0x5
+ 197 006b 696E7400 		.ascii	"int\000"
+ 198 006f 02       		.uleb128 0x2
+ 199 0070 04       		.byte	0x4
+ 200 0071 07       		.byte	0x7
+ 201 0072 0E000000 		.4byte	.LASF8
+ 202 0076 03       		.uleb128 0x3
+ 203 0077 25010000 		.4byte	.LASF10
+ 204 007b 03       		.byte	0x3
+ 205 007c 18       		.byte	0x18
+ 206 007d 2C000000 		.4byte	0x2c
+ 207 0081 02       		.uleb128 0x2
+ 208 0082 04       		.byte	0x4
+ 209 0083 04       		.byte	0x4
+ 210 0084 D4010000 		.4byte	.LASF11
+ 211 0088 02       		.uleb128 0x2
+ 212 0089 08       		.byte	0x8
+ 213 008a 04       		.byte	0x4
+ 214 008b 49010000 		.4byte	.LASF12
+ 215 008f 02       		.uleb128 0x2
+ 216 0090 01       		.byte	0x1
+ 217 0091 08       		.byte	0x8
+ 218 0092 3B010000 		.4byte	.LASF13
+ 219 0096 02       		.uleb128 0x2
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 10
+
+
+ 220 0097 08       		.byte	0x8
+ 221 0098 04       		.byte	0x4
+ 222 0099 83010000 		.4byte	.LASF14
+ 223 009d 02       		.uleb128 0x2
+ 224 009e 04       		.byte	0x4
+ 225 009f 07       		.byte	0x7
+ 226 00a0 E4010000 		.4byte	.LASF15
+ 227 00a4 02       		.uleb128 0x2
+ 228 00a5 01       		.byte	0x1
+ 229 00a6 02       		.byte	0x2
+ 230 00a7 50010000 		.4byte	.LASF16
+ 231 00ab 05       		.uleb128 0x5
+ 232 00ac 56010000 		.4byte	.LASF20
+ 233 00b0 01       		.byte	0x1
+ 234 00b1 2C       		.byte	0x2c
+ 235 00b2 A4000000 		.4byte	0xa4
+ 236 00b6 00000000 		.4byte	.LFB32
+ 237 00ba 04000000 		.4byte	.LFE32-.LFB32
+ 238 00be 01       		.uleb128 0x1
+ 239 00bf 9C       		.byte	0x9c
+ 240 00c0 06       		.uleb128 0x6
+ 241 00c1 20010000 		.4byte	.LASF21
+ 242 00c5 01       		.byte	0x1
+ 243 00c6 2C       		.byte	0x2c
+ 244 00c7 76000000 		.4byte	0x76
+ 245 00cb 00000000 		.4byte	.LLST0
+ 246 00cf 00       		.byte	0
+ 247 00d0 00       		.byte	0
+ 248              		.section	.debug_abbrev,"",%progbits
+ 249              	.Ldebug_abbrev0:
+ 250 0000 01       		.uleb128 0x1
+ 251 0001 11       		.uleb128 0x11
+ 252 0002 01       		.byte	0x1
+ 253 0003 25       		.uleb128 0x25
+ 254 0004 0E       		.uleb128 0xe
+ 255 0005 13       		.uleb128 0x13
+ 256 0006 0B       		.uleb128 0xb
+ 257 0007 03       		.uleb128 0x3
+ 258 0008 0E       		.uleb128 0xe
+ 259 0009 1B       		.uleb128 0x1b
+ 260 000a 0E       		.uleb128 0xe
+ 261 000b 55       		.uleb128 0x55
+ 262 000c 17       		.uleb128 0x17
+ 263 000d 11       		.uleb128 0x11
+ 264 000e 01       		.uleb128 0x1
+ 265 000f 10       		.uleb128 0x10
+ 266 0010 17       		.uleb128 0x17
+ 267 0011 00       		.byte	0
+ 268 0012 00       		.byte	0
+ 269 0013 02       		.uleb128 0x2
+ 270 0014 24       		.uleb128 0x24
+ 271 0015 00       		.byte	0
+ 272 0016 0B       		.uleb128 0xb
+ 273 0017 0B       		.uleb128 0xb
+ 274 0018 3E       		.uleb128 0x3e
+ 275 0019 0B       		.uleb128 0xb
+ 276 001a 03       		.uleb128 0x3
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 11
+
+
+ 277 001b 0E       		.uleb128 0xe
+ 278 001c 00       		.byte	0
+ 279 001d 00       		.byte	0
+ 280 001e 03       		.uleb128 0x3
+ 281 001f 16       		.uleb128 0x16
+ 282 0020 00       		.byte	0
+ 283 0021 03       		.uleb128 0x3
+ 284 0022 0E       		.uleb128 0xe
+ 285 0023 3A       		.uleb128 0x3a
+ 286 0024 0B       		.uleb128 0xb
+ 287 0025 3B       		.uleb128 0x3b
+ 288 0026 0B       		.uleb128 0xb
+ 289 0027 49       		.uleb128 0x49
+ 290 0028 13       		.uleb128 0x13
+ 291 0029 00       		.byte	0
+ 292 002a 00       		.byte	0
+ 293 002b 04       		.uleb128 0x4
+ 294 002c 24       		.uleb128 0x24
+ 295 002d 00       		.byte	0
+ 296 002e 0B       		.uleb128 0xb
+ 297 002f 0B       		.uleb128 0xb
+ 298 0030 3E       		.uleb128 0x3e
+ 299 0031 0B       		.uleb128 0xb
+ 300 0032 03       		.uleb128 0x3
+ 301 0033 08       		.uleb128 0x8
+ 302 0034 00       		.byte	0
+ 303 0035 00       		.byte	0
+ 304 0036 05       		.uleb128 0x5
+ 305 0037 2E       		.uleb128 0x2e
+ 306 0038 01       		.byte	0x1
+ 307 0039 3F       		.uleb128 0x3f
+ 308 003a 19       		.uleb128 0x19
+ 309 003b 03       		.uleb128 0x3
+ 310 003c 0E       		.uleb128 0xe
+ 311 003d 3A       		.uleb128 0x3a
+ 312 003e 0B       		.uleb128 0xb
+ 313 003f 3B       		.uleb128 0x3b
+ 314 0040 0B       		.uleb128 0xb
+ 315 0041 27       		.uleb128 0x27
+ 316 0042 19       		.uleb128 0x19
+ 317 0043 49       		.uleb128 0x49
+ 318 0044 13       		.uleb128 0x13
+ 319 0045 11       		.uleb128 0x11
+ 320 0046 01       		.uleb128 0x1
+ 321 0047 12       		.uleb128 0x12
+ 322 0048 06       		.uleb128 0x6
+ 323 0049 40       		.uleb128 0x40
+ 324 004a 18       		.uleb128 0x18
+ 325 004b 9742     		.uleb128 0x2117
+ 326 004d 19       		.uleb128 0x19
+ 327 004e 00       		.byte	0
+ 328 004f 00       		.byte	0
+ 329 0050 06       		.uleb128 0x6
+ 330 0051 05       		.uleb128 0x5
+ 331 0052 00       		.byte	0
+ 332 0053 03       		.uleb128 0x3
+ 333 0054 0E       		.uleb128 0xe
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 12
+
+
+ 334 0055 3A       		.uleb128 0x3a
+ 335 0056 0B       		.uleb128 0xb
+ 336 0057 3B       		.uleb128 0x3b
+ 337 0058 0B       		.uleb128 0xb
+ 338 0059 49       		.uleb128 0x49
+ 339 005a 13       		.uleb128 0x13
+ 340 005b 02       		.uleb128 0x2
+ 341 005c 17       		.uleb128 0x17
+ 342 005d 00       		.byte	0
+ 343 005e 00       		.byte	0
+ 344 005f 00       		.byte	0
+ 345              		.section	.debug_loc,"",%progbits
+ 346              	.Ldebug_loc0:
+ 347              	.LLST0:
+ 348 0000 00000000 		.4byte	.LVL0
+ 349 0004 02000000 		.4byte	.LVL1
+ 350 0008 0100     		.2byte	0x1
+ 351 000a 50       		.byte	0x50
+ 352 000b 02000000 		.4byte	.LVL1
+ 353 000f 04000000 		.4byte	.LFE32
+ 354 0013 0400     		.2byte	0x4
+ 355 0015 F3       		.byte	0xf3
+ 356 0016 01       		.uleb128 0x1
+ 357 0017 50       		.byte	0x50
+ 358 0018 9F       		.byte	0x9f
+ 359 0019 00000000 		.4byte	0
+ 360 001d 00000000 		.4byte	0
+ 361              		.section	.debug_aranges,"",%progbits
+ 362 0000 1C000000 		.4byte	0x1c
+ 363 0004 0200     		.2byte	0x2
+ 364 0006 00000000 		.4byte	.Ldebug_info0
+ 365 000a 04       		.byte	0x4
+ 366 000b 00       		.byte	0
+ 367 000c 0000     		.2byte	0
+ 368 000e 0000     		.2byte	0
+ 369 0010 00000000 		.4byte	.LFB32
+ 370 0014 04000000 		.4byte	.LFE32-.LFB32
+ 371 0018 00000000 		.4byte	0
+ 372 001c 00000000 		.4byte	0
+ 373              		.section	.debug_ranges,"",%progbits
+ 374              	.Ldebug_ranges0:
+ 375 0000 00000000 		.4byte	.LFB32
+ 376 0004 04000000 		.4byte	.LFE32
+ 377 0008 00000000 		.4byte	0
+ 378 000c 00000000 		.4byte	0
+ 379              		.section	.debug_line,"",%progbits
+ 380              	.Ldebug_line0:
+ 381 0000 3F010000 		.section	.debug_str,"MS",%progbits,1
+ 381      02002901 
+ 381      00000201 
+ 381      FB0E0D00 
+ 381      01010101 
+ 382              	.LASF6:
+ 383 0000 6C6F6E67 		.ascii	"long long int\000"
+ 383      206C6F6E 
+ 383      6720696E 
+ 383      7400
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 13
+
+
+ 384              	.LASF8:
+ 385 000e 756E7369 		.ascii	"unsigned int\000"
+ 385      676E6564 
+ 385      20696E74 
+ 385      00
+ 386              	.LASF18:
+ 387 001b 636F6D6D 		.ascii	"common\\datamux_ctrl.c\000"
+ 387      6F6E5C64 
+ 387      6174616D 
+ 387      75785F63 
+ 387      74726C2E 
+ 388              	.LASF5:
+ 389 0031 6C6F6E67 		.ascii	"long unsigned int\000"
+ 389      20756E73 
+ 389      69676E65 
+ 389      6420696E 
+ 389      7400
+ 390              	.LASF7:
+ 391 0043 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 391      206C6F6E 
+ 391      6720756E 
+ 391      7369676E 
+ 391      65642069 
+ 392              	.LASF9:
+ 393 005a 5F5F7569 		.ascii	"__uint8_t\000"
+ 393      6E74385F 
+ 393      7400
+ 394              	.LASF17:
+ 395 0064 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 395      43313120 
+ 395      352E342E 
+ 395      31203230 
+ 395      31363036 
+ 396 0097 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 396      20726576 
+ 396      6973696F 
+ 396      6E203233 
+ 396      37373135 
+ 397 00ca 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects -finline-fu"
+ 397      66756E63 
+ 397      74696F6E 
+ 397      2D736563 
+ 397      74696F6E 
+ 398 00fd 6E637469 		.ascii	"nctions -flto -fno-strict-aliasing\000"
+ 398      6F6E7320 
+ 398      2D666C74 
+ 398      6F202D66 
+ 398      6E6F2D73 
+ 399              	.LASF21:
+ 400 0120 706F7274 		.ascii	"port\000"
+ 400      00
+ 401              	.LASF10:
+ 402 0125 75696E74 		.ascii	"uint8_t\000"
+ 402      385F7400 
+ 403              	.LASF1:
+ 404 012d 756E7369 		.ascii	"unsigned char\000"
+ 404      676E6564 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 14
+
+
+ 404      20636861 
+ 404      7200
+ 405              	.LASF13:
+ 406 013b 63686172 		.ascii	"char\000"
+ 406      00
+ 407              	.LASF4:
+ 408 0140 6C6F6E67 		.ascii	"long int\000"
+ 408      20696E74 
+ 408      00
+ 409              	.LASF12:
+ 410 0149 646F7562 		.ascii	"double\000"
+ 410      6C6500
+ 411              	.LASF16:
+ 412 0150 5F426F6F 		.ascii	"_Bool\000"
+ 412      6C00
+ 413              	.LASF20:
+ 414 0156 6D75785F 		.ascii	"mux_ctrl_init\000"
+ 414      6374726C 
+ 414      5F696E69 
+ 414      7400
+ 415              	.LASF3:
+ 416 0164 73686F72 		.ascii	"short unsigned int\000"
+ 416      7420756E 
+ 416      7369676E 
+ 416      65642069 
+ 416      6E7400
+ 417              	.LASF0:
+ 418 0177 7369676E 		.ascii	"signed char\000"
+ 418      65642063 
+ 418      68617200 
+ 419              	.LASF14:
+ 420 0183 6C6F6E67 		.ascii	"long double\000"
+ 420      20646F75 
+ 420      626C6500 
+ 421              	.LASF19:
+ 422 018f 443A5C56 		.ascii	"D:\\V-TE-PWR\\PDSS_SRC_SNK\\CYPD3171-24LQXQ_pb\\CYP"
+ 422      2D54452D 
+ 422      5057525C 
+ 422      50445353 
+ 422      5F535243 
+ 423 01be 44333137 		.ascii	"D3171-24LQXQ_pb.cydsn\000"
+ 423      312D3234 
+ 423      4C515851 
+ 423      5F70622E 
+ 423      63796473 
+ 424              	.LASF11:
+ 425 01d4 666C6F61 		.ascii	"float\000"
+ 425      7400
+ 426              	.LASF2:
+ 427 01da 73686F72 		.ascii	"short int\000"
+ 427      7420696E 
+ 427      7400
+ 428              	.LASF15:
+ 429 01e4 73697A65 		.ascii	"sizetype\000"
+ 429      74797065 
+ 429      00
+ 430              		.comm	__gnu_lto_v1,1,1
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccusV5kI.s 			page 15
+
+
+ 431              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,1279 @@
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"MasterInput_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.section	.gnu.lto_.profile.b369ba2f,"",%progbits
+  19 0000 789C6361 		.ascii	"x\234ca`d`a`\000\222\034l\000\000\200\000\031"
+  19      60646061 
+  19      6000921C 
+  19      6C000080 
+  19      0019
+  20              		.text
+  21              		.section	.gnu.lto_.icf.b369ba2f,"",%progbits
+  22 0000 789C6361 		.ascii	"x\234ca`d\000\001a\006\004`f8\333\272\177)\033\343\322"
+  22      60640001 
+  22      61060460 
+  22      6638DBBA 
+  22      7F291BE3 
+  23 0015 A70B6C98 		.ascii	"\247\013l\230\346-9\372\223\225\001\000Rt\010F"
+  23      E62D39FA 
+  23      93950100 
+  23      52740846 
+  24              		.text
+  25              		.section	.gnu.lto_.jmpfuncs.b369ba2f,"",%progbits
+  26 0000 789C6361 		.ascii	"x\234ca`d\000\001\016\006\004`\202b\000\001^\000\022"
+  26      60640001 
+  26      0E060460 
+  26      82620001 
+  26      5E0012
+  27              		.text
+  28              		.section	.gnu.lto_.inline.b369ba2f,"",%progbits
+  29 0000 789C6361 		.ascii	"x\234ca`d\000\001\015\006\004`b``ead`bY \317\300\266"
+  29      60640001 
+  29      0D060460 
+  29      62606065 
+  29      61646062 
+  30 0019 409E0922 		.ascii	"@\236\011\"\206!\304\000\000G\374\003^"
+  30      8621C400 
+  30      0047FC03 
+  30      5E
+  31              		.text
+  32              		.section	.gnu.lto_.pureconst.b369ba2f,"",%progbits
+  33 0000 789C6361 		.ascii	"x\234ca`d`e```b\220b\222\002\000\000\357\000C"
+  33      60646065 
+  33      60606062 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 2
+
+
+  33      90629202 
+  33      0000EF00 
+  34              		.text
+  35              		.section	.gnu.lto_MasterInput_Sleep.b369ba2f,"",%progbits
+  36 0000 789C4D50 		.ascii	"x\234MP\277KBQ\024>\347\336\347\217\212\240=\207\246"
+  36      BF4B4251 
+  36      143EE7DE 
+  36      E78F8AA0 
+  36      3D87A6
+  37 0013 C8865CFA 		.ascii	"\310\206\\\372\017\032\252A\220\\\005\021{\253\206)"
+  37      0F1AAA41 
+  37      905C0511 
+  37      7BAB8629 
+  38 0023 8D5E7F3C 		.ascii	"\215^\177<\322\006q\311\246\220\206\320~\230EK\322\362"
+  38      D20671C9 
+  38      A69086D0 
+  38      7E98454B 
+  38      D2F2
+  39 0035 90868630 		.ascii	"\220\206\2060\010\232Z\"\310\301\032\014r)|v\316s\351"
+  39      089A5A22 
+  39      C8C11A0C 
+  39      72297C76 
+  39      CE73E9
+  40 0048 C0E5DCFB 		.ascii	"\300\345\334\373\235\357~\3379G\003\004\2165J\213\224"
+  40      9DEF7EDF 
+  40      39470304 
+  40      8E354A8B 
+  40      94
+  41 0059 67E9A004 		.ascii	"g\351\240\004\024\345\016@\306-\020\371\242\334\010"
+  41      14E50E40 
+  41      C62D10F9 
+  41      A2DC08
+  42 0068 6981691C 		.ascii	"i\201i\034\210\241\300\366n\267%\2745E\361j\034HU7\321"
+  42      88A1C0F6 
+  42      6EB725BC 
+  42      3545F16A 
+  42      1C485537 
+  43 007d 90002361 		.ascii	"\220\000#a+\001\326\320\013D{\273\262\366\247\235y\246"
+  43      2B01D6D0 
+  43      0B447BBB 
+  43      B2F6A79D 
+  43      79A6
+  44 008f CD8D8B58 		.ascii	"\315\215\213XG'\33357L5\032\345\224y\353\030HM\200!"
+  44      4727DB35 
+  44      374C351A 
+  44      E59479EB 
+  44      18484D80 
+  45 00a4 09ED1383 		.ascii	"\011\355\023\203\275\276\204\340,\273\330\376\331\263"
+  45      BDBE84E0 
+  45      2CBBD8FE 
+  45      D9B3
+  46 00b2 DE27F853 		.ascii	"\336'\370SN\262o\305h?\272\276\205!\005\262\376u\351"
+  46      4EB26FC5 
+  46      683FBABE 
+  46      852105B2 
+  46      FE75E9
+  47 00c5 C99A1A3F 		.ascii	"\311\232\032?\013\331\262\322\010\3728\356\334\273\252"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 3
+
+
+  47      0BD9B2D2 
+  47      08FA38EE 
+  47      DCBBAA
+  48 00d4 7898C953 		.ascii	"x\230\311SG\022O\321\203'\350!\3433\254\"t1[9\232g\275"
+  48      47124FD1 
+  48      8327E821 
+  48      E333AC22 
+  48      74315B39 
+  49 00eb FF629A2D 		.ascii	"\377b\232-\326j}\276\270\322CUPj\206\260\"\315\303p"
+  49      D66A7DBE 
+  49      B8D24355 
+  49      506A86B0 
+  49      22CDC370 
+  50 00ff EFE1F96E 		.ascii	"\357\341\371n\222\005\225\215;\260AK8gI*\226n.\213n"
+  50      9205958D 
+  50      3BB0414B 
+  50      3867492A 
+  50      966E2E8B 
+  51 0114 5F830754 		.ascii	"_\203\007T;\206t\342\005\271X\366\026\260\211>j\032"
+  51      3B8674E2 
+  51      05B958F6 
+  51      16B0893E 
+  51      6A1A
+  52 0126 7A98357F 		.ascii	"z\2305\177\035li\257\246O\235\323lDYX\325cz\"\222\324"
+  52      1D6C69AF 
+  52      A64F9DD3 
+  52      6C445958 
+  52      D5637A22 
+  53 013c 37C3C178 		.ascii	"7\303\301x*\021\325C\201`|e9\344\217l'\365\304zl+\225"
+  53      2A11D543 
+  53      81607C65 
+  53      39E48F6C 
+  53      27F5C47A 
+  54 0153 0C07FC4B 		.ascii	"\014\007\374KQ\370\003/Y\202]"
+  54      51F8032F 
+  54      59825D
+  55              		.text
+  56              		.section	.gnu.lto_MasterInput_backup.b369ba2f,"",%progbits
+  57 0000 789C6361 		.ascii	"x\234ca`d\000\001k \206\260\030\030\37621\256\177\263"
+  57      60640001 
+  57      6B2086B0 
+  57      1818FE32 
+  57      31AE7FB3 
+  58 0014 F327EF17 		.ascii	"\363'\357\027\246Vf\240 \220{\341\356\212\343\374\026"
+  58      A65666A0 
+  58      20907BE1 
+  58      EE8AE3FC 
+  58      16
+  59 0025 DB1A3A16 		.ascii	"\333\032:\0264\030\26423\376cb`\\\316(\363\217\211\021"
+  59      3418B432 
+  59      33FE6362 
+  59      605CCE28 
+  59      F38F8911 
+  60 0039 42318128 		.ascii	"B1\201(\006\306\025\214\026\014\000\345\232\024I"
+  60      06C6158C 
+  60      160C00E5 
+  60      9A1449
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 4
+
+
+  61              		.text
+  62              		.section	.gnu.lto_MasterInput_Wakeup.b369ba2f,"",%progbits
+  63 0000 789C4D90 		.ascii	"x\234M\220\277KBQ\024\307\357\367\336\227O\222\240="
+  63      BF4B4251 
+  63      14C7EFF7 
+  63      DE974F92 
+  63      A03D
+  64 0012 87C60CCA 		.ascii	"\207\306\014\312\240\376\203\006i\020$WA\304\336\252"
+  64      A0FE8306 
+  64      69102457 
+  64      41C4DEAA 
+  65 0022 613A7BFD 		.ascii	"a:{\375\361H\027\221\"\267\210\206\320~Z\264d\323S\012"
+  65      F1481791 
+  65      22B78886 
+  65      D07E5AB4 
+  65      64D3530A 
+  66 0036 1AC220A8 		.ascii	"\032\302 \250\206\226hp\260\006\205\032\325\316}.]\270"
+  66      86966870 
+  66      B006851A 
+  66      D5CE7D2E 
+  66      5DB8
+  67 0048 9C7BBFE7 		.ascii	"\234{\277\347\334\363\371\236\25310\265|\024\346)\316"
+  67      DCF3F99E 
+  67      AB3130B5 
+  67      7C14E629 
+  67      CE
+  68 0059 D08660E0 		.ascii	"\320\206`\340\3456c\031'\007\324A:\301\322\034i\374"
+  68      E5366319 
+  68      2707D441 
+  68      3AC1D21C 
+  68      69FC
+  69 006b F201476B 		.ascii	"\362\001Gk\273\323\340\236\252\244\365q\337]\2225\013"
+  69      BBD3E09E 
+  69      AAA4F571 
+  69      DF5D9235 
+  69      0B
+  70 007c A6606CC4 		.ascii	"\246`l\304\355N\014Ux\030\225}^\015\367\246\034yU6;"
+  70      ED4E0C55 
+  70      7818957D 
+  70      5E0DF7A6 
+  70      1C795536 
+  71 0091 4EA20687 		.ascii	"N\242\006\207\302\325\327-9\032\345\244\365\346h\356"
+  71      C2D5D72D 
+  71      391AE5A4 
+  71      F5E668EE 
+  72 00a1 E81A67A6 		.ascii	"\350\032g\246 \271G%\012\326\347\\E\321A\366\266\377"
+  72      20B94725 
+  72      0AD6E75C 
+  72      45D141F6 
+  72      B6FF
+  73 00b3 DA74A957 		.ascii	"\332t\251W9\241\300\025\263\365\244\377pSp(@\243\361"
+  73      39A1C015 
+  73      B3F5A4FF 
+  73      70537028 
+  73      40A3F1
+  74 00c6 FDAEA707 		.ascii	"\375\256\247\007\262 \3454iE\362\240\344\356\343\313"
+  74      B220E534 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 5
+
+
+  74      6945F2A0 
+  74      E4EEE3CB 
+  75 00d6 DDE401F6 		.ascii	"\335\344\001\3663\322\326\005N\310\3701\334v\262tsY"
+  75      33D2D605 
+  75      4EC8F831 
+  75      DC76B274 
+  75      7359
+  76 00e8 747A174C 		.ascii	"tz\027L\241\341\024\007\030\332\236q\006/\353\240U9"
+  76      A1E11407 
+  76      18DA9E71 
+  76      062FEBA0 
+  76      5539
+  77 00fa 742BD87F 		.ascii	"t+\330\177\322\204M\272.=\017]\343k![\226\032I_G\355"
+  77      D2844DBA 
+  77      2E3D0F5D 
+  77      E36B215B 
+  77      961A495F 
+  78 0110 075D51F2 		.ascii	"\007]Q\362\304Y\246\011\034\270\200\033\347\212\203"
+  78      C459A609 
+  78      1CB8801B 
+  78      E78A83
+  79 011f 3AB526CB 		.ascii	":\265&\313\254\213\254\265\353S=\355\237\351\221o\232"
+  79      AC8BACB5 
+  79      EB533DED 
+  79      9FE9916F 
+  79      9A
+  80 0130 8C98733E 		.ascii	"\214\230s>#f$\"Ic#\034\214\247\022Q#\024\010\306WWB"
+  80      23662422 
+  80      4963231C 
+  80      8CA71251 
+  80      231408C6 
+  81 0147 FEC856D2 		.ascii	"\376\310V\322H\254\3056S\311p\300\277\030e\177\3564"
+  81      48ACC536 
+  81      53C970C0 
+  81      BF18657F 
+  81      EE34
+  82 0159 8185     		.ascii	"\201\205"
+  83              		.text
+  84              		.section	.gnu.lto_.symbol_nodes.b369ba2f,"",%progbits
+  85 0000 789C6361 		.ascii	"x\234ca`d\320a\000\002&\306z\006\206\011\347\030\030"
+  85      6064D061 
+  85      000226C6 
+  85      7A068609 
+  85      E71818
+  86 0013 80D4AE06 		.ascii	"\200\324\256\006E\006\006V\006\206\006!\006\006f&\246"
+  86      45060656 
+  86      06860621 
+  86      06066626 
+  86      A6
+  87 0024 7A461409 		.ascii	"zF\024\011\006\000\276o\010B"
+  87      0600BE6F 
+  87      0842
+  88              		.text
+  89              		.section	.gnu.lto_.refs.b369ba2f,"",%progbits
+  90 0000 789C6361 		.ascii	"x\234ca`d\340f`\000\222\214\214L\214L@\222\001\000\001"
+  90      6064E066 
+  90      6000928C 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 6
+
+
+  90      8C4C8C4C 
+  90      40920100 
+  91 0015 54001B   		.ascii	"T\000\033"
+  92              		.text
+  93              		.section	.gnu.lto_.decls.b369ba2f,"",%progbits
+  94 0000 789C8D54 		.ascii	"x\234\215T\353KTA\024\237s\357\356\266\336\326,\215"
+  94      EB4B5441 
+  94      149F73EF 
+  94      EEB6DED6 
+  94      2C8D
+  95 0012 28E883C5 		.ascii	"(\350\203\305\232\373!\014\255?\240\022z\020\205\264"
+  95      9AFB210C 
+  95      AD3FA012 
+  95      7A1085B4 
+  96 0022 6A0881E8 		.ascii	"j\010\201\350v\251(t\321\335\017}j\322\2407\275-CkK"
+  96      76A92874 
+  96      D1DD0F7D 
+  96      6AD2A037 
+  96      BD2D436B 
+  97 0037 2A2D75ED 		.ascii	"*-u\355\241\226\226m\371\250V\203\214\012L\312\215\210"
+  97      A196966D 
+  97      F9A85683 
+  97      8C0A4CCA 
+  97      8D88
+  98 0049 9ED003A9 		.ascii	"\236\320\003\251\354\301vf\346\356\336k\254\325\260"
+  98      ECC17666 
+  98      E6EEDE6B 
+  98      ACD5B0
+  99 0058 6766CE99 		.ascii	"gf\316\231\363\373\235\307\314]\023\001\302F\276\231"
+  99      F3FB9DC7 
+  99      CC5D1301 
+  99      C246BE99 
+ 100 0068 90612224 		.ascii	"\220a\"$\214\303\204k.\321\207\204\322\200\342Ga\210"
+ 100      8CC3846B 
+ 100      2ED18784 
+ 100      D280E247 
+ 100      6188
+ 101 007a 1E327AB0 		.ascii	"\0362z\260\263q\032&\025\245\027%\210\322\207\322\205"
+ 101      B3711A26 
+ 101      15A51725 
+ 101      88D287D2 
+ 101      85
+ 102 008b D2A6E16E 		.ascii	"\322\246\341njk\303\030<=Z\254T\015'k\230\000J\007\211"
+ 102      6A6BC318 
+ 102      3C3D5AAC 
+ 102      540D276B 
+ 102      98004A07 
+ 103 00a0 3DFC7FC4 		.ascii	"=\374\177\3046\306\214\344a\214=V\015\277$\010W7\326"
+ 103      36C68CE4 
+ 103      618C3D56 
+ 103      0DBF2408 
+ 103      5737D6
+ 104 00b3 C60DC200 		.ascii	"\306\015\302\000H\2405\206\000\210\031\270\020!\\\305"
+ 104      48A03586 
+ 104      008819B8 
+ 104      10215CC5 
+ 105 00c3 8DC46712 		.ascii	"\215\304g\0225E\027\302f\"\374\271M'\343\277\310\032"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 7
+
+
+ 105      354517C2 
+ 105      6622FCB9 
+ 105      4D27E3BF 
+ 105      C81A
+ 106 00d5 8E0C4EA2 		.ascii	"\216\014N\242\263\203\006\202h\006\002%\316%\315\215"
+ 106      B3830682 
+ 106      68060225 
+ 106      CE25CD8D 
+ 107 00e5 08724907 		.ascii	"\010rI\007\030\370D\272\206\234`tM\020)z\317\351\346"
+ 107      18F844BA 
+ 107      869C6074 
+ 107      4D10297A 
+ 107      CFE9E6
+ 108 00f8 27161939 		.ascii	"'\026\0319q?4R\273(\255\236\342\330G\2514[\357Lw\370"
+ 108      713F3452 
+ 108      BB28AD9E 
+ 108      E2D847A9 
+ 108      345BEF4C 
+ 109 010e 6B206158 		.ascii	"k aX\202D\005$T\037|\354\253\036\217\352d\005&\242\372"
+ 109      82440524 
+ 109      541F7CEC 
+ 109      AB1E8FEA 
+ 109      640526A2 
+ 110 0123 AEA3321C 		.ascii	"\256\2432\034?\265\202\341h9M\226 w\012\234\207\351"
+ 110      3FB582E1 
+ 110      68394D96 
+ 110      20770A9C 
+ 110      87E9
+ 111 0135 700EA663 		.ascii	"p\016\246c\240z\230\212s\241I0\365\373\273[a\246\217"
+ 111      A07A988A 
+ 111      73A14930 
+ 111      F5FBBB5B 
+ 111      61A68F
+ 112 0148 FA9A68E8 		.ascii	"\372\232h\350\307\307\214J\032(C\224\304\274\240\026"
+ 112      C7C78C4A 
+ 112      1A284394 
+ 112      C4BCA016 
+ 113 0158 64A88334 		.ascii	"d\250\2034\226\035n\331r\026\0061\355\006\230\211\310"
+ 113      961D6ED9 
+ 113      72160631 
+ 113      ED069889 
+ 113      C8
+ 114 0169 7B9D6F1F 		.ascii	"{\235o\037[\344E<\321\032_yx\202`\011<\354\261\321\373"
+ 114      5BE4453C 
+ 114      D11A5F79 
+ 114      78826009 
+ 114      3CECB1D1 
+ 115 017e C8319F73 		.ascii	"\3101\237s4\352\034\215F\016?\3478\333\037:n\225\363"
+ 115      34EA1C8D 
+ 115      460E3FE7 
+ 115      38DB1F3A 
+ 115      6E95F3
+ 116 0191 38C78FD7 		.ascii	"8\307\217\327\207\006@\324dC\265\254}`\177\202\250)"
+ 116      870640D4 
+ 116      6443B5AC 
+ 116      7D607F82 
+ 116      A829
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 8
+
+
+ 117 01a3 C48E8FB5 		.ascii	"\304\216\217\265\017\007\315\342\330\312\362\336\332"
+ 117      0F07CDE2 
+ 117      D8CAF2DE 
+ 117      DA
+ 118 01b0 54250BD5 		.ascii	"T%\013\325\204\352\247{\307^L\020\336\311\250\016\366"
+ 118      84EAA77B 
+ 118      C75E4C10 
+ 118      DEC9A80E 
+ 118      F6
+ 119 01c1 B73C97E5 		.ascii	"\267<\227\345\215\234\367\351\235\272\363\3143U\001"
+ 119      8D9CF7E9 
+ 119      9DBAF3CC 
+ 119      335501
+ 120 01d0 76150968 		.ascii	"v\025\011h\362\277\277:\022/L\314#8\364\362s\234\354"
+ 120      F2BFBF3A 
+ 120      122F4CCC 
+ 120      2338F4F2 
+ 120      739CEC
+ 121 01e3 657BE941 		.ascii	"e{\351A\345\373!\013(\216\355\224\226\321}\3454q\011"
+ 121      E5FB210B 
+ 121      288EED94 
+ 121      96D17DE5 
+ 121      347109
+ 122 01f6 8166ECDD 		.ascii	"\201f\354\335e\354\035\264\203\203aX=p\005\215\255h"
+ 122      65EC1DB4 
+ 122      83836158 
+ 122      3D70058D 
+ 122      AD68
+ 123 0208 3CC3BA1C 		.ascii	"<\303\272\034\032\331\226{d\033\353[\033(pU\2579U\021"
+ 123      1AD9967B 
+ 123      641BEB5B 
+ 123      1B287055 
+ 123      AF395511 
+ 124 021c 6D3EF5BD 		.ascii	"m>\365\275\342\225\"\037\007\036\317\027|\323\037'\237"
+ 124      E295221F 
+ 124      071ECF17 
+ 124      7CD31F27 
+ 124      9F
+ 125 022d E18AF9F5 		.ascii	"\341\212\371\365\301_eV\260'\331\355\216S,f\350F\357"
+ 125      C15F6556 
+ 125      B027D9ED 
+ 125      8E532C66 
+ 125      E846EF
+ 126 0240 ACAA8B94 		.ascii	"\254\252\213\224\356\260p\256\353\310u\003\222\364\034"
+ 126      EEB070AE 
+ 126      EBC87503 
+ 126      92F41C
+ 127 024f 2EF14B4C 		.ascii	".\361KL\307\211\354\327^\006\005\023\201\213\350p\201"
+ 127      C789ECD7 
+ 127      5E060513 
+ 127      818BE870 
+ 127      81
+ 128 0260 9F31770C 		.ascii	"\2371w\014\017\2670\333\233`\207\000J\007\330\371\333"
+ 128      0FB730DB 
+ 128      9B608700 
+ 128      4A07D8F9 
+ 128      DB
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 9
+
+
+ 129 0271 E1210247 		.ascii	"\341!\002G\325\010}\313\237\364s\030C3\343\321|+\242"
+ 129      D5087DCB 
+ 129      9FF47318 
+ 129      4333E3D1 
+ 129      7C2BA2
+ 130 0284 BED762FA 		.ascii	"\276\327b\372\362Lx\023\002\007UJ\255\314\205h\345k"
+ 130      F24C7813 
+ 130      0207554A 
+ 130      ADCC8568 
+ 130      E56B
+ 131 0296 AFB5ABB3 		.ascii	"\257\265\253\263\376\244I~\304\353\225\352\333N\\\222"
+ 131      FEA4497E 
+ 131      C4EB95EA 
+ 131      DB4E5C92 
+ 132 02a6 20C91133 		.ascii	" \311\0213y\350\306\234\377\226\277\010T\035\217\235"
+ 132      79E8C69C 
+ 132      FF96BF08 
+ 132      541D8F9D 
+ 133 02b6 EE42B74E 		.ascii	"\356B\267N\275\323,,\217v\342E\315u[J\015\245>|\321"
+ 133      BDD32C2C 
+ 133      8F76E245 
+ 133      CD755B4A 
+ 133      0DA53E7C 
+ 134 02cb 4D798728 		.ascii	"My\207(]\302}\233\204\257\241Q\314\222\215\177\032="
+ 134      5DC27D9B 
+ 134      84AFA151 
+ 134      CC928D7F 
+ 134      1A3D
+ 135 02dd 9082B81D 		.ascii	"\220\202\270\035\317\017?1+\333\331'\363?\367\216\210"
+ 135      CF0F3F31 
+ 135      2BDBD927 
+ 135      F33FF78E 
+ 135      88
+ 136 02ee B667B4CA 		.ascii	"\266g\264\312,\177\020u=\332\325zT\006\207\022y\017"
+ 136      2C7F1075 
+ 136      3DDAD57A 
+ 136      54068712 
+ 136      790F
+ 137 0300 9B2B0F6C 		.ascii	"\233+\017l\241\311\020\304\306\335\321\263\274\015\354"
+ 137      A1C910C4 
+ 137      C6DDD1B3 
+ 137      BC0DEC
+ 138 030f 41C40C72 		.ascii	"A\304\014r7v\220/\337\356\356\266\331vF\237#g\214\200"
+ 138      3776902F 
+ 138      DFEEEEB6 
+ 138      D976469F 
+ 138      23678C80 
+ 139 0323 08F4828D 		.ascii	"\010\364\202\215\377\207\364\362\217\346\347\327\223"
+ 139      FF87F4F2 
+ 139      8FE6E7D7 
+ 139      93
+ 140 0330 7B65A373 		.ascii	"{e\243s\227\341\276\010\364i\316l\235\264\274\240\324"
+ 140      97E1BE08 
+ 140      F469CE6C 
+ 140      9DB4BCA0 
+ 140      D4
+ 141 0341 A3962C2D 		.ascii	"\243\226,-r{=\371\316\215\252\352\266.^\221\223\234"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 10
+
+
+ 141      727B3DF9 
+ 141      CE8DAAEA 
+ 141      B62E5E91 
+ 141      939C
+ 142 0353 999E4E1C 		.ascii	"\231\236N\034\213\325\"\265\244\300\243\256\311w\026"
+ 142      8BD522B5 
+ 142      A4C0A3AE 
+ 142      C97716
+ 143 0362 7B4B5CEA 		.ascii	"{K\\\352\352,gq\346\274\325FD\326\3624\027I4ZV\025l"
+ 143      EA2C6771 
+ 143      E6BCD546 
+ 143      44D6F234 
+ 143      1749345A 
+ 144 0379 50BDEE51 		.ascii	"P\275\356Q\246\302\002\327\006\257\333Z\272\276\330"
+ 144      A6C202D7 
+ 144      06AFDB5A 
+ 144      BABED8
+ 145 0388 E9413A8B 		.ascii	"\351A:\213w}\221gn\306\2141\350]\233<\233\334ji\332"
+ 145      777D9167 
+ 145      6EC68C31 
+ 145      E85D9B3C 
+ 145      9BDC6A69 
+ 146 039d 3A32CEED 		.ascii	":2\316\355\342\000\253\267\264\220oR\376\235\021\302"
+ 146      E200ABB7 
+ 146      B4906F52 
+ 146      FE9D11C2 
+ 147 03ad A619632F 		.ascii	"\246\031c/\\\220\271,'+\337\231\2752'3\333\\\242\256"
+ 147      5C90B92C 
+ 147      272BDF99 
+ 147      BD322733 
+ 147      DB5CA2AE 
+ 148 03c1 9D9BF11B 		.ascii	"\235\233\361\033\250P\334q"
+ 148      A850DC71 
+ 149              		.text
+ 150              		.section	.gnu.lto_.symtab.b369ba2f,"",%progbits
+ 151 0000 4D617374 		.ascii	"MasterInput_Sleep\000"
+ 151      6572496E 
+ 151      7075745F 
+ 151      536C6565 
+ 151      7000
+ 152 0012 00       		.ascii	"\000"
+ 153 0013 00       		.ascii	"\000"
+ 154 0014 00       		.ascii	"\000"
+ 155 0015 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 155      00000000 
+ 156 001d AD000000 		.ascii	"\255\000\000\000"
+ 157 0021 4D617374 		.ascii	"MasterInput_Wakeup\000"
+ 157      6572496E 
+ 157      7075745F 
+ 157      57616B65 
+ 157      757000
+ 158 0034 00       		.ascii	"\000"
+ 159 0035 00       		.ascii	"\000"
+ 160 0036 00       		.ascii	"\000"
+ 161 0037 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 161      00000000 
+ 162 003f AF000000 		.ascii	"\257\000\000\000"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 11
+
+
+ 163              		.text
+ 164              		.section	.gnu.lto_.opts,"",%progbits
+ 165 0000 272D666D 		.ascii	"'-fmath-errno' '-fsigned-zeros' '-ftrapping-math' '"
+ 165      6174682D 
+ 165      6572726E 
+ 165      6F272027 
+ 165      2D667369 
+ 166 0033 2D666E6F 		.ascii	"-fno-trapv' '-fno-openmp' '-fno-openacc' '-mcpu=cor"
+ 166      2D747261 
+ 166      70762720 
+ 166      272D666E 
+ 166      6F2D6F70 
+ 167 0066 7465782D 		.ascii	"tex-m0' '-mthumb' '-g' '-Os' '-Werror' '-ffunction-"
+ 167      6D302720 
+ 167      272D6D74 
+ 167      68756D62 
+ 167      2720272D 
+ 168 0099 73656374 		.ascii	"sections' '-ffat-lto-objects' '-finline-functions' "
+ 168      696F6E73 
+ 168      2720272D 
+ 168      66666174 
+ 168      2D6C746F 
+ 169 00cc 272D666C 		.ascii	"'-flto' '-fno-strict-aliasing'\000"
+ 169      746F2720 
+ 169      272D666E 
+ 169      6F2D7374 
+ 169      72696374 
+ 170              		.text
+ 171              		.cfi_sections	.debug_frame
+ 172              		.section	.text.MasterInput_Sleep,"ax",%progbits
+ 173              		.align	1
+ 174              		.global	MasterInput_Sleep
+ 175              		.code	16
+ 176              		.thumb_func
+ 177              		.type	MasterInput_Sleep, %function
+ 178              	MasterInput_Sleep:
+ 179              	.LFB0:
+ 180              		.file 1 "Generated_Source\\PSoC4\\MasterInput_PM.c"
+   1:Generated_Source\PSoC4/MasterInput_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC4/MasterInput_PM.c **** * File Name: MasterInput.c  
+   3:Generated_Source\PSoC4/MasterInput_PM.c **** * Version 2.20
+   4:Generated_Source\PSoC4/MasterInput_PM.c **** *
+   5:Generated_Source\PSoC4/MasterInput_PM.c **** * Description:
+   6:Generated_Source\PSoC4/MasterInput_PM.c **** *  This file contains APIs to set up the Pins component for low power modes.
+   7:Generated_Source\PSoC4/MasterInput_PM.c **** *
+   8:Generated_Source\PSoC4/MasterInput_PM.c **** * Note:
+   9:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  10:Generated_Source\PSoC4/MasterInput_PM.c **** ********************************************************************************
+  11:Generated_Source\PSoC4/MasterInput_PM.c **** * Copyright 2015, Cypress Semiconductor Corporation.  All rights reserved.
+  12:Generated_Source\PSoC4/MasterInput_PM.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:Generated_Source\PSoC4/MasterInput_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:Generated_Source\PSoC4/MasterInput_PM.c **** * the software package with which this file was provided.
+  15:Generated_Source\PSoC4/MasterInput_PM.c **** *******************************************************************************/
+  16:Generated_Source\PSoC4/MasterInput_PM.c **** 
+  17:Generated_Source\PSoC4/MasterInput_PM.c **** #include "cytypes.h"
+  18:Generated_Source\PSoC4/MasterInput_PM.c **** #include "MasterInput.h"
+  19:Generated_Source\PSoC4/MasterInput_PM.c **** 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 12
+
+
+  20:Generated_Source\PSoC4/MasterInput_PM.c **** static MasterInput_BACKUP_STRUCT  MasterInput_backup = {0u, 0u, 0u};
+  21:Generated_Source\PSoC4/MasterInput_PM.c **** 
+  22:Generated_Source\PSoC4/MasterInput_PM.c **** 
+  23:Generated_Source\PSoC4/MasterInput_PM.c **** /*******************************************************************************
+  24:Generated_Source\PSoC4/MasterInput_PM.c **** * Function Name: MasterInput_Sleep
+  25:Generated_Source\PSoC4/MasterInput_PM.c **** ****************************************************************************//**
+  26:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  27:Generated_Source\PSoC4/MasterInput_PM.c **** * \brief Stores the pin configuration and prepares the pin for entering chip 
+  28:Generated_Source\PSoC4/MasterInput_PM.c **** *  deep-sleep/hibernate modes. This function applies only to SIO and USBIO pins.
+  29:Generated_Source\PSoC4/MasterInput_PM.c **** *  It should not be called for GPIO or GPIO_OVT pins.
+  30:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  31:Generated_Source\PSoC4/MasterInput_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  32:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  33:Generated_Source\PSoC4/MasterInput_PM.c **** * \return 
+  34:Generated_Source\PSoC4/MasterInput_PM.c **** *  None 
+  35:Generated_Source\PSoC4/MasterInput_PM.c **** *  
+  36:Generated_Source\PSoC4/MasterInput_PM.c **** * \sideeffect
+  37:Generated_Source\PSoC4/MasterInput_PM.c **** *  For SIO pins, this function configures the pin input threshold to CMOS and
+  38:Generated_Source\PSoC4/MasterInput_PM.c **** *  drive level to Vddio. This is needed for SIO pins when in device 
+  39:Generated_Source\PSoC4/MasterInput_PM.c **** *  deep-sleep/hibernate modes.
+  40:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  41:Generated_Source\PSoC4/MasterInput_PM.c **** * \funcusage
+  42:Generated_Source\PSoC4/MasterInput_PM.c **** *  \snippet MasterInput_SUT.c usage_MasterInput_Sleep_Wakeup
+  43:Generated_Source\PSoC4/MasterInput_PM.c **** *******************************************************************************/
+  44:Generated_Source\PSoC4/MasterInput_PM.c **** void MasterInput_Sleep(void)
+  45:Generated_Source\PSoC4/MasterInput_PM.c **** {
+ 181              		.loc 1 45 0
+ 182              		.cfi_startproc
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185              		@ link register save eliminated.
+  46:Generated_Source\PSoC4/MasterInput_PM.c ****     #if defined(MasterInput__PC)
+  47:Generated_Source\PSoC4/MasterInput_PM.c ****         MasterInput_backup.pcState = MasterInput_PC;
+ 186              		.loc 1 47 0
+ 187 0000 024B     		ldr	r3, .L2
+  48:Generated_Source\PSoC4/MasterInput_PM.c ****     #else
+  49:Generated_Source\PSoC4/MasterInput_PM.c ****         #if (CY_PSOC4_4200L)
+  50:Generated_Source\PSoC4/MasterInput_PM.c ****             /* Save the regulator state and put the PHY into suspend mode */
+  51:Generated_Source\PSoC4/MasterInput_PM.c ****             MasterInput_backup.usbState = MasterInput_CR1_REG;
+  52:Generated_Source\PSoC4/MasterInput_PM.c ****             MasterInput_USB_POWER_REG |= MasterInput_USBIO_ENTER_SLEEP;
+  53:Generated_Source\PSoC4/MasterInput_PM.c ****             MasterInput_CR1_REG &= MasterInput_USBIO_CR1_OFF;
+  54:Generated_Source\PSoC4/MasterInput_PM.c ****         #endif
+  55:Generated_Source\PSoC4/MasterInput_PM.c ****     #endif
+  56:Generated_Source\PSoC4/MasterInput_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(MasterInput__SIO)
+  57:Generated_Source\PSoC4/MasterInput_PM.c ****         MasterInput_backup.sioState = MasterInput_SIO_REG;
+  58:Generated_Source\PSoC4/MasterInput_PM.c ****         /* SIO requires unregulated output buffer and single ended input buffer */
+  59:Generated_Source\PSoC4/MasterInput_PM.c ****         MasterInput_SIO_REG &= (uint32)(~MasterInput_SIO_LPM_MASK);
+  60:Generated_Source\PSoC4/MasterInput_PM.c ****     #endif  
+  61:Generated_Source\PSoC4/MasterInput_PM.c **** }
+ 188              		.loc 1 61 0
+ 189              		@ sp needed
+  47:Generated_Source\PSoC4/MasterInput_PM.c ****     #else
+ 190              		.loc 1 47 0
+ 191 0002 1A68     		ldr	r2, [r3]
+ 192 0004 024B     		ldr	r3, .L2+4
+ 193 0006 1A60     		str	r2, [r3]
+ 194              		.loc 1 61 0
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 13
+
+
+ 195 0008 7047     		bx	lr
+ 196              	.L3:
+ 197 000a C046     		.align	2
+ 198              	.L2:
+ 199 000c 08010440 		.word	1074004232
+ 200 0010 00000000 		.word	.LANCHOR0
+ 201              		.cfi_endproc
+ 202              	.LFE0:
+ 203              		.size	MasterInput_Sleep, .-MasterInput_Sleep
+ 204              		.section	.text.MasterInput_Wakeup,"ax",%progbits
+ 205              		.align	1
+ 206              		.global	MasterInput_Wakeup
+ 207              		.code	16
+ 208              		.thumb_func
+ 209              		.type	MasterInput_Wakeup, %function
+ 210              	MasterInput_Wakeup:
+ 211              	.LFB1:
+  62:Generated_Source\PSoC4/MasterInput_PM.c **** 
+  63:Generated_Source\PSoC4/MasterInput_PM.c **** 
+  64:Generated_Source\PSoC4/MasterInput_PM.c **** /*******************************************************************************
+  65:Generated_Source\PSoC4/MasterInput_PM.c **** * Function Name: MasterInput_Wakeup
+  66:Generated_Source\PSoC4/MasterInput_PM.c **** ****************************************************************************//**
+  67:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  68:Generated_Source\PSoC4/MasterInput_PM.c **** * \brief Restores the pin configuration that was saved during Pin_Sleep(). This 
+  69:Generated_Source\PSoC4/MasterInput_PM.c **** * function applies only to SIO and USBIO pins. It should not be called for
+  70:Generated_Source\PSoC4/MasterInput_PM.c **** * GPIO or GPIO_OVT pins.
+  71:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  72:Generated_Source\PSoC4/MasterInput_PM.c **** * For USBIO pins, the wakeup is only triggered for falling edge interrupts.
+  73:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  74:Generated_Source\PSoC4/MasterInput_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  75:Generated_Source\PSoC4/MasterInput_PM.c **** *
+  76:Generated_Source\PSoC4/MasterInput_PM.c **** * \return 
+  77:Generated_Source\PSoC4/MasterInput_PM.c **** *  None
+  78:Generated_Source\PSoC4/MasterInput_PM.c **** *  
+  79:Generated_Source\PSoC4/MasterInput_PM.c **** * \funcusage
+  80:Generated_Source\PSoC4/MasterInput_PM.c **** *  Refer to MasterInput_Sleep() for an example usage.
+  81:Generated_Source\PSoC4/MasterInput_PM.c **** *******************************************************************************/
+  82:Generated_Source\PSoC4/MasterInput_PM.c **** void MasterInput_Wakeup(void)
+  83:Generated_Source\PSoC4/MasterInput_PM.c **** {
+ 212              		.loc 1 83 0
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 0
+ 215              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216              		@ link register save eliminated.
+  84:Generated_Source\PSoC4/MasterInput_PM.c ****     #if defined(MasterInput__PC)
+  85:Generated_Source\PSoC4/MasterInput_PM.c ****         MasterInput_PC = MasterInput_backup.pcState;
+ 217              		.loc 1 85 0
+ 218 0000 024B     		ldr	r3, .L5
+  86:Generated_Source\PSoC4/MasterInput_PM.c ****     #else
+  87:Generated_Source\PSoC4/MasterInput_PM.c ****         #if (CY_PSOC4_4200L)
+  88:Generated_Source\PSoC4/MasterInput_PM.c ****             /* Restore the regulator state and come out of suspend mode */
+  89:Generated_Source\PSoC4/MasterInput_PM.c ****             MasterInput_USB_POWER_REG &= MasterInput_USBIO_EXIT_SLEEP_PH1;
+  90:Generated_Source\PSoC4/MasterInput_PM.c ****             MasterInput_CR1_REG = MasterInput_backup.usbState;
+  91:Generated_Source\PSoC4/MasterInput_PM.c ****             MasterInput_USB_POWER_REG &= MasterInput_USBIO_EXIT_SLEEP_PH2;
+  92:Generated_Source\PSoC4/MasterInput_PM.c ****         #endif
+  93:Generated_Source\PSoC4/MasterInput_PM.c ****     #endif
+  94:Generated_Source\PSoC4/MasterInput_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(MasterInput__SIO)
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 14
+
+
+  95:Generated_Source\PSoC4/MasterInput_PM.c ****         MasterInput_SIO_REG = MasterInput_backup.sioState;
+  96:Generated_Source\PSoC4/MasterInput_PM.c ****     #endif
+  97:Generated_Source\PSoC4/MasterInput_PM.c **** }
+ 219              		.loc 1 97 0
+ 220              		@ sp needed
+  85:Generated_Source\PSoC4/MasterInput_PM.c ****     #else
+ 221              		.loc 1 85 0
+ 222 0002 1A68     		ldr	r2, [r3]
+ 223 0004 024B     		ldr	r3, .L5+4
+ 224 0006 1A60     		str	r2, [r3]
+ 225              		.loc 1 97 0
+ 226 0008 7047     		bx	lr
+ 227              	.L6:
+ 228 000a C046     		.align	2
+ 229              	.L5:
+ 230 000c 00000000 		.word	.LANCHOR0
+ 231 0010 08010440 		.word	1074004232
+ 232              		.cfi_endproc
+ 233              	.LFE1:
+ 234              		.size	MasterInput_Wakeup, .-MasterInput_Wakeup
+ 235              		.bss
+ 236              		.align	2
+ 237              		.set	.LANCHOR0,. + 0
+ 238              		.type	MasterInput_backup, %object
+ 239              		.size	MasterInput_backup, 12
+ 240              	MasterInput_backup:
+ 241 0000 00000000 		.space	12
+ 241      00000000 
+ 241      00000000 
+ 242              		.text
+ 243              	.Letext0:
+ 244              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
+ 245              		.file 3 "Generated_Source\\PSoC4\\MasterInput.h"
+ 246              		.section	.debug_info,"",%progbits
+ 247              	.Ldebug_info0:
+ 248 0000 05010000 		.4byte	0x105
+ 249 0004 0400     		.2byte	0x4
+ 250 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 251 000a 04       		.byte	0x4
+ 252 000b 01       		.uleb128 0x1
+ 253 000c BA000000 		.4byte	.LASF20
+ 254 0010 0C       		.byte	0xc
+ 255 0011 BF010000 		.4byte	.LASF21
+ 256 0015 F3010000 		.4byte	.LASF22
+ 257 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 258 001d 00000000 		.4byte	0
+ 259 0021 00000000 		.4byte	.Ldebug_line0
+ 260 0025 02       		.uleb128 0x2
+ 261 0026 01       		.byte	0x1
+ 262 0027 06       		.byte	0x6
+ 263 0028 E7010000 		.4byte	.LASF0
+ 264 002c 02       		.uleb128 0x2
+ 265 002d 01       		.byte	0x1
+ 266 002e 08       		.byte	0x8
+ 267 002f 2F000000 		.4byte	.LASF1
+ 268 0033 02       		.uleb128 0x2
+ 269 0034 02       		.byte	0x2
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 15
+
+
+ 270 0035 05       		.byte	0x5
+ 271 0036 A4010000 		.4byte	.LASF2
+ 272 003a 02       		.uleb128 0x2
+ 273 003b 02       		.byte	0x2
+ 274 003c 07       		.byte	0x7
+ 275 003d 62000000 		.4byte	.LASF3
+ 276 0041 02       		.uleb128 0x2
+ 277 0042 04       		.byte	0x4
+ 278 0043 05       		.byte	0x5
+ 279 0044 B6010000 		.4byte	.LASF4
+ 280 0048 02       		.uleb128 0x2
+ 281 0049 04       		.byte	0x4
+ 282 004a 07       		.byte	0x7
+ 283 004b 3D000000 		.4byte	.LASF5
+ 284 004f 02       		.uleb128 0x2
+ 285 0050 08       		.byte	0x8
+ 286 0051 05       		.byte	0x5
+ 287 0052 7F010000 		.4byte	.LASF6
+ 288 0056 02       		.uleb128 0x2
+ 289 0057 08       		.byte	0x8
+ 290 0058 07       		.byte	0x7
+ 291 0059 A3000000 		.4byte	.LASF7
+ 292 005d 03       		.uleb128 0x3
+ 293 005e 04       		.byte	0x4
+ 294 005f 05       		.byte	0x5
+ 295 0060 696E7400 		.ascii	"int\000"
+ 296 0064 02       		.uleb128 0x2
+ 297 0065 04       		.byte	0x4
+ 298 0066 07       		.byte	0x7
+ 299 0067 83000000 		.4byte	.LASF8
+ 300 006b 04       		.uleb128 0x4
+ 301 006c 7C000000 		.4byte	.LASF12
+ 302 0070 02       		.byte	0x2
+ 303 0071 D401     		.2byte	0x1d4
+ 304 0073 48000000 		.4byte	0x48
+ 305 0077 02       		.uleb128 0x2
+ 306 0078 04       		.byte	0x4
+ 307 0079 04       		.byte	0x4
+ 308 007a 29000000 		.4byte	.LASF9
+ 309 007e 02       		.uleb128 0x2
+ 310 007f 08       		.byte	0x8
+ 311 0080 04       		.byte	0x4
+ 312 0081 75000000 		.4byte	.LASF10
+ 313 0085 02       		.uleb128 0x2
+ 314 0086 01       		.byte	0x1
+ 315 0087 08       		.byte	0x8
+ 316 0088 8D010000 		.4byte	.LASF11
+ 317 008c 04       		.uleb128 0x4
+ 318 008d 00000000 		.4byte	.LASF13
+ 319 0091 02       		.byte	0x2
+ 320 0092 7E02     		.2byte	0x27e
+ 321 0094 98000000 		.4byte	0x98
+ 322 0098 05       		.uleb128 0x5
+ 323 0099 6B000000 		.4byte	0x6b
+ 324 009d 06       		.uleb128 0x6
+ 325 009e 0C       		.byte	0xc
+ 326 009f 03       		.byte	0x3
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 16
+
+
+ 327 00a0 21       		.byte	0x21
+ 328 00a1 CA000000 		.4byte	0xca
+ 329 00a5 07       		.uleb128 0x7
+ 330 00a6 AE010000 		.4byte	.LASF14
+ 331 00aa 03       		.byte	0x3
+ 332 00ab 23       		.byte	0x23
+ 333 00ac 6B000000 		.4byte	0x6b
+ 334 00b0 00       		.byte	0
+ 335 00b1 07       		.uleb128 0x7
+ 336 00b2 76010000 		.4byte	.LASF15
+ 337 00b6 03       		.byte	0x3
+ 338 00b7 24       		.byte	0x24
+ 339 00b8 6B000000 		.4byte	0x6b
+ 340 00bc 04       		.byte	0x4
+ 341 00bd 07       		.uleb128 0x7
+ 342 00be 06000000 		.4byte	.LASF16
+ 343 00c2 03       		.byte	0x3
+ 344 00c3 25       		.byte	0x25
+ 345 00c4 6B000000 		.4byte	0x6b
+ 346 00c8 08       		.byte	0x8
+ 347 00c9 00       		.byte	0
+ 348 00ca 08       		.uleb128 0x8
+ 349 00cb 0F000000 		.4byte	.LASF17
+ 350 00cf 03       		.byte	0x3
+ 351 00d0 26       		.byte	0x26
+ 352 00d1 9D000000 		.4byte	0x9d
+ 353 00d5 09       		.uleb128 0x9
+ 354 00d6 92010000 		.4byte	.LASF18
+ 355 00da 01       		.byte	0x1
+ 356 00db 2C       		.byte	0x2c
+ 357 00dc 00000000 		.4byte	.LFB0
+ 358 00e0 14000000 		.4byte	.LFE0-.LFB0
+ 359 00e4 01       		.uleb128 0x1
+ 360 00e5 9C       		.byte	0x9c
+ 361 00e6 09       		.uleb128 0x9
+ 362 00e7 90000000 		.4byte	.LASF19
+ 363 00eb 01       		.byte	0x1
+ 364 00ec 52       		.byte	0x52
+ 365 00ed 00000000 		.4byte	.LFB1
+ 366 00f1 14000000 		.4byte	.LFE1-.LFB1
+ 367 00f5 01       		.uleb128 0x1
+ 368 00f6 9C       		.byte	0x9c
+ 369 00f7 0A       		.uleb128 0xa
+ 370 00f8 4F000000 		.4byte	.LASF23
+ 371 00fc 01       		.byte	0x1
+ 372 00fd 14       		.byte	0x14
+ 373 00fe CA000000 		.4byte	0xca
+ 374 0102 05       		.uleb128 0x5
+ 375 0103 03       		.byte	0x3
+ 376 0104 00000000 		.4byte	MasterInput_backup
+ 377 0108 00       		.byte	0
+ 378              		.section	.debug_abbrev,"",%progbits
+ 379              	.Ldebug_abbrev0:
+ 380 0000 01       		.uleb128 0x1
+ 381 0001 11       		.uleb128 0x11
+ 382 0002 01       		.byte	0x1
+ 383 0003 25       		.uleb128 0x25
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 17
+
+
+ 384 0004 0E       		.uleb128 0xe
+ 385 0005 13       		.uleb128 0x13
+ 386 0006 0B       		.uleb128 0xb
+ 387 0007 03       		.uleb128 0x3
+ 388 0008 0E       		.uleb128 0xe
+ 389 0009 1B       		.uleb128 0x1b
+ 390 000a 0E       		.uleb128 0xe
+ 391 000b 55       		.uleb128 0x55
+ 392 000c 17       		.uleb128 0x17
+ 393 000d 11       		.uleb128 0x11
+ 394 000e 01       		.uleb128 0x1
+ 395 000f 10       		.uleb128 0x10
+ 396 0010 17       		.uleb128 0x17
+ 397 0011 00       		.byte	0
+ 398 0012 00       		.byte	0
+ 399 0013 02       		.uleb128 0x2
+ 400 0014 24       		.uleb128 0x24
+ 401 0015 00       		.byte	0
+ 402 0016 0B       		.uleb128 0xb
+ 403 0017 0B       		.uleb128 0xb
+ 404 0018 3E       		.uleb128 0x3e
+ 405 0019 0B       		.uleb128 0xb
+ 406 001a 03       		.uleb128 0x3
+ 407 001b 0E       		.uleb128 0xe
+ 408 001c 00       		.byte	0
+ 409 001d 00       		.byte	0
+ 410 001e 03       		.uleb128 0x3
+ 411 001f 24       		.uleb128 0x24
+ 412 0020 00       		.byte	0
+ 413 0021 0B       		.uleb128 0xb
+ 414 0022 0B       		.uleb128 0xb
+ 415 0023 3E       		.uleb128 0x3e
+ 416 0024 0B       		.uleb128 0xb
+ 417 0025 03       		.uleb128 0x3
+ 418 0026 08       		.uleb128 0x8
+ 419 0027 00       		.byte	0
+ 420 0028 00       		.byte	0
+ 421 0029 04       		.uleb128 0x4
+ 422 002a 16       		.uleb128 0x16
+ 423 002b 00       		.byte	0
+ 424 002c 03       		.uleb128 0x3
+ 425 002d 0E       		.uleb128 0xe
+ 426 002e 3A       		.uleb128 0x3a
+ 427 002f 0B       		.uleb128 0xb
+ 428 0030 3B       		.uleb128 0x3b
+ 429 0031 05       		.uleb128 0x5
+ 430 0032 49       		.uleb128 0x49
+ 431 0033 13       		.uleb128 0x13
+ 432 0034 00       		.byte	0
+ 433 0035 00       		.byte	0
+ 434 0036 05       		.uleb128 0x5
+ 435 0037 35       		.uleb128 0x35
+ 436 0038 00       		.byte	0
+ 437 0039 49       		.uleb128 0x49
+ 438 003a 13       		.uleb128 0x13
+ 439 003b 00       		.byte	0
+ 440 003c 00       		.byte	0
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 18
+
+
+ 441 003d 06       		.uleb128 0x6
+ 442 003e 13       		.uleb128 0x13
+ 443 003f 01       		.byte	0x1
+ 444 0040 0B       		.uleb128 0xb
+ 445 0041 0B       		.uleb128 0xb
+ 446 0042 3A       		.uleb128 0x3a
+ 447 0043 0B       		.uleb128 0xb
+ 448 0044 3B       		.uleb128 0x3b
+ 449 0045 0B       		.uleb128 0xb
+ 450 0046 01       		.uleb128 0x1
+ 451 0047 13       		.uleb128 0x13
+ 452 0048 00       		.byte	0
+ 453 0049 00       		.byte	0
+ 454 004a 07       		.uleb128 0x7
+ 455 004b 0D       		.uleb128 0xd
+ 456 004c 00       		.byte	0
+ 457 004d 03       		.uleb128 0x3
+ 458 004e 0E       		.uleb128 0xe
+ 459 004f 3A       		.uleb128 0x3a
+ 460 0050 0B       		.uleb128 0xb
+ 461 0051 3B       		.uleb128 0x3b
+ 462 0052 0B       		.uleb128 0xb
+ 463 0053 49       		.uleb128 0x49
+ 464 0054 13       		.uleb128 0x13
+ 465 0055 38       		.uleb128 0x38
+ 466 0056 0B       		.uleb128 0xb
+ 467 0057 00       		.byte	0
+ 468 0058 00       		.byte	0
+ 469 0059 08       		.uleb128 0x8
+ 470 005a 16       		.uleb128 0x16
+ 471 005b 00       		.byte	0
+ 472 005c 03       		.uleb128 0x3
+ 473 005d 0E       		.uleb128 0xe
+ 474 005e 3A       		.uleb128 0x3a
+ 475 005f 0B       		.uleb128 0xb
+ 476 0060 3B       		.uleb128 0x3b
+ 477 0061 0B       		.uleb128 0xb
+ 478 0062 49       		.uleb128 0x49
+ 479 0063 13       		.uleb128 0x13
+ 480 0064 00       		.byte	0
+ 481 0065 00       		.byte	0
+ 482 0066 09       		.uleb128 0x9
+ 483 0067 2E       		.uleb128 0x2e
+ 484 0068 00       		.byte	0
+ 485 0069 3F       		.uleb128 0x3f
+ 486 006a 19       		.uleb128 0x19
+ 487 006b 03       		.uleb128 0x3
+ 488 006c 0E       		.uleb128 0xe
+ 489 006d 3A       		.uleb128 0x3a
+ 490 006e 0B       		.uleb128 0xb
+ 491 006f 3B       		.uleb128 0x3b
+ 492 0070 0B       		.uleb128 0xb
+ 493 0071 27       		.uleb128 0x27
+ 494 0072 19       		.uleb128 0x19
+ 495 0073 11       		.uleb128 0x11
+ 496 0074 01       		.uleb128 0x1
+ 497 0075 12       		.uleb128 0x12
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 19
+
+
+ 498 0076 06       		.uleb128 0x6
+ 499 0077 40       		.uleb128 0x40
+ 500 0078 18       		.uleb128 0x18
+ 501 0079 9742     		.uleb128 0x2117
+ 502 007b 19       		.uleb128 0x19
+ 503 007c 00       		.byte	0
+ 504 007d 00       		.byte	0
+ 505 007e 0A       		.uleb128 0xa
+ 506 007f 34       		.uleb128 0x34
+ 507 0080 00       		.byte	0
+ 508 0081 03       		.uleb128 0x3
+ 509 0082 0E       		.uleb128 0xe
+ 510 0083 3A       		.uleb128 0x3a
+ 511 0084 0B       		.uleb128 0xb
+ 512 0085 3B       		.uleb128 0x3b
+ 513 0086 0B       		.uleb128 0xb
+ 514 0087 49       		.uleb128 0x49
+ 515 0088 13       		.uleb128 0x13
+ 516 0089 02       		.uleb128 0x2
+ 517 008a 18       		.uleb128 0x18
+ 518 008b 00       		.byte	0
+ 519 008c 00       		.byte	0
+ 520 008d 00       		.byte	0
+ 521              		.section	.debug_aranges,"",%progbits
+ 522 0000 24000000 		.4byte	0x24
+ 523 0004 0200     		.2byte	0x2
+ 524 0006 00000000 		.4byte	.Ldebug_info0
+ 525 000a 04       		.byte	0x4
+ 526 000b 00       		.byte	0
+ 527 000c 0000     		.2byte	0
+ 528 000e 0000     		.2byte	0
+ 529 0010 00000000 		.4byte	.LFB0
+ 530 0014 14000000 		.4byte	.LFE0-.LFB0
+ 531 0018 00000000 		.4byte	.LFB1
+ 532 001c 14000000 		.4byte	.LFE1-.LFB1
+ 533 0020 00000000 		.4byte	0
+ 534 0024 00000000 		.4byte	0
+ 535              		.section	.debug_ranges,"",%progbits
+ 536              	.Ldebug_ranges0:
+ 537 0000 00000000 		.4byte	.LFB0
+ 538 0004 14000000 		.4byte	.LFE0
+ 539 0008 00000000 		.4byte	.LFB1
+ 540 000c 14000000 		.4byte	.LFE1
+ 541 0010 00000000 		.4byte	0
+ 542 0014 00000000 		.4byte	0
+ 543              		.section	.debug_line,"",%progbits
+ 544              	.Ldebug_line0:
+ 545 0000 95000000 		.section	.debug_str,"MS",%progbits,1
+ 545      02005C00 
+ 545      00000201 
+ 545      FB0E0D00 
+ 545      01010101 
+ 546              	.LASF13:
+ 547 0000 72656733 		.ascii	"reg32\000"
+ 547      3200
+ 548              	.LASF16:
+ 549 0006 75736253 		.ascii	"usbState\000"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 20
+
+
+ 549      74617465 
+ 549      00
+ 550              	.LASF17:
+ 551 000f 4D617374 		.ascii	"MasterInput_BACKUP_STRUCT\000"
+ 551      6572496E 
+ 551      7075745F 
+ 551      4241434B 
+ 551      55505F53 
+ 552              	.LASF9:
+ 553 0029 666C6F61 		.ascii	"float\000"
+ 553      7400
+ 554              	.LASF1:
+ 555 002f 756E7369 		.ascii	"unsigned char\000"
+ 555      676E6564 
+ 555      20636861 
+ 555      7200
+ 556              	.LASF5:
+ 557 003d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 557      20756E73 
+ 557      69676E65 
+ 557      6420696E 
+ 557      7400
+ 558              	.LASF23:
+ 559 004f 4D617374 		.ascii	"MasterInput_backup\000"
+ 559      6572496E 
+ 559      7075745F 
+ 559      6261636B 
+ 559      757000
+ 560              	.LASF3:
+ 561 0062 73686F72 		.ascii	"short unsigned int\000"
+ 561      7420756E 
+ 561      7369676E 
+ 561      65642069 
+ 561      6E7400
+ 562              	.LASF10:
+ 563 0075 646F7562 		.ascii	"double\000"
+ 563      6C6500
+ 564              	.LASF12:
+ 565 007c 75696E74 		.ascii	"uint32\000"
+ 565      333200
+ 566              	.LASF8:
+ 567 0083 756E7369 		.ascii	"unsigned int\000"
+ 567      676E6564 
+ 567      20696E74 
+ 567      00
+ 568              	.LASF19:
+ 569 0090 4D617374 		.ascii	"MasterInput_Wakeup\000"
+ 569      6572496E 
+ 569      7075745F 
+ 569      57616B65 
+ 569      757000
+ 570              	.LASF7:
+ 571 00a3 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 571      206C6F6E 
+ 571      6720756E 
+ 571      7369676E 
+ 571      65642069 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 21
+
+
+ 572              	.LASF20:
+ 573 00ba 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 573      43313120 
+ 573      352E342E 
+ 573      31203230 
+ 573      31363036 
+ 574 00ed 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 574      20726576 
+ 574      6973696F 
+ 574      6E203233 
+ 574      37373135 
+ 575 0120 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects -finline-fu"
+ 575      66756E63 
+ 575      74696F6E 
+ 575      2D736563 
+ 575      74696F6E 
+ 576 0153 6E637469 		.ascii	"nctions -flto -fno-strict-aliasing\000"
+ 576      6F6E7320 
+ 576      2D666C74 
+ 576      6F202D66 
+ 576      6E6F2D73 
+ 577              	.LASF15:
+ 578 0176 73696F53 		.ascii	"sioState\000"
+ 578      74617465 
+ 578      00
+ 579              	.LASF6:
+ 580 017f 6C6F6E67 		.ascii	"long long int\000"
+ 580      206C6F6E 
+ 580      6720696E 
+ 580      7400
+ 581              	.LASF11:
+ 582 018d 63686172 		.ascii	"char\000"
+ 582      00
+ 583              	.LASF18:
+ 584 0192 4D617374 		.ascii	"MasterInput_Sleep\000"
+ 584      6572496E 
+ 584      7075745F 
+ 584      536C6565 
+ 584      7000
+ 585              	.LASF2:
+ 586 01a4 73686F72 		.ascii	"short int\000"
+ 586      7420696E 
+ 586      7400
+ 587              	.LASF14:
+ 588 01ae 70635374 		.ascii	"pcState\000"
+ 588      61746500 
+ 589              	.LASF4:
+ 590 01b6 6C6F6E67 		.ascii	"long int\000"
+ 590      20696E74 
+ 590      00
+ 591              	.LASF21:
+ 592 01bf 47656E65 		.ascii	"Generated_Source\\PSoC4\\MasterInput_PM.c\000"
+ 592      72617465 
+ 592      645F536F 
+ 592      75726365 
+ 592      5C50536F 
+ 593              	.LASF0:
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccd4HuUX.s 			page 22
+
+
+ 594 01e7 7369676E 		.ascii	"signed char\000"
+ 594      65642063 
+ 594      68617200 
+ 595              	.LASF22:
+ 596 01f3 443A5C56 		.ascii	"D:\\V-TE-PWR\\PDSS_SRC_SNK\\CYPD3171-24LQXQ_pb\\CYP"
+ 596      2D54452D 
+ 596      5057525C 
+ 596      50445353 
+ 596      5F535243 
+ 597 0222 44333137 		.ascii	"D3171-24LQXQ_pb.cydsn\000"
+ 597      312D3234 
+ 597      4C515851 
+ 597      5F70622E 
+ 597      63796473 
+ 598              		.comm	__gnu_lto_v1,1,1
+ 599              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

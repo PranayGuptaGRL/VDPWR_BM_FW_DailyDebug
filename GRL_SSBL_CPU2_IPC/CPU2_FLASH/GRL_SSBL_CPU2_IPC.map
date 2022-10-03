@@ -1,0 +1,616 @@
+******************************************************************************
+             TMS320C2000 Linker PC v21.6.0                     
+******************************************************************************
+>> Linked Wed Apr  6 15:19:23 2022
+
+OUTPUT FILE NAME:   <GRL_SSBL_CPU2_IPC.out>
+ENTRY POINT SYMBOL: "code_start"  address: 00080000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  BOOT_RSVD             00000002   000001ae  00000000  000001ae  RWIX
+  RAMM0                 000001b0   00000250  0000023c  00000014  RWIX
+  RAMM1                 00000400   00000400  00000000  00000400  RWIX
+  RAMLS1_0              00008000   00001800  00000b26  00000cda  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000000  00000800  RWIX
+  RAMLS5                0000a800   00000800  00000000  00000800  RWIX
+  RAMLS6                0000b000   00000800  00000000  00000800  RWIX
+  RAMLS7                0000b800   00000800  00000000  00000800  RWIX
+  RAMD0                 0000c000   00000800  000003f8  00000408  RWIX
+  RAMD1                 0000c800   00000800  00000000  00000800  RWIX
+  RAMGS0                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS1                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000f000   00001000  00000000  00001000  RWIX
+  RAMGS3                00010000   00001000  00000000  00001000  RWIX
+  RAMGS4                00011000   00001000  00000000  00001000  RWIX
+  RAMGS5                00012000   00001000  00000000  00001000  RWIX
+  RAMGS6                00013000   00001000  00000000  00001000  RWIX
+  RAMGS7                00014000   00001000  00000000  00001000  RWIX
+  RAMGS8                00015000   00001000  00000000  00001000  RWIX
+  RAMGS9                00016000   00001000  00000000  00001000  RWIX
+  RAMGS10               00017000   00001000  00000000  00001000  RWIX
+  RAMGS11               00018000   00001000  00000000  00001000  RWIX
+  RAMGS12               00019000   00001000  00000000  00001000  RWIX
+  RAMGS13               0001a000   00001000  00000000  00001000  RWIX
+  RAMGS14               0001b000   00001000  00000000  00001000  RWIX
+  RAMGS15               0001c000   00001000  00000000  00001000  RWIX
+  CMTOCPURAM            00038000   00000800  00000088  00000778  RWIX
+  CPUTOCMRAM            00039000   00000800  000001c8  00000638  RWIX
+  CPU1TOCPU2RAM         0003a000   00000800  00000088  00000778  RWIX
+  CPU2TOCPU1RAM         0003b000   00000800  000001c8  00000638  RWIX
+  CANA_MSG_RAM          00049000   00000800  00000000  00000800  RWIX
+  CANB_MSG_RAM          0004b000   00000800  00000000  00000800  RWIX
+  BEGIN                 00080000   00000002  00000002  00000000  RWIX
+  FLASH0                00080002   00001ffe  00000048  00001fb6  RWIX
+  FLASH1                00082000   00002000  00000f1f  000010e1  RWIX
+  FLASH2                00084000   00002000  00000d39  000012c7  RWIX
+  FLASH3                00086000   00002000  00000000  00002000  RWIX
+  FLASH4                00088000   00008000  00000000  00008000  RWIX
+  FLASH5                00090000   00008000  00000000  00008000  RWIX
+  FLASH6                00098000   00008000  00000000  00008000  RWIX
+  FLASH7                000a0000   00008000  00000000  00008000  RWIX
+  FLASH8                000a8000   00008000  00000000  00008000  RWIX
+  FLASH9                000b0000   00008000  00000000  00008000  RWIX
+  FLASH10               000b8000   00002000  00000000  00002000  RWIX
+  FLASH11               000ba000   00002000  00000000  00002000  RWIX
+  FLASH12               000bc000   00002000  00000000  00002000  RWIX
+  FLASH13               000be000   00002000  00000000  00002000  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00080000    00000002     
+                  00080000    00000002     f2838x_codestartbranch.obj (codestart)
+
+.cinit     0    00080008    00000048     
+                  00080008    00000029     (.cinit..data.load) [load image, compression = lzss]
+                  00080031    00000006     (.cinit.IPC_RX_DECODE_BUF.load) [load image, compression = lzss]
+                  00080037    00000001     --HOLE-- [fill = 0]
+                  00080038    00000006     (__TI_handler_table)
+                  0008003e    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  00080042    00000002     --HOLE-- [fill = 0]
+                  00080044    0000000c     (__TI_cinit_table)
+
+.reset     0    003fffc0    00000000     DSECT
+
+.stack     0    0000c000    000003f8     UNINITIALIZED
+                  0000c000    000003f8     --HOLE--
+
+.init_array 
+*          0    00082000    00000000     UNINITIALIZED
+
+.bss       0    00008b1a    0000000e     UNINITIALIZED
+                  00008b1a    0000000e     CPU2_SSBL_Main.obj (.bss)
+
+.data      0    00008ace    0000004b     UNINITIALIZED
+                  00008ace    00000028     FRAM.obj (.data)
+                  00008af6    00000018     CPU2_SSBL_Main.obj (.data:flash_address)
+                  00008b0e    00000006     rts2800_fpu64_eabi.lib : exit.c.obj (.data)
+                  00008b14    00000002                            : _lock.c.obj (.data:_lock)
+                  00008b16    00000002                            : _lock.c.obj (.data:_unlock)
+                  00008b18    00000001     CPU2_SSBL_Main.obj (.data)
+
+MSGRAM_CM_TO_CPU 
+*          0    00038000    00000088     UNINITIALIZED
+                  00038000    00000088     driverlib.lib : ipc.obj (MSGRAM_CM_TO_CPU)
+
+MSGRAM_CPU_TO_CM 
+*          0    00039000    000001c8     
+                  00039000    0000011e     CPU2_SSBL_Main.obj (MSGRAM_CPU_TO_CM)
+                  0003911e    00000022     --HOLE-- [fill = 0]
+                  00039140    00000088     driverlib.lib : ipc.obj (MSGRAM_CPU_TO_CM) [fill = 0]
+
+.const     0    00084ad0    0000026c     
+                  00084ad0    00000098     driverlib.lib : flash.obj (.const:.string)
+                  00084b68    00000088                   : ipc.obj (.const:IPC_Instance)
+                  00084bf0    0000007b     CPU2_SSBL_Main.obj (.const:.string)
+                  00084c6b    00000001     --HOLE-- [fill = 0]
+                  00084c6c    0000004a     driverlib.lib : i2c.obj (.const:.string)
+                  00084cb6    0000004a                   : ipc.obj (.const:.string)
+                  00084d00    0000003c     FRAM.obj (.const:.string)
+
+MSGRAM_CPU1_TO_CPU2 
+*          0    0003a000    00000088     UNINITIALIZED
+                  0003a000    00000088     driverlib.lib : ipc.obj (MSGRAM_CPU1_TO_CPU2)
+
+MSGRAM_CPU2_TO_CPU1 
+*          0    0003b000    000001c8     UNINITIALIZED
+                  0003b000    0000011e     CPU2_SSBL_Main.obj (MSGRAM_CPU2_TO_CPU1)
+                  0003b11e    00000022     --HOLE--
+                  0003b140    00000088     driverlib.lib : ipc.obj (MSGRAM_CPU2_TO_CPU1)
+
+.TI.ramfunc 
+*          0    00084000    00000acd     RUN ADDR = 00008000
+                  00084000    000002e1     F2838x_C28x_FlashAPI.lib : FlashStateMachine.obj (.text:_Fapi_setupFlashStateMachine)
+                  000842e1    000001a5                              : Program.obj (.text:Fapi_issueProgrammingCommand)
+                  00084486    0000007e                              : Read.obj (.text:_Fapi_loopRegionForValue)
+                  00084504    00000079                              : FlashStateMachine.obj (.text:Fapi_setupEepromSectorEnable)
+                  0008457d    00000066                              : Init.obj (.text:Fapi_initializeAPI)
+                  000845e3    00000063                              : BlankCheck.obj (.text:Fapi_doBlankCheck)
+                  00084646    00000061                              : Read.obj (.text:_Fapi_checkRegionForValue)
+                  000846a7    00000053                              : FlashStateMachine.obj (.text:_Fapi_issueFsmCommand)
+                  000846fa    0000003b                              : Utilities.obj (.text:Fapi_isAddressValid)
+                  00084735    00000038                              : Async.obj (.text:Fapi_issueAsyncCommandWithAddress)
+                  0008476d    00000031                              : FlashStateMachine.obj (.text:Fapi_setupBankSectorEnable)
+                  0008479e    0000002f                              : FlashStateMachine.obj (.text:Fapi_setActiveFlashBank)
+                  000847cd    0000002c                              : Utilities.obj (.text:Fapi_calculateFletcherChecksum)
+                  000847f9    0000002a                              : Utilities.obj (.text:_Fapi_divideUnsignedLong)
+                  00084823    00000026                              : FlashStateMachine.obj (.text:_Fapi_setupSectorsForWrite)
+                  00084849    00000022                              : FlashStateMachine.obj (.text:Fapi_isAddressEcc)
+                  0008486b    00000015                              : Read.obj (.text:Fapi_flushPipeline)
+                  00084880    0000000f                              : Verify.obj (.text:Fapi_doVerify)
+                  0008488f    0000000e                              : FlashStateMachine.obj (.text:Fapi_checkFsmForReady)
+                  0008489d    0000000e                              : Utilities.obj (.text:_Fapi_scaleCycleValues)
+                  000848ab    0000000b                              : Utilities.obj (.text:_Fapi_calculateOtpChecksum)
+                  000848b6    0000000a                              : Init.obj (.bss) [fill = 0]
+                  000848c0    00000007                              : FlashStateMachine.obj (.text:Fapi_getFsmStatus)
+                  000848c7    00000002                              : FlashStateMachine.obj (.text:Fapi_serviceWatchdogTimer)
+                  000848c9    00000071     CPU2_SSBL_Main.obj (.TI.ramfunc:Flash_data_program_8)
+                  0008493a    0000003f     driverlib.lib : flash.obj (.TI.ramfunc:Flash_initModule)
+                  00084979    00000033     CPU2_SSBL_Main.obj (.TI.ramfunc:Example_EraseSector)
+                  000849ac    00000033     CPU2_SSBL_Main.obj (.TI.ramfunc:grlFlashBOOTPGMSectorWrite)
+                  000849df    0000002d     driverlib.lib : flash.obj (.TI.ramfunc:Flash_setBankPowerMode)
+                  00084a0c    00000022                   : flash.obj (.TI.ramfunc:Flash_setWaitstates)
+                  00084a2e    0000001e                   : flash.obj (.TI.ramfunc:Flash_setPumpPowerMode)
+                  00084a4c    0000001a                   : flash.obj (.TI.ramfunc:Flash_disableCache)
+                  00084a66    0000001a                   : flash.obj (.TI.ramfunc:Flash_disablePrefetch)
+                  00084a80    00000019                   : flash.obj (.TI.ramfunc:Flash_enableCache)
+                  00084a99    00000019                   : flash.obj (.TI.ramfunc:Flash_enablePrefetch)
+                  00084ab2    00000017                   : flash.obj (.TI.ramfunc:Flash_enableECC)
+                  00084ac9    00000004                   : sysctl.obj (.TI.ramfunc)
+
+IPC_RX_DECODE_BUF 
+*          0    000001b0    0000023c     UNINITIALIZED
+                  000001b0    0000023c     CPU2_SSBL_Main.obj (IPC_RX_DECODE_BUF)
+
+.text      0    00082000    00000f1f     
+                  00082000    00000268     CPU2_SSBL_Main.obj (.text:copy_data)
+                  00082268    00000146     device.obj (.text:Device_enableAllPeripherals)
+                  000823ae    00000125     CPU2_SSBL_Main.obj (.text:IPC_ISR0)
+                  000824d3    000000e7     CPU2_SSBL_Main.obj (.text:CM_CPU2_IPC_ISR1)
+                  000825ba    0000008a     CPU2_SSBL_Main.obj (.text:DataRxHandler)
+                  00082644    00000087     FRAM.obj (.text:readData)
+                  000826cb    00000073     FRAM.obj (.text:FRAM_I2C_read)
+                  0008273e    00000064     driverlib.lib : i2c.obj (.text:I2C_initMaster)
+                  000827a2    0000005d                   : ipc.obj (.text:IPC_sendCommand)
+                  000827ff    00000059     CPU2_SSBL_Main.obj (.text:main)
+                  00082858    00000053     FRAM.obj (.text:I2C_FRAM_ISR)
+                  000828ab    0000004a     driverlib.lib : ipc.obj (.text:IPC_readCommand)
+                  000828f5    00000048     CPU2_SSBL_Main.obj (.text:TxSystemDetailstoCM)
+                  0008293d    0000003d     driverlib.lib : interrupt.obj (.text:Interrupt_initModule)
+                  0008297a    0000003c     FRAM.obj (.text:Init_I2C_Master)
+                  000829b6    0000003b     CPU2_SSBL_Main.obj (.text:is_TiFWUpdate)
+                  000829f1    00000037     driverlib.lib : ipc.obj (.text:IPC_registerInterrupt)
+                  00082a28    00000034                   : interrupt.obj (.text:Interrupt_enable)
+                  00082a5c    00000031     rts2800_fpu64_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss)
+                  00082a8d    0000002b     driverlib.lib : i2c.obj (.text:I2C_enableInterrupt)
+                  00082ab8    0000002b     rts2800_fpu64_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  00082ae3    00000029                            : exit.c.obj (.text)
+                  00082b0c    00000021     device.obj (.text:Device_initGPIO)
+                  00082b2d    00000021     driverlib.lib : i2c.obj (.text:I2C_clearInterruptStatus)
+                  00082b4e    00000020     FRAM.obj (.text:I2C_isBusBusy)
+                  00082b6e    0000001e     driverlib.lib : interrupt.obj (.text:Interrupt_initVectorTable)
+                  00082b8c    0000001d     FRAM.obj (.text:I2C_setSlaveAddress)
+                  00082ba9    0000001d     rts2800_fpu64_eabi.lib : memcpy.c.obj (.text)
+                  00082bc6    0000001c     device.obj (.text:Device_init)
+                  00082be2    0000001b     FRAM.obj (.text:I2C_getStopConditionStatus)
+                  00082bfd    0000001b     FRAM.obj (.text:I2C_setBitCount)
+                  00082c18    0000001b     FRAM.obj (.text:I2C_setConfig)
+                  00082c33    0000001b     FRAM.obj (.text:I2C_setEmulationMode)
+                  00082c4e    00000019     FRAM.obj (.text:I2C_enableFIFO)
+                  00082c67    00000019     rts2800_fpu64_eabi.lib : boot28.asm.obj (.text)
+                  00082c80    00000017     CPU2_SSBL_Main.obj (.text:Flash_disableECC)
+                  00082c97    00000017     device.obj (.text:SysCtl_enablePeripheral)
+                  00082cae    00000015     device.obj (.text:GPIO_unlockPortConfig)
+                  00082cc3    00000015     FRAM.obj (.text:I2C_isBaseValid)
+                  00082cd8    00000015     driverlib.lib : i2c.obj (.text:I2C_isBaseValid)
+                  00082ced    00000015     FRAM.obj (.text:I2C_putData)
+                  00082d02    00000014     FRAM.obj (.text:I2C_disableModule)
+                  00082d16    00000014     FRAM.obj (.text:I2C_enableModule)
+                  00082d2a    00000014     FRAM.obj (.text:I2C_getInterruptSource)
+                  00082d3e    00000014     FRAM.obj (.text:I2C_sendStartCondition)
+                  00082d52    00000014     FRAM.obj (.text:I2C_sendStopCondition)
+                  00082d66    00000014     CPU2_SSBL_Main.obj (.text:IPC_waitForAck)
+                  00082d7a    00000013     device.obj (.text:Device_enableUnbondedGPIOPullupsFor176Pin)
+                  00082d8d    00000013     FRAM.obj (.text:I2C_setDataCount)
+                  00082da0    00000013     CPU2_SSBL_Main.obj (.text:IPC_sync)
+                  00082db3    00000012     CPU2_SSBL_Main.obj (.text:IPC_waitForFlag)
+                  00082dc5    00000011     device.obj (.text:Device_enableUnbondedGPIOPullups)
+                  00082dd6    00000011     CPU2_SSBL_Main.obj (.text:Flash_claimPumpSemaphore)
+                  00082de7    00000011     FRAM.obj (.text:I2C_getData)
+                  00082df8    00000010     driverlib.lib : flash.obj (.text:Flash_isCtrlBaseValid)
+                  00082e08    00000010     CPU2_SSBL_Main.obj (.text:Flash_isECCBaseValid)
+                  00082e18    00000010     driverlib.lib : flash.obj (.text:Flash_isECCBaseValid)
+                  00082e28    0000000f     CPU2_SSBL_Main.obj (.text:IPC_ackFlagRtoL)
+                  00082e37    0000000f     CPU2_SSBL_Main.obj (.text:IPC_clearFlagLtoR)
+                  00082e46    0000000f     CPU2_SSBL_Main.obj (.text:IPC_setFlagLtoR)
+                  00082e55    0000000f     CPU2_SSBL_Main.obj (.text:Interrupt_register)
+                  00082e64    0000000f     driverlib.lib : ipc.obj (.text:Interrupt_register)
+                  00082e73    0000000f     CPU2_SSBL_Main.obj (.text:i2cB_init)
+                  00082e82    0000000e     driverlib.lib : interrupt.obj (.text:Interrupt_defaultHandler)
+                  00082e90    0000000d                   : interrupt.obj (.text:Interrupt_disableMaster)
+                  00082e9d    0000000d                   : interrupt.obj (.text:Interrupt_enableMaster)
+                  00082eaa    0000000d     rts2800_fpu64_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset)
+                  00082eb7    0000000d     CPU2_SSBL_Main.obj (.text:isAPI_FWUpdate)
+                  00082ec4    0000000c     rts2800_fpu64_eabi.lib : args_main.c.obj (.text)
+                  00082ed0    0000000a     CPU2_SSBL_Main.obj (.text:Flash_releasePumpSemaphore)
+                  00082eda    00000009     rts2800_fpu64_eabi.lib : _lock.c.obj (.text)
+                  00082ee3    00000008     device.obj (.text:SysCtl_disableWatchdog)
+                  00082eeb    00000008     rts2800_fpu64_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none)
+                  00082ef3    00000008     f2838x_codestartbranch.obj (.text)
+                  00082efb    00000007     device.obj (.text:__error__)
+                  00082f02    00000007     rts2800_fpu64_eabi.lib : memset.c.obj (.text)
+                  00082f09    00000006     CPU2_SSBL_Main.obj (.text:Interrupt_clearACKGroup)
+                  00082f0f    00000006     FRAM.obj (.text:Interrupt_clearACKGroup)
+                  00082f15    00000003     FRAM.obj (.text:fail)
+                  00082f18    00000002     driverlib.lib : interrupt.obj (.text:Interrupt_illegalOperationHandler)
+                  00082f1a    00000002                   : interrupt.obj (.text:Interrupt_nmiHandler)
+                  00082f1c    00000002     rts2800_fpu64_eabi.lib : pre_init.c.obj (.text)
+                  00082f1e    00000001                            : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                       code   ro data   rw data
+       ------                       ----   -------   -------
+    .\
+       CPU2_SSBL_Main.obj           2145   123       1183   
+       FRAM.obj                     774    60        40     
+    +--+----------------------------+------+---------+---------+
+       Total:                       2919   183       1223   
+                                                            
+    .\device\
+       device.obj                   482    0         0      
+       f2838x_codestartbranch.obj   10     0         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       492    0         0      
+                                                            
+    C:/ti/C2000Ware_4_00_00_00/driverlib/f2838x/driverlib/ccs/Debug/driverlib.lib
+       ipc.obj                      237    210       544    
+       flash.obj                    626    152       0      
+       i2c.obj                      197    74        0      
+       interrupt.obj                187    0         0      
+       sysctl.obj                   8      0         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       1255   436       544    
+                                                            
+    C:/ti/C2000Ware_4_00_00_00/libraries/flash_api/f2838x/c28x/lib/F2838x_C28x_FlashAPI.lib
+       FlashStateMachine.obj        2264   0         0      
+       Program.obj                  842    0         0      
+       Read.obj                     488    0         0      
+       Utilities.obj                340    0         0      
+       Init.obj                     204    0         20     
+       BlankCheck.obj               198    0         0      
+       Async.obj                    112    0         0      
+       Verify.obj                   30     0         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       4478   0         20     
+                                                            
+    C:\ti\ccs1110\ccs\tools\compiler\ti-cgt-c2000_21.6.0.LTS\lib\rts2800_fpu64_eabi.lib
+       copy_decompress_lzss.c.obj   49     0         0      
+       exit.c.obj                   41     0         6      
+       autoinit.c.obj               43     0         0      
+       memcpy.c.obj                 29     0         0      
+       boot28.asm.obj               25     0         0      
+       _lock.c.obj                  9      0         4      
+       copy_zero_init.c.obj         13     0         0      
+       args_main.c.obj              12     0         0      
+       copy_decompress_none.c.obj   8      0         0      
+       memset.c.obj                 7      0         0      
+       pre_init.c.obj               2      0         0      
+       startup.c.obj                1      0         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       239    0         10     
+                                                            
+       Stack:                       0      0         1016   
+       Linker Generated:            0      69        0      
+    +--+----------------------------+------+---------+---------+
+       Grand Total:                 9383   688       2813   
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 00080044 records: 3, size/record: 4, table size: 12
+	.data: load addr=00080008, load size=00000029 bytes, run addr=00008ace, run size=0000004b bytes, compression=lzss
+	IPC_RX_DECODE_BUF: load addr=00080031, load size=00000006 bytes, run addr=000001b0, run size=0000023c bytes, compression=lzss
+	.bss: load addr=0008003e, load size=00000004 bytes, run addr=00008b1a, run size=0000000e bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 00080038 records: 3, size/record: 2, table size: 6
+	index: 0, handler: __TI_zero_init
+	index: 1, handler: __TI_decompress_lzss
+	index: 2, handler: __TI_decompress_none
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+000001b0       6 (00000180)     gVar
+
+00008ace     22b (00008ac0)     STOP_CON_FLAG
+00008acf     22b (00008ac0)     REG_ACCCESS_READY
+00008ad0     22b (00008ac0)     i2cMsgOut
+00008ae3     22b (00008ac0)     i2cMsgIn
+00008af6     22b (00008ac0)     flash_address
+
+00008b0e     22c (00008b00)     __TI_enable_exit_profile_output
+00008b10     22c (00008b00)     __TI_cleanup_ptr
+00008b12     22c (00008b00)     __TI_dtors_ptr
+00008b14     22c (00008b00)     _lock
+00008b16     22c (00008b00)     _unlock
+00008b1a     22c (00008b00)     mfd_month
+00008b1e     22c (00008b00)     sys_id
+00008b20     22c (00008b00)     mfd_year
+00008b22     22c (00008b00)     entry_point
+00008b24     22c (00008b00)     BlockHeader
+
+0000c000     300 (0000c000)     __stack
+
+00038000     e00 (00038000)     IPC_CPU_To_CM_GetBuffer
+
+00039000     e40 (00039000)     grlRxbuf
+
+00039140     e45 (00039140)     IPC_CPU_To_CM_PutBuffer
+
+0003a000     e80 (0003a000)     IPC_CPU1_To_CPU2_PutBuffer
+
+0003b000     ec0 (0003b000)     CPU2DataRxbuf
+
+0003b140     ec5 (0003b140)     IPC_CPU1_To_CPU2_GetBuffer
+
+00084b68    212d (00084b40)     IPC_Instance
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                                     
+----  -------   ----                                     
+0     00008b24  BlockHeader                              
+0     00082ae3  C$$EXIT                                  
+0     000824d3  CM_CPU2_IPC_ISR1                         
+0     0003b000  CPU2DataRxbuf                            
+0     000825ba  DataRxHandler                            
+0     00082268  Device_enableAllPeripherals              
+0     00082dc5  Device_enableUnbondedGPIOPullups         
+0     00082d7a  Device_enableUnbondedGPIOPullupsFor176Pin
+0     00082bc6  Device_init                              
+0     00082b0c  Device_initGPIO                          
+0     00008979  Example_EraseSector                      
+0     000826cb  FRAM_I2C_read                            
+0     000088b6  Fapi_GlobalInit                          
+0     000087cd  Fapi_calculateFletcherChecksum           
+0     0000888f  Fapi_checkFsmForReady                    
+0     000085e3  Fapi_doBlankCheck                        
+0     00008880  Fapi_doVerify                            
+0     0000886b  Fapi_flushPipeline                       
+0     000088c0  Fapi_getFsmStatus                        
+0     0000857d  Fapi_initializeAPI                       
+0     00008849  Fapi_isAddressEcc                        
+0     000086fa  Fapi_isAddressValid                      
+0     00008735  Fapi_issueAsyncCommandWithAddress        
+0     000082e1  Fapi_issueProgrammingCommand             
+0     000088c7  Fapi_serviceWatchdogTimer                
+0     0000879e  Fapi_setActiveFlashBank                  
+0     0000876d  Fapi_setupBankSectorEnable               
+0     00008504  Fapi_setupEepromSectorEnable             
+0     000088c9  Flash_data_program_8                     
+0     0000893a  Flash_initModule                         
+0     00082858  I2C_FRAM_ISR                             
+0     00082b2d  I2C_clearInterruptStatus                 
+0     00082a8d  I2C_enableInterrupt                      
+0     0008273e  I2C_initMaster                           
+0     0003b140  IPC_CPU1_To_CPU2_GetBuffer               
+0     0003a000  IPC_CPU1_To_CPU2_PutBuffer               
+0     00038000  IPC_CPU_To_CM_GetBuffer                  
+0     00039140  IPC_CPU_To_CM_PutBuffer                  
+0     000823ae  IPC_ISR0                                 
+0     00084b68  IPC_Instance                             
+0     000828ab  IPC_readCommand                          
+0     000829f1  IPC_registerInterrupt                    
+0     000827a2  IPC_sendCommand                          
+0     0008297a  Init_I2C_Master                          
+0     00082a28  Interrupt_enable                         
+0     0008293d  Interrupt_initModule                     
+0     00082b6e  Interrupt_initVectorTable                
+0     00008acf  REG_ACCCESS_READY                        
+0     00084acd  RamfuncsLoadEnd                          
+abs   00000acd  RamfuncsLoadSize                         
+0     00084000  RamfuncsLoadStart                        
+0     00008acd  RamfuncsRunEnd                           
+abs   00000acd  RamfuncsRunSize                          
+0     00008000  RamfuncsRunStart                         
+0     00008ace  STOP_CON_FLAG                            
+0     00008ac9  SysCtl_delay                             
+0     000828f5  TxSystemDetailstoCM                      
+0     000088ab  _Fapi_calculateOtpChecksum               
+0     00008646  _Fapi_checkRegionForValue                
+0     000087f9  _Fapi_divideUnsignedLong                 
+0     000086a7  _Fapi_issueFsmCommand                    
+0     00008486  _Fapi_loopRegionForValue                 
+0     0000889d  _Fapi_scaleCycleValues                   
+0     00008823  _Fapi_setupSectorsForWrite               
+0     00080044  __TI_CINIT_Base                          
+0     00080050  __TI_CINIT_Limit                         
+0     00080050  __TI_CINIT_Warm                          
+0     00080038  __TI_Handler_Table_Base                  
+0     0008003e  __TI_Handler_Table_Limit                 
+0     0000c3f8  __TI_STACK_END                           
+abs   000003f8  __TI_STACK_SIZE                          
+0     00082ab8  __TI_auto_init_nobinit_nopinit           
+0     00008b10  __TI_cleanup_ptr                         
+0     00082a5c  __TI_decompress_lzss                     
+0     00082eeb  __TI_decompress_none                     
+0     00008b12  __TI_dtors_ptr                           
+0     00008b0e  __TI_enable_exit_profile_output          
+abs   ffffffff  __TI_pprof_out_hndl                      
+abs   ffffffff  __TI_prof_data_size                      
+abs   ffffffff  __TI_prof_data_start                     
+0     00082eaa  __TI_zero_init_nomemset                  
+n/a   UNDEFED   __c_args__                               
+0     00082efb  __error__                                
+0     0000c000  __stack                                  
+0     00082ec4  _args_main                               
+0     00082c67  _c_int00                                 
+0     00008b14  _lock                                    
+0     00082ee2  _nop                                     
+0     00082ede  _register_lock                           
+0     00082eda  _register_unlock                         
+0     00082f1e  _system_post_cinit                       
+0     00082f1c  _system_pre_init                         
+0     00008b16  _unlock                                  
+0     00082ae3  abort                                    
+0     00080000  code_start                               
+0     00082000  copy_data                                
+0     00008b22  entry_point                              
+0     00082ae5  exit                                     
+0     00082f15  fail                                     
+0     00008af6  flash_address                            
+0     000001b0  gVar                                     
+0     000089ac  grlFlashBOOTPGMSectorWrite               
+0     00039000  grlRxbuf                                 
+0     00082e73  i2cB_init                                
+0     00008ae3  i2cMsgIn                                 
+0     00008ad0  i2cMsgOut                                
+0     00082eb7  isAPI_FWUpdate                           
+0     000829b6  is_TiFWUpdate                            
+0     000827ff  main                                     
+0     00082ba9  memcpy                                   
+0     00082f02  memset                                   
+0     00008b1a  mfd_month                                
+0     00008b20  mfd_year                                 
+0     00082644  readData                                 
+0     00008b1e  sys_id                                   
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                                     
+----  -------   ----                                     
+0     000001b0  gVar                                     
+0     00008000  RamfuncsRunStart                         
+0     000082e1  Fapi_issueProgrammingCommand             
+0     00008486  _Fapi_loopRegionForValue                 
+0     00008504  Fapi_setupEepromSectorEnable             
+0     0000857d  Fapi_initializeAPI                       
+0     000085e3  Fapi_doBlankCheck                        
+0     00008646  _Fapi_checkRegionForValue                
+0     000086a7  _Fapi_issueFsmCommand                    
+0     000086fa  Fapi_isAddressValid                      
+0     00008735  Fapi_issueAsyncCommandWithAddress        
+0     0000876d  Fapi_setupBankSectorEnable               
+0     0000879e  Fapi_setActiveFlashBank                  
+0     000087cd  Fapi_calculateFletcherChecksum           
+0     000087f9  _Fapi_divideUnsignedLong                 
+0     00008823  _Fapi_setupSectorsForWrite               
+0     00008849  Fapi_isAddressEcc                        
+0     0000886b  Fapi_flushPipeline                       
+0     00008880  Fapi_doVerify                            
+0     0000888f  Fapi_checkFsmForReady                    
+0     0000889d  _Fapi_scaleCycleValues                   
+0     000088ab  _Fapi_calculateOtpChecksum               
+0     000088b6  Fapi_GlobalInit                          
+0     000088c0  Fapi_getFsmStatus                        
+0     000088c7  Fapi_serviceWatchdogTimer                
+0     000088c9  Flash_data_program_8                     
+0     0000893a  Flash_initModule                         
+0     00008979  Example_EraseSector                      
+0     000089ac  grlFlashBOOTPGMSectorWrite               
+0     00008ac9  SysCtl_delay                             
+0     00008acd  RamfuncsRunEnd                           
+0     00008ace  STOP_CON_FLAG                            
+0     00008acf  REG_ACCCESS_READY                        
+0     00008ad0  i2cMsgOut                                
+0     00008ae3  i2cMsgIn                                 
+0     00008af6  flash_address                            
+0     00008b0e  __TI_enable_exit_profile_output          
+0     00008b10  __TI_cleanup_ptr                         
+0     00008b12  __TI_dtors_ptr                           
+0     00008b14  _lock                                    
+0     00008b16  _unlock                                  
+0     00008b1a  mfd_month                                
+0     00008b1e  sys_id                                   
+0     00008b20  mfd_year                                 
+0     00008b22  entry_point                              
+0     00008b24  BlockHeader                              
+0     0000c000  __stack                                  
+0     0000c3f8  __TI_STACK_END                           
+0     00038000  IPC_CPU_To_CM_GetBuffer                  
+0     00039000  grlRxbuf                                 
+0     00039140  IPC_CPU_To_CM_PutBuffer                  
+0     0003a000  IPC_CPU1_To_CPU2_PutBuffer               
+0     0003b000  CPU2DataRxbuf                            
+0     0003b140  IPC_CPU1_To_CPU2_GetBuffer               
+0     00080000  code_start                               
+0     00080038  __TI_Handler_Table_Base                  
+0     0008003e  __TI_Handler_Table_Limit                 
+0     00080044  __TI_CINIT_Base                          
+0     00080050  __TI_CINIT_Limit                         
+0     00080050  __TI_CINIT_Warm                          
+0     00082000  copy_data                                
+0     00082268  Device_enableAllPeripherals              
+0     000823ae  IPC_ISR0                                 
+0     000824d3  CM_CPU2_IPC_ISR1                         
+0     000825ba  DataRxHandler                            
+0     00082644  readData                                 
+0     000826cb  FRAM_I2C_read                            
+0     0008273e  I2C_initMaster                           
+0     000827a2  IPC_sendCommand                          
+0     000827ff  main                                     
+0     00082858  I2C_FRAM_ISR                             
+0     000828ab  IPC_readCommand                          
+0     000828f5  TxSystemDetailstoCM                      
+0     0008293d  Interrupt_initModule                     
+0     0008297a  Init_I2C_Master                          
+0     000829b6  is_TiFWUpdate                            
+0     000829f1  IPC_registerInterrupt                    
+0     00082a28  Interrupt_enable                         
+0     00082a5c  __TI_decompress_lzss                     
+0     00082a8d  I2C_enableInterrupt                      
+0     00082ab8  __TI_auto_init_nobinit_nopinit           
+0     00082ae3  C$$EXIT                                  
+0     00082ae3  abort                                    
+0     00082ae5  exit                                     
+0     00082b0c  Device_initGPIO                          
+0     00082b2d  I2C_clearInterruptStatus                 
+0     00082b6e  Interrupt_initVectorTable                
+0     00082ba9  memcpy                                   
+0     00082bc6  Device_init                              
+0     00082c67  _c_int00                                 
+0     00082d7a  Device_enableUnbondedGPIOPullupsFor176Pin
+0     00082dc5  Device_enableUnbondedGPIOPullups         
+0     00082e73  i2cB_init                                
+0     00082eaa  __TI_zero_init_nomemset                  
+0     00082eb7  isAPI_FWUpdate                           
+0     00082ec4  _args_main                               
+0     00082eda  _register_unlock                         
+0     00082ede  _register_lock                           
+0     00082ee2  _nop                                     
+0     00082eeb  __TI_decompress_none                     
+0     00082efb  __error__                                
+0     00082f02  memset                                   
+0     00082f15  fail                                     
+0     00082f1c  _system_pre_init                         
+0     00082f1e  _system_post_cinit                       
+0     00084000  RamfuncsLoadStart                        
+0     00084acd  RamfuncsLoadEnd                          
+0     00084b68  IPC_Instance                             
+abs   000003f8  __TI_STACK_SIZE                          
+abs   00000acd  RamfuncsLoadSize                         
+abs   00000acd  RamfuncsRunSize                          
+abs   ffffffff  __TI_pprof_out_hndl                      
+abs   ffffffff  __TI_prof_data_size                      
+abs   ffffffff  __TI_prof_data_start                     
+n/a   UNDEFED   __c_args__                               
+
+[115 symbols]

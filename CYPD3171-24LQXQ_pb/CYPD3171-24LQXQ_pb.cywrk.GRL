@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb">
+<ExpandedNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Pins</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Clocks</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Interrupts</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\System</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Directives</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Flash Security</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\alt_mode_hw.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\alt_modes_mngr.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\cy_alt_mode.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\uvdm.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\vdm_task_mngr.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\app.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\battery_charging.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\billboard.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\pdo.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\power_bank.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\psink.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\psource.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\swap.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\type_a.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\vbus_ctrl.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\vdm.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\dpm.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\dpm_intern.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\pd.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\pd_policy_engine.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\pd_protocol.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\typec_manager.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal\hal_ccgx.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal\hpd.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal\pdss_hal.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\alt_modes_config.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\app_version.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\config.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\cyapicallbacks.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\flash_config.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\grl_struct.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\grlabstraction.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\grlapp.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\instrumentation.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\stack_params.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\boot.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\ccg3pa_regs.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\ccgx_regs.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\ccgx_version.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\flash.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\gpio.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\status.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\system.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\timer.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\system\utils.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\alt_mode</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\alt_mode\alt_mode_hw.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\alt_mode\alt_modes_mngr.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\alt_mode\cy_alt_mode.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\alt_mode\uvdm.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\alt_mode\vdm_task_mngr.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\app.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\battery_charging.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\pdo.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\power_bank.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\psink.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\psource.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\swap.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\type_a.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\vbus_ctrl.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\app\vdm.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\pd_hal</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\pd_hal\hal_ccgx.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\pd_hal\pdss_mx_hal.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution\config.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution\datamux_ctrl.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution\grlabstraction.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution\grlapp.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution\grlstruct.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution\instrumentation.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\solution\main.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\system</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\system\boot.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\system\flash.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\system\gpio.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\system\system.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\system\timer.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Source Files\system\utils.c</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Generated_Source\PSoC4</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TopDesign</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.cydwr</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.cydwr\Pins</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.cydwr\Clocks</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.cydwr\Interrupts</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.cydwr\System</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.cydwr\Directives</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.cydwr\Flash Security</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\alt_mode</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\alt_mode\alt_mode_hw.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\alt_mode\alt_modes_mngr.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\alt_mode\uvdm.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\alt_mode\vdm_task_mngr.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\app.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\battery_charging.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\pdo.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\power_bank.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\psink.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\psource.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\swap.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\type_a.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\uvdm.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\vbus_ctrl.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\app\vdm.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_common</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_common\dpm.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_common\dpm_intern.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_common\pd.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_common\pd_policy_engine.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_common\pd_protocol.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_common\typec_manager.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_hal</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_hal\chgb_hal.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_hal\hal_ccgx.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\pd_hal\pdss_hal.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\solution</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\solution\alt_modes_config.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\solution\app_version.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\solution\config.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\solution\flash_config.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\solution\instrumentation.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\solution\stack_params.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\boot.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\ccg3pa_regs.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\ccgx_regs.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\ccgx_version.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\flash.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\gpio.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\status.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\system.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\timer.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\system\utils.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Header Files\cyapicallbacks.h</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\alt_mode</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\alt_mode\alt_mode_hw.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\alt_mode\alt_modes_mngr.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\alt_mode\cy_alt_mode.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\alt_mode\uvdm.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\alt_mode\vdm_task_mngr.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\app.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\battery_charging.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\pdo.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\power_bank.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\psink.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\psource.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\swap.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\type_a.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\vbus_ctrl.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\app\vdm.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\pd_hal</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\pd_hal\hal_ccgx.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\pd_hal\pdss_mx_hal.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\solution</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\solution\config.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\solution\datamux_ctrl.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\solution\instrumentation.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\solution\main.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\system</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\system\boot.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\system\flash.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\system\gpio.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\system\system.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\system\timer.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Source Files\system\utils.c</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Generated_Source</v>
+<v>CYPD3171-24LQXQ_pb\noboot\Generated_Source\PSoC4</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Pins</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Clocks</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Interrupts</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\System</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Directives</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydwr\Flash Security</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\alt_mode_hw.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\alt_modes_mngr.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\cy_alt_mode.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\uvdm.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\alt_mode\vdm_task_mngr.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\app.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\battery_charging.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\billboard.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\pdo.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\power_bank.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\psink.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\psource.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\swap.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\type_a.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\vbus_ctrl.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\app\vdm.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\dpm.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\dpm_intern.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\pd.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\pd_policy_engine.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\pd_protocol.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_common\typec_manager.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal\hal_ccgx.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal\hpd.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\pd_hal\pdss_hal.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\alt_modes_config.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\app_version.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\config.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\cyapicallbacks.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\flash_config.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\grl_struct.h</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Header Files\solution\grlabstraction.h</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign\TopDesign.cysch</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign\TopDesign_01.cymacro</v>
+<v>CYPD3171-24LQXQ_pb\noboot</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TopDesign</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign\TopDesign.cysch</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TopDesign\TopDesign_01.cymacro</v>
+<v>CYPD3171-24LQXQ_pb\noboot</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TopDesign</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\alt_mode_hw.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\alt_modes_mngr.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\app.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\AUG_ISR.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\AUG_TIMER.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\AUG_TIMER_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\battery_charging.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\boot.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\Bootloadable_1.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\BUCK_BOOST_EN_C.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\BUCK_BOOST_EN_C_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\config.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_alt_mode.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\cybootloader.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\datamux_ctrl.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\DIR_CTRL_C.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\DIR_CTRL_C_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_BOOT.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_EZI2C.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_EZI2C_BOOT.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_EZI2C_INT.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_SCB_IRQ.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_SCBCLK.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_scl.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_scl_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_sda.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\EZI2C_1_sda_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\flash.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\gpio.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\grlabstraction.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\grlapp.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\grlstruct.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\hal_ccgx.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\instrumentation.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\MasterInput.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\MasterInput_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\MasterInputInt.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\pdo.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\pdss_mx_hal.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PDSS_PORT0_BCH_CLK.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PDSS_PORT0_FILT_CLK_SEL.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PDSS_PORT0_ISINK_CLK.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PDSS_PORT0_RX_CLK.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PDSS_PORT0_SAR_CLK.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PDSS_PORT0_TX_CLK.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PDSS_PORTX_REFGEN_CLK.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\power_bank.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\psink.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\psource.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PWMI_C.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PWMI_C_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PWMI_OUT_C.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\PWMI_OUT_C_PM.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\swap.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\system.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\timer.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\type_a.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\utils.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\uvdm.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\vbus_ctrl.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\vdm.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\Listing Files\vdm_task_mngr.lst</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\CYPD3171-24LQXQ_pb.cyacd</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\CYPD3171-24LQXQ_pb.elf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\CYPD3171-24LQXQ_pb.hex</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CortexM0\ARM_GCC_541\Debug\CYPD3171-24LQXQ_pb.map</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.gpdsc</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.rpt</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb_timing.html</v>
+<v>CYPD3171-24LQXQ_pb\noboot</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CortexM0</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CortexM0\ARM_GCC_541</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CortexM0\ARM_GCC_541\Debug</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CortexM0\ARM_GCC_541\Debug\noboot.elf</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CortexM0\ARM_GCC_541\Debug\noboot.hex</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CortexM0\ARM_GCC_541\Debug\noboot.map</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.gpdsc</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot.rpt</v>
+<v>CYPD3171-24LQXQ_pb\noboot\noboot_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\PSoC 4 Architecture TRM</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CCG3PA Family Datasheet</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\System Reference Guides</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\System Reference Guides\cy_boot_v5_60</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Bootloadable_v1_50.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_clock_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_isr_v1_70</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_pins_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\SCB_P4_v4_0.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TCPWM_P4_v2_10</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TCPWM_P4_v2_10\TCPWM_P4_v2_10.pdf</v>
+<v>CYPD3171-24LQXQ_pb\noboot</v>
+<v>CYPD3171-24LQXQ_pb\noboot\PSoC 4 Architecture TRM</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CCG3PA Family Datasheet</v>
+<v>CYPD3171-24LQXQ_pb\noboot\System Reference Guides</v>
+<v>CYPD3171-24LQXQ_pb\noboot\System Reference Guides\cy_boot_v5_60</v>
+<v>CYPD3171-24LQXQ_pb\noboot\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_clock_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_pins_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TCPWM_P4_v2_10</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TCPWM_P4_v2_10\TCPWM_P4_v2_10.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\PSoC 4 Architecture TRM</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\CCG3PA Family Datasheet</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\System Reference Guides</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\System Reference Guides\cy_boot_v5_60</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\Bootloadable_v1_50.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_clock_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_isr_v1_70</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_pins_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\SCB_P4_v4_0.pdf</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TCPWM_P4_v2_10</v>
+<v>CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb\TCPWM_P4_v2_10\TCPWM_P4_v2_10.pdf</v>
+<v>CYPD3171-24LQXQ_pb\noboot</v>
+<v>CYPD3171-24LQXQ_pb\noboot\PSoC 4 Architecture TRM</v>
+<v>CYPD3171-24LQXQ_pb\noboot\CCG3PA Family Datasheet</v>
+<v>CYPD3171-24LQXQ_pb\noboot\System Reference Guides</v>
+<v>CYPD3171-24LQXQ_pb\noboot\System Reference Guides\cy_boot_v5_60</v>
+<v>CYPD3171-24LQXQ_pb\noboot\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_clock_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_pins_v2_20</v>
+<v>CYPD3171-24LQXQ_pb\noboot\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TCPWM_P4_v2_10</v>
+<v>CYPD3171-24LQXQ_pb\noboot\TCPWM_P4_v2_10\TCPWM_P4_v2_10.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\common\main.c" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\grlapp.c" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\app\pdo.c" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\app\app.c" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\app\app.h" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\grl_struct.h" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\grlapp.h" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\grlabstraction.c" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\app\psource.c" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\pd_common\pd.h" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\app\power_bank.c" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\pd_common\dpm.h" />
+<name v=".\CYPD3171-24LQXQ_pb.cydsn\src\pd_common\pd_protocol.h" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1425, 630" SelectedTabbedMdiWindow="22eb6ddd-d5b8-4cf8-a598-519a3e095fb3"><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\common\main.c" Guid="46cb3143-fdff-4a87-be78-79ca1bfef33a" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\grlapp.c" Guid="067ece9e-0d24-4626-8842-412f83e36b00" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\app\pdo.c" Guid="4a96b39c-6a17-4c11-9ab7-a23c0fb211b2" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\app\app.c" Guid="22eb6ddd-d5b8-4cf8-a598-519a3e095fb3" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\app\app.h" Guid="116d5ac1-20ee-4779-9fbd-01533a0b3cde" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\grl_struct.h" Guid="66d67b21-8c08-4356-a3db-d3e8aa90b50e" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\grlapp.h" Guid="87e3c199-adaf-4d68-81b3-f4ec1daea131" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\grlabstraction.c" Guid="cb74bff8-a95c-4dff-8cc3-21c4f1cf3097" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\app\psource.c" Guid="b15bc605-4311-45dd-bf13-91556fd8a921" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\pd_common\pd.h" Guid="0f156622-2d6c-423b-af87-8d28e69318dd" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\app\power_bank.c" Guid="1e37df4a-9987-40af-8400-ea025e416a30" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\pd_common\dpm.h" Guid="faa20208-1c5e-40cb-99b7-b63b9a41d500" /><DocumentWindow Key="D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\src\pd_common\pd_protocol.h" Guid="59207f64-39d2-4483-b09e-016c0aa59f64" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="a5309009-1146-4cbc-897e-1709d5e2975b" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

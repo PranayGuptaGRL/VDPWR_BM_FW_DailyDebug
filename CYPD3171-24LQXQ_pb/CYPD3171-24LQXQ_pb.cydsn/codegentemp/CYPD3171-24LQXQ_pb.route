@@ -1,0 +1,47 @@
+net ClockBlock_HFCLK
+	term   ":m0s8clockblockcell.hfclk"
+	switch ":m0s8clockblockcell.hfclk==>:interrupt_8.clock"
+	term   ":interrupt_8.clock"
+	switch ":m0s8clockblockcell.hfclk==>:interrupt_1.clock"
+	term   ":interrupt_1.clock"
+	switch ":m0s8clockblockcell.hfclk==>:interrupt_11.clock"
+	term   ":interrupt_11.clock"
+end ClockBlock_HFCLK
+net Net_408
+	term   ":m0s8tcpwmcell_2.line"
+	switch ":m0s8tcpwmcell_2.line==>:ioport1:hsiom_out0.fixed_ACT_1"
+	switch ":ioport1:hsiom_out0.hsiom0_out==>:ioport1:pin0.pin_input"
+	term   ":ioport1:pin0.pin_input"
+end Net_408
+net Net_474
+	term   ":m0s8scbcell_1.interrupt"
+	switch ":m0s8scbcell_1.interrupt==>:interrupt_idmux_8.in_0"
+	switch ":interrupt_idmux_8.interrupt_idmux_8__out==>:interrupt_8.interrupt"
+	term   ":interrupt_8.interrupt"
+end Net_474
+net Net_491
+	term   ":ioport2:pin3.fb"
+	switch ":ioport2:pin3.fb==>:ioport2:hsiom_in3.hsiom3_in"
+	switch ":ioport2:hsiom_in3.fixed_DPSLP_3==>:m0s8scbcell_1__i2c_scl__hsiom_permute.ioport2__fixed_out_p3_DPSLP_3"
+	switch ":m0s8scbcell_1__i2c_scl__hsiom_permute.m0s8scbcell_1__i2c_scl==>:m0s8scbcell_1.i2c_scl"
+	term   ":m0s8scbcell_1.i2c_scl"
+end Net_491
+net Net_492
+	term   ":ioport2:pin2.fb"
+	switch ":ioport2:pin2.fb==>:ioport2:hsiom_in2.hsiom2_in"
+	switch ":ioport2:hsiom_in2.fixed_DPSLP_3==>:m0s8scbcell_1__i2c_sda__hsiom_permute.ioport2__fixed_out_p2_DPSLP_3"
+	switch ":m0s8scbcell_1__i2c_sda__hsiom_permute.m0s8scbcell_1__i2c_sda==>:m0s8scbcell_1.i2c_sda"
+	term   ":m0s8scbcell_1.i2c_sda"
+end Net_492
+net Net_494
+	term   ":logicalport_1.interrupt"
+	switch ":logicalport_1.interrupt==>:interrupt_idmux_1.in_0"
+	switch ":interrupt_idmux_1.interrupt_idmux_1__out==>:interrupt_1.interrupt"
+	term   ":interrupt_1.interrupt"
+end Net_494
+net Net_877
+	term   ":m0s8tcpwmcell_0.interrupt"
+	switch ":m0s8tcpwmcell_0.interrupt==>:interrupt_idmux_11.in_0"
+	switch ":interrupt_idmux_11.interrupt_idmux_11__out==>:interrupt_11.interrupt"
+	term   ":interrupt_11.interrupt"
+end Net_877

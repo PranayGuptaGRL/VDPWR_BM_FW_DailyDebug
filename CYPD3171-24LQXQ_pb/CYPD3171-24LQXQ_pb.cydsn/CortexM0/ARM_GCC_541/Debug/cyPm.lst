@@ -1,0 +1,2118 @@
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cyPm.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.section	.gnu.lto_.profile.b369c895,"",%progbits
+  19 0000 789C6361 		.ascii	"x\234ca`d`a`\000\222N\322\000\001\011\000h"
+  19      60646061 
+  19      6000924E 
+  19      D2000109 
+  19      0068
+  20              		.text
+  21              		.section	.gnu.lto_.icf.b369c895,"",%progbits
+  22 0000 789C6361 		.ascii	"x\234ca`d\000\001\021\006\004`fh\234\260\240\205\213"
+  22      60640001 
+  22      11060460 
+  22      66689CB0 
+  22      A0858B
+  23 0013 71D9EFFD 		.ascii	"q\331\357\375\027\230\231V\277^\332\311\302\000\000"
+  23      17989956 
+  23      BF5EDAC9 
+  23      C20000
+  24 0022 56EE085A 		.ascii	"V\356\010Z"
+  25              		.text
+  26              		.section	.gnu.lto_.jmpfuncs.b369c895,"",%progbits
+  27 0000 789C6361 		.ascii	"x\234ca`d\000\001q\006\004`\006b&\020\203\021J3122\326"
+  27      60640001 
+  27      71060460 
+  27      06622610 
+  27      83114A33 
+  28 0018 33000005 		.ascii	"3\000\000\005\312\000\251"
+  28      CA00A9
+  29              		.text
+  30              		.section	.gnu.lto_.inline.b369c895,"",%progbits
+  31 0000 789C6361 		.ascii	"x\234ca`d\000\201X\006\004`f`\340\221ed`\342\232\340"
+  31      60640081 
+  31      58060460 
+  31      6660E091 
+  31      656460E2 
+  32 0016 C7C0B640 		.ascii	"\307\300\266@\236\011$\306\304\315\300\3008\301\017"
+  32      9E0924C6 
+  32      C4CDC0C0 
+  32      38C10F
+  33 0025 440175F0 		.ascii	"D\001u\360\311\003\245\3716\344b\225fb`gcddP\000\032"
+  33      C903A5F9 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 2
+
+
+  33      36E46295 
+  33      66626067 
+  33      63646450 
+  34 003b CCCC7481 		.ascii	"\314\314t\201\037\242\206\355\203\036\013\330p\000\276"
+  34      1FA286ED 
+  34      831E0BD8 
+  34      7000BE
+  35 004a 74095B   		.ascii	"t\011["
+  36              		.text
+  37              		.section	.gnu.lto_.pureconst.b369c895,"",%progbits
+  38 0000 789C6361 		.ascii	"x\234ca`d\340d```f\330\305\310\270\213\221I\012\000"
+  38      6064E064 
+  38      60606066 
+  38      D8C5C8B8 
+  38      8B91490A 
+  39 0015 091E01A5 		.ascii	"\011\036\001\245"
+  40              		.text
+  41              		.section	.gnu.lto_CySysPmSleep.b369c895,"",%progbits
+  42 0000 789C7D90 		.ascii	"x\234}\220\273K#Q\024\306\317wof\022D\3156V\006\211"
+  42      BB4B2351 
+  42      14C6CF77 
+  42      6F661244 
+  42      CD365606 
+  43 0015 85858D08 		.ascii	"\205\205\215\010.\376\003\202\313vb\012\033A$Na\341"
+  43      2EFE0382 
+  43      CB76620A 
+  43      1B41244E 
+  43      61E1
+  44 0027 83100BAB 		.ascii	"\203\020\013\253\33483\350n\025VT,D\320\"\2765\205\222"
+  44      DC3833E8 
+  44      6E155654 
+  44      2C44D022 
+  44      BE358592 
+  45 003b 6033C45E 		.ascii	"`3\304^\373\210 \"*\"\342.\332\354\256\216\347\316\260"
+  45      FB882022 
+  45      2A22E22E 
+  45      DAECAE8E 
+  45      E7CEB0
+  46 004e 95B017EE 		.ascii	"\225\260\027\356\234;\207\357\373\235G\204@\372<r\350"
+  46      9C3B87EF 
+  46      FB9D4784 
+  46      40FA3C72 
+  46      E8
+  47 005f E6D8CC17 		.ascii	"\346\330\314\027\222 \012\247D\371\230\000\364C\305"
+  47      92200AA7 
+  47      44F99800 
+  47      F443C5
+  48 006e 4039811C 		.ascii	"@9\201\034^\304\253@u\366\246\"\332\213\212\317\245"
+  48      5EC4AB40 
+  48      75F6A622 
+  48      DA8B8ACF 
+  48      A5
+  49 007f FB43AA0D 		.ascii	"\373C\252\015\017\256$\362E@\"\024\321N,\233\377uQ6"
+  49      0FAE24F2 
+  49      45402214 
+  49      D14E2C9B 
+  49      FF755136 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 3
+
+
+  50 0093 652BF4BB 		.ascii	"e+\364\273\266Wp\352\332\326\225\232Q\336\302\330\222"
+  50      B65770EA 
+  50      DAD6959A 
+  50      51DEC2D8 
+  50      92
+  51 00a4 F2F24957 		.ascii	"\362\362IW\002\033\220\354BW\002\235\211\300\313\322"
+  51      021B90EC 
+  51      4257029D 
+  51      89C0CBD2 
+  52 00b4 ABD2DB42 		.ascii	"\253\322\333B\203\351hz\022\233h\013\271\330\202\311"
+  52      83E9687A 
+  52      129B680B 
+  52      B9D882C9 
+  53 00c4 2D4267F6 		.ascii	"-Bg\366\373=\345\373\266\362\346\215\027\021\343f9\027"
+  53      FB3DE5FB 
+  53      B6F2E68D 
+  53      1711E366 
+  53      3917
+  54 00d6 21570A43 		.ascii	"!W\012C\177\210\236\370\352\256\177\012\241\243\274"
+  54      7F889EF8 
+  54      EAAE7F0A 
+  54      A1A3BC
+  55 00e5 83ED2D97 		.ascii	"\203\355-\227\240\021\266\224\\\242Ry8\217\346^\325"
+  55      A011B694 
+  55      5CA25279 
+  55      388FE65E 
+  55      D5
+  56 00f6 9C529F5C 		.ascii	"\234R\237\\\311-h\3626rl\217\320\025DP\214\241\254\246"
+  56      C92D68F2 
+  56      36726C8F 
+  56      D0154450 
+  56      8CA1ACA6 
+  57 010a 1B547F7F 		.ascii	"\033T\177\177\177{6Bw\204\335\213n\365,\372,\\i\004"
+  57      7F7B3642 
+  57      7784DD8B 
+  57      6EF52CFA 
+  57      2C5C6904 
+  58 011e A3AD7F73 		.ascii	"\243\255\177s\346\352\303\337B\315V\215\234*_\256\035"
+  58      E6EAC3DF 
+  58      42CD568D 
+  58      9C2A5FAE 
+  58      1D
+  59 012f C557B192 		.ascii	"\305W\261\222wx1&v\221\300\016x@\354a\025L\264\377\232"
+  59      77783126 
+  59      7691C00E 
+  59      7840EC61 
+  59      154CB4FF 
+  60 0144 21CE0889 		.ascii	"!\316\010\211\305\332u5\256\021\002\177|\337\217c\237"
+  60      C5DA7535 
+  60      AE11027F 
+  60      7CDF8F63 
+  60      9F
+  61 0155 D55C7831 		.ascii	"\325\\x1\350\371\177\300\003\0062\206n\241N\016\233"
+  61      E8F97FC0 
+  61      03063286 
+  61      6EA14E0E 
+  61      9B
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 4
+
+
+  62 0166 B45A6FB1 		.ascii	"\264Zo\261\223\356\340x\345\300M\037\346\215\372\274"
+  62      93EEE078 
+  62      E5C04D1F 
+  62      E68DFABC 
+  63 0176 174289E7 		.ascii	"\027B\211\347\345\001]\031\243{\314x\307\306?7\357\017"
+  63      E5015D19 
+  63      A37BCC78 
+  63      C7C63F37 
+  63      EF0F
+  64 0188 7A6F2C6A 		.ascii	"zo,j\371b\215[\231\341\25452\224\232\230\312\244\255"
+  64      F9628D5B 
+  64      99E1AC35 
+  64      32949A98 
+  64      CAA4AD
+  65 019b C1BED444 		.ascii	"\301\276\324D\317\347\301\364t\337XG\232\032G\307\263"
+  65      CFE7C1F4 
+  65      74DF5847 
+  65      9A1A47C7 
+  65      B3
+  66 01ac 56263335 		.ascii	"V&35\231MeYd\016\364~M\326\321;\216\335\264|"
+  66      994D6559 
+  66      640EF47E 
+  66      4DD6D13B 
+  66      8EDDB47C 
+  67              		.text
+  68              		.section	.gnu.lto_CySysPmDeepSleep.b369c895,"",%progbits
+  69 0000 789C7591 		.ascii	"x\234u\221\317k\023A\024\307\337wf\263\273Ml\365\344"
+  69      CF6B1341 
+  69      14C7DF77 
+  69      66B3BB4D 
+  69      6CF5E4
+  70 0013 C520F1D0 		.ascii	"\305 \361\320C/RP\374\007\004\213\267b\016^\212\"1\007"
+  70      432F5250 
+  70      FC07048B 
+  70      B7620E5E 
+  70      8A223107 
+  71 0027 0FB612D2 		.ascii	"\017\266\022\322\203\0273Ivm\025\221\224\320\212\245"
+  71      83173349 
+  71      766D1591 
+  71      94D08AA5 
+  72 0037 35620FAD 		.ascii	"5b\017\255\277\372CmLnk\012\366\246\350\301CE)\001k"
+  72      BFFA436D 
+  72      4C6E6B0A 
+  72      F6A6E8C1 
+  72      43452901 
+  73 004c D1223528 		.ascii	"\321\"5(\024\241\256ov\251\024\304\201\235\231\367x"
+  73      14A1AE6F 
+  73      76A914C4 
+  73      819D99F7 
+  73      78
+  74 005d DFCFF7CD 		.ascii	"\337\317\367\315>\203@z\335\021D\307\370<\300\037$A"
+  74      3E83407A 
+  74      DD1144C7 
+  74      F83CC01F 
+  74      2441
+  75 006f 945E11E5 		.ascii	"\224^\021\345m\001\350\213\262A9\201\034~\212m\201\306"
+  75      6D01E88B 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 5
+
+
+  75      B2413981 
+  75      1C7E8A6D 
+  75      81C6
+  76 0081 D05A5D74 		.ascii	"\320Z]tM+^\253\237*R\315xp%\221/\002\022a\032]\304e"
+  76      4D2B5EAB 
+  76      9F2A52CD 
+  76      78702591 
+  76      2F021261 
+  77 0099 E5D6879A 		.ascii	"\345\326\207\232)\017A\337WfKN\264sJ\251\202\362\312"
+  77      290F41DF 
+  77      57664B4E 
+  77      B4734AA9 
+  77      82F2CA
+  78 00ac 2FDB6F29 		.ascii	"/\333o)/\237p%0\003\3112\034\211\243;\036\210\271\266"
+  78      2F9F7025 
+  78      3003C932 
+  78      1C89A33B 
+  78      1E88B9B6 
+  79 00c0 B9F07BB4 		.ascii	"\271\360{\264\335t4>\201\373\350\014\301x\000\223[\205"
+  79      DD74343E 
+  79      81FBE80C 
+  79      C1780093 
+  79      5B85
+  80 00d2 CECC9DF2 		.ascii	"\316\314\235\362\224\357\027\2257b\276\250Y1n\227\223"
+  80      94EF1795 
+  80      3762BEA8 
+  80      59316E97 
+  80      93
+  81 00e3 06B95244 		.ascii	"\006\271RDx\223\226\336l\275\021m\262V\277\340\273\020"
+  81      789396DE 
+  81      6CBD116D 
+  81      B256BFE0 
+  81      BB10
+  82 00f5 FA94EB28 		.ascii	"\372\224\353(z\223W\367kZQJv\253\3277\336[\271m5\254"
+  82      7A9357F7 
+  82      6B5A514A 
+  82      76ABD737 
+  82      DE5BB96D 
+  83 010b D43E571A 		.ascii	"\324>W\032\276\320&\017\221cy\204\232\020\201/\343\271"
+  83      BED0260F 
+  83      91637984 
+  83      9A10812F 
+  83      E3B9
+  84 011d 9AD6D0F8 		.ascii	"\232\326\320\370u\375\335\370\225Pm\260z\314m\274\266"
+  84      75FDDDF8 
+  84      95506DB0 
+  84      7ACC6DBC 
+  84      B6
+  85 012e 7E08579A 		.ascii	"~\010W\232\3013'\266FoF\303\360m\323\367uj\271\\i\241"
+  85      C13327B6 
+  85      466F46C3 
+  85      F06DD3F7 
+  85      756AB95C 
+  86 0144 82C9BCC3 		.ascii	"\202\311\274\303?\311\302c\304\361\010\374V\314r\226"
+  86      3FC9C263 
+  86      C4F108FC 
+  86      56CC7296 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 6
+
+
+  87 0154 8985D6D0 		.ascii	"\211\205\326\320\206\014\201\021fj\2171\350x7\335\016"
+  87      860C8111 
+  87      666A8F31 
+  87      E87837DD 
+  87      0E
+  88 0165 E81FAB77 		.ascii	"\350\037\253w\027#a\350\250\033J\373\177\275\275\364"
+  88      172361E8 
+  88      A81B4AFB 
+  88      7FBDBDF4 
+  89 0175 DC08E879 		.ascii	"\334\010\350y\245b\256l\303<\033\314\005\006\013l\300"
+  89      A562AE6C 
+  89      C33C1BCC 
+  89      05060B6C 
+  89      C0
+  90 0186 D0B0EB6F 		.ascii	"\320\260\353o\343gB\023\213US\327\234\341=!\250\264"
+  90      E3674213 
+  90      8B5553D7 
+  90      9CE13D21 
+  90      A8B4
+  91 0198 52541D9C 		.ascii	"RT\035\234\252\255\336\253\356\335i\263\015O\376R\236"
+  91      AAADDEAB 
+  91      EEDD69B3 
+  91      0D4FFE52 
+  91      9E
+  92 01a9 866D16B7 		.ascii	"\206m\026\267\314Po\207\2107\316\374\204\324\010\011"
+  92      CC506F87 
+  92      8837CEFC 
+  92      84D40809 
+  93 01b9 03CFB872 		.ascii	"\003\317\270rw\337\377\205-\006-\331\364\031jid9\370"
+  93      77DFFF85 
+  93      2D062DD9 
+  93      F4196A69 
+  93      6439F8
+  94 01cc B77AE8DD 		.ascii	"\267z\350\335\264\016\307\253ZA\374\317L\242>\317\216"
+  94      B40EC7AB 
+  94      5A41FCCF 
+  94      4CA23ECF 
+  94      8E
+  95 01dd 50E599F0 		.ascii	"P\345\231\360\020\\\031\243/(x\365\236\0355\317\030"
+  95      105C19A3 
+  95      2F2878F5 
+  95      9E1D35CF 
+  95      18
+  96 01ee 7AB65C74 		.ascii	"z\266\\t\260'\335\237\316\234\313\246\317\237M\016\014"
+  96      B027DD9F 
+  96      CE9CCBA6 
+  96      CF9F4D0E 
+  96      0C
+  97 01ff 6652E9BE 		.ascii	"fR\351\276\336\344\300\361\243}\251\313\275\027\017"
+  97      DEE4C0F1 
+  97      A37DA9CB 
+  97      BD170F
+  98 020e A7A8E342 		.ascii	"\247\250\343B\1776\235\311\014^\312&\263\\d\236>q2\021"
+  98      7F369DC9 
+  98      0C5ECA26 
+  98      B35C649E 
+  98      3E713211 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 7
+
+
+  99 0222 A53FD1CE 		.ascii	"\245?\321\316\355#"
+  99      ED23
+ 100              		.text
+ 101              		.section	.gnu.lto_CySysPmSetWakeupHoldoff.b369c895,"",%progbits
+ 102 0000 789C2591 		.ascii	"x\234%\221\317KTQ\024\307\317\367\3367?,\013\005\027"
+ 102      CF4B5451 
+ 102      14C7CFF7 
+ 102      DE373F2C 
+ 102      0B0517
+ 103 0013 6612D36A 		.ascii	"f\022\323jp\323\302\372\017\002]\011\322l\205\210\327"
+ 103      70D3C2FA 
+ 103      0F025D09 
+ 103      D26C8588 
+ 103      D7
+ 104 0024 0BA19AA1 		.ascii	"\013\241\232\241A\027\266\361\2163\357\265q\341\306"
+ 104      4117B6F1 
+ 104      8E33EFB5 
+ 104      71E1C6
+ 105 0033 0145510A 		.ascii	"\001EQ\012\261\264R\263L\027\3120Zn\324\241 \202\250"
+ 105      B1B452B3 
+ 105      4C17CA30 
+ 105      5A6ED4A1 
+ 105      2082A8
+ 106 0046 881217BA 		.ascii	"\210\022\027\272y3\326*\246\351\234y\027\336=\367\274"
+ 106      7933D62A 
+ 106      A6E99C79 
+ 106      17DE3DF7 
+ 106      BC
+ 107 0057 F739DF73 		.ascii	"\3679\337s\277\347Y\004\222\265\306\241\223\343E~\240"
+ 107      BFE75904 
+ 107      92B5C6A1 
+ 107      93E3457E 
+ 107      A0
+ 108 0068 096AEC80 		.ascii	"\011j\354\200(\023U\200\034L\0244\2540\214?\252\252"
+ 108      28135580 
+ 108      1C4C1434 
+ 108      AC308C3F 
+ 108      AAAA
+ 109 007a 507C74B4 		.ascii	"P|t\264\241:\346\015\257\037s\213\211\214q[]MTSu%\302"
+ 109      A13AE60D 
+ 109      AF1F738B 
+ 109      898C715B 
+ 109      5D4D5453 
+ 110 0091 3C3A98FA 		.ascii	"<:\230\372\220[\236\322\277\225\253\001\213\323\362"
+ 110      905B9ED2 
+ 110      BF95AB01 
+ 110      8BD3F2
+ 111 00a0 FEE4AFF3 		.ascii	"\376\344\257\363\222*\3048\375\272Y}|F_\006\3619\357"
+ 111      922AC438 
+ 111      FDBA597D 
+ 111      7C465F06 
+ 111      F139EF
+ 112 00b3 95FE86E2 		.ascii	"\225\376\206\342s\306\214\030\263\352\230\006Wk,@\263"
+ 112      73C68C18 
+ 112      B3EA9806 
+ 112      576B2C40 
+ 112      B3
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 8
+
+
+ 113 00c4 1E9EA11D 		.ascii	"\036\236\241\035O\321N\374\212\260\210\270\340?W\376"
+ 113      4FD14EFC 
+ 113      8AB088B8 
+ 113      E03F57FE 
+ 114 00d4 8D9F0BE7 		.ascii	"\215\237\013\347\244},h\212\347\010\213\215\245\033"
+ 114      A47D2C68 
+ 114      8AE7088B 
+ 114      8DA51B
+ 115 00e3 0553AB65 		.ascii	"\005S\253eM\341[\333\273J[\004\220\022\305\305\226\226"
+ 115      4DE15BDB 
+ 115      BB4A5B04 
+ 115      9012C5C5 
+ 115      9696
+ 116 00f5 CD928DC8 		.ascii	"\315\222\215\310\347\0221UVJ\242>Bv\322{\177\262\005"
+ 116      E7123155 
+ 116      564AA23E 
+ 116      4276D27B 
+ 116      7FB205
+ 117 0108 91C96A95 		.ascii	"\221\311j\225\325\340.\353\253O\374F\271\257\205\205"
+ 117      D5E02EEB 
+ 117      AB4FFC46 
+ 117      B9AF8585 
+ 118 0118 4F2D78C1 		.ascii	"O-x\301\227`\260\342\035\266\006\230f\222\261\217\376"
+ 118      9760B0E2 
+ 118      1DB60698 
+ 118      6692B18F 
+ 118      FE
+ 119 0129 DEF459C1 		.ascii	"\336\364Y\301Bh\302\313\000\312{\207\027\002\310b\216"
+ 119      4268C2CB 
+ 119      00CA7B87 
+ 119      1702C862 
+ 119      8E
+ 120 013a A1D73BBB 		.ascii	"\241\327;\273^4\320\002\226\352P1_\376\234o\020J\006"
+ 120      5E34D002 
+ 120      96EA5031 
+ 120      5FFE9C6F 
+ 120      104A06
+ 121 014d E0164B11 		.ascii	"\340\026K\021\371\036\256\317\343\373\332\354\233P\220"
+ 121      F91EAECF 
+ 121      E3FBDAEC 
+ 121      9B5090
+ 122 015c E6CCA891 		.ascii	"\346\314\250\221\351\235Ll\277\265f0\235\311e\214\271"
+ 122      E99D4C6C 
+ 122      BFB56630 
+ 122      9DC9658C 
+ 122      B9
+ 123 016d CA3E2258 		.ascii	"\312>\"X\341\321,\263\026\341\025f\300\275\350\030#"
+ 123      E1D12CB3 
+ 123      16E11566 
+ 123      C0BDE818 
+ 123      23
+ 124 017e 85D32F4A 		.ascii	"\205\323/JD\353?\302W\020\203l\367R\267\223t\322\267"
+ 124      44EB3FC2 
+ 124      5710836C 
+ 124      F752B793 
+ 124      74D2B7
+ 125 0191 069CDB37 		.ascii	"\006\234\3337\023\251\301\264\355\364\365&R\327\257"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 9
+
+
+ 125      13A9C1B4 
+ 125      EDF4F526 
+ 125      52D7AF
+ 126 01a0 F5D943BD 		.ascii	"\365\331C\275\367\257\330\324\334\177\307\276w\267+"
+ 126      F7AFD8D4 
+ 126      DC7FC7BE 
+ 126      77B72B
+ 127 01af ED3C1874 		.ascii	"\355<\030t\222\366PO\377\303\377\320\352\247b"
+ 127      92F6504F 
+ 127      FFC3FFD0 
+ 127      EAA762
+ 128              		.text
+ 129              		.section	.gnu.lto_.symbol_nodes.b369c895,"",%progbits
+ 130 0000 789C6361 		.ascii	"x\234ca`d(e\000\002&\206z\006\206\011\347\030@\324\256"
+ 130      60642865 
+ 130      00022686 
+ 130      7A068609 
+ 130      E71840D4 
+ 131 0015 0645A000 		.ascii	"\006E\240\000c=#\252\000S=\023\212\000#K=3X\200\201"
+ 131      633D23AA 
+ 131      00533D13 
+ 131      8A00234B 
+ 131      3D335880 
+ 132 002a A1A14101 		.ascii	"\241\241A\001\310g\256gA\34633\2600,y\360\217\221\031"
+ 132      C867AE67 
+ 132      41E63333 
+ 132      B0302C79 
+ 132      F08F9119 
+ 133 003e C87AF210 		.ascii	"\310z\362\020H3B\371@\221#mo\344\031\000\006{\033\361"
+ 133      483342F9 
+ 133      4091236D 
+ 133      6FE41900 
+ 133      067B1BF1 
+ 134              		.text
+ 135              		.section	.gnu.lto_.refs.b369c895,"",%progbits
+ 136 0000 789C6361 		.ascii	"x\234ca`\004B \000\000\0009\000\007"
+ 136      60044220 
+ 136      00000039 
+ 136      0007
+ 137              		.text
+ 138              		.section	.gnu.lto_.decls.b369c895,"",%progbits
+ 139 0000 789C8D53 		.ascii	"x\234\215S]PTe\030>\3579\273;\260,\342\220\031\027;"
+ 139      5D505465 
+ 139      183EEF39 
+ 139      BB3BB02C 
+ 139      E2901917 
+ 140 0015 495E0057 		.ascii	"I^\000W\214@Y\367[\311ES\3140\322\2153\205x\264\235"
+ 140      8C4059F7 
+ 140      5BC94553 
+ 140      CC30D28D 
+ 140      338578B4 
+ 141 002a 90657099 		.ascii	"\220ep\231i\257\372RL\320\246!'\205%\376\252IA\020\010"
+ 141      69AFFA52 
+ 141      4CD0A621 
+ 141      278525FE 
+ 141      AA494110 
+ 142 003f 5013528F 		.ascii	"P\023R\217\374\313o\202\200d\271\020Y\021\344`5\231"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 10
+
+
+ 142      FCCB6F82 
+ 142      8064B910 
+ 142      5911E460 
+ 142      3599
+ 143 0051 906EEFF7 		.ascii	"\220n\357\367s\366\034P\034\277\331\367|?\373\276\317"
+ 143      73F61C50 
+ 143      1CBFD9F7 
+ 143      7C3FFBBE 
+ 143      CF
+ 144 0062 FB3CCFF9 		.ascii	"\373<\317\371\216E\002\211\216)\233$\335\3069\001\267"
+ 144      8E450289 
+ 144      8E299B24 
+ 144      DDC63901 
+ 144      B7
+ 145 0073 411C165C 		.ascii	"A\034\026\\gH\306\260b\234\306h\304h\303\350\304\350"
+ 145      6748C6B0 
+ 145      629CC668 
+ 145      C468C3E8 
+ 145      C4E8
+ 146 0085 911E1E34 		.ascii	"\221\036\0364'\\\324j\030\361\030\275\030\335\030\203"
+ 146      275CD46A 
+ 146      18F118BD 
+ 146      18DD1883 
+ 147 0095 18031843 		.ascii	"\030\003\030C\030\035\"_\0215=\002s\365\240\375\034"
+ 147      181D225F 
+ 147      11353D02 
+ 147      73F5A0FD 
+ 147      1C
+ 148 00a6 26BCB855 		.ascii	"&\274\270U\230\223\030\023\217\301n|\0146\325\021&\260"
+ 148      98931813 
+ 148      8FC16E7C 
+ 148      0C36D511 
+ 148      26B0
+ 149 00b8 A3313660 		.ascii	"\24316`\234\025\370o\2300\351\000\221\277z\334\227!"
+ 149      9C15F86F 
+ 149      9830E900 
+ 149      91BF7ADC 
+ 149      9721
+ 150 00ca 58D15013 		.ascii	"X\321P\023~\003\246@\006a\246\004\300\237\300B\342\301"
+ 150      7E03A640 
+ 150      0661A604 
+ 150      C09FC042 
+ 150      E2C1
+ 151 00dc B6B890D9 		.ascii	"\266\270\220\331S\012\035\205&\211>%\236\317\316\014"
+ 151      530A1D85 
+ 151      26893E25 
+ 151      9ECFCE0C 
+ 152 00ec 30F6D3E7 		.ascii	"0\366\323\347\240>\030\210\201\016\242\010B\014x\025"
+ 152      A03E1888 
+ 152      810EA208 
+ 152      420C7815 
+ 153 00fc FF5F1669 		.ascii	"\377_\026i\022\007\227\215\002\023\036\247k\342\004"
+ 153      1207978D 
+ 153      02131EA7 
+ 153      6BE204
+ 154 010b 2B35812E 		.ascii	"+5\201.\372N\341\261JP\020\023\327\201{5\257&\326\023"
+ 154      FA4EE1B1 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 11
+
+
+ 154      4A501013 
+ 154      D7817B35 
+ 154      AF26D613 
+ 155 011f 1CC584C8 		.ascii	"\034\305\204\310\233\014g\272\203w\265\250\277e\210"
+ 155      9B0C67BA 
+ 155      8377B5A8 
+ 155      BF6588
+ 156 012e B6838CDB 		.ascii	"\266\203\214\333\321\305\301\212\010\334n\260\303z\334"
+ 156      D1C5C18A 
+ 156      08DC6EB0 
+ 156      C37ADC
+ 157 013d CE5FF407 		.ascii	"\316_\364\007#c\216\323:r\200\304\312\220\261\021\352"
+ 157      23638ED3 
+ 157      3A7280C4 
+ 157      CA90B111 
+ 157      EA
+ 158 014e C009A7C0 		.ascii	"\300\011\247\300\211\215\352!\006\237;-\034\251\253"
+ 158      898DEA21 
+ 158      069F3B2D 
+ 158      1CA9AB
+ 159 015d 2890BCB9 		.ascii	"(\220\274\271\232T7\221\351;\325\311~\242\355\307\""
+ 159      9A543791 
+ 159      E93BD5C9 
+ 159      7EA2EDC7 
+ 159      22
+ 160 016e 9926410D 		.ascii	"\231&A\015(P\013\211\224\034.\351t\022n \353\323\260"
+ 160      28500B89 
+ 160      941C2EE9 
+ 160      74126E20 
+ 160      EBD3B0
+ 161 0181 190B07EA 		.ascii	"\031\013\007\352\357\016\333\224\027\031\317\017/\004"
+ 161      EF0EDB94 
+ 161      1719CF0F 
+ 161      2F04
+ 162 018f AE457114 		.ascii	"\256Eq\024\355\201J\016\"\204\205A4\030\020\015f\210"
+ 162      ED814A0E 
+ 162      22848541 
+ 162      3418100D 
+ 162      6688
+ 163 01a1 4606717C 		.ascii	"F\006q|n\276\000\224T\006\361c_m\235\202\022\342\355"
+ 163      6EBE0094 
+ 163      5406F163 
+ 163      5F6D9D82 
+ 163      12E2ED
+ 164 01b4 400D8BC2 		.ascii	"@\015\213\302\243\306\205\363\367\"\371\021\315\350"
+ 164      A3C685F3 
+ 164      F722F911 
+ 164      CDE8
+ 165 01c2 0FDCFA33 		.ascii	"\017\334\3723\\y\233\255\257\0264\225+\\\277\205z6T"
+ 165      5C799BAD 
+ 165      AF163495 
+ 165      2B5CBF85 
+ 165      7A3654
+ 166 01d5 36BB8EEB 		.ascii	"6\273\216\353\217\275/\313\243\376\205\200\015\354\011"
+ 166      8FBD2FCB 
+ 166      A3FE8580 
+ 166      0DEC09
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 12
+
+
+ 167 01e4 8584EC27 		.ascii	"\205\204\354'\305\007Ht\252\004gP\177+\352\207s\220"
+ 167      C5074874 
+ 167      AA046750 
+ 167      7F2BEA87 
+ 167      7390
+ 168 01f6 4011292B 		.ascii	"@\021)+h\306\303\257\361\360\004uj\272\352PF\311!*\376"
+ 168      68C6C3AF 
+ 168      F1F00475 
+ 168      6ABAEA50 
+ 168      46C9212A 
+ 169 020b 2CD8A1C5 		.ascii	",\330\241\305`\036o\027\327q\272\265X\266\310xB\023"
+ 169      601E6F17 
+ 169      D771BAB5 
+ 169      58B6C878 
+ 169      4213
+ 170 021d D0403C1B 		.ascii	"\320@<\033/_\034\213X\323\352\363\314\352o@x]:=\332"
+ 170      2F5F1C8B 
+ 170      58D3EAF3 
+ 170      CCEA6F40 
+ 170      785D3A3D 
+ 171 0232 07BAD9AD 		.ascii	"\007\272\331\255/\2245\023a\025\346A\223\321\260\311"
+ 171      2F943513 
+ 171      6115E641 
+ 171      93D1B0C9 
+ 172 0242 6C551BB3 		.ascii	"lU\033\263\352\322\\\377IE)\002\246\276\361\340\317"
+ 172      EAD25CFF 
+ 172      49452902 
+ 172      A6BEF1E0 
+ 172      CF
+ 173 0253 B56128D7 		.ascii	"\265a(\327\211^\201\311('7\312\377\311\354\203\010\245"
+ 173      895E81C9 
+ 173      282737CA 
+ 173      FFC9EC83 
+ 173      08A5
+ 174 0265 8AE5CA63 		.ascii	"\212\345\312c\263us\026H\260\353\022\267s\211\032*\270"
+ 174      B3757316 
+ 174      48B0EB12 
+ 174      B773891A 
+ 174      2AB8
+ 175 0277 68747452 		.ascii	"httR\211\314\256\305/\210-F\202\024'lA\263.\241YNa\326"
+ 175      89CCAEC5 
+ 175      2F882D46 
+ 175      8214276C 
+ 175      41B32EA1 
+ 176 028f 0594F52D 		.ascii	"\005\224\365-\312\302\016\267J\252\346m\314\011-\344"
+ 176      CAC20EB7 
+ 176      4AAAE66D 
+ 176      CC092DE4 
+ 177 029f C4F0A753 		.ascii	"\304\360\247S\243\260\246\023\035\314\211\313\272\023"
+ 177      A3B0A613 
+ 177      1DCC89CB 
+ 177      BA13
+ 178 02ad 334533D7 		.ascii	"3E3\327\035\350\3044r\372\354\310\236\277\232I\201\225"
+ 178      1DE8C434 
+ 178      72FAECC8 
+ 178      9EBF9A49 
+ 178      8195
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 13
+
+
+ 179 02bf E640BBC1 		.ascii	"\346@\273\301\251\235\271\200\213N\346@}{\305r\230\322"
+ 179      A99DB980 
+ 179      8B4EE640 
+ 179      7D7BC572 
+ 179      98D2
+ 180 02d1 CD1DA828 		.ascii	"\315\035\250(\376\362\324\012\333)\017\243[\367\212"
+ 180      FEF2D40A 
+ 180      DB290FA3 
+ 180      5BF78A
+ 181 02e0 2BFEFB6F 		.ascii	"+\376\373o\225#Q\274\231V6\342\320\322\350\377\320e"
+ 181      952351BC 
+ 181      995636E2 
+ 181      D0D2E8FF 
+ 181      D065
+ 182 02f2 74EAD23B 		.ascii	"t\352\322;\365\260NKe\037\223u\216\303\241\313\303\322"
+ 182      F5B04E4B 
+ 182      651F9375 
+ 182      8EC3A1CB 
+ 182      C3D2
+ 183 0304 F5FB2341 		.ascii	"\365\373#A/8X2\316\230\\4s\354{\253\275\220\322x\222"
+ 183      2F385832 
+ 183      CE985C34 
+ 183      73EC7BAB 
+ 183      BD90D278 
+ 184 0319 9B86156D 		.ascii	"\233\206\025m7I\271U\371\201\277\236\361#\347J\025\323"
+ 184      3749B955 
+ 184      F981BF9E 
+ 184      F123E74A 
+ 184      15D3
+ 185 032b EB79DF7F 		.ascii	"\353y\337\177\364\003\022\013\003(\347\212A\260\017"
+ 185      F403120B 
+ 185      0328E78A 
+ 185      41B00F
+ 186 033a C4FB79B8 		.ascii	"\304\373y\270I\377\243\233\374\363\357\225\217\034f"
+ 186      49FFA39B 
+ 186      FCF3EF95 
+ 186      8F1C66
+ 187 0349 0D14D1D0 		.ascii	"\015\024\321\3200(4\0142\015\344\304RK\2709\271c\205"
+ 187      3028340C 
+ 187      320DE4C4 
+ 187      524BB839 
+ 187      B96385
+ 188 035c E021913C 		.ascii	"\340!\221<\304\222\277ZZ^\244\237^\034\375P\025\323"
+ 188      C492BF5A 
+ 188      5A5EA49F 
+ 188      5E1CFD50 
+ 188      15D3
+ 189 036e ED8BE3B7 		.ascii	"\355\213\343\267\257\346\363\236\026\273\362\023\227"
+ 189      AFE6F39E 
+ 189      16BBF213 
+ 189      97
+ 190 037b 77BBB5F7 		.ascii	"w\273\265\367z\244\376%\"{{\202\024zM0\212\324\343\004"
+ 190      7AA4FE25 
+ 190      227B7B82 
+ 190      147A4D30 
+ 190      8AD4E304 
+ 191 038f F5113C1C 		.ascii	"\365\021<\034\326\277Dm\362\246\223\2200\270\212\234"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 14
+
+
+ 191      D6BF446D 
+ 191      F2A69390 
+ 191      30B88A9C 
+ 192 039f BF335C88 		.ascii	"\2773\\\210\023\337\341/\235\245\177\310\334\362'\201"
+ 192      13DFE12F 
+ 192      9DA57FC8 
+ 192      DCF22781 
+ 193 03af C48AFFB4 		.ascii	"\304\212\377\264\341\247\2249N\251d\366p\245Uw\\[\376"
+ 193      E1A79439 
+ 193      4EA964F6 
+ 193      70A55577 
+ 193      5C5BFE
+ 194 03c2 35B58010 		.ascii	"5\265\200\020\200\011lu\315h5f\030\276\272\305\370\243"
+ 194      80096C75 
+ 194      CD683566 
+ 194      18BEBAC5 
+ 194      F8A3
+ 195 03d4 5B2C0482 		.ascii	"[,\004\202Ge\263\207\023+\014\237\024\036\322\331\341"
+ 195      4765B387 
+ 195      132B0C9F 
+ 195      141ED2D9 
+ 195      E1
+ 196 03e5 F2A5FBF6 		.ascii	"\362\245\373\366\245\355M\317V\325\334\260m\257o\217"
+ 196      A5ED4DCF 
+ 196      56D5DCB0 
+ 196      6DAF6F8F 
+ 197 03f5 75252549 		.ascii	"u%%I\317nSs\324\274L\257\272\353\255tO~^\226\272#-\335"
+ 197      CF6E5373 
+ 197      D4BC4CAF 
+ 197      BAEBAD74 
+ 197      4F7E5E96 
+ 198 040d E37A7E47 		.ascii	"\343z~G\226/mob\226\264^\024\275\2145\254\360\031\035"
+ 198      962F6D6F 
+ 198      6296B45E 
+ 198      14BD8C35 
+ 198      ACF0191D 
+ 199 0421 45F5BE99 		.ascii	"E\365\276\231\371\256\232\237\233\352\311\336\345\331"
+ 199      F9AE9A9F 
+ 199      9BEAC9DE 
+ 199      E5D9
+ 200 042f BDDB96EF 		.ascii	"\275\333\226\357\316\361\246$?\267&\234\327\227\253"
+ 200      CEF1A624 
+ 200      3FB7269C 
+ 200      D797AB
+ 201 043e EE4B7C47 		.ascii	"\356K|Gz\332\345{\345=\267\327\225\347\366\272\2632"
+ 201      7ADAE57B 
+ 201      E53DB7D7 
+ 201      95E7F6BA 
+ 201      B332
+ 202 0450 B3D3D52C 		.ascii	"\263\323\325,\257\333\223c\245\345/mZ\243\332\345{\315"
+ 202      AFDB9363 
+ 202      A5E52F6D 
+ 202      5AA3DAE5 
+ 202      7BCD
+ 203 0462 BD136B37 		.ascii	"\275\023k7bm\216W\315[]\234\247\356IIf\014\222\266\322"
+ 203      626D8E57 
+ 203      CD5B5D9C 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 15
+
+
+ 203      A7EE4949 
+ 203      660C92B6 
+ 204 0477 4DD2D6FF 		.ascii	"M\322\326\377\001l\334U\252"
+ 204      016CDC55 
+ 204      AA
+ 205              		.text
+ 206              		.section	.gnu.lto_.symtab.b369c895,"",%progbits
+ 207 0000 43795379 		.ascii	"CySysPmSleep\000"
+ 207      73506D53 
+ 207      6C656570 
+ 207      00
+ 208 000d 00       		.ascii	"\000"
+ 209 000e 00       		.ascii	"\000"
+ 210 000f 00       		.ascii	"\000"
+ 211 0010 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 211      00000000 
+ 212 0018 AD000000 		.ascii	"\255\000\000\000"
+ 213 001c 43795379 		.ascii	"CySysPmDeepSleep\000"
+ 213      73506D44 
+ 213      65657053 
+ 213      6C656570 
+ 213      00
+ 214 002d 00       		.ascii	"\000"
+ 215 002e 00       		.ascii	"\000"
+ 216 002f 00       		.ascii	"\000"
+ 217 0030 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 217      00000000 
+ 218 0038 AF000000 		.ascii	"\257\000\000\000"
+ 219 003c 43795379 		.ascii	"CySysPmSetWakeupHoldoff\000"
+ 219      73506D53 
+ 219      65745761 
+ 219      6B657570 
+ 219      486F6C64 
+ 220 0054 00       		.ascii	"\000"
+ 221 0055 00       		.ascii	"\000"
+ 222 0056 00       		.ascii	"\000"
+ 223 0057 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 223      00000000 
+ 224 005f BA000000 		.ascii	"\272\000\000\000"
+ 225 0063 43794578 		.ascii	"CyExitCriticalSection\000"
+ 225      69744372 
+ 225      69746963 
+ 225      616C5365 
+ 225      6374696F 
+ 226 0079 00       		.ascii	"\000"
+ 227 007a 02       		.ascii	"\002"
+ 228 007b 00       		.ascii	"\000"
+ 229 007c 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 229      00000000 
+ 230 0084 C3000000 		.ascii	"\303\000\000\000"
+ 231 0088 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 231      74657243 
+ 231      72697469 
+ 231      63616C53 
+ 231      65637469 
+ 232 009f 00       		.ascii	"\000"
+ 233 00a0 02       		.ascii	"\002"
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 16
+
+
+ 234 00a1 00       		.ascii	"\000"
+ 235 00a2 00000000 		.ascii	"\000\000\000\000\000\000\000\000"
+ 235      00000000 
+ 236 00aa C6000000 		.ascii	"\306\000\000\000"
+ 237              		.text
+ 238              		.section	.gnu.lto_.opts,"",%progbits
+ 239 0000 272D666D 		.ascii	"'-fmath-errno' '-fsigned-zeros' '-ftrapping-math' '"
+ 239      6174682D 
+ 239      6572726E 
+ 239      6F272027 
+ 239      2D667369 
+ 240 0033 2D666E6F 		.ascii	"-fno-trapv' '-fno-openmp' '-fno-openacc' '-mcpu=cor"
+ 240      2D747261 
+ 240      70762720 
+ 240      272D666E 
+ 240      6F2D6F70 
+ 241 0066 7465782D 		.ascii	"tex-m0' '-mthumb' '-g' '-Os' '-Werror' '-ffunction-"
+ 241      6D302720 
+ 241      272D6D74 
+ 241      68756D62 
+ 241      2720272D 
+ 242 0099 73656374 		.ascii	"sections' '-ffat-lto-objects' '-finline-functions' "
+ 242      696F6E73 
+ 242      2720272D 
+ 242      66666174 
+ 242      2D6C746F 
+ 243 00cc 272D666C 		.ascii	"'-flto' '-fno-strict-aliasing'\000"
+ 243      746F2720 
+ 243      272D666E 
+ 243      6F2D7374 
+ 243      72696374 
+ 244              		.text
+ 245              		.cfi_sections	.debug_frame
+ 246              		.section	.text.CySysPmSleep,"ax",%progbits
+ 247              		.align	1
+ 248              		.global	CySysPmSleep
+ 249              		.code	16
+ 250              		.thumb_func
+ 251              		.type	CySysPmSleep, %function
+ 252              	CySysPmSleep:
+ 253              	.LFB0:
+ 254              		.file 1 "Generated_Source\\PSoC4\\cyPm.c"
+   1:Generated_Source\PSoC4/cyPm.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC4/cyPm.c **** * \file cyPm.c
+   3:Generated_Source\PSoC4/cyPm.c **** * \version 5.60
+   4:Generated_Source\PSoC4/cyPm.c **** *
+   5:Generated_Source\PSoC4/cyPm.c **** * \brief Provides an API for the power management.
+   6:Generated_Source\PSoC4/cyPm.c **** *
+   7:Generated_Source\PSoC4/cyPm.c **** * \note Documentation of the API's in this file is located in the System
+   8:Generated_Source\PSoC4/cyPm.c **** * Reference Guide provided with PSoC Creator.
+   9:Generated_Source\PSoC4/cyPm.c **** *
+  10:Generated_Source\PSoC4/cyPm.c **** ********************************************************************************
+  11:Generated_Source\PSoC4/cyPm.c **** * \copyright
+  12:Generated_Source\PSoC4/cyPm.c **** * Copyright 2011-2017, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC4/cyPm.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC4/cyPm.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC4/cyPm.c **** * the software package with which this file was provided.
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 17
+
+
+  16:Generated_Source\PSoC4/cyPm.c **** *******************************************************************************/
+  17:Generated_Source\PSoC4/cyPm.c **** 
+  18:Generated_Source\PSoC4/cyPm.c **** #include "cyPm.h"
+  19:Generated_Source\PSoC4/cyPm.c **** #include "CyLib.h"
+  20:Generated_Source\PSoC4/cyPm.c **** 
+  21:Generated_Source\PSoC4/cyPm.c **** 
+  22:Generated_Source\PSoC4/cyPm.c **** /*******************************************************************************
+  23:Generated_Source\PSoC4/cyPm.c **** * Function Name: CySysPmSleep
+  24:Generated_Source\PSoC4/cyPm.c **** ****************************************************************************//**
+  25:Generated_Source\PSoC4/cyPm.c **** *
+  26:Generated_Source\PSoC4/cyPm.c **** * Puts the part into the Sleep state. This is a CPU-centric power mode.
+  27:Generated_Source\PSoC4/cyPm.c **** * It means that the CPU has indicated that it is in the sleep mode and
+  28:Generated_Source\PSoC4/cyPm.c **** * its main clock can be removed. It is identical to Active from a peripheral
+  29:Generated_Source\PSoC4/cyPm.c **** * point of view. Any enabled interrupts can cause wakeup from the Sleep mode.
+  30:Generated_Source\PSoC4/cyPm.c **** *
+  31:Generated_Source\PSoC4/cyPm.c **** *******************************************************************************/
+  32:Generated_Source\PSoC4/cyPm.c **** void CySysPmSleep(void)
+  33:Generated_Source\PSoC4/cyPm.c **** {
+ 255              		.loc 1 33 0
+ 256              		.cfi_startproc
+ 257              		@ args = 0, pretend = 0, frame = 0
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 259 0000 10B5     		push	{r4, lr}
+ 260              		.cfi_def_cfa_offset 8
+ 261              		.cfi_offset 4, -8
+ 262              		.cfi_offset 14, -4
+  34:Generated_Source\PSoC4/cyPm.c ****     uint8 interruptState;
+  35:Generated_Source\PSoC4/cyPm.c **** 
+  36:Generated_Source\PSoC4/cyPm.c ****     interruptState = CyEnterCriticalSection();
+ 263              		.loc 1 36 0
+ 264 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ 265              	.LVL0:
+  37:Generated_Source\PSoC4/cyPm.c **** 
+  38:Generated_Source\PSoC4/cyPm.c ****     /* CPU enters Sleep mode upon execution of WFI */
+  39:Generated_Source\PSoC4/cyPm.c ****     CY_PM_CPU_SCR_REG &= (uint32) (~CY_PM_CPU_SCR_SLEEPDEEP);
+ 266              		.loc 1 39 0
+ 267 0006 0421     		movs	r1, #4
+ 268 0008 034A     		ldr	r2, .L2
+ 269 000a 1368     		ldr	r3, [r2]
+ 270 000c 8B43     		bics	r3, r1
+ 271 000e 1360     		str	r3, [r2]
+  40:Generated_Source\PSoC4/cyPm.c **** 
+  41:Generated_Source\PSoC4/cyPm.c ****     /* Sleep and wait for interrupt */
+  42:Generated_Source\PSoC4/cyPm.c ****     CY_PM_WFI;
+ 272              		.loc 1 42 0
+ 273              		.syntax divided
+ 274              	@ 42 "Generated_Source\PSoC4\cyPm.c" 1
+ 275 0010 30BF     		WFI 
+ 276              	
+ 277              	@ 0 "" 2
+  43:Generated_Source\PSoC4/cyPm.c **** 
+  44:Generated_Source\PSoC4/cyPm.c ****     CyExitCriticalSection(interruptState);
+ 278              		.loc 1 44 0
+ 279              		.thumb
+ 280              		.syntax unified
+ 281 0012 FFF7FEFF 		bl	CyExitCriticalSection
+ 282              	.LVL1:
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 18
+
+
+  45:Generated_Source\PSoC4/cyPm.c **** }
+ 283              		.loc 1 45 0
+ 284              		@ sp needed
+ 285 0016 10BD     		pop	{r4, pc}
+ 286              	.L3:
+ 287              		.align	2
+ 288              	.L2:
+ 289 0018 10ED00E0 		.word	-536810224
+ 290              		.cfi_endproc
+ 291              	.LFE0:
+ 292              		.size	CySysPmSleep, .-CySysPmSleep
+ 293              		.section	.text.CySysPmDeepSleep,"ax",%progbits
+ 294              		.align	1
+ 295              		.global	CySysPmDeepSleep
+ 296              		.code	16
+ 297              		.thumb_func
+ 298              		.type	CySysPmDeepSleep, %function
+ 299              	CySysPmDeepSleep:
+ 300              	.LFB1:
+  46:Generated_Source\PSoC4/cyPm.c **** 
+  47:Generated_Source\PSoC4/cyPm.c **** 
+  48:Generated_Source\PSoC4/cyPm.c **** /*******************************************************************************
+  49:Generated_Source\PSoC4/cyPm.c **** * Function Name: CySysPmDeepSleep
+  50:Generated_Source\PSoC4/cyPm.c **** ****************************************************************************//**
+  51:Generated_Source\PSoC4/cyPm.c **** *
+  52:Generated_Source\PSoC4/cyPm.c **** * Puts the part into the Deep Sleep state. If the firmware attempts to enter
+  53:Generated_Source\PSoC4/cyPm.c **** * this mode before the system is ready (that is, when
+  54:Generated_Source\PSoC4/cyPm.c **** * PWR_CONTROL.LPM_READY = 0), then the device will go into the Sleep mode
+  55:Generated_Source\PSoC4/cyPm.c **** * instead and automatically enter the originally intended mode when the
+  56:Generated_Source\PSoC4/cyPm.c **** * holdoff expires.
+  57:Generated_Source\PSoC4/cyPm.c **** *
+  58:Generated_Source\PSoC4/cyPm.c **** * The wakeup occurs when an interrupt is received from a DeepSleep or
+  59:Generated_Source\PSoC4/cyPm.c **** * Hibernate peripheral. For more details, see a corresponding
+  60:Generated_Source\PSoC4/cyPm.c **** * peripheral's datasheet.
+  61:Generated_Source\PSoC4/cyPm.c **** *
+  62:Generated_Source\PSoC4/cyPm.c **** *******************************************************************************/
+  63:Generated_Source\PSoC4/cyPm.c **** void CySysPmDeepSleep(void)
+  64:Generated_Source\PSoC4/cyPm.c **** {
+ 301              		.loc 1 64 0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305 0000 10B5     		push	{r4, lr}
+ 306              		.cfi_def_cfa_offset 8
+ 307              		.cfi_offset 4, -8
+ 308              		.cfi_offset 14, -4
+  65:Generated_Source\PSoC4/cyPm.c ****     uint8 interruptState;
+  66:Generated_Source\PSoC4/cyPm.c ****     #if(CY_IP_SRSSV2)
+  67:Generated_Source\PSoC4/cyPm.c ****         volatile uint32 clkSelectReg;
+  68:Generated_Source\PSoC4/cyPm.c ****     #endif /* (CY_IP_SRSSV2) */
+  69:Generated_Source\PSoC4/cyPm.c **** 
+  70:Generated_Source\PSoC4/cyPm.c ****     interruptState = CyEnterCriticalSection();
+ 309              		.loc 1 70 0
+ 310 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ 311              	.LVL2:
+  71:Generated_Source\PSoC4/cyPm.c **** 
+  72:Generated_Source\PSoC4/cyPm.c ****     #if(CY_IP_SRSSV2)
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 19
+
+
+  73:Generated_Source\PSoC4/cyPm.c ****         /* Device enters DeepSleep mode when CPU asserts SLEEPDEEP signal */
+  74:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_CONTROL_REG &= (uint32) (~CY_PM_PWR_CONTROL_HIBERNATE);
+  75:Generated_Source\PSoC4/cyPm.c ****     #endif /* (CY_IP_SRSSV2) */
+  76:Generated_Source\PSoC4/cyPm.c **** 
+  77:Generated_Source\PSoC4/cyPm.c ****     #if (CY_IP_CPUSS && CY_IP_SRSSV2)
+  78:Generated_Source\PSoC4/cyPm.c ****         CY_PM_CPUSS_CONFIG_REG |= CY_PM_CPUSS_CONFIG_FLSH_ACC_BYPASS;
+  79:Generated_Source\PSoC4/cyPm.c ****     #endif /* (CY_IP_CPUSS && CY_IP_SRSSV2) */
+  80:Generated_Source\PSoC4/cyPm.c **** 
+  81:Generated_Source\PSoC4/cyPm.c ****     /* Adjust delay to wait for references to settle on wakeup from Deep Sleep */
+  82:Generated_Source\PSoC4/cyPm.c ****     CY_PM_PWR_KEY_DELAY_REG = CY_SFLASH_DPSLP_KEY_DELAY_REG;
+  83:Generated_Source\PSoC4/cyPm.c **** 
+  84:Generated_Source\PSoC4/cyPm.c ****     /* CPU enters DeepSleep/Hibernate mode upon execution of WFI */
+  85:Generated_Source\PSoC4/cyPm.c ****     CY_PM_CPU_SCR_REG |= CY_PM_CPU_SCR_SLEEPDEEP;
+ 312              		.loc 1 85 0
+ 313 0006 0421     		movs	r1, #4
+  82:Generated_Source\PSoC4/cyPm.c **** 
+ 314              		.loc 1 82 0
+ 315 0008 064B     		ldr	r3, .L5
+ 316 000a 074A     		ldr	r2, .L5+4
+ 317 000c 1B88     		ldrh	r3, [r3]
+ 318 000e 9BB2     		uxth	r3, r3
+ 319 0010 1360     		str	r3, [r2]
+ 320              		.loc 1 85 0
+ 321 0012 064A     		ldr	r2, .L5+8
+ 322 0014 1368     		ldr	r3, [r2]
+ 323 0016 0B43     		orrs	r3, r1
+ 324 0018 1360     		str	r3, [r2]
+  86:Generated_Source\PSoC4/cyPm.c **** 
+  87:Generated_Source\PSoC4/cyPm.c ****     #if(CY_IP_SRSSV2)
+  88:Generated_Source\PSoC4/cyPm.c ****         /* Preserve system clock configuration and
+  89:Generated_Source\PSoC4/cyPm.c ****         * reduce sysclk to <=12 MHz (Cypress ID #158710, #179888).
+  90:Generated_Source\PSoC4/cyPm.c ****         */
+  91:Generated_Source\PSoC4/cyPm.c ****         clkSelectReg = CY_SYS_CLK_SELECT_REG;
+  92:Generated_Source\PSoC4/cyPm.c ****         CySysClkWriteSysclkDiv(CY_SYS_CLK_SYSCLK_DIV4);
+  93:Generated_Source\PSoC4/cyPm.c ****     #endif /* (CY_IP_SRSSV2) */
+  94:Generated_Source\PSoC4/cyPm.c **** 
+  95:Generated_Source\PSoC4/cyPm.c ****     /* Sleep and wait for interrupt */
+  96:Generated_Source\PSoC4/cyPm.c ****     CY_PM_WFI;
+ 325              		.loc 1 96 0
+ 326              		.syntax divided
+ 327              	@ 96 "Generated_Source\PSoC4\cyPm.c" 1
+ 328 001a 30BF     		WFI 
+ 329              	
+ 330              	@ 0 "" 2
+  97:Generated_Source\PSoC4/cyPm.c **** 
+  98:Generated_Source\PSoC4/cyPm.c ****     #if(CY_IP_SRSSV2)
+  99:Generated_Source\PSoC4/cyPm.c ****         /* Restore system clock configuration */
+ 100:Generated_Source\PSoC4/cyPm.c ****         CY_SYS_CLK_SELECT_REG = clkSelectReg;
+ 101:Generated_Source\PSoC4/cyPm.c ****     #endif /* (CY_IP_SRSSV2) */
+ 102:Generated_Source\PSoC4/cyPm.c **** 
+ 103:Generated_Source\PSoC4/cyPm.c ****     #if (CY_IP_CPUSS && CY_IP_SRSSV2)
+ 104:Generated_Source\PSoC4/cyPm.c ****         CY_PM_CPUSS_CONFIG_REG &= (uint32) (~CY_PM_CPUSS_CONFIG_FLSH_ACC_BYPASS);
+ 105:Generated_Source\PSoC4/cyPm.c ****     #endif /* (CY_IP_CPUSS && CY_IP_SRSSV2) */
+ 106:Generated_Source\PSoC4/cyPm.c **** 
+ 107:Generated_Source\PSoC4/cyPm.c ****     CyExitCriticalSection(interruptState);
+ 331              		.loc 1 107 0
+ 332              		.thumb
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 20
+
+
+ 333              		.syntax unified
+ 334 001c FFF7FEFF 		bl	CyExitCriticalSection
+ 335              	.LVL3:
+ 108:Generated_Source\PSoC4/cyPm.c **** }
+ 336              		.loc 1 108 0
+ 337              		@ sp needed
+ 338 0020 10BD     		pop	{r4, pc}
+ 339              	.L6:
+ 340 0022 C046     		.align	2
+ 341              	.L5:
+ 342 0024 52F1FF0F 		.word	268431698
+ 343 0028 04000340 		.word	1073938436
+ 344 002c 10ED00E0 		.word	-536810224
+ 345              		.cfi_endproc
+ 346              	.LFE1:
+ 347              		.size	CySysPmDeepSleep, .-CySysPmDeepSleep
+ 348              		.section	.text.CySysPmSetWakeupHoldoff,"ax",%progbits
+ 349              		.align	1
+ 350              		.global	CySysPmSetWakeupHoldoff
+ 351              		.code	16
+ 352              		.thumb_func
+ 353              		.type	CySysPmSetWakeupHoldoff, %function
+ 354              	CySysPmSetWakeupHoldoff:
+ 355              	.LFB2:
+ 109:Generated_Source\PSoC4/cyPm.c **** 
+ 110:Generated_Source\PSoC4/cyPm.c **** 
+ 111:Generated_Source\PSoC4/cyPm.c **** #if(CY_IP_SRSSV2)
+ 112:Generated_Source\PSoC4/cyPm.c **** 
+ 113:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
+ 114:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmHibernate
+ 115:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
+ 116:Generated_Source\PSoC4/cyPm.c ****     *
+ 117:Generated_Source\PSoC4/cyPm.c ****     * Puts the part into the Hibernate state. Only SRAM and UDBs are retained;
+ 118:Generated_Source\PSoC4/cyPm.c ****     * most internal supplies are off. Wakeup is possible from a pin or a hibernate
+ 119:Generated_Source\PSoC4/cyPm.c ****     * comparator only.
+ 120:Generated_Source\PSoC4/cyPm.c ****     *
+ 121:Generated_Source\PSoC4/cyPm.c ****     * It is expected that the firmware has already frozen the IO-Cells using
+ 122:Generated_Source\PSoC4/cyPm.c ****     * CySysPmFreezeIo() function before the call to this function. If this is
+ 123:Generated_Source\PSoC4/cyPm.c ****     * omitted, the IO-cells will be frozen in the same way as they are
+ 124:Generated_Source\PSoC4/cyPm.c ****     * in the Active to Deep Sleep transition, but will lose their state on wake up
+ 125:Generated_Source\PSoC4/cyPm.c ****     * (because of the reset occurring at that time).
+ 126:Generated_Source\PSoC4/cyPm.c ****     *
+ 127:Generated_Source\PSoC4/cyPm.c ****     * Because all the CPU state is lost, the CPU will start up at the reset vector.
+ 128:Generated_Source\PSoC4/cyPm.c ****     * To save the firmware state through the Hibernate low power mode, a
+ 129:Generated_Source\PSoC4/cyPm.c ****     * corresponding variable should be defined with CY_NOINIT attribute. It
+ 130:Generated_Source\PSoC4/cyPm.c ****     * prevents data from being initialized to zero on startup. The interrupt
+ 131:Generated_Source\PSoC4/cyPm.c ****     * cause of the hibernate peripheral is retained, such that it can be either
+ 132:Generated_Source\PSoC4/cyPm.c ****     * read by the firmware or cause an interrupt after the firmware has booted and
+ 133:Generated_Source\PSoC4/cyPm.c ****     * enabled the corresponding interrupt. To distinguish the wakeup from
+ 134:Generated_Source\PSoC4/cyPm.c ****     * the Hibernate mode and the general Reset event, the
+ 135:Generated_Source\PSoC4/cyPm.c ****     * \ref CySysPmGetResetReason() function could be used.
+ 136:Generated_Source\PSoC4/cyPm.c ****     *
+ 137:Generated_Source\PSoC4/cyPm.c ****     *******************************************************************************/
+ 138:Generated_Source\PSoC4/cyPm.c ****     void CySysPmHibernate(void)
+ 139:Generated_Source\PSoC4/cyPm.c ****     {
+ 140:Generated_Source\PSoC4/cyPm.c ****         uint8 interruptState;
+ 141:Generated_Source\PSoC4/cyPm.c **** 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 21
+
+
+ 142:Generated_Source\PSoC4/cyPm.c ****         interruptState = CyEnterCriticalSection();
+ 143:Generated_Source\PSoC4/cyPm.c **** 
+ 144:Generated_Source\PSoC4/cyPm.c ****         #if (CY_IP_HOBTO_DEVICE)
+ 145:Generated_Source\PSoC4/cyPm.c ****             /* Disable input buffers for all ports */
+ 146:Generated_Source\PSoC4/cyPm.c ****             CySysPmHibPinsDisableInputBuf();
+ 147:Generated_Source\PSoC4/cyPm.c ****         #endif /* (CY_IP_HOBTO_DEVICE) */
+ 148:Generated_Source\PSoC4/cyPm.c **** 
+ 149:Generated_Source\PSoC4/cyPm.c ****         /* Device enters Hibernate mode when CPU asserts SLEEPDEEP signal */
+ 150:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_CONTROL_REG |= CY_PM_PWR_CONTROL_HIBERNATE;
+ 151:Generated_Source\PSoC4/cyPm.c **** 
+ 152:Generated_Source\PSoC4/cyPm.c ****         /* Adjust delay to wait for references to settle on wakeup from hibernate */
+ 153:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_KEY_DELAY_REG = CY_SFLASH_HIB_KEY_DELAY_REG;
+ 154:Generated_Source\PSoC4/cyPm.c **** 
+ 155:Generated_Source\PSoC4/cyPm.c ****         /* CPU enters DeepSleep/Hibernate mode upon execution of WFI */
+ 156:Generated_Source\PSoC4/cyPm.c ****         CY_PM_CPU_SCR_REG |= CY_PM_CPU_SCR_SLEEPDEEP;
+ 157:Generated_Source\PSoC4/cyPm.c **** 
+ 158:Generated_Source\PSoC4/cyPm.c ****         /* Save token that will retain through a STOP/WAKEUP sequence
+ 159:Generated_Source\PSoC4/cyPm.c ****          * thus could be used by CySysPmGetResetReason() to differentiate
+ 160:Generated_Source\PSoC4/cyPm.c ****          * WAKEUP from a general RESET event.
+ 161:Generated_Source\PSoC4/cyPm.c ****          */
+ 162:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_STOP_REG = (CY_PM_PWR_STOP_REG & (uint32)(~CY_PM_PWR_STOP_TOKEN_MASK)) | CY_PM_PW
+ 163:Generated_Source\PSoC4/cyPm.c **** 
+ 164:Generated_Source\PSoC4/cyPm.c ****         /* Sleep and wait for interrupt. Wakeup from Hibernate is performed
+ 165:Generated_Source\PSoC4/cyPm.c ****          * through RESET state, causing a normal Boot procedure to occur.
+ 166:Generated_Source\PSoC4/cyPm.c ****          * The WFI instruction doesn't put the core to sleep if its wake condition
+ 167:Generated_Source\PSoC4/cyPm.c ****          * is true when the instruction is executed.
+ 168:Generated_Source\PSoC4/cyPm.c ****          */
+ 169:Generated_Source\PSoC4/cyPm.c ****         CY_PM_WFI;
+ 170:Generated_Source\PSoC4/cyPm.c **** 
+ 171:Generated_Source\PSoC4/cyPm.c ****         CyExitCriticalSection(interruptState);
+ 172:Generated_Source\PSoC4/cyPm.c ****     }
+ 173:Generated_Source\PSoC4/cyPm.c **** 
+ 174:Generated_Source\PSoC4/cyPm.c **** 
+ 175:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
+ 176:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmStop
+ 177:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
+ 178:Generated_Source\PSoC4/cyPm.c ****     *
+ 179:Generated_Source\PSoC4/cyPm.c ****     * Puts the part into the Stop state. All internal supplies are off;
+ 180:Generated_Source\PSoC4/cyPm.c ****     * no state is retained.
+ 181:Generated_Source\PSoC4/cyPm.c ****     *
+ 182:Generated_Source\PSoC4/cyPm.c ****     * Wakeup from Stop is performed by toggling the wakeup pin, causing
+ 183:Generated_Source\PSoC4/cyPm.c ****     * a normal boot procedure to occur. To configure the wakeup pin,
+ 184:Generated_Source\PSoC4/cyPm.c ****     * the Digital Input Pin component should be placed on the schematic,
+ 185:Generated_Source\PSoC4/cyPm.c ****     * assigned to the wakeup pin, and resistively pulled up or down to the inverse
+ 186:Generated_Source\PSoC4/cyPm.c ****     * state of the wakeup polarity. To distinguish the wakeup from the Stop mode
+ 187:Generated_Source\PSoC4/cyPm.c ****     * and the general Reset event, \ref CySysPmGetResetReason() function could be
+ 188:Generated_Source\PSoC4/cyPm.c ****     * used.  The wakeup pin is active low by default. The wakeup pin polarity
+ 189:Generated_Source\PSoC4/cyPm.c ****     * could be changed with the \ref CySysPmSetWakeupPolarity() function.
+ 190:Generated_Source\PSoC4/cyPm.c ****     *
+ 191:Generated_Source\PSoC4/cyPm.c ****     * This function freezes IO cells implicitly. It is not possible to enter
+ 192:Generated_Source\PSoC4/cyPm.c ****     * the STOP mode before freezing the IO cells. The IO cells remain frozen after
+ 193:Generated_Source\PSoC4/cyPm.c ****     * awake from the Stop mode until the firmware unfreezes them after booting
+ 194:Generated_Source\PSoC4/cyPm.c ****     * explicitly with \ref CySysPmUnfreezeIo() function call.
+ 195:Generated_Source\PSoC4/cyPm.c ****     *
+ 196:Generated_Source\PSoC4/cyPm.c ****     *******************************************************************************/
+ 197:Generated_Source\PSoC4/cyPm.c ****     void CySysPmStop(void)
+ 198:Generated_Source\PSoC4/cyPm.c ****     {
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 22
+
+
+ 199:Generated_Source\PSoC4/cyPm.c ****         (void) CyEnterCriticalSection();
+ 200:Generated_Source\PSoC4/cyPm.c **** 
+ 201:Generated_Source\PSoC4/cyPm.c ****         /* Update token to indicate Stop mode transition. Preserve only polarity. */
+ 202:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_STOP_REG = (CY_PM_PWR_STOP_REG & CY_PM_PWR_STOP_POLARITY) | CY_PM_PWR_STOP_TOKEN_
+ 203:Generated_Source\PSoC4/cyPm.c **** 
+ 204:Generated_Source\PSoC4/cyPm.c ****         /* Freeze IO-Cells to save IO-Cell state */
+ 205:Generated_Source\PSoC4/cyPm.c ****         CySysPmFreezeIo();
+ 206:Generated_Source\PSoC4/cyPm.c **** 
+ 207:Generated_Source\PSoC4/cyPm.c ****         /* Initiates transition to Stop state */
+ 208:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_STOP_REG = CY_PM_PWR_STOP_REG | CY_PM_PWR_STOP_STOP;
+ 209:Generated_Source\PSoC4/cyPm.c **** 
+ 210:Generated_Source\PSoC4/cyPm.c ****         /* Depending on the clock frequency and internal timing delays,
+ 211:Generated_Source\PSoC4/cyPm.c ****          * the final AHB transaction may or may not complete. To guard against
+ 212:Generated_Source\PSoC4/cyPm.c ****          * accidentally executing an unintended instruction, it is recommended
+ 213:Generated_Source\PSoC4/cyPm.c ****          * to add 2 NOP cycles after the final write to the STOP register.
+ 214:Generated_Source\PSoC4/cyPm.c ****          */
+ 215:Generated_Source\PSoC4/cyPm.c ****         CY_NOP;
+ 216:Generated_Source\PSoC4/cyPm.c ****         CY_NOP;
+ 217:Generated_Source\PSoC4/cyPm.c **** 
+ 218:Generated_Source\PSoC4/cyPm.c ****         /* Should never get to this WFI instruction */
+ 219:Generated_Source\PSoC4/cyPm.c ****         CY_PM_WFI;
+ 220:Generated_Source\PSoC4/cyPm.c **** 
+ 221:Generated_Source\PSoC4/cyPm.c ****         /* Wakeup from Stop is performed by toggling of Wakeup pin,
+ 222:Generated_Source\PSoC4/cyPm.c ****          * causing a normal Boot procedure to occur. No need to exit
+ 223:Generated_Source\PSoC4/cyPm.c ****          * from the critical section.
+ 224:Generated_Source\PSoC4/cyPm.c ****          */
+ 225:Generated_Source\PSoC4/cyPm.c ****     }
+ 226:Generated_Source\PSoC4/cyPm.c **** 
+ 227:Generated_Source\PSoC4/cyPm.c **** 
+ 228:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
+ 229:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmSetWakeupPolarity
+ 230:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
+ 231:Generated_Source\PSoC4/cyPm.c ****     *
+ 232:Generated_Source\PSoC4/cyPm.c ****     * Wake up from the stop mode is performed by toggling the wakeup pin,
+ 233:Generated_Source\PSoC4/cyPm.c ****     * causing a normal boot procedure to occur. This function assigns
+ 234:Generated_Source\PSoC4/cyPm.c ****     * the wakeup pin active level. Setting the wakeup pin to this level will cause
+ 235:Generated_Source\PSoC4/cyPm.c ****     * the wakeup from stop mode. The wakeup pin is active low by default.
+ 236:Generated_Source\PSoC4/cyPm.c ****     *
+ 237:Generated_Source\PSoC4/cyPm.c ****     * \param polarity
+ 238:Generated_Source\PSoC4/cyPm.c ****     * - \ref CY_PM_STOP_WAKEUP_ACTIVE_LOW Logical zero will wakeup the chip
+ 239:Generated_Source\PSoC4/cyPm.c ****     * - \ref CY_PM_STOP_WAKEUP_ACTIVE_HIGH Logical one will wakeup the chip
+ 240:Generated_Source\PSoC4/cyPm.c ****     *
+ 241:Generated_Source\PSoC4/cyPm.c ****     *******************************************************************************/
+ 242:Generated_Source\PSoC4/cyPm.c ****     void CySysPmSetWakeupPolarity(uint32 polarity)
+ 243:Generated_Source\PSoC4/cyPm.c ****     {
+ 244:Generated_Source\PSoC4/cyPm.c ****         uint8 interruptState;
+ 245:Generated_Source\PSoC4/cyPm.c **** 
+ 246:Generated_Source\PSoC4/cyPm.c ****         interruptState = CyEnterCriticalSection();
+ 247:Generated_Source\PSoC4/cyPm.c **** 
+ 248:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_STOP_REG = (CY_PM_STOP_WAKEUP_ACTIVE_LOW != polarity) ?
+ 249:Generated_Source\PSoC4/cyPm.c ****                             (CY_PM_PWR_STOP_REG | CY_PM_PWR_STOP_POLARITY) :
+ 250:Generated_Source\PSoC4/cyPm.c ****                             (CY_PM_PWR_STOP_REG & (uint32) (~CY_PM_PWR_STOP_POLARITY));
+ 251:Generated_Source\PSoC4/cyPm.c **** 
+ 252:Generated_Source\PSoC4/cyPm.c ****         CyExitCriticalSection(interruptState);
+ 253:Generated_Source\PSoC4/cyPm.c ****     }
+ 254:Generated_Source\PSoC4/cyPm.c **** 
+ 255:Generated_Source\PSoC4/cyPm.c **** 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 23
+
+
+ 256:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
+ 257:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmGetResetReason
+ 258:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
+ 259:Generated_Source\PSoC4/cyPm.c ****     *
+ 260:Generated_Source\PSoC4/cyPm.c ****     * Retrieves the last reset reason - transition from OFF/XRES/STOP/HIBERNATE to
+ 261:Generated_Source\PSoC4/cyPm.c ****     * the RESET state. Note that waking up from STOP using XRES will be perceived
+ 262:Generated_Source\PSoC4/cyPm.c ****     * as a general RESET.
+ 263:Generated_Source\PSoC4/cyPm.c ****     *
+ 264:Generated_Source\PSoC4/cyPm.c ****     * \return CY_PM_RESET_REASON_UNKN          Unknown reset reason.
+ 265:Generated_Source\PSoC4/cyPm.c ****     * \return CY_PM_RESET_REASON_XRES          Transition from OFF/XRES to RESET
+ 266:Generated_Source\PSoC4/cyPm.c ****     * \return CY_PM_RESET_REASON_WAKEUP_HIB    Transition/wakeup from HIBERNATE to RESET
+ 267:Generated_Source\PSoC4/cyPm.c ****     * \return CY_PM_RESET_REASON_WAKEUP_STOP   Transition/wakeup from STOP to RESET
+ 268:Generated_Source\PSoC4/cyPm.c ****     *
+ 269:Generated_Source\PSoC4/cyPm.c ****     *******************************************************************************/
+ 270:Generated_Source\PSoC4/cyPm.c ****     uint32 CySysPmGetResetReason(void)
+ 271:Generated_Source\PSoC4/cyPm.c ****     {
+ 272:Generated_Source\PSoC4/cyPm.c ****         uint32 reason = CY_PM_RESET_REASON_UNKN;
+ 273:Generated_Source\PSoC4/cyPm.c **** 
+ 274:Generated_Source\PSoC4/cyPm.c ****         switch(CY_PM_PWR_STOP_REG & CY_PM_PWR_STOP_TOKEN_MASK)
+ 275:Generated_Source\PSoC4/cyPm.c ****         {
+ 276:Generated_Source\PSoC4/cyPm.c ****         /* Power up, XRES */
+ 277:Generated_Source\PSoC4/cyPm.c ****         case CY_PM_PWR_STOP_TOKEN_XRES:
+ 278:Generated_Source\PSoC4/cyPm.c ****             reason = CY_PM_RESET_REASON_XRES;
+ 279:Generated_Source\PSoC4/cyPm.c ****             break;
+ 280:Generated_Source\PSoC4/cyPm.c **** 
+ 281:Generated_Source\PSoC4/cyPm.c ****         /* Wakeup from Hibernate */
+ 282:Generated_Source\PSoC4/cyPm.c ****         case CY_PM_PWR_STOP_TOKEN_HIB:
+ 283:Generated_Source\PSoC4/cyPm.c ****             reason = CY_PM_RESET_REASON_WAKEUP_HIB;
+ 284:Generated_Source\PSoC4/cyPm.c ****             break;
+ 285:Generated_Source\PSoC4/cyPm.c **** 
+ 286:Generated_Source\PSoC4/cyPm.c ****         /* Wakeup from Stop (through WAKEUP pin assert) */
+ 287:Generated_Source\PSoC4/cyPm.c ****         case CY_PM_PWR_STOP_TOKEN_STOP:
+ 288:Generated_Source\PSoC4/cyPm.c ****             reason = CY_PM_RESET_REASON_WAKEUP_STOP;
+ 289:Generated_Source\PSoC4/cyPm.c ****             break;
+ 290:Generated_Source\PSoC4/cyPm.c **** 
+ 291:Generated_Source\PSoC4/cyPm.c ****         /* Unknown reason */
+ 292:Generated_Source\PSoC4/cyPm.c ****         default:
+ 293:Generated_Source\PSoC4/cyPm.c ****             break;
+ 294:Generated_Source\PSoC4/cyPm.c ****         }
+ 295:Generated_Source\PSoC4/cyPm.c **** 
+ 296:Generated_Source\PSoC4/cyPm.c ****         return (reason);
+ 297:Generated_Source\PSoC4/cyPm.c ****     }
+ 298:Generated_Source\PSoC4/cyPm.c **** 
+ 299:Generated_Source\PSoC4/cyPm.c **** 
+ 300:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
+ 301:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmFreezeIo
+ 302:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
+ 303:Generated_Source\PSoC4/cyPm.c ****     *
+ 304:Generated_Source\PSoC4/cyPm.c ****     * Freezes IO-Cells directly to save the IO-Cell state on wake up from the
+ 305:Generated_Source\PSoC4/cyPm.c ****     * Hibernate or Stop state. It is not required to call this function before
+ 306:Generated_Source\PSoC4/cyPm.c ****     * entering the Stop mode, since \ref CySysPmStop() function freezes IO-Cells
+ 307:Generated_Source\PSoC4/cyPm.c ****     * implicitly.
+ 308:Generated_Source\PSoC4/cyPm.c ****     *
+ 309:Generated_Source\PSoC4/cyPm.c ****     * This API is not available for PSoC 4000 family of devices.
+ 310:Generated_Source\PSoC4/cyPm.c ****     *
+ 311:Generated_Source\PSoC4/cyPm.c ****     *******************************************************************************/
+ 312:Generated_Source\PSoC4/cyPm.c ****     void CySysPmFreezeIo(void)
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 24
+
+
+ 313:Generated_Source\PSoC4/cyPm.c ****     {
+ 314:Generated_Source\PSoC4/cyPm.c ****         uint8 interruptState;
+ 315:Generated_Source\PSoC4/cyPm.c **** 
+ 316:Generated_Source\PSoC4/cyPm.c ****         interruptState = CyEnterCriticalSection();
+ 317:Generated_Source\PSoC4/cyPm.c **** 
+ 318:Generated_Source\PSoC4/cyPm.c ****         /* Check FREEZE state to avoid recurrent IO-Cells freeze attempt,
+ 319:Generated_Source\PSoC4/cyPm.c ****          * since the second call to this function will cause accidental switch
+ 320:Generated_Source\PSoC4/cyPm.c ****          * to the STOP mode (the system will enter STOP mode immediately after
+ 321:Generated_Source\PSoC4/cyPm.c ****          * writing to STOP bit since both UNLOCK and FREEZE have been set correctly
+ 322:Generated_Source\PSoC4/cyPm.c ****          * in a previous call to this function).
+ 323:Generated_Source\PSoC4/cyPm.c ****          */
+ 324:Generated_Source\PSoC4/cyPm.c ****         if (0u == (CY_PM_PWR_STOP_REG & CY_PM_PWR_STOP_FREEZE))
+ 325:Generated_Source\PSoC4/cyPm.c ****         {
+ 326:Generated_Source\PSoC4/cyPm.c ****             /* Preserve last reset reason and disable overrides the next freeze command by peripher
+ 327:Generated_Source\PSoC4/cyPm.c ****             CY_PM_PWR_STOP_REG = CY_PM_PWR_STOP_STOP | CY_PM_PWR_STOP_FREEZE | CY_PM_PWR_STOP_UNLOC
+ 328:Generated_Source\PSoC4/cyPm.c ****                                 (CY_PM_PWR_STOP_REG & (CY_PM_PWR_STOP_TOKEN_MASK | CY_PM_PWR_STOP_P
+ 329:Generated_Source\PSoC4/cyPm.c **** 
+ 330:Generated_Source\PSoC4/cyPm.c ****             /* If reading after writing, read this register three times to delay
+ 331:Generated_Source\PSoC4/cyPm.c ****             *  enough time for internal settling.
+ 332:Generated_Source\PSoC4/cyPm.c ****             */
+ 333:Generated_Source\PSoC4/cyPm.c ****             (void) CY_PM_PWR_STOP_REG;
+ 334:Generated_Source\PSoC4/cyPm.c ****             (void) CY_PM_PWR_STOP_REG;
+ 335:Generated_Source\PSoC4/cyPm.c **** 
+ 336:Generated_Source\PSoC4/cyPm.c ****             /* Second write causes the freeze of IO-Cells to save IO-Cell state */
+ 337:Generated_Source\PSoC4/cyPm.c ****             CY_PM_PWR_STOP_REG = CY_PM_PWR_STOP_REG;
+ 338:Generated_Source\PSoC4/cyPm.c ****         }
+ 339:Generated_Source\PSoC4/cyPm.c **** 
+ 340:Generated_Source\PSoC4/cyPm.c ****         CyExitCriticalSection(interruptState);
+ 341:Generated_Source\PSoC4/cyPm.c ****     }
+ 342:Generated_Source\PSoC4/cyPm.c **** 
+ 343:Generated_Source\PSoC4/cyPm.c **** 
+ 344:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
+ 345:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmUnfreezeIo
+ 346:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
+ 347:Generated_Source\PSoC4/cyPm.c ****     *
+ 348:Generated_Source\PSoC4/cyPm.c ****     * The IO-Cells remain frozen after awake from Hibernate or Stop mode until
+ 349:Generated_Source\PSoC4/cyPm.c ****     * the firmware unfreezes them after booting. The call of this function
+ 350:Generated_Source\PSoC4/cyPm.c ****     * unfreezes IO-Cells explicitly.
+ 351:Generated_Source\PSoC4/cyPm.c ****     *
+ 352:Generated_Source\PSoC4/cyPm.c ****     * If the firmware intent is to retain the data value on the port, then the
+ 353:Generated_Source\PSoC4/cyPm.c ****     * value must be read and re-written to the data register before calling this
+ 354:Generated_Source\PSoC4/cyPm.c ****     * API. Furthermore, the drive mode must be re-programmed.  If this is not done,
+ 355:Generated_Source\PSoC4/cyPm.c ****     * the pin state will change to default state the moment the freeze is removed.
+ 356:Generated_Source\PSoC4/cyPm.c ****     *
+ 357:Generated_Source\PSoC4/cyPm.c ****     * This API is not available for PSoC 4000 family of devices.
+ 358:Generated_Source\PSoC4/cyPm.c ****     *
+ 359:Generated_Source\PSoC4/cyPm.c ****     *******************************************************************************/
+ 360:Generated_Source\PSoC4/cyPm.c ****     void CySysPmUnfreezeIo(void)
+ 361:Generated_Source\PSoC4/cyPm.c ****     {
+ 362:Generated_Source\PSoC4/cyPm.c ****         uint8 interruptState;
+ 363:Generated_Source\PSoC4/cyPm.c **** 
+ 364:Generated_Source\PSoC4/cyPm.c ****         interruptState = CyEnterCriticalSection();
+ 365:Generated_Source\PSoC4/cyPm.c **** 
+ 366:Generated_Source\PSoC4/cyPm.c ****         /* Preserve last reset reason and wakeup polarity. Then, unfreeze I/O:
+ 367:Generated_Source\PSoC4/cyPm.c ****          * write PWR_STOP.FREEZE=0, .UNLOCK=0x3A, .STOP=0, .TOKEN
+ 368:Generated_Source\PSoC4/cyPm.c ****          */
+ 369:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_STOP_REG = CY_PM_PWR_STOP_UNLOCK |
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 25
+
+
+ 370:Generated_Source\PSoC4/cyPm.c ****                             (CY_PM_PWR_STOP_REG & (CY_PM_PWR_STOP_TOKEN_MASK | CY_PM_PWR_STOP_POLAR
+ 371:Generated_Source\PSoC4/cyPm.c **** 
+ 372:Generated_Source\PSoC4/cyPm.c ****         /* If reading after writing, read this register three times to delay
+ 373:Generated_Source\PSoC4/cyPm.c ****         *  enough time for internal settling.
+ 374:Generated_Source\PSoC4/cyPm.c ****         */
+ 375:Generated_Source\PSoC4/cyPm.c ****         (void) CY_PM_PWR_STOP_REG;
+ 376:Generated_Source\PSoC4/cyPm.c ****         (void) CY_PM_PWR_STOP_REG;
+ 377:Generated_Source\PSoC4/cyPm.c **** 
+ 378:Generated_Source\PSoC4/cyPm.c ****         /* Lock STOP mode: write PWR_STOP.FREEZE=0, UNLOCK=0x00, STOP=0, .TOKEN */
+ 379:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_STOP_REG &= (CY_PM_PWR_STOP_TOKEN_MASK | CY_PM_PWR_STOP_POLARITY);
+ 380:Generated_Source\PSoC4/cyPm.c **** 
+ 381:Generated_Source\PSoC4/cyPm.c ****         CyExitCriticalSection(interruptState);
+ 382:Generated_Source\PSoC4/cyPm.c ****     }
+ 383:Generated_Source\PSoC4/cyPm.c **** 
+ 384:Generated_Source\PSoC4/cyPm.c **** #else
+ 385:Generated_Source\PSoC4/cyPm.c **** 
+ 386:Generated_Source\PSoC4/cyPm.c ****     /*******************************************************************************
+ 387:Generated_Source\PSoC4/cyPm.c ****     * Function Name: CySysPmSetWakeupHoldoff
+ 388:Generated_Source\PSoC4/cyPm.c ****     ****************************************************************************//**
+ 389:Generated_Source\PSoC4/cyPm.c ****     *
+ 390:Generated_Source\PSoC4/cyPm.c ****     * Sets the Deep Sleep wakeup time by scaling the hold-off to the HFCLK
+ 391:Generated_Source\PSoC4/cyPm.c ****     * frequency.
+ 392:Generated_Source\PSoC4/cyPm.c ****     *
+ 393:Generated_Source\PSoC4/cyPm.c ****     * This function must be called before increasing HFCLK clock frequency. It can
+ 394:Generated_Source\PSoC4/cyPm.c ****     * optionally be called after lowering HFCLK clock frequency in order to improve
+ 395:Generated_Source\PSoC4/cyPm.c ****     * Deep Sleep wakeup time.
+ 396:Generated_Source\PSoC4/cyPm.c ****     *
+ 397:Generated_Source\PSoC4/cyPm.c ****     * It is functionally acceptable to leave the default hold-off setting, but
+ 398:Generated_Source\PSoC4/cyPm.c ****     * Deep Sleep wakeup time may exceed the specification.
+ 399:Generated_Source\PSoC4/cyPm.c ****     *
+ 400:Generated_Source\PSoC4/cyPm.c ****     * This function is applicable only for the 4000 device family.
+ 401:Generated_Source\PSoC4/cyPm.c ****     *
+ 402:Generated_Source\PSoC4/cyPm.c ****     * \param hfclkFrequencyMhz The HFCLK frequency in MHz.
+ 403:Generated_Source\PSoC4/cyPm.c ****     *
+ 404:Generated_Source\PSoC4/cyPm.c ****     *******************************************************************************/
+ 405:Generated_Source\PSoC4/cyPm.c ****     void CySysPmSetWakeupHoldoff(uint32 hfclkFrequencyMhz)
+ 406:Generated_Source\PSoC4/cyPm.c ****     {
+ 356              		.loc 1 406 0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360              		@ link register save eliminated.
+ 361              	.LVL4:
+ 407:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_KEY_DELAY_REG = ((((uint32)(CY_PM_PWR_KEY_DELAY_REG_DEFAULT << 16u) /
+ 408:Generated_Source\PSoC4/cyPm.c ****             CY_PM_PWR_KEY_DELAY_FREQ_DEFAULT) * hfclkFrequencyMhz) >> 16u) + 1u;
+ 362              		.loc 1 408 0
+ 363 0000 034B     		ldr	r3, .L8
+ 409:Generated_Source\PSoC4/cyPm.c ****     }
+ 364              		.loc 1 409 0
+ 365              		@ sp needed
+ 408:Generated_Source\PSoC4/cyPm.c ****     }
+ 366              		.loc 1 408 0
+ 367 0002 5843     		muls	r0, r3
+ 368              	.LVL5:
+ 407:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_KEY_DELAY_REG = ((((uint32)(CY_PM_PWR_KEY_DELAY_REG_DEFAULT << 16u) /
+ 369              		.loc 1 407 0
+ 370 0004 034B     		ldr	r3, .L8+4
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 26
+
+
+ 408:Generated_Source\PSoC4/cyPm.c ****     }
+ 371              		.loc 1 408 0
+ 372 0006 000C     		lsrs	r0, r0, #16
+ 373 0008 0130     		adds	r0, r0, #1
+ 407:Generated_Source\PSoC4/cyPm.c ****         CY_PM_PWR_KEY_DELAY_REG = ((((uint32)(CY_PM_PWR_KEY_DELAY_REG_DEFAULT << 16u) /
+ 374              		.loc 1 407 0
+ 375 000a 1860     		str	r0, [r3]
+ 376              		.loc 1 409 0
+ 377 000c 7047     		bx	lr
+ 378              	.L9:
+ 379 000e C046     		.align	2
+ 380              	.L8:
+ 381 0010 AA2A0500 		.word	338602
+ 382 0014 04000340 		.word	1073938436
+ 383              		.cfi_endproc
+ 384              	.LFE2:
+ 385              		.size	CySysPmSetWakeupHoldoff, .-CySysPmSetWakeupHoldoff
+ 386              		.text
+ 387              	.Letext0:
+ 388              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
+ 389              		.file 3 "Generated_Source\\PSoC4\\CyLib.h"
+ 390              		.section	.debug_info,"",%progbits
+ 391              	.Ldebug_info0:
+ 392 0000 7C010000 		.4byte	0x17c
+ 393 0004 0400     		.2byte	0x4
+ 394 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 395 000a 04       		.byte	0x4
+ 396 000b 01       		.uleb128 0x1
+ 397 000c AF000000 		.4byte	.LASF25
+ 398 0010 0C       		.byte	0xc
+ 399 0011 33000000 		.4byte	.LASF26
+ 400 0015 F4010000 		.4byte	.LASF27
+ 401 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 402 001d 00000000 		.4byte	0
+ 403 0021 00000000 		.4byte	.Ldebug_line0
+ 404 0025 02       		.uleb128 0x2
+ 405 0026 01       		.byte	0x1
+ 406 0027 06       		.byte	0x6
+ 407 0028 C5010000 		.4byte	.LASF0
+ 408 002c 02       		.uleb128 0x2
+ 409 002d 01       		.byte	0x1
+ 410 002e 08       		.byte	0x8
+ 411 002f 71010000 		.4byte	.LASF1
+ 412 0033 02       		.uleb128 0x2
+ 413 0034 02       		.byte	0x2
+ 414 0035 05       		.byte	0x5
+ 415 0036 45020000 		.4byte	.LASF2
+ 416 003a 02       		.uleb128 0x2
+ 417 003b 02       		.byte	0x2
+ 418 003c 07       		.byte	0x7
+ 419 003d B2010000 		.4byte	.LASF3
+ 420 0041 02       		.uleb128 0x2
+ 421 0042 04       		.byte	0x4
+ 422 0043 05       		.byte	0x5
+ 423 0044 84010000 		.4byte	.LASF4
+ 424 0048 02       		.uleb128 0x2
+ 425 0049 04       		.byte	0x4
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 27
+
+
+ 426 004a 07       		.byte	0x7
+ 427 004b 86000000 		.4byte	.LASF5
+ 428 004f 02       		.uleb128 0x2
+ 429 0050 08       		.byte	0x8
+ 430 0051 05       		.byte	0x5
+ 431 0052 00000000 		.4byte	.LASF6
+ 432 0056 02       		.uleb128 0x2
+ 433 0057 08       		.byte	0x8
+ 434 0058 07       		.byte	0x7
+ 435 0059 98000000 		.4byte	.LASF7
+ 436 005d 03       		.uleb128 0x3
+ 437 005e 04       		.byte	0x4
+ 438 005f 05       		.byte	0x5
+ 439 0060 696E7400 		.ascii	"int\000"
+ 440 0064 02       		.uleb128 0x2
+ 441 0065 04       		.byte	0x4
+ 442 0066 07       		.byte	0x7
+ 443 0067 15000000 		.4byte	.LASF8
+ 444 006b 04       		.uleb128 0x4
+ 445 006c 80000000 		.4byte	.LASF9
+ 446 0070 02       		.byte	0x2
+ 447 0071 D201     		.2byte	0x1d2
+ 448 0073 2C000000 		.4byte	0x2c
+ 449 0077 04       		.uleb128 0x4
+ 450 0078 4F020000 		.4byte	.LASF10
+ 451 007c 02       		.byte	0x2
+ 452 007d D301     		.2byte	0x1d3
+ 453 007f 3A000000 		.4byte	0x3a
+ 454 0083 04       		.uleb128 0x4
+ 455 0084 0E000000 		.4byte	.LASF11
+ 456 0088 02       		.byte	0x2
+ 457 0089 D401     		.2byte	0x1d4
+ 458 008b 48000000 		.4byte	0x48
+ 459 008f 02       		.uleb128 0x2
+ 460 0090 04       		.byte	0x4
+ 461 0091 04       		.byte	0x4
+ 462 0092 6B010000 		.4byte	.LASF12
+ 463 0096 02       		.uleb128 0x2
+ 464 0097 08       		.byte	0x8
+ 465 0098 04       		.byte	0x4
+ 466 0099 93010000 		.4byte	.LASF13
+ 467 009d 02       		.uleb128 0x2
+ 468 009e 01       		.byte	0x1
+ 469 009f 08       		.byte	0x8
+ 470 00a0 7F010000 		.4byte	.LASF14
+ 471 00a4 04       		.uleb128 0x4
+ 472 00a5 8D010000 		.4byte	.LASF15
+ 473 00a9 02       		.byte	0x2
+ 474 00aa 7D02     		.2byte	0x27d
+ 475 00ac B0000000 		.4byte	0xb0
+ 476 00b0 05       		.uleb128 0x5
+ 477 00b1 77000000 		.4byte	0x77
+ 478 00b5 04       		.uleb128 0x4
+ 479 00b6 AC010000 		.4byte	.LASF16
+ 480 00ba 02       		.byte	0x2
+ 481 00bb 7E02     		.2byte	0x27e
+ 482 00bd C1000000 		.4byte	0xc1
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 28
+
+
+ 483 00c1 05       		.uleb128 0x5
+ 484 00c2 83000000 		.4byte	0x83
+ 485 00c6 02       		.uleb128 0x2
+ 486 00c7 08       		.byte	0x8
+ 487 00c8 04       		.byte	0x4
+ 488 00c9 39020000 		.4byte	.LASF17
+ 489 00cd 02       		.uleb128 0x2
+ 490 00ce 04       		.byte	0x4
+ 491 00cf 07       		.byte	0x7
+ 492 00d0 56020000 		.4byte	.LASF18
+ 493 00d4 06       		.uleb128 0x6
+ 494 00d5 D1010000 		.4byte	.LASF19
+ 495 00d9 01       		.byte	0x1
+ 496 00da 20       		.byte	0x20
+ 497 00db 00000000 		.4byte	.LFB0
+ 498 00df 1C000000 		.4byte	.LFE0-.LFB0
+ 499 00e3 01       		.uleb128 0x1
+ 500 00e4 9C       		.byte	0x9c
+ 501 00e5 0B010000 		.4byte	0x10b
+ 502 00e9 07       		.uleb128 0x7
+ 503 00ea 5F020000 		.4byte	.LASF21
+ 504 00ee 01       		.byte	0x1
+ 505 00ef 22       		.byte	0x22
+ 506 00f0 6B000000 		.4byte	0x6b
+ 507 00f4 00000000 		.4byte	.LLST0
+ 508 00f8 08       		.uleb128 0x8
+ 509 00f9 06000000 		.4byte	.LVL0
+ 510 00fd 69010000 		.4byte	0x169
+ 511 0101 08       		.uleb128 0x8
+ 512 0102 16000000 		.4byte	.LVL1
+ 513 0106 74010000 		.4byte	0x174
+ 514 010a 00       		.byte	0
+ 515 010b 06       		.uleb128 0x6
+ 516 010c 22000000 		.4byte	.LASF20
+ 517 0110 01       		.byte	0x1
+ 518 0111 3F       		.byte	0x3f
+ 519 0112 00000000 		.4byte	.LFB1
+ 520 0116 30000000 		.4byte	.LFE1-.LFB1
+ 521 011a 01       		.uleb128 0x1
+ 522 011b 9C       		.byte	0x9c
+ 523 011c 42010000 		.4byte	0x142
+ 524 0120 07       		.uleb128 0x7
+ 525 0121 5F020000 		.4byte	.LASF21
+ 526 0125 01       		.byte	0x1
+ 527 0126 41       		.byte	0x41
+ 528 0127 6B000000 		.4byte	0x6b
+ 529 012b 13000000 		.4byte	.LLST1
+ 530 012f 08       		.uleb128 0x8
+ 531 0130 06000000 		.4byte	.LVL2
+ 532 0134 69010000 		.4byte	0x169
+ 533 0138 08       		.uleb128 0x8
+ 534 0139 20000000 		.4byte	.LVL3
+ 535 013d 74010000 		.4byte	0x174
+ 536 0141 00       		.byte	0
+ 537 0142 09       		.uleb128 0x9
+ 538 0143 68000000 		.4byte	.LASF22
+ 539 0147 01       		.byte	0x1
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 29
+
+
+ 540 0148 9501     		.2byte	0x195
+ 541 014a 00000000 		.4byte	.LFB2
+ 542 014e 18000000 		.4byte	.LFE2-.LFB2
+ 543 0152 01       		.uleb128 0x1
+ 544 0153 9C       		.byte	0x9c
+ 545 0154 69010000 		.4byte	0x169
+ 546 0158 0A       		.uleb128 0xa
+ 547 0159 9A010000 		.4byte	.LASF28
+ 548 015d 01       		.byte	0x1
+ 549 015e 9501     		.2byte	0x195
+ 550 0160 83000000 		.4byte	0x83
+ 551 0164 26000000 		.4byte	.LLST2
+ 552 0168 00       		.byte	0
+ 553 0169 0B       		.uleb128 0xb
+ 554 016a 51000000 		.4byte	.LASF23
+ 555 016e 51000000 		.4byte	.LASF23
+ 556 0172 03       		.byte	0x3
+ 557 0173 E5       		.byte	0xe5
+ 558 0174 0B       		.uleb128 0xb
+ 559 0175 DE010000 		.4byte	.LASF24
+ 560 0179 DE010000 		.4byte	.LASF24
+ 561 017d 03       		.byte	0x3
+ 562 017e E6       		.byte	0xe6
+ 563 017f 00       		.byte	0
+ 564              		.section	.debug_abbrev,"",%progbits
+ 565              	.Ldebug_abbrev0:
+ 566 0000 01       		.uleb128 0x1
+ 567 0001 11       		.uleb128 0x11
+ 568 0002 01       		.byte	0x1
+ 569 0003 25       		.uleb128 0x25
+ 570 0004 0E       		.uleb128 0xe
+ 571 0005 13       		.uleb128 0x13
+ 572 0006 0B       		.uleb128 0xb
+ 573 0007 03       		.uleb128 0x3
+ 574 0008 0E       		.uleb128 0xe
+ 575 0009 1B       		.uleb128 0x1b
+ 576 000a 0E       		.uleb128 0xe
+ 577 000b 55       		.uleb128 0x55
+ 578 000c 17       		.uleb128 0x17
+ 579 000d 11       		.uleb128 0x11
+ 580 000e 01       		.uleb128 0x1
+ 581 000f 10       		.uleb128 0x10
+ 582 0010 17       		.uleb128 0x17
+ 583 0011 00       		.byte	0
+ 584 0012 00       		.byte	0
+ 585 0013 02       		.uleb128 0x2
+ 586 0014 24       		.uleb128 0x24
+ 587 0015 00       		.byte	0
+ 588 0016 0B       		.uleb128 0xb
+ 589 0017 0B       		.uleb128 0xb
+ 590 0018 3E       		.uleb128 0x3e
+ 591 0019 0B       		.uleb128 0xb
+ 592 001a 03       		.uleb128 0x3
+ 593 001b 0E       		.uleb128 0xe
+ 594 001c 00       		.byte	0
+ 595 001d 00       		.byte	0
+ 596 001e 03       		.uleb128 0x3
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 30
+
+
+ 597 001f 24       		.uleb128 0x24
+ 598 0020 00       		.byte	0
+ 599 0021 0B       		.uleb128 0xb
+ 600 0022 0B       		.uleb128 0xb
+ 601 0023 3E       		.uleb128 0x3e
+ 602 0024 0B       		.uleb128 0xb
+ 603 0025 03       		.uleb128 0x3
+ 604 0026 08       		.uleb128 0x8
+ 605 0027 00       		.byte	0
+ 606 0028 00       		.byte	0
+ 607 0029 04       		.uleb128 0x4
+ 608 002a 16       		.uleb128 0x16
+ 609 002b 00       		.byte	0
+ 610 002c 03       		.uleb128 0x3
+ 611 002d 0E       		.uleb128 0xe
+ 612 002e 3A       		.uleb128 0x3a
+ 613 002f 0B       		.uleb128 0xb
+ 614 0030 3B       		.uleb128 0x3b
+ 615 0031 05       		.uleb128 0x5
+ 616 0032 49       		.uleb128 0x49
+ 617 0033 13       		.uleb128 0x13
+ 618 0034 00       		.byte	0
+ 619 0035 00       		.byte	0
+ 620 0036 05       		.uleb128 0x5
+ 621 0037 35       		.uleb128 0x35
+ 622 0038 00       		.byte	0
+ 623 0039 49       		.uleb128 0x49
+ 624 003a 13       		.uleb128 0x13
+ 625 003b 00       		.byte	0
+ 626 003c 00       		.byte	0
+ 627 003d 06       		.uleb128 0x6
+ 628 003e 2E       		.uleb128 0x2e
+ 629 003f 01       		.byte	0x1
+ 630 0040 3F       		.uleb128 0x3f
+ 631 0041 19       		.uleb128 0x19
+ 632 0042 03       		.uleb128 0x3
+ 633 0043 0E       		.uleb128 0xe
+ 634 0044 3A       		.uleb128 0x3a
+ 635 0045 0B       		.uleb128 0xb
+ 636 0046 3B       		.uleb128 0x3b
+ 637 0047 0B       		.uleb128 0xb
+ 638 0048 27       		.uleb128 0x27
+ 639 0049 19       		.uleb128 0x19
+ 640 004a 11       		.uleb128 0x11
+ 641 004b 01       		.uleb128 0x1
+ 642 004c 12       		.uleb128 0x12
+ 643 004d 06       		.uleb128 0x6
+ 644 004e 40       		.uleb128 0x40
+ 645 004f 18       		.uleb128 0x18
+ 646 0050 9742     		.uleb128 0x2117
+ 647 0052 19       		.uleb128 0x19
+ 648 0053 01       		.uleb128 0x1
+ 649 0054 13       		.uleb128 0x13
+ 650 0055 00       		.byte	0
+ 651 0056 00       		.byte	0
+ 652 0057 07       		.uleb128 0x7
+ 653 0058 34       		.uleb128 0x34
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 31
+
+
+ 654 0059 00       		.byte	0
+ 655 005a 03       		.uleb128 0x3
+ 656 005b 0E       		.uleb128 0xe
+ 657 005c 3A       		.uleb128 0x3a
+ 658 005d 0B       		.uleb128 0xb
+ 659 005e 3B       		.uleb128 0x3b
+ 660 005f 0B       		.uleb128 0xb
+ 661 0060 49       		.uleb128 0x49
+ 662 0061 13       		.uleb128 0x13
+ 663 0062 02       		.uleb128 0x2
+ 664 0063 17       		.uleb128 0x17
+ 665 0064 00       		.byte	0
+ 666 0065 00       		.byte	0
+ 667 0066 08       		.uleb128 0x8
+ 668 0067 898201   		.uleb128 0x4109
+ 669 006a 00       		.byte	0
+ 670 006b 11       		.uleb128 0x11
+ 671 006c 01       		.uleb128 0x1
+ 672 006d 31       		.uleb128 0x31
+ 673 006e 13       		.uleb128 0x13
+ 674 006f 00       		.byte	0
+ 675 0070 00       		.byte	0
+ 676 0071 09       		.uleb128 0x9
+ 677 0072 2E       		.uleb128 0x2e
+ 678 0073 01       		.byte	0x1
+ 679 0074 3F       		.uleb128 0x3f
+ 680 0075 19       		.uleb128 0x19
+ 681 0076 03       		.uleb128 0x3
+ 682 0077 0E       		.uleb128 0xe
+ 683 0078 3A       		.uleb128 0x3a
+ 684 0079 0B       		.uleb128 0xb
+ 685 007a 3B       		.uleb128 0x3b
+ 686 007b 05       		.uleb128 0x5
+ 687 007c 27       		.uleb128 0x27
+ 688 007d 19       		.uleb128 0x19
+ 689 007e 11       		.uleb128 0x11
+ 690 007f 01       		.uleb128 0x1
+ 691 0080 12       		.uleb128 0x12
+ 692 0081 06       		.uleb128 0x6
+ 693 0082 40       		.uleb128 0x40
+ 694 0083 18       		.uleb128 0x18
+ 695 0084 9742     		.uleb128 0x2117
+ 696 0086 19       		.uleb128 0x19
+ 697 0087 01       		.uleb128 0x1
+ 698 0088 13       		.uleb128 0x13
+ 699 0089 00       		.byte	0
+ 700 008a 00       		.byte	0
+ 701 008b 0A       		.uleb128 0xa
+ 702 008c 05       		.uleb128 0x5
+ 703 008d 00       		.byte	0
+ 704 008e 03       		.uleb128 0x3
+ 705 008f 0E       		.uleb128 0xe
+ 706 0090 3A       		.uleb128 0x3a
+ 707 0091 0B       		.uleb128 0xb
+ 708 0092 3B       		.uleb128 0x3b
+ 709 0093 05       		.uleb128 0x5
+ 710 0094 49       		.uleb128 0x49
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 32
+
+
+ 711 0095 13       		.uleb128 0x13
+ 712 0096 02       		.uleb128 0x2
+ 713 0097 17       		.uleb128 0x17
+ 714 0098 00       		.byte	0
+ 715 0099 00       		.byte	0
+ 716 009a 0B       		.uleb128 0xb
+ 717 009b 2E       		.uleb128 0x2e
+ 718 009c 00       		.byte	0
+ 719 009d 3F       		.uleb128 0x3f
+ 720 009e 19       		.uleb128 0x19
+ 721 009f 3C       		.uleb128 0x3c
+ 722 00a0 19       		.uleb128 0x19
+ 723 00a1 6E       		.uleb128 0x6e
+ 724 00a2 0E       		.uleb128 0xe
+ 725 00a3 03       		.uleb128 0x3
+ 726 00a4 0E       		.uleb128 0xe
+ 727 00a5 3A       		.uleb128 0x3a
+ 728 00a6 0B       		.uleb128 0xb
+ 729 00a7 3B       		.uleb128 0x3b
+ 730 00a8 0B       		.uleb128 0xb
+ 731 00a9 00       		.byte	0
+ 732 00aa 00       		.byte	0
+ 733 00ab 00       		.byte	0
+ 734              		.section	.debug_loc,"",%progbits
+ 735              	.Ldebug_loc0:
+ 736              	.LLST0:
+ 737 0000 06000000 		.4byte	.LVL0
+ 738 0004 15000000 		.4byte	.LVL1-1
+ 739 0008 0100     		.2byte	0x1
+ 740 000a 50       		.byte	0x50
+ 741 000b 00000000 		.4byte	0
+ 742 000f 00000000 		.4byte	0
+ 743              	.LLST1:
+ 744 0013 06000000 		.4byte	.LVL2
+ 745 0017 1F000000 		.4byte	.LVL3-1
+ 746 001b 0100     		.2byte	0x1
+ 747 001d 50       		.byte	0x50
+ 748 001e 00000000 		.4byte	0
+ 749 0022 00000000 		.4byte	0
+ 750              	.LLST2:
+ 751 0026 00000000 		.4byte	.LVL4
+ 752 002a 04000000 		.4byte	.LVL5
+ 753 002e 0100     		.2byte	0x1
+ 754 0030 50       		.byte	0x50
+ 755 0031 04000000 		.4byte	.LVL5
+ 756 0035 18000000 		.4byte	.LFE2
+ 757 0039 0400     		.2byte	0x4
+ 758 003b F3       		.byte	0xf3
+ 759 003c 01       		.uleb128 0x1
+ 760 003d 50       		.byte	0x50
+ 761 003e 9F       		.byte	0x9f
+ 762 003f 00000000 		.4byte	0
+ 763 0043 00000000 		.4byte	0
+ 764              		.section	.debug_aranges,"",%progbits
+ 765 0000 2C000000 		.4byte	0x2c
+ 766 0004 0200     		.2byte	0x2
+ 767 0006 00000000 		.4byte	.Ldebug_info0
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 33
+
+
+ 768 000a 04       		.byte	0x4
+ 769 000b 00       		.byte	0
+ 770 000c 0000     		.2byte	0
+ 771 000e 0000     		.2byte	0
+ 772 0010 00000000 		.4byte	.LFB0
+ 773 0014 1C000000 		.4byte	.LFE0-.LFB0
+ 774 0018 00000000 		.4byte	.LFB1
+ 775 001c 30000000 		.4byte	.LFE1-.LFB1
+ 776 0020 00000000 		.4byte	.LFB2
+ 777 0024 18000000 		.4byte	.LFE2-.LFB2
+ 778 0028 00000000 		.4byte	0
+ 779 002c 00000000 		.4byte	0
+ 780              		.section	.debug_ranges,"",%progbits
+ 781              	.Ldebug_ranges0:
+ 782 0000 00000000 		.4byte	.LFB0
+ 783 0004 1C000000 		.4byte	.LFE0
+ 784 0008 00000000 		.4byte	.LFB1
+ 785 000c 30000000 		.4byte	.LFE1
+ 786 0010 00000000 		.4byte	.LFB2
+ 787 0014 18000000 		.4byte	.LFE2
+ 788 0018 00000000 		.4byte	0
+ 789 001c 00000000 		.4byte	0
+ 790              		.section	.debug_line,"",%progbits
+ 791              	.Ldebug_line0:
+ 792 0000 99000000 		.section	.debug_str,"MS",%progbits,1
+ 792      02004C00 
+ 792      00000201 
+ 792      FB0E0D00 
+ 792      01010101 
+ 793              	.LASF6:
+ 794 0000 6C6F6E67 		.ascii	"long long int\000"
+ 794      206C6F6E 
+ 794      6720696E 
+ 794      7400
+ 795              	.LASF11:
+ 796 000e 75696E74 		.ascii	"uint32\000"
+ 796      333200
+ 797              	.LASF8:
+ 798 0015 756E7369 		.ascii	"unsigned int\000"
+ 798      676E6564 
+ 798      20696E74 
+ 798      00
+ 799              	.LASF20:
+ 800 0022 43795379 		.ascii	"CySysPmDeepSleep\000"
+ 800      73506D44 
+ 800      65657053 
+ 800      6C656570 
+ 800      00
+ 801              	.LASF26:
+ 802 0033 47656E65 		.ascii	"Generated_Source\\PSoC4\\cyPm.c\000"
+ 802      72617465 
+ 802      645F536F 
+ 802      75726365 
+ 802      5C50536F 
+ 803              	.LASF23:
+ 804 0051 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 804      74657243 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 34
+
+
+ 804      72697469 
+ 804      63616C53 
+ 804      65637469 
+ 805              	.LASF22:
+ 806 0068 43795379 		.ascii	"CySysPmSetWakeupHoldoff\000"
+ 806      73506D53 
+ 806      65745761 
+ 806      6B657570 
+ 806      486F6C64 
+ 807              	.LASF9:
+ 808 0080 75696E74 		.ascii	"uint8\000"
+ 808      3800
+ 809              	.LASF5:
+ 810 0086 6C6F6E67 		.ascii	"long unsigned int\000"
+ 810      20756E73 
+ 810      69676E65 
+ 810      6420696E 
+ 810      7400
+ 811              	.LASF7:
+ 812 0098 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 812      206C6F6E 
+ 812      6720756E 
+ 812      7369676E 
+ 812      65642069 
+ 813              	.LASF25:
+ 814 00af 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 814      43313120 
+ 814      352E342E 
+ 814      31203230 
+ 814      31363036 
+ 815 00e2 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 815      20726576 
+ 815      6973696F 
+ 815      6E203233 
+ 815      37373135 
+ 816 0115 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects -finline-fu"
+ 816      66756E63 
+ 816      74696F6E 
+ 816      2D736563 
+ 816      74696F6E 
+ 817 0148 6E637469 		.ascii	"nctions -flto -fno-strict-aliasing\000"
+ 817      6F6E7320 
+ 817      2D666C74 
+ 817      6F202D66 
+ 817      6E6F2D73 
+ 818              	.LASF12:
+ 819 016b 666C6F61 		.ascii	"float\000"
+ 819      7400
+ 820              	.LASF1:
+ 821 0171 756E7369 		.ascii	"unsigned char\000"
+ 821      676E6564 
+ 821      20636861 
+ 821      7200
+ 822              	.LASF14:
+ 823 017f 63686172 		.ascii	"char\000"
+ 823      00
+ 824              	.LASF4:
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 35
+
+
+ 825 0184 6C6F6E67 		.ascii	"long int\000"
+ 825      20696E74 
+ 825      00
+ 826              	.LASF15:
+ 827 018d 72656731 		.ascii	"reg16\000"
+ 827      3600
+ 828              	.LASF13:
+ 829 0193 646F7562 		.ascii	"double\000"
+ 829      6C6500
+ 830              	.LASF28:
+ 831 019a 6866636C 		.ascii	"hfclkFrequencyMhz\000"
+ 831      6B467265 
+ 831      7175656E 
+ 831      63794D68 
+ 831      7A00
+ 832              	.LASF16:
+ 833 01ac 72656733 		.ascii	"reg32\000"
+ 833      3200
+ 834              	.LASF3:
+ 835 01b2 73686F72 		.ascii	"short unsigned int\000"
+ 835      7420756E 
+ 835      7369676E 
+ 835      65642069 
+ 835      6E7400
+ 836              	.LASF0:
+ 837 01c5 7369676E 		.ascii	"signed char\000"
+ 837      65642063 
+ 837      68617200 
+ 838              	.LASF19:
+ 839 01d1 43795379 		.ascii	"CySysPmSleep\000"
+ 839      73506D53 
+ 839      6C656570 
+ 839      00
+ 840              	.LASF24:
+ 841 01de 43794578 		.ascii	"CyExitCriticalSection\000"
+ 841      69744372 
+ 841      69746963 
+ 841      616C5365 
+ 841      6374696F 
+ 842              	.LASF27:
+ 843 01f4 443A5C56 		.ascii	"D:\\V-TE-PWR\\PDSS_SRC_SNK\\CYPD3171-24LQXQ_pb\\CYP"
+ 843      2D54452D 
+ 843      5057525C 
+ 843      50445353 
+ 843      5F535243 
+ 844 0223 44333137 		.ascii	"D3171-24LQXQ_pb.cydsn\000"
+ 844      312D3234 
+ 844      4C515851 
+ 844      5F70622E 
+ 844      63796473 
+ 845              	.LASF17:
+ 846 0239 6C6F6E67 		.ascii	"long double\000"
+ 846      20646F75 
+ 846      626C6500 
+ 847              	.LASF2:
+ 848 0245 73686F72 		.ascii	"short int\000"
+ 848      7420696E 
+ARM GAS  C:\Users\prana\AppData\Local\Temp\ccCddhon.s 			page 36
+
+
+ 848      7400
+ 849              	.LASF10:
+ 850 024f 75696E74 		.ascii	"uint16\000"
+ 850      313600
+ 851              	.LASF18:
+ 852 0256 73697A65 		.ascii	"sizetype\000"
+ 852      74797065 
+ 852      00
+ 853              	.LASF21:
+ 854 025f 696E7465 		.ascii	"interruptState\000"
+ 854      72727570 
+ 854      74537461 
+ 854      746500
+ 855              		.comm	__gnu_lto_v1,1,1
+ 856              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

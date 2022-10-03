@@ -1,0 +1,603 @@
+******************************************************************************
+                  TI ARM Linker PC v20.2.5                     
+******************************************************************************
+>> Linked Thu Aug  4 11:06:32 2022
+
+OUTPUT FILE NAME:   <GRL_SSBL_CM.out>
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00209f79
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  CMBANK0_RESETISR      00200000   00000008  00000006  00000002  RWIX
+  CMBANK0_SECTOR0       00200008   00003ff7  00000bb4  00003443  RWIX
+  CMBANK0_SECTOR1       00204000   00004000  00000060  00003fa0  RWIX
+  CMBANK0_SECTOR2       00208000   00004000  000020dc  00001f24  RWIX
+  CMBANK0_SECTOR3       0020c000   00004000  00000140  00003ec0  RWIX
+  CMBANK0_SECTOR4       00210000   00010000  00000000  00010000  RWIX
+  CMBANK0_SECTOR5       00220000   00010000  00000000  00010000  RWIX
+  CMBANK0_SECTOR6       00230000   00010000  00000000  00010000  RWIX
+  CMBANK0_SECTOR7       00240000   00010000  00000000  00010000  RWIX
+  CMBANK0_SECTOR8       00250000   00010000  00000000  00010000  RWIX
+  CMBANK0_SECTOR9       00260000   00010000  00000000  00010000  RWIX
+  CMBANK0_SECTOR10      00270000   00004000  00000000  00004000  RWIX
+  CMBANK0_SECTOR11      00274000   00004000  00000000  00004000  RWIX
+  CMBANK0_SECTOR12      00278000   00004000  00000000  00004000  RWIX
+  CMBANK0_SECTOR13      0027c000   00004000  00000000  00004000  RWIX
+  C1RAM                 1fffc000   00001fff  00000000  00001fff  RWIX
+  C0RAM                 1fffe000   00001fff  00001000  00000fff  RWIX
+  BOOT_RSVD             20000000   00000800  00000000  00000800  RWIX
+  SRAM                  20000800   0000f7ff  00000000  0000f7ff  RWIX
+  E0RAM                 20010000   00003fff  00001158  00002ea7  RWIX
+  CPU1TOCMMSGRAM0       20080000   00000800  00000110  000006f0  RWIX
+  CPU1TOCMMSGRAM1       20080800   00000800  00000000  00000800  RWIX
+  CMTOCPU1MSGRAM0       20082000   00000800  00000124  000006dc  RWIX
+  CMTOCPU1MSGRAM1       20082800   00000800  00000000  00000800  RWIX
+  CPU2TOCMMSGRAM0       20084000   00000800  00000110  000006f0  RWIX
+  CPU2TOCMMSGRAM1       20084800   00000800  00000000  00000800  RWIX
+  CMTOCPU2MSGRAM0       20086000   00000800  00000110  000006f0  RWIX
+  CMTOCPU2MSGRAM1       20086800   00000800  00000000  00000800  RWIX
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00200000    00200000    00000006   00000006    r-x
+  00200000    00200000    00000006   00000006    r-x .resetisr
+00204000    00204000    00000060   00000060    r--
+  00204000    00204000    00000060   00000060    r-- .cinit
+00208000    00208000    000020dc   000020dc    r-x
+  00208000    00208000    000020dc   000020dc    r-x .text
+0020c000    0020c000    00000140   00000140    r--
+  0020c000    0020c000    00000140   00000140    r-- .vftable
+1fffe000    1fffe000    00001000   00000000    rw-
+  1fffe000    1fffe000    00001000   00000000    rw- .stack
+20010000    00200008    00000b2c   00000b2c    r-x
+  20010000    00200008    00000b2c   00000b2c    r-x .TI.ramfunc
+20010b2c    20010b2c    00000430   00000000    rw-
+  20010b2c    20010b2c    00000430   00000000    rw- .bss
+20010f60    00200b38    00000088   00000088    r--
+  20010f60    00200b38    00000088   00000088    r-- .const
+20011000    20011000    00000174   00000000    rw-
+  20011000    20011000    00000140   00000000    rw- .vtable
+  20011140    20011140    00000034   00000000    rw- .data
+20080000    20080000    00000110   00000000    rw-
+  20080000    20080000    00000110   00000000    rw- MSGRAM_CPU1_TO_CM
+20082000    20082000    00000124   00000000    rw-
+  20082000    20082000    00000124   00000000    rw- MSGRAM_CM_TO_CPU1
+20084000    20084000    00000110   00000000    rw-
+  20084000    20084000    00000110   00000000    rw- MSGRAM_CPU2_TO_CM
+20086000    20086000    00000110   00000000    rw-
+  20086000    20086000    00000110   00000000    rw- MSGRAM_CM_TO_CPU2
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.resetisr 
+*          0    00200000    00000006     
+                  00200000    00000006     startup_ccs.obj (.resetisr:ResetISR)
+
+.cinit     0    00204000    00000060     
+                  00204000    0000002c     (.cinit..data.load) [load image, compression = lzss]
+                  0020402c    0000000c     (__TI_handler_table)
+                  00204038    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00204040    00000008     (.cinit..vtable.load) [load image, compression = zero_init]
+                  00204048    00000018     (__TI_cinit_table)
+
+.vftable   0    0020c000    00000140     
+                  0020c000    00000140     startup_ccs.obj (.vftable)
+
+.vtable    0    20011000    00000140     UNINITIALIZED
+                  20011000    00000140     driverlib_cm.lib : interrupt.obj (.vtable)
+
+.TI.ramfunc 
+*          0    00200008    00000b2c     RUN ADDR = 20010000
+                  00200008    000006a4     GrlPDComm.obj (.TI.ramfunc:copy_data)
+                  002006ac    00000008     rtsv7M4_T_le_eabi.lib : memset_t2.asm.obj (.tramp.memset.1)
+                  002006b4    00000160     GrlPDComm.obj (.TI.ramfunc:cm_handler)
+                  00200814    00000008     rtsv7M4_T_le_eabi.lib : memmov.c.obj (.tramp.memmove.1)
+                  0020081c    00000008     GrlPDComm.obj (.tramp.cpu1_ipc_intr_write_status.1)
+                  00200824    000000b8     GrlPDComm.obj (.TI.ramfunc:Flash_data_program_8)
+                  002008dc    00000008     F2838x_CM_FlashAPI.lib : Init.obj (.tramp.Fapi_initializeAPI.1)
+                  002008e4    00000008                            : FlashStateMachine.obj (.tramp.Fapi_setActiveFlashBank.1)
+                  002008ec    00000008                            : Program.obj (.tramp.Fapi_issueProgrammingCommand.1)
+                  002008f4    00000008                            : FlashStateMachine.obj (.tramp.Fapi_checkFsmForReady.1)
+                  002008fc    00000008                            : FlashStateMachine.obj (.tramp.Fapi_getFsmStatus.1)
+                  00200904    00000008                            : Verify.obj (.tramp.Fapi_doVerifyByByte.1)
+                  0020090c    00000070     driverlib_cm.lib : flash.obj (.TI.ramfunc:Flash_initModule)
+                  0020097c    00000008                      : flash.obj (.tramp.Flash_unlockCtrlRegisters.1)
+                  00200984    00000008                      : flash.obj (.tramp.Flash_unlockECCRegisters.1)
+                  0020098c    00000058     GrlPDComm.obj (.TI.ramfunc:grlFlashBOOTPGMSectorWrite)
+                  002009e4    00000054     GrlPDComm.obj (.TI.ramfunc:Example_EraseSector)
+                  00200a38    00000008     F2838x_CM_FlashAPI.lib : Async.obj (.tramp.Fapi_issueAsyncCommandWithAddress.1)
+                  00200a40    00000008                            : BlankCheck.obj (.tramp.Fapi_doBlankCheck.1)
+                  00200a48    00000030     driverlib_cm.lib : flash.obj (.TI.ramfunc:Flash_setBankPowerMode)
+                  00200a78    00000022                      : flash.obj (.TI.ramfunc:Flash_setWaitstates)
+                  00200a9a    00000020                      : flash.obj (.TI.ramfunc:Flash_setPumpPowerMode)
+                  00200aba    0000001a                      : flash.obj (.TI.ramfunc:Flash_enableECC)
+                  00200ad4    00000018                      : flash.obj (.TI.ramfunc:Flash_disableDataCache)
+                  00200aec    00000018                      : flash.obj (.TI.ramfunc:Flash_disableProgramCache)
+                  00200b04    00000018                      : flash.obj (.TI.ramfunc:Flash_enableDataCache)
+                  00200b1c    00000018                      : flash.obj (.TI.ramfunc:Flash_enableProgramCache)
+
+.const     0    00200b38    00000088     RUN ADDR = 20010f60
+                  00200b38    00000088     driverlib_cm.lib : ipc.obj (.const:IPC_Instance)
+
+.stack     0    1fffe000    00001000     UNINITIALIZED
+                  1fffe000    00000004     rtsv7M4_T_le_eabi.lib : boot_cortex_m.c.obj (.stack)
+                  1fffe004    00000ffc     --HOLE--
+
+.bss       0    20010b2c    00000430     UNINITIALIZED
+                  20010b2c    00000410     (.common:CPU1RxBuf)
+                  20010f3c    0000000c     (.common:Fapi_GlobalInit)
+                  20010f48    00000008     (.common:BlockHeader)
+                  20010f50    00000004     GrlPDComm.obj (.bss)
+                  20010f54    00000004     (.common:entryAddress)
+                  20010f58    00000004     (.common:entry_point)
+
+.data      0    20011140    00000034     UNINITIALIZED
+                  20011140    00000024     GrlPDComm.obj (.data:flash_address)
+                  20011164    00000008     GrlPDComm.obj (.data)
+                  2001116c    00000008     GrlPDComm.obj (.data:write_status)
+
+MSGRAM_CPU1_TO_CM 
+*          0    20080000    00000110     UNINITIALIZED
+                  20080000    00000110     driverlib_cm.lib : ipc.obj (MSGRAM_CPU1_TO_CM)
+
+MSGRAM_CM_TO_CPU1 
+*          0    20082000    00000124     UNINITIALIZED
+                  20082000    00000110     driverlib_cm.lib : ipc.obj (MSGRAM_CM_TO_CPU1)
+                  20082110    00000014     CM_SSBL_Main.obj (MSGRAM_CM_TO_CPU1)
+
+MSGRAM_CPU2_TO_CM 
+*          0    20084000    00000110     UNINITIALIZED
+                  20084000    00000110     driverlib_cm.lib : ipc.obj (MSGRAM_CPU2_TO_CM)
+
+MSGRAM_CM_TO_CPU2 
+*          0    20086000    00000110     UNINITIALIZED
+                  20086000    00000110     driverlib_cm.lib : ipc.obj (MSGRAM_CM_TO_CPU2)
+
+__llvm_prf_cnts 
+*          0    20010000    00000000     UNINITIALIZED
+
+.text      0    00208000    000020dc     
+                  00208000    000006be     F2838x_CM_FlashAPI.lib : FlashStateMachine.obj (.text:_Fapi_setupFlashStateMachine)
+                  002086be    0000032c                            : Program.obj (.text:Fapi_issueProgrammingCommand)
+                  002089ea    0000013e                            : FlashStateMachine.obj (.text:Fapi_setupEepromSectorEnable)
+                  00208b28    00000134     CM_SSBL_Main.obj (.text:IPC_CPU1_CM_ISR0)
+                  00208c5c    00000008     GrlPDComm.obj (.tramp.cm_handler.1)
+                  00208c64    00000106     F2838x_CM_FlashAPI.lib : Read.obj (.text:_Fapi_loopRegionForValue)
+                  00208d6a    000000e6                            : BlankCheck.obj (.text:Fapi_doBlankCheck)
+                  00208e50    000000e6                            : Read.obj (.text:_Fapi_checkRegionForValueByByte)
+                  00208f36    00000002     startup_ccs.obj (.text:FaultISR)
+                  00208f38    000000dc     driverlib_cm.lib : ipc.obj (.text:IPC_sendCommand)
+                  00209014    000000d2     F2838x_CM_FlashAPI.lib : FlashStateMachine.obj (.text:_Fapi_issueFsmCommand)
+                  002090e6    000000ca                            : Init.obj (.text:Fapi_initializeAPI)
+                  002091b0    000000c0     driverlib_cm.lib : ipc.obj (.text:IPC_readCommand)
+                  00209270    0000009c     rtsv7M4_T_le_eabi.lib : memcpy_t2.asm.obj (.text)
+                  0020930c    00000090     CM_SSBL_Main.obj (.text:main)
+                  0020939c    00000008     driverlib_cm.lib : flash.obj (.tramp.Flash_initModule.1)
+                  002093a4    0000008e     F2838x_CM_FlashAPI.lib : Async.obj (.text:Fapi_issueAsyncCommandWithAddress)
+                  00209432    00000084                            : Utilities.obj (.text:Fapi_isAddressValid)
+                  002094b6    00000084                            : FlashStateMachine.obj (.text:Fapi_setActiveFlashBank)
+                  0020953a    00000002     startup_ccs.obj (.text:IntDefaultHandler)
+                  0020953c    00000080     driverlib_cm.lib : interrupt.obj (.text:Interrupt_enable)
+                  002095bc    0000007e     F2838x_CM_FlashAPI.lib : FlashStateMachine.obj (.text:Fapi_setupBankSectorEnable)
+                  0020963a    0000007a     rtsv7M4_T_le_eabi.lib : memset_t2.asm.obj (.text)
+                  002096b4    00000078     F2838x_CM_FlashAPI.lib : Utilities.obj (.text:Fapi_calculateFletcherChecksum)
+                  0020972c    00000078     GrlPDComm.obj (.text:cpu1_ipc_intr_write_status)
+                  002097a4    00000076     cm.obj (.text:CM_enableAllPeripherals)
+                  0020981a    00000072     F2838x_CM_FlashAPI.lib : Read.obj (.text:_Fapi_loopRegionForValueByByte)
+                  0020988c    00000068                            : Utilities.obj (.text:_Fapi_divideUnsignedLong)
+                  002098f4    00000068                            : FlashStateMachine.obj (.text:_Fapi_setupSectorsForWrite)
+                  0020995c    00000068     rtsv7M4_T_le_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  002099c4    0000005c     driverlib_cm.lib : interrupt.obj (.text:Interrupt_registerHandler)
+                  00209a20    00000054     cm.obj (.text:CM_init)
+                  00209a74    00000050     F2838x_CM_FlashAPI.lib : FlashStateMachine.obj (.text:Fapi_isAddressEcc)
+                  00209ac4    0000004e                            : Utilities.obj (.text:Fapi_calculateEcc)
+                  00209b12    00000002     startup_ccs.obj (.text:NmiSR)
+                  00209b14    00000048     driverlib_cm.lib : sysctl.obj (.text:SysCtl_enablePeripheral)
+                  00209b5c    00000044     rtsv7M4_T_le_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  00209ba0    0000003c     driverlib_cm.lib : ipc.obj (.text:IPC_registerInterrupt)
+                  00209bdc    00000038     F2838x_CM_FlashAPI.lib : Read.obj (.text:Fapi_flushPipeline)
+                  00209c14    00000034     CM_SSBL_Main.obj (.text:Flash_claimPumpSemaphore)
+                  00209c48    00000032     CM_SSBL_Main.obj (.text:IPC_sync)
+                  00209c7a    00000002     --HOLE-- [fill = 0]
+                  00209c7c    00000028     CM_SSBL_Main.obj (.text:IPC_waitForAck)
+                  00209ca4    00000028     GrlPDComm.obj (.text:IPC_waitForAck)
+                  00209ccc    00000028     CM_SSBL_Main.obj (.text:IPC_waitForFlag)
+                  00209cf4    00000028     CM_SSBL_Main.obj (.text:initFlashSectors)
+                  00209d1c    00000028     rtsv7M4_T_le_eabi.lib : memmov.c.obj (.text:memmove)
+                  00209d44    00000026     F2838x_CM_FlashAPI.lib : Async.obj (.text:CM_FLASHREGS_LOCK)
+                  00209d6a    00000026                            : BlankCheck.obj (.text:CM_FLASHREGS_LOCK)
+                  00209d90    00000026                            : FlashStateMachine.obj (.text:CM_FLASHREGS_LOCK)
+                  00209db6    00000026                            : Program.obj (.text:CM_FLASHREGS_LOCK)
+                  00209ddc    00000026                            : Read.obj (.text:CM_FLASHREGS_LOCK)
+                  00209e02    00000026                            : Utilities.obj (.text:CM_FLASHREGS_LOCK)
+                  00209e28    00000026                            : Async.obj (.text:CM_FLASHREGS_UNLOCK)
+                  00209e4e    00000026                            : BlankCheck.obj (.text:CM_FLASHREGS_UNLOCK)
+                  00209e74    00000026                            : FlashStateMachine.obj (.text:CM_FLASHREGS_UNLOCK)
+                  00209e9a    00000026                            : Program.obj (.text:CM_FLASHREGS_UNLOCK)
+                  00209ec0    00000026                            : Read.obj (.text:CM_FLASHREGS_UNLOCK)
+                  00209ee6    00000026                            : Utilities.obj (.text:CM_FLASHREGS_UNLOCK)
+                  00209f0c    00000024     CM_SSBL_Main.obj (.text:IPC_ackFlagRtoL)
+                  00209f30    00000024     CM_SSBL_Main.obj (.text:IPC_clearFlagLtoR)
+                  00209f54    00000024     CM_SSBL_Main.obj (.text:IPC_setFlagLtoR)
+                  00209f78    00000024     rtsv7M4_T_le_eabi.lib : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
+                  00209f9c    00000022     F2838x_CM_FlashAPI.lib : Verify.obj (.text:Fapi_doVerifyByByte)
+                  00209fbe    0000001c                            : Utilities.obj (.text:_Fapi_scaleCycleValues)
+                  00209fda    0000001a                            : FlashStateMachine.obj (.text:Fapi_checkFsmForReady)
+                  00209ff4    0000001a     CM_SSBL_Main.obj (.text:Flash_disableECC)
+                  0020a00e    0000001a     F2838x_CM_FlashAPI.lib : Utilities.obj (.text:_Fapi_calculateOtpChecksum)
+                  0020a028    00000018     CM_SSBL_Main.obj (.text:Interrupt_enableInProcessor)
+                  0020a040    00000014     CM_SSBL_Main.obj (.text:Flash_releasePumpSemaphore)
+                  0020a054    00000014     driverlib_cm.lib : flash.obj (.text:Flash_unlockCtrlRegisters)
+                  0020a068    00000014     cm.obj (.text:Interrupt_setVectorTableOffset)
+                  0020a07c    00000012     driverlib_cm.lib : flash.obj (.text:Flash_unlockECCRegisters)
+                  0020a08e    00000002     --HOLE-- [fill = 0]
+                  0020a090    00000010     cm.obj (.text:SysCtl_disableWatchdog)
+                  0020a0a0    0000000e     F2838x_CM_FlashAPI.lib : FlashStateMachine.obj (.text:Fapi_getFsmStatus)
+                  0020a0ae    0000000e     rtsv7M4_T_le_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  0020a0bc    0000000c                           : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init)
+                  0020a0c8    00000008     CM_SSBL_Main.obj (.text:CPU_clearPRIMASK)
+                  0020a0d0    00000004     F2838x_CM_FlashAPI.lib : FlashStateMachine.obj (.text:Fapi_serviceWatchdogTimer)
+                  0020a0d4    00000004     rtsv7M4_T_le_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  0020a0d8    00000004                           : exit.c.obj (.text:abort:abort)
+
+MODULE SUMMARY
+
+       Module                       code    ro data   rw data
+       ------                       ----    -------   -------
+    .\
+       GrlPDComm.obj                5000    0         64     
+       CM_SSBL_Main.obj             860     0         1068   
+       startup_ccs.obj              12      320       0      
+       cm.obj                       238     0         0      
+    +--+----------------------------+-------+---------+---------+
+       Total:                       6110    320       1132   
+                                                             
+    C:/ti/c2000/C2000Ware_4_00_00_00/driverlib/f2838x/driverlib_cm/ccs/Debug/driverlib_cm.lib
+       ipc.obj                      472     272       1088   
+       flash.obj                    774     0         0      
+       interrupt.obj                220     0         320    
+       sysctl.obj                   72      0         0      
+    +--+----------------------------+-------+---------+---------+
+       Total:                       1538    272       1408   
+                                                             
+    C:/ti/c2000/C2000Ware_4_00_00_00/libraries/flash_api/f2838x/cm/lib/F2838x_CM_FlashAPI.lib
+       FlashStateMachine.obj        2864    0         0      
+       Program.obj                  904     0         0      
+       Read.obj                     738     0         0      
+       Utilities.obj                564     0         0      
+       BlankCheck.obj               322     0         0      
+       Async.obj                    234     0         0      
+       Init.obj                     218     0         12     
+       Verify.obj                   50      0         0      
+    +--+----------------------------+-------+---------+---------+
+       Total:                       5894    0         12     
+                                                             
+    C:\ti\ccs1040\ccs\tools\compiler\ti-cgt-arm_20.2.5.LTS\lib\rtsv7M4_T_le_eabi.lib
+       memcpy_t2.asm.obj            156     0         0      
+       memset_t2.asm.obj            138     0         0      
+       copy_decompress_lzss.c.obj   104     0         0      
+       autoinit.c.obj               68      0         0      
+       memmov.c.obj                 56      0         0      
+       boot_cortex_m.c.obj          36      0         0      
+       copy_decompress_none.c.obj   14      0         0      
+       copy_zero_init.c.obj         12      0         0      
+       exit.c.obj                   4       0         0      
+       pre_init.c.obj               4       0         0      
+    +--+----------------------------+-------+---------+---------+
+       Total:                       592     0         0      
+                                                             
+       Stack:                       0       0         4096   
+       Linker Generated:            0       96        0      
+    +--+----------------------------+-------+---------+---------+
+       Grand Total:                 14134   688       6648   
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 00204048 records: 3, size/record: 8, table size: 24
+	.data: load addr=00204000, load size=0000002c bytes, run addr=20011140, run size=00000034 bytes, compression=lzss
+	.bss: load addr=00204038, load size=00000008 bytes, run addr=20010b2c, run size=00000430 bytes, compression=zero_init
+	.vtable: load addr=00204040, load size=00000008 bytes, run addr=20011000, run size=00000140 bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 0020402c records: 3, size/record: 4, table size: 12
+	index: 0, handler: __TI_zero_init
+	index: 1, handler: __TI_decompress_lzss
+	index: 2, handler: __TI_decompress_none
+
+
+FAR CALL TRAMPOLINES
+
+callee name               trampoline name
+   callee addr  tramp addr   call addr  call info
+--------------  -----------  ---------  ----------------
+cm_handler                $Tramp$TT$L$PI$$cm_handler
+   200106ad     00208c5c     00208c44   CM_SSBL_Main.obj (.text:IPC_CPU1_CM_ISR0)
+Flash_initModule          $Tramp$TT$L$PI$$Flash_initModule
+   20010905     0020939c     00209334   CM_SSBL_Main.obj (.text:main)
+                             00209a40   cm.obj (.text:CM_init)
+memset                    $Tramp$TT$L$PI$$memset
+   00209643     200106a4     20010238   GrlPDComm.obj (.TI.ramfunc:copy_data)
+                             2001068a   GrlPDComm.obj (.TI.ramfunc:copy_data)
+                             200107c6   GrlPDComm.obj (.TI.ramfunc:cm_handler)
+memmove                   $Tramp$TT$L$PI$$memmove
+   00209d1d     2001080c     2001071e   GrlPDComm.obj (.TI.ramfunc:cm_handler)
+cpu1_ipc_intr_write_status  $Tramp$TT$L$PI$$cpu1_ipc_intr_write_status
+   0020972d     20010814     200107bc   GrlPDComm.obj (.TI.ramfunc:cm_handler)
+Fapi_initializeAPI        $Tramp$TT$L$PI$$Fapi_initializeAPI
+   002090e7     200108d4     20010846   GrlPDComm.obj (.TI.ramfunc:Flash_data_program_8)
+                             20010996   GrlPDComm.obj (.TI.ramfunc:grlFlashBOOTPGMSectorWrite)
+                             200109e8   GrlPDComm.obj (.TI.ramfunc:Example_EraseSector)
+Fapi_setActiveFlashBank   $Tramp$TT$L$PI$$Fapi_setActiveFlashBank
+   002094b7     200108dc     20010850   GrlPDComm.obj (.TI.ramfunc:Flash_data_program_8)
+                             200109a0   GrlPDComm.obj (.TI.ramfunc:grlFlashBOOTPGMSectorWrite)
+                             200109f2   GrlPDComm.obj (.TI.ramfunc:Example_EraseSector)
+Fapi_issueProgrammingCommand  $Tramp$TT$L$PI$$Fapi_issueProgrammingCommand
+   002086bf     200108e4     2001086a   GrlPDComm.obj (.TI.ramfunc:Flash_data_program_8)
+                             200109ba   GrlPDComm.obj (.TI.ramfunc:grlFlashBOOTPGMSectorWrite)
+Fapi_checkFsmForReady     $Tramp$TT$L$PI$$Fapi_checkFsmForReady
+   00209fdb     200108ec     20010872   GrlPDComm.obj (.TI.ramfunc:Flash_data_program_8)
+                             200109c2   GrlPDComm.obj (.TI.ramfunc:grlFlashBOOTPGMSectorWrite)
+                             20010a06   GrlPDComm.obj (.TI.ramfunc:Example_EraseSector)
+Fapi_getFsmStatus         $Tramp$TT$L$PI$$Fapi_getFsmStatus
+   0020a0a1     200108f4     2001087a   GrlPDComm.obj (.TI.ramfunc:Flash_data_program_8)
+                             200109ca   GrlPDComm.obj (.TI.ramfunc:grlFlashBOOTPGMSectorWrite)
+Fapi_doVerifyByByte       $Tramp$TT$L$PI$$Fapi_doVerifyByByte
+   00209f9d     200108fc     2001088e   GrlPDComm.obj (.TI.ramfunc:Flash_data_program_8)
+Flash_unlockCtrlRegisters  $Tramp$TT$L$PI$$Flash_unlockCtrlRegisters
+   0020a055     20010974     20010914   driverlib_cm.lib : flash.obj (.TI.ramfunc:Flash_initModule)
+Flash_unlockECCRegisters  $Tramp$TT$L$PI$$Flash_unlockECCRegisters
+   0020a07d     2001097c     2001091a   driverlib_cm.lib : flash.obj (.TI.ramfunc:Flash_initModule)
+Fapi_issueAsyncCommandWithAddress  $Tramp$TT$L$PI$$Fapi_issueAsyncCommandWithAddress
+   002093a5     20010a30     200109fe   GrlPDComm.obj (.TI.ramfunc:Example_EraseSector)
+Fapi_doBlankCheck         $Tramp$TT$L$PI$$Fapi_doBlankCheck
+   00208d6b     20010a38     20010a18   GrlPDComm.obj (.TI.ramfunc:Example_EraseSector)
+
+[15 trampolines]
+[26 trampoline calls]
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                             
+-------   ----                             
+20010f48  BlockHeader                      
+0020a0d9  C$$EXIT                          
+002097a5  CM_enableAllPeripherals          
+00209a21  CM_init                          
+20010b2c  CPU1RxBuf                        
+200109dd  Example_EraseSector              
+20010f3c  Fapi_GlobalInit                  
+00209ac5  Fapi_calculateEcc                
+002096b5  Fapi_calculateFletcherChecksum   
+00209fdb  Fapi_checkFsmForReady            
+00208d6b  Fapi_doBlankCheck                
+00209f9d  Fapi_doVerifyByByte              
+00209bdd  Fapi_flushPipeline               
+0020a0a1  Fapi_getFsmStatus                
+002090e7  Fapi_initializeAPI               
+00209a75  Fapi_isAddressEcc                
+00209433  Fapi_isAddressValid              
+002093a5  Fapi_issueAsyncCommandWithAddress
+002086bf  Fapi_issueProgrammingCommand     
+0020a0d1  Fapi_serviceWatchdogTimer        
+002094b7  Fapi_setActiveFlashBank          
+002095bd  Fapi_setupBankSectorEnable       
+002089eb  Fapi_setupEepromSectorEnable     
+2001081d  Flash_data_program_8             
+20010905  Flash_initModule                 
+20080000  IPC_CM_To_CPU1_GetBuffer         
+20082000  IPC_CM_To_CPU1_PutBuffer         
+20084000  IPC_CM_To_CPU2_GetBuffer         
+20086000  IPC_CM_To_CPU2_PutBuffer         
+00208b29  IPC_CPU1_CM_ISR0                 
+20010f60  IPC_Instance                     
+002091b1  IPC_readCommand                  
+00209ba1  IPC_registerInterrupt            
+00208f39  IPC_sendCommand                  
+0020953d  Interrupt_enable                 
+002099c5  Interrupt_registerHandler        
+00200b34  RamfuncsLoadEnd                  
+00000b2c  RamfuncsLoadSize                 
+00200008  RamfuncsLoadStart                
+20010b2c  RamfuncsRunEnd                   
+00000b2c  RamfuncsRunSize                  
+20010000  RamfuncsRunStart                 
+00200001  ResetISR                         
+00209b15  SysCtl_enablePeripheral          
+0020a00f  _Fapi_calculateOtpChecksum       
+00208e51  _Fapi_checkRegionForValueByByte  
+0020988d  _Fapi_divideUnsignedLong         
+00209015  _Fapi_issueFsmCommand            
+00208c65  _Fapi_loopRegionForValue         
+0020981b  _Fapi_loopRegionForValueByByte   
+00209fbf  _Fapi_scaleCycleValues           
+002098f5  _Fapi_setupSectorsForWrite       
+1ffff000  __STACK_END                      
+00001000  __STACK_SIZE                     
+00204048  __TI_CINIT_Base                  
+00204060  __TI_CINIT_Limit                 
+0020402c  __TI_Handler_Table_Base          
+00204038  __TI_Handler_Table_Limit         
+00209b5d  __TI_auto_init_nobinit_nopinit   
+0020995d  __TI_decompress_lzss             
+0020a0af  __TI_decompress_none             
+ffffffff  __TI_pprof_out_hndl              
+ffffffff  __TI_prof_data_size              
+ffffffff  __TI_prof_data_start             
+00204000  __TI_static_base__               
+0020a0bd  __TI_zero_init                   
+0020963b  __aeabi_memclr                   
+0020963b  __aeabi_memclr4                  
+0020963b  __aeabi_memclr8                  
+00209271  __aeabi_memcpy                   
+00209271  __aeabi_memcpy4                  
+00209271  __aeabi_memcpy8                  
+0020963d  __aeabi_memset                   
+0020963d  __aeabi_memset4                  
+0020963d  __aeabi_memset8                  
+ffffffff  __binit__                        
+ffffffff  __c_args__                       
+UNDEFED   __mpu_init                       
+1fffe000  __stack                          
+20010000  __start___llvm_prf_cnts          
+20010000  __stop___llvm_prf_cnts           
+00209f79  _c_int00_noargs                  
+UNDEFED   _system_post_cinit               
+0020a0d5  _system_pre_init                 
+0020a0d9  abort                            
+ffffffff  binit                            
+20082110  buf_rx                           
+200106ad  cm_handler                       
+00200bc0  constLoadEnd                     
+00000088  constLoadSize                    
+00200b38  constLoadStart                   
+20010fe8  constRunEnd                      
+00000088  constRunSize                     
+20010f60  constRunStart                    
+20010001  copy_data                        
+0020972d  cpu1_ipc_intr_write_status       
+20011168  data_size                        
+20010f54  entryAddress                     
+20010f58  entry_point                      
+20011140  flash_address                    
+20010985  grlFlashBOOTPGMSectorWrite       
+00209cf5  initFlashSectors                 
+20011166  iteration_cnt                    
+0020930d  main                             
+00209271  memcpy                           
+00209d1d  memmove                          
+00209643  memset                           
+0020c000  vectorTableFlash                 
+20011000  vectorTableRAM                   
+2001116c  write_status                     
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                             
+-------   ----                             
+00000088  constLoadSize                    
+00000088  constRunSize                     
+00000b2c  RamfuncsLoadSize                 
+00000b2c  RamfuncsRunSize                  
+00001000  __STACK_SIZE                     
+00200001  ResetISR                         
+00200008  RamfuncsLoadStart                
+00200b34  RamfuncsLoadEnd                  
+00200b38  constLoadStart                   
+00200bc0  constLoadEnd                     
+00204000  __TI_static_base__               
+0020402c  __TI_Handler_Table_Base          
+00204038  __TI_Handler_Table_Limit         
+00204048  __TI_CINIT_Base                  
+00204060  __TI_CINIT_Limit                 
+002086bf  Fapi_issueProgrammingCommand     
+002089eb  Fapi_setupEepromSectorEnable     
+00208b29  IPC_CPU1_CM_ISR0                 
+00208c65  _Fapi_loopRegionForValue         
+00208d6b  Fapi_doBlankCheck                
+00208e51  _Fapi_checkRegionForValueByByte  
+00208f39  IPC_sendCommand                  
+00209015  _Fapi_issueFsmCommand            
+002090e7  Fapi_initializeAPI               
+002091b1  IPC_readCommand                  
+00209271  __aeabi_memcpy                   
+00209271  __aeabi_memcpy4                  
+00209271  __aeabi_memcpy8                  
+00209271  memcpy                           
+0020930d  main                             
+002093a5  Fapi_issueAsyncCommandWithAddress
+00209433  Fapi_isAddressValid              
+002094b7  Fapi_setActiveFlashBank          
+0020953d  Interrupt_enable                 
+002095bd  Fapi_setupBankSectorEnable       
+0020963b  __aeabi_memclr                   
+0020963b  __aeabi_memclr4                  
+0020963b  __aeabi_memclr8                  
+0020963d  __aeabi_memset                   
+0020963d  __aeabi_memset4                  
+0020963d  __aeabi_memset8                  
+00209643  memset                           
+002096b5  Fapi_calculateFletcherChecksum   
+0020972d  cpu1_ipc_intr_write_status       
+002097a5  CM_enableAllPeripherals          
+0020981b  _Fapi_loopRegionForValueByByte   
+0020988d  _Fapi_divideUnsignedLong         
+002098f5  _Fapi_setupSectorsForWrite       
+0020995d  __TI_decompress_lzss             
+002099c5  Interrupt_registerHandler        
+00209a21  CM_init                          
+00209a75  Fapi_isAddressEcc                
+00209ac5  Fapi_calculateEcc                
+00209b15  SysCtl_enablePeripheral          
+00209b5d  __TI_auto_init_nobinit_nopinit   
+00209ba1  IPC_registerInterrupt            
+00209bdd  Fapi_flushPipeline               
+00209cf5  initFlashSectors                 
+00209d1d  memmove                          
+00209f79  _c_int00_noargs                  
+00209f9d  Fapi_doVerifyByByte              
+00209fbf  _Fapi_scaleCycleValues           
+00209fdb  Fapi_checkFsmForReady            
+0020a00f  _Fapi_calculateOtpChecksum       
+0020a0a1  Fapi_getFsmStatus                
+0020a0af  __TI_decompress_none             
+0020a0bd  __TI_zero_init                   
+0020a0d1  Fapi_serviceWatchdogTimer        
+0020a0d5  _system_pre_init                 
+0020a0d9  C$$EXIT                          
+0020a0d9  abort                            
+0020c000  vectorTableFlash                 
+1fffe000  __stack                          
+1ffff000  __STACK_END                      
+20010000  RamfuncsRunStart                 
+20010000  __start___llvm_prf_cnts          
+20010000  __stop___llvm_prf_cnts           
+20010001  copy_data                        
+200106ad  cm_handler                       
+2001081d  Flash_data_program_8             
+20010905  Flash_initModule                 
+20010985  grlFlashBOOTPGMSectorWrite       
+200109dd  Example_EraseSector              
+20010b2c  CPU1RxBuf                        
+20010b2c  RamfuncsRunEnd                   
+20010f3c  Fapi_GlobalInit                  
+20010f48  BlockHeader                      
+20010f54  entryAddress                     
+20010f58  entry_point                      
+20010f60  IPC_Instance                     
+20010f60  constRunStart                    
+20010fe8  constRunEnd                      
+20011000  vectorTableRAM                   
+20011140  flash_address                    
+20011166  iteration_cnt                    
+20011168  data_size                        
+2001116c  write_status                     
+20080000  IPC_CM_To_CPU1_GetBuffer         
+20082000  IPC_CM_To_CPU1_PutBuffer         
+20082110  buf_rx                           
+20084000  IPC_CM_To_CPU2_GetBuffer         
+20086000  IPC_CM_To_CPU2_PutBuffer         
+ffffffff  __TI_pprof_out_hndl              
+ffffffff  __TI_prof_data_size              
+ffffffff  __TI_prof_data_start             
+ffffffff  __binit__                        
+ffffffff  __c_args__                       
+ffffffff  binit                            
+UNDEFED   __mpu_init                       
+UNDEFED   _system_post_cinit               
+
+[110 symbols]

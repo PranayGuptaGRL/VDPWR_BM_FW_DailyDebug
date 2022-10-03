@@ -1,0 +1,7 @@
+D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\noboot.cydsn\noboot.cyprj|1cc46d77-1a37-49a0-8bcd-76ed744c4595
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|58278a48-3d36-44ea-aa4e-3e5fff155e2d
+C:\Users\GRL\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|89146c2e-b4a6-4914-b0dd-1a36450a6798
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|c9de8ae6-fe41-4812-9472-dac60d2830f3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|f61ae4c5-4d1d-44a2-80a3-e3852c25ee48
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|519e0acb-3465-4ce2-8074-065b6aef4dfc
+D:\V-TE-PWR\PDSS_SRC_SNK\CYPD3171-24LQXQ_pb\CYPD3171-24LQXQ_pb.cydsn\CYPD3171-24LQXQ_pb.cyprj|635e8b3c-e33b-4935-9844-535dc3afc57e

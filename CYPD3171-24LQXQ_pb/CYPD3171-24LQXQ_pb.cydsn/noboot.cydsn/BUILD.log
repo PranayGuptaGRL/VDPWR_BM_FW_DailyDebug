@@ -1,0 +1,8 @@
+--------------- Build Started: 11/29/2021 17:41:29 Project: noboot, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+The code generation step is up to date.
+arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I..\src\pd_hal -I..\src\app -I..\src\pd_common -I..\src\system -I..\src\app\alt_mode -I..\common -I..\src\hpiss -I..\src\scb -I..\src\cable_comp -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/alt_modes_mngr.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Os -fno-strict-aliasing -c ..\src\app\alt_mode\alt_modes_mngr.c -o .\CortexM0\ARM_GCC_541\Debug\alt_modes_mngr.o
+In file included from ..\src\app\alt_mode\alt_modes_mngr.c:44:0:
+..\src\app/app.h:762:24: fatal error: grl_struct.h: No such file or directory
+compilation terminated.
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+--------------- Build Failed: 11/29/2021 17:41:30 ---------------

@@ -1,0 +1,1 @@
+"./CPU1_SSBL_Main.obj" "./device/device.obj" "./device/f2838x_codestartbranch.obj" "C:/ti/c2000/C2000Ware_3_04_00_00/driverlib/f2838x/driverlib/ccs/Debug/driverlib.lib" "../ssbl.cmd" -llibc.a 

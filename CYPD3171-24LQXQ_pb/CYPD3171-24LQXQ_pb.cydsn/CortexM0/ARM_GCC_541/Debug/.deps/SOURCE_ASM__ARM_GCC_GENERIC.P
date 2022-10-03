@@ -1,0 +1,8 @@
+D:/V-TE-PWR/PDSS_SRC_SNK/CYPD3171-24LQXQ_pb/CYPD3171-24LQXQ_pb.cydsn/CortexM0/ARM_GCC_541/Debug/CyBootAsmGnu.o : D:/V-TE-PWR/PDSS_SRC_SNK/CYPD3171-24LQXQ_pb/CYPD3171-24LQXQ_pb.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s D:/V-TE-PWR/PDSS_SRC_SNK/CYPD3171-24LQXQ_pb/CYPD3171-24LQXQ_pb.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc D:/V-TE-PWR/PDSS_SRC_SNK/CYPD3171-24LQXQ_pb/CYPD3171-24LQXQ_pb.cydsn/Generated_Source/PSoC4/cyfittergnu.inc 
+
+D:/V-TE-PWR/PDSS_SRC_SNK/CYPD3171-24LQXQ_pb/CYPD3171-24LQXQ_pb.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s : 
+
+D:/V-TE-PWR/PDSS_SRC_SNK/CYPD3171-24LQXQ_pb/CYPD3171-24LQXQ_pb.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc : 
+
+D:/V-TE-PWR/PDSS_SRC_SNK/CYPD3171-24LQXQ_pb/CYPD3171-24LQXQ_pb.cydsn/Generated_Source/PSoC4/cyfittergnu.inc : 
+

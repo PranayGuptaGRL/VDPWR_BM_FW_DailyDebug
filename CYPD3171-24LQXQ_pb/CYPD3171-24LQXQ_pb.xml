@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Name="CYPD3171-24LQXQ_pb" WorkspaceName="CYPD3171-24LQXQ_pb.cywrk">
+  <Version>3.3.0</Version>
+  <Keyword>CCG3PA</Keyword>
+  <Keyword>Power Bank</Keyword>
+  <Keyword Hidden="true">EZ-PD_CCGx_Power_SDK</Keyword>
+  <Description>CCG3PA Type-C power bank reference application.</Description>
+  <DeviceFilter MpnDefault="CYPD3171-24LQXQ">CCG3PA</DeviceFilter>
+  <MinToolVersion>4.1.0.2686</MinToolVersion>
+</Project>
