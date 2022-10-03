@@ -40,7 +40,7 @@
       rp_supported="0x06"
       usbpd_supported="1"
       try_src_en="0"
-      cable_disc_en="0"
+      cable_disc_en="1"
       dead_bat_en="0"
       err_recov_en="1"
       port_disable="0"

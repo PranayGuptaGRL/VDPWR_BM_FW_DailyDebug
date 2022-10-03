@@ -75,6 +75,9 @@ typedef enum
     GRL_TesterMode_SRC = 0x04,
     GRL_APP_CONFIG = 0x05,
     GRL_TesterMode_DRP = 0x06,
+    GRL_ATTACH_NO_CHECK_PDC = 0x07,
+    GRL_DETACH_WITH_RP_RD_DISABLE = 0x08,
+    
     GRL_APP_CMD_INIT = 0x10,
     GRL_SRC_CAPS_UPDATE = 0x20,
     
@@ -96,7 +99,7 @@ typedef struct
 {
     uint8_t GetBattStatusBuf[4];
     uint8_t GetStatusBuf[8];
-
+    volatile uint8_t gReceivedSetPortRoleCmd;
 }g_Custom_config_Buf;
 
 typedef struct 

@@ -760,7 +760,7 @@ bool mux_ctrl_set_cfg(uint8_t port, mux_select_t cfg, uint8_t polarity);
 void mux_ctrl_bb_enable (uint8_t port, uint8_t polarity);
 
 #include "grl_struct.h"
-
+#define EVT_LOG 1
 void PD_BC_i2cBufHandler(uint8_t);
 void PDCStatusBuffFillHandler(uint8_t, uint8_t * );
 void g_PdssGPIOIntrHandler(uint8_t);
@@ -770,7 +770,7 @@ void gInitSOP1DiscID();
 
 #ifdef EVT_LOG
 void gBufLog(bool isReset,uint8_t aLogVar);
-#define EVNT_LOG_BUF_SIZE   64
+#define EVNT_LOG_BUF_SIZE   128
 extern uint16_t gEventlogBufIndex;
 extern uint8_t gEventlogBuffer[EVNT_LOG_BUF_SIZE];
 void gBufLog(bool,uint8_t );    

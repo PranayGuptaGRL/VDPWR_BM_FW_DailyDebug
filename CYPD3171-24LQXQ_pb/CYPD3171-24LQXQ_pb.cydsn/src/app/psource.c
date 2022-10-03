@@ -772,7 +772,7 @@ void psrc_set_voltage(uint8_t port, uint16_t volt_mV)
     app_stat->psrc_volt = volt_mV;
     const dpm_status_t *dpm_stat = dpm_get_info(port);
     
-    if(dpm_stat->cur_port_role != PRT_ROLE_SINK)
+    if(dpm_stat->cur_port_role == PRT_ROLE_SOURCE)
     {
        /**
         * Requirement is to Send REQUESTED VBUS VOLTAGE to FX3 details along with Keyword, Interrupt Status

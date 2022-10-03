@@ -52,7 +52,7 @@
 #include <power_bank.h>
 #include <vbus_ctrl.h>
 
-#define POWER_BANK                                  (1)
+//#define POWER_BANK                                  (0)
 
 /*******************************************************************************
  * VBus Control Type

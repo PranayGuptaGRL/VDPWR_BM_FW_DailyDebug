@@ -1712,6 +1712,34 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
             app_pps_sink_disable (port);
 #endif /* APP_PPS_SINK_SUPPORT */
 
+            //Pranay,23Sept'22,
+            /*if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd != PRT_DUAL)
+            {
+                dpm_update_port_config (TYPEC_PORT_0_IDX, 
+                g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
+                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, false, false);
+            
+                CyDelay(2);
+                
+                dpm_update_port_config (TYPEC_PORT_0_IDX, 
+                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
+                        g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, false, false);
+            }
+            else
+            {
+                            
+                dpm_update_port_config (TYPEC_PORT_0_IDX, 
+                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
+                        g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, true, false);
+                
+                CyDelay(2);
+                                            
+                dpm_update_port_config (TYPEC_PORT_0_IDX, 
+                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
+                        g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, true, false);
+
+            }*/
+            
             AUG_TIMER_Stop();/**Turning off timer if we get detach/hardreset */
             timer_stop(0,GRL_APP_SOP1_TIMER); /**Stopping SOP1 timer in detach event*/
             /** Pranay,27Sept'19,to resolve issue i.e., after requesting PDOx if we send Attach/Detach, 

@@ -18,7 +18,7 @@
 static uint16_t glogBufIndex;
 dpm_pd_cmd_buf_t vdm_cmd_buf;
 
-uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.2.1";
+uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.4.3";
 #if ONLY_PD_SNK_FUNC_EN
 void g_CapabilityMismatchHandler(uint8_t * aBuffer)
 {
@@ -677,6 +677,11 @@ void g_EventlogBufFetch(uint8_t * aBuffer)
         glogBufIndex += 32;/** response buffer index should be tracked with no. of bytes being reposnded with, so incrementingby No of bytes being filled*/
     }
 }
+void EvtBufCopy(uint8_t * aBuffer)
+{
+    memcpy(&aBuffer[glogBufIndex],&gEventlogBuffer[0],gEventlogBufIndex);
+    glogBufIndex += gEventlogBufIndex;
+}
 #endif
 /*
 Pranay,07Jun'19,Function to get details of DUT packet details
@@ -899,8 +904,8 @@ void g_Get_PDNegotiationInfo(uint8_t * RecvBuffer,uint8_t * aBuffer)
             aBuffer[glogBufIndex++] = 0xA2;/**Keyword*/
             aBuffer[glogBufIndex++] = 0xFD;
             
-            g_EventlogBufFetch(aBuffer);
-                        
+            //g_EventlogBufFetch(aBuffer);
+            EvtBufCopy(aBuffer);
         break;
 #endif
       case 0xB1://Fetching Battery status details

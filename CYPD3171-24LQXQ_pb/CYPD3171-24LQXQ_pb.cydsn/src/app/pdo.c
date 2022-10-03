@@ -809,7 +809,7 @@ ATTRIBUTES static pd_do_t grl_eval_Src_caps(uint8_t port ,const pd_packet_t* src
                 snk_rdo = g_DUTFallBackHandler(src_cap);
 #if ONLY_PD_SNK_FUNC_EN
 #ifdef EVT_LOG
-	    gBufLog(false,0xC1);         
+	    //gBufLog(false,0xC1);         
 #endif
 #endif/*ONLY_PD_SNK_FUNC_EN*/
         }
@@ -823,7 +823,7 @@ ATTRIBUTES static pd_do_t grl_eval_Src_caps(uint8_t port ,const pd_packet_t* src
 #if ONLY_PD_SNK_FUNC_EN
 
 #ifdef EVT_LOG
-        gBufLog(false,0xC4);
+        //gBufLog(false,0xC4);
 #endif
 
 #endif/*ONLY_PD_SNK_FUNC_EN*/

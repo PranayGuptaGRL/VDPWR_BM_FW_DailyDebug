@@ -40,7 +40,7 @@
       rp_supported="0x06"
       usbpd_supported="1"
       try_src_en="0"
-      cable_disc_en="0"
+      cable_disc_en="1"
       dead_bat_en="0"
       err_recov_en="1"
       port_disable="0"
@@ -48,7 +48,7 @@
       vconn_retain="0"
       dr_swap_response="3"
       pr_swap_response="0"
-      vconn_swap_response="3"
+      vconn_swap_response="0"
       src_pdo="[0x2401912C, 0x0002D12C, 0x0003C12C, 0x0004B12C, 0x0006412C, 0xC140213C, 0xC190213C]"
       sink_pdo="[0x2201905A, 0x8DC2305A]"
       sink_min_max_current="[0x005A, 0x005A]" />
