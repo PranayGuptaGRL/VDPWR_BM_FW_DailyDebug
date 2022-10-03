@@ -109,8 +109,13 @@ __interrupt void MsgTimer0ExpiryHandler( void )
     switch(gTimer0Var)
     {
     case ADC_DATA_READ:
+
         Task_ADC_DataRead();
+
+        GPIO_togglePin(38);
+
         MsgTimerStart(10000, ADC_DATA_READ, TIMER0);//
+
         break;
     case I2C_FRAM_BYTECOUNT_DECODE:
 

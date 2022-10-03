@@ -15,7 +15,7 @@ uint8_t CMDataRxbuf[286];
 //uint8_t FRAMReadData[286];
 uint8_t FRAM_Misc_buf[16];
 
-uint8_t glFirmwareID[6] = { '4', '1', '\1' };
+uint8_t glFirmwareID[6] = { '4', '2', '\1' };
 
 
 //gPPSStruct *pStructPtr_t;
@@ -1087,10 +1087,10 @@ void main()
 
     while(1)
     {
-        GPIO_writePin(38, 0);
-        DEVICE_DELAY_US(100000);//it was 10us
-        GPIO_writePin(38, 1);
-        DEVICE_DELAY_US(100000);//it was 10us
+//        GPIO_writePin(38, 0);
+//        DEVICE_DELAY_US(100000);//it was 10us
+//        GPIO_writePin(38, 1);
+//        DEVICE_DELAY_US(100000);//it was 10us
 
         if(gi2c_rx_intr == I2C_CMD_RECEIVED)
         {
