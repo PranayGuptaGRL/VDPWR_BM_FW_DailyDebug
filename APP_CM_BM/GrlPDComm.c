@@ -285,13 +285,16 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
 //                        grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending back data to client
                   }
 
-                  /**Pranay,03Sept'22, Handling the echoback and msg ID sequence during FW udpates, If prev and present MSG ID is same then ignore received FW packet*/
-//                  gFWupdPresentRxMsgID = ( (atcpRxBuf[0] & 0xF0) >> 4);
-//
-//                  if(gFWupdPrevMsgID == gFWupdPresentRxMsgID)
-//                      return ;
-//                  else
-//                      gFWupdPrevMsgID = gFWupdPresentRxMsgID;
+                  /**Pranay,03Oct'22, Handling the echoback and msg ID sequence during FW udpates,
+                   * If prev and present MSG ID is same then ignore received FW packet
+                   * But Echo back will be sent to SW no matter what Msg ID is received
+                   * */
+                  gFWupdPresentRxMsgID = ( (atcpRxBuf[0] & 0xF0) >> 4);
+
+                  if(gFWupdPrevMsgID == gFWupdPresentRxMsgID)
+                      return ;
+                  else
+                      gFWupdPrevMsgID = gFWupdPresentRxMsgID;
 
                   if(atcpRxBuf[3] == CPU1)//CPU1 FW update
                   {
@@ -411,7 +414,7 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
                 TxBuf[0] = 0x0617;
                 TxBuf[1] = 0x0601;
                 TxBuf[2] = 0x0701;
-                TxBuf[3] = 0x0906;//FW Version 6.0
+                TxBuf[3] = 0x0806;//FW Version 6.0
 //                TxBuf[4] = 0x04;//FW Version
 //                TxBuf[5] = 0x00;
 //                memcpy( &TxBuf[4], glFirmwareID, 3);

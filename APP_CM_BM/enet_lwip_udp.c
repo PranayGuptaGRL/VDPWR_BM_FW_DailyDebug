@@ -47,6 +47,7 @@
 #include <GrlPDComm.h>
 //#include <dhcp.h>
 
+static int g_tcp_active_cnt = 0;    /* tcp activity status to close the in-active connection */
 uint16_t cont_rx_udp;
 extern uint8_t  gTimer0Var;
 extern uint8_t  gTimer1Var;
@@ -738,38 +739,80 @@ static err_t tcp_echoserver_poll(void *arg, struct tcp_pcb *tpcb)
   struct tcp_echoserver_struct *es;
 
   es = (struct tcp_echoserver_struct *)arg;
-  if (es != NULL)
+//  if( (es->pcb->state == CLOSED) ||
+//          ( es->pcb->state == CLOSE_WAIT) ||
+//              ( es->pcb->state == CLOSING)
+//      )
   {
-    if (es->p != NULL)
-    {
-      /* there is a remaining pbuf (chain) , try to send data */
-//       tcp_echoserver_send(tpcb, es);
-//        u8_t freed;
-//        /* chop first pbuf from chain */
-//       do
-//       {
-//         /* try hard to free pbuf */
-//         freed = pbuf_free(ptr);
-//       }
-//       while(freed == 0);
-    }
-    else
-    {
-      /* no remaining pbuf (chain)  */
-      if (es->state == ES_CLOSING)
+      g_tcp_active_cnt++;
+//      main();
+//      __asm("   bkpt #0");//GRL-EDIT debugging
+//      if(gVar == 1)
+//          grl_tcp_lwip_re_init();
+
+//      CM_reset();
+//      unsigned long ulUser0, ulUser1;
+//
+      /* Polling for the tcp/ip activity */
+      if(g_tcp_active_cnt >= 5)
       {
-        /*  close tcp connection */
-        tcp_echoserver_connection_close(tpcb, es);
+          g_tcp_active_cnt = 0;
+          tcp_close(tpcb);//Sending FIN
       }
-    }
-    ret_err = ERR_OK;
+//
+//      ulUser0 = GRL_MAC_0 ;
+//      ulUser1 = GRL_MAC_1 | (gSystemID & 0xFFF);
+//
+//      pucMACArray[0] = ((ulUser0 >> 16) & 0xff);
+//      pucMACArray[1] = ((ulUser0 >> 8) & 0xff);
+//      pucMACArray[2] = ((ulUser0 >> 0) & 0xff);
+//      pucMACArray[3] = ((ulUser1 >>  16) & 0xff);
+//      pucMACArray[4] = ((ulUser1 >>  8) & 0xff);
+//      pucMACArray[5] = ((ulUser1 >> 0) & 0xff);
+//
+//      //
+//      // Initialize ethernet module.
+//      //
+//      Ethernet_init(pucMACArray);
+//      //
+//      // Initialze the lwIP library, using DHCP.
+//      //
+//      IPAddr &= 0xFFFF0000;
+//      IPAddr |= gSystemID;
+//
+//      IP_address=IPAddr;
+//      //Re init TCP stack
+//
+//      lwIPInit(0, pucMACArray, IPAddr, NetMask, GWAddr, IPADDR_USE_STATIC);
+//
+//      // Initialize the UDP server
+//      //
+////      netif_init();
+//      dhcp_start(&g_sNetIF);
+//
+//      if( 0 ==  my_tcp_init() )
+//      {
+//          return 0;
+//      }
+
   }
-  else
-  {
-    /* nothing to be done */
-    tcp_abort(tpcb);
-    ret_err = ERR_ABRT;
-  }
+//  if (es != NULL) {
+//    if (es->p != NULL) {
+//      /* there is a remaining pbuf (chain) , try to send data */
+//      tcp_echoserver_send(tpcb, es);
+//    } else {
+//      /* no remaining pbuf (chain)  */
+//      if (es->state == ES_CLOSING) {
+//        /*  close tcp connection */
+//        tcp_echoserver_connection_close(tpcb, es);
+//      }
+//    }
+//    ret_err = ERR_OK;
+//  } else {
+//    /* nothing to be done */
+//    tcp_abort(tpcb);
+//    ret_err = ERR_ABRT;
+//  }
   return ret_err;
 }
 
@@ -956,7 +999,7 @@ static err_t grltcpServerRecv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, e
 
         grl_tcp_recv_data_pop(tpcb,p);
 
-
+        g_tcp_active_cnt = 0; /* Re-init the tcp activity status to close the in-active connection */
 
         if( isEchobackReq )//Dont echo back
             tcp_echoserver_send(tpcb, es);
@@ -1012,7 +1055,7 @@ static err_t tcp_echoserver_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
     tcp_err(newpcb, tcp_echoserver_error);
 
     /* initialize lwip tcp_poll callback function for newpcb */
-    tcp_poll(newpcb, tcp_echoserver_poll, 8);//For every 4 secs of nterval keep polling
+    tcp_poll(newpcb, tcp_echoserver_poll, 120);//For every 40 -50Secs of nterval keep polling
 
     ret_err = ERR_OK;
   } else {
@@ -1246,7 +1289,7 @@ err_t grlTcpDataTx_5003(uint16_t * aTxBuf, uint16_t aDataLength)
     return err;
 }
 */
-static int llen,gDatalength ;
+
 err_t grlTcpDataTx(uint16_t * aTxBuf, uint16_t aDataLength)
 {
     err_t err;
