@@ -532,7 +532,16 @@ void I2CSetCmdHandler(uint8_t * aBuffer)
          SetDACVoltage( (aBuffer[1] | (aBuffer[2] << 8)) );
          break;
      case 0xF3:
-
+         HANDLE_VBUS_CTRL_SWITCH(TURN_OFF);
+         break;
+     case 0xF4:
+         HANDLE_VBUS_CTRL_SWITCH(TURN_ON);
+         break;
+     case 0xF5:
+         gBootTime = true;
+         break;
+     case 0xF6:
+         gBootTime = false;
          break;
      }
 }
