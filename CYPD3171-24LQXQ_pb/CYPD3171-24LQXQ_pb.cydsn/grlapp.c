@@ -82,6 +82,7 @@ void toggle_PDNegLed()
     
     gpio_set_value (GPIO_PORT_2_PIN_1, (lVar&1) );
 }
+static uint8_t gRetryCount;
 static void timer_expiry_callback(uint8_t instance, timer_id_t id)
 {
     g_Struct_Ptr = (grl_Struct_t *)get_grl_struct_ptr();
@@ -135,9 +136,7 @@ static void timer_expiry_callback(uint8_t instance, timer_id_t id)
                 schedule_task(200,GRL_PORT_ATTACH);
             break;
         case GRL_PORT_ROLE_DRP:
-                
                 DrpConfiguration();
-               
                 schedule_task(200,GRL_PORT_ATTACH);
             break;
                     
@@ -147,8 +146,52 @@ static void timer_expiry_callback(uint8_t instance, timer_id_t id)
                 gpio_set_value (GPIO_PORT_2_PIN_1, 1);
                 
                 CableConnectionSimulation(GRL_ATTACH_NO_CHECK_PDC);
-                pd_phy_refresh_roles(0);                
+                //pd_phy_refresh_roles(0);                
             break;
+        case GRL_PORT_DETACH:
+                CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
+                schedule_task(60,GRL_ATTACH_STATE_POLL);
+                break;
+        case GRL_ATTACH_STATE_POLL:
+                
+                gBufLog(false,0xBA);
+                gBufLog(false, dpm_get_info(G_PORT0)->typec_fsm_state);
+                gBufLog(false, dpm_get_info(G_PORT0)->contract_exist);
+                gBufLog(false, dpm_get_info(G_PORT0)->port_role);
+                gBufLog(false, dpm_get_info(G_PORT0)->attach);
+                gBufLog(false, dpm_get_info(G_PORT0)->cc_live.cc[0]);
+                gBufLog(false, dpm_get_info(G_PORT0)->cc_live.cc[1]);
+                gBufLog(false,0xBB);
+                
+                if(dpm_get_info(G_PORT0)->attach != true)
+                {
+                    
+                    if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd == PRT_ROLE_SINK)
+                    {
+                        gBufLog(false,0xB1);
+                        schedule_task(640,GRL_PORT_ROLE_SNK);
+                    }
+                    else if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd == PRT_ROLE_SOURCE)
+                    {
+                        gBufLog(false,0xB2);
+                        schedule_task(640,GRL_PORT_ROLE_SRC);
+                    }
+                    else if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd == PRT_DUAL)
+                    {
+                        gBufLog(false,0xB3);
+                        schedule_task(640,GRL_PORT_ROLE_DRP);
+                    }
+                }
+                else if(gRetryCount++ >= 2)
+                {
+                    gBufLog(false,0xBD);
+                    schedule_task(2,GRL_PORT_DETACH);
+                }
+                else
+                {
+                    gBufLog(false,0xBE);
+                }
+                break;
     }
   
 }
@@ -707,7 +750,7 @@ void CableConnectionSimulation(uint8_t isAttach)
             CyDelay(1);
             //De asserting RpRd
             dpm_typec_deassert_rp_rd(0,CC_CHANNEL_2);
-            dpm_typec_deassert_rp_rd(0,CC_CHANNEL_2);
+            dpm_typec_deassert_rp_rd(0,CC_CHANNEL_1);
             
             g_Struct_Ptr->RequestPacketConfig.isDUT_FallBack = false;
             g_Struct_Ptr->RequestPacketConfig.gCustomConfig = 0;
@@ -765,7 +808,7 @@ void g_grl_custom_config_handler(uint8_t * lAppBuffer)
             
         case GET_BATTERY_SOC_TEMP_DETAILS://0x0D
             //InitGetBattStatusExtndMsg(lAppBuffer);
-            
+            memset(&gBattStatBuf[0], 0x00, 16);
             g_Struct_Ptr->gLogData.gCustomConfig = GET_BATTERY_SOC_TEMP_DETAILS;
             dpm_pd_command(0, DPM_CMD_GET_STATUS, NULL, NULL);
         break;
@@ -804,7 +847,7 @@ bool gPD_DataManager(uint8_t * lAppBuffer)
         break;
         case GRL_TesterMode_SINK ://0x03
             gBufLog(true,0);
-            gBufLog(false,0xAA);
+            gBufLog(false,0xA5);
             gBufLog(false,lAppBuffer[4]);
     
            // if( (dpm_get_info (TYPEC_PORT_0_IDX)->cur_port_role != PRT_ROLE_SINK) &&
@@ -812,11 +855,13 @@ bool gPD_DataManager(uint8_t * lAppBuffer)
            //    )
             //    break;
             gpio_set_value (GPIO_PORT_2_PIN_1,0);
+            gRetryCount = 0;
             g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd = PRT_ROLE_SINK;
             
-            CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
+            //CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
             
-            schedule_task(700,GRL_PORT_ROLE_SNK);
+            schedule_task(2,GRL_PORT_DETACH);
+            //schedule_task(700,GRL_PORT_ROLE_SNK);
             //SinkConfiguration();
             
          
@@ -824,18 +869,19 @@ bool gPD_DataManager(uint8_t * lAppBuffer)
             
         case GRL_TesterMode_SRC://0x04
             gBufLog(true,0);
-            gBufLog(false,0xAA);
+            gBufLog(false,0xA5);
             gBufLog(false,lAppBuffer[4]);
            // if( (dpm_get_info (TYPEC_PORT_0_IDX)->cur_port_role != PRT_ROLE_SOURCE) &&
            //     (dpm_stat->contract_exist)
            //    )
            //     break;
             gpio_set_value (GPIO_PORT_2_PIN_1,0);
+            gRetryCount = 0;
             g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd = PRT_ROLE_SOURCE;
+            //CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
+            
         
-            CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
-        
-            schedule_task(700,GRL_PORT_ROLE_SRC);
+            schedule_task(2,GRL_PORT_DETACH);
             
             
             //SrcConfiguration();
@@ -843,18 +889,20 @@ bool gPD_DataManager(uint8_t * lAppBuffer)
             
         case GRL_TesterMode_DRP://0x06
             gBufLog(true,0);
-            gBufLog(false,0xAA);
+            gBufLog(false,0xA5);
             gBufLog(false,lAppBuffer[4]);
             //if( (dpm_get_info (TYPEC_PORT_0_IDX)->cur_port_role != PRT_DUAL) &&
              //   (dpm_stat->contract_exist)
              //  )
              //   break;
             gpio_set_value (GPIO_PORT_2_PIN_1,0);
+            gRetryCount = 0;
             g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd = PRT_DUAL;
             
-            CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
-        
-            schedule_task(700,GRL_PORT_ROLE_DRP);
+            //CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
+            
+            schedule_task(2,GRL_PORT_DETACH);
+            //schedule_task(700,GRL_PORT_ROLE_DRP);
             //DrpConfiguration();
             break;
 
@@ -1049,6 +1097,10 @@ void grlapp_Initialization()
   
     g_Struct_Ptr->gPDSSConfigCtrl.gStartSOP1DiscIDAfterPDC = false;
     g_Struct_Ptr->gPDSSConfigCtrl.isCableDataReady = false;
+    
+    
+    memset(&gBattStatBuf[0], 0x00, 16);
+    
 #endif /**ONLY_PD_SNK_FUNC_EN*/
 
 }

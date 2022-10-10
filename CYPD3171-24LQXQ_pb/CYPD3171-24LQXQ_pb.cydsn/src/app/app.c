@@ -1884,7 +1884,7 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
 
             g_PdssGPIOIntrHandler(INTR_SET);
             PD_BC_i2cBufHandler(INTR_PD);
-
+            memset(&gBattStatBuf[0], 0x00, 16);//Pranay,07Oct'22,BatteryStatus Buffer clearing in detach interrupt
             /** DUT fall back flag will be TRUE only after every Ps_Rdy and will be false each time when we send API.*/
             g_Struct_Ptr->RequestPacketConfig.isDUT_FallBack = true;
             g_Struct_Ptr->RequestPacketConfig.Capability_Mismatch = false;
@@ -2117,10 +2117,10 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
                         //       b[3:2] -- Temperature status
                         // Byte3 -- Internal Temperature
                         //SoC-2Bytes
-                        gBattStatBuf[0] = (pd_pkt_p->dat[0].val & 0x00FF0000) >> 16;
-                        gBattStatBuf[1] = (pd_pkt_p->dat[0].val & 0xFF000000) >> 24;
+                        gBattStatBuf[0] = ((pd_pkt_p->dat[0].val & 0x00FF0000) >> 16);
+                        gBattStatBuf[1] = ((pd_pkt_p->dat[0].val & 0xFF000000) >> 24);
                         //Battery charging status-2Bits
-                        gBattStatBuf[2] =  (pd_pkt_p->dat[0].val & 0x0C00) >> 10;//b[1:0] 
+                        gBattStatBuf[2] =  ((pd_pkt_p->dat[0].val & 0x0C00) >> 10);//b[1:0] 
                         g_Struct_Ptr->gLogData.gCustomConfig = NA;//Pranay,06Jun'22
                         //schedule_task(2, GRL_INIT_GET_STATUS);//Pranay,06Jun'22
                     }

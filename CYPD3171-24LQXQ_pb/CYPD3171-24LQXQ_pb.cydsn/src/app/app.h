@@ -799,6 +799,8 @@ typedef enum
     GRL_PORT_ROLE_SNK,
     GRL_PORT_ROLE_DRP,
     GRL_PORT_ATTACH,
+    GRL_PORT_DETACH,
+    GRL_ATTACH_STATE_POLL,
 }Timer_var;
 
 void MsgTimerStart(uint16_t);

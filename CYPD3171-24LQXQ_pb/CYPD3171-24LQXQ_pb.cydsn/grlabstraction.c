@@ -18,7 +18,7 @@
 static uint16_t glogBufIndex;
 dpm_pd_cmd_buf_t vdm_cmd_buf;
 
-uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.4.3";
+uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.4.5";
 #if ONLY_PD_SNK_FUNC_EN
 void g_CapabilityMismatchHandler(uint8_t * aBuffer)
 {
@@ -933,6 +933,8 @@ void g_Get_PDNegotiationInfo(uint8_t * RecvBuffer,uint8_t * aBuffer)
             aBuffer[glogBufIndex++] = gBattStatBuf[11];
             //Battery Type
             aBuffer[glogBufIndex++] = gBattStatBuf[12];
+            
+            memset(&gBattStatBuf[0], 0x00, 16);//Pranay,07Oct'22, Clearing Buffer after being read
             break;
       case 0xB2://Get status message response details
             
