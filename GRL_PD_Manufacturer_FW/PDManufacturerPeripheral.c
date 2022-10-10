@@ -679,6 +679,7 @@ CyFxSpiTransfer (
 				status = CyU3PSpiReceiveWords (&readBuffer[0], byteCount);
 				if (status != CY_U3P_SUCCESS)
 				{
+	            	DEBUG_LOG(DBG1,0xB0,status );//0xB1 for SPI write failure//Pranay,03Oct'22, Debug logging mechanism to find if any peripheral failures
 					CyU3PSpiSetSsnLine (CyTrue);
 					return status;
 				}
@@ -693,6 +694,7 @@ CyFxSpiTransfer (
 //            status = SendSpiWords(buffer, byteCount);
             if (status != CY_U3P_SUCCESS)
             {
+            	DEBUG_LOG(DBG1,0xB1,status );//0xB1 for SPI write failure//Pranay,03Oct'22, Debug logging mechanism to find if any peripheral failures
                 CyU3PSpiSetSsnLine (CyTrue);
                 return status;
             }
@@ -771,6 +773,12 @@ CyFxUsbI2cTransfer (
     uint16_t resCount = glI2cPageSize;
     //int8_t debugData[250] = "";
 
+    /**Pranay,07Oct'22, Adding 2mS delay before and after I2c TX.*/
+    if(devAddr == CCG3PA_SLAVEADDR)
+    {
+		CyU3PBusyWait(1000);//2mS delay required after writing into i2c and to generate interrupt//Pranay,07Oct'22
+    }
+
     if (byteCount == 0)
     {
         return CY_U3P_SUCCESS;
@@ -826,7 +834,11 @@ CyFxUsbI2cTransfer (
 //          status = CyU3PI2cReceiveBytes (&preamble, buffer, (pageCount == 1) ? resCount : glI2cPageSize, 0);
             if (status != CY_U3P_SUCCESS)
             {
-                return status;
+            	DEBUG_LOG(DBG1,0xB2,status );//0xB2 for I2C Read failure//Pranay,03Oct'22, Debug logging mechanism to find if any peripheral failures
+            	DEBUG_LOG(DBG1,0xB3,devAddr );//0xB3 Slave ID indication//Pranay,03Oct'22, Debug logging mechanism to find if any peripheral failures
+                status = CyU3PI2cReceiveBytes (&preamble, buffer, byteCount, 2);
+
+            	return status;
             }
         }
         else /* Write */
@@ -869,6 +881,11 @@ CyFxUsbI2cTransfer (
             status = CyU3PI2cTransmitBytes (&preamble, buffer, byteCount, 0);
             if (status != CY_U3P_SUCCESS)
             {
+            	DEBUG_LOG(DBG1,0xB4,status );//0xB2 for I2C write failure//Pranay,03Oct'22, Debug logging mechanism to find if any peripheral failures
+				DEBUG_LOG(DBG1,0xB5,devAddr );//0xB3 Slave ID indication//Pranay,03Oct'22, Debug logging mechanism to find if any peripheral failures
+
+				status = CyU3PI2cTransmitBytes (&preamble, buffer, byteCount, 2);
+
                 return status;
             }
 //#endif
@@ -890,6 +907,12 @@ CyFxUsbI2cTransfer (
         byteAddress  += glI2cPageSize;
         buffer += glI2cPageSize;
         pageCount --;
+    }
+
+    /**Pranay,07Oct'22, Adding 2mS delay before and after I2c TX.*/
+    if(devAddr == CCG3PA_SLAVEADDR)
+    {
+		CyU3PBusyWait(1000);//2mS delay required after writing into i2c and to generate interrupt//Pranay,07Oct'22
     }
 #ifdef DEBUG_PRINT
     CyU3PDebugPrint (2, "I2C access1 - dev: 0x%x, address: 0x%x, size: 0x%x, pages: 0x%x, resCount: 0x%x. Data: 0x%x\r\n",

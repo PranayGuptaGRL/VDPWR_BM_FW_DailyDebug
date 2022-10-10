@@ -95,9 +95,10 @@ const uint16_t Timer0Count[]=
 		30,				//Timer_tGetDpDmData				//20
 		20, 			//Timer_ReadppsI2CData				//21
 		30,				//Timer_tGetPDSSVbusData			//22
-		30,				//Timer_tGetBatteryS0CTempDetails	//23
+		50,				//Timer_tGetBatteryS0CTempDetails	//23
 		30,				//Timer_tGetStatusMsgInfo	 		//24
 		30,				//Timer_tGetBatterystatusInfo 		//25
+		3000,			//Timer_PDSS_InitGetBatteryCaps		//26
 };
 
 const uint16_t Timer3Count[]=
@@ -632,7 +633,8 @@ CyU3PReturnStatus_t MsgTimer0ExpiredHandle (uint8_t regMsgTimerValue)
 		memset(gI2CRxBuf,0x00,BUF_SIZE_256BYTE);
     	CyFxUsbI2cTransfer(0x01,CCG3PA_SLAVEADDR,64,gI2CRxBuf,READ);/**Reading I2cData from ccg3pa*/
     	lI2CReadByteCount = gI2CRxBuf[2];/**Tracking Total byte count from ccg3pa*/
-//
+		memset(gBattStatusBuf,0x00,32);//Pranay, 06oct22
+
 //    	DebuglogInit();
 //    	DEBUG_LOG(DBG1, 0xB0, gI2CRxBuf[0]);
 //    	DEBUG_LOG(DBG1, 0xB1, gI2CRxBuf[1] );
@@ -644,7 +646,7 @@ CyU3PReturnStatus_t MsgTimer0ExpiredHandle (uint8_t regMsgTimerValue)
 //    	DEBUG_LOG(DBG1, 0xB7, gI2CRxBuf[7] );
 //    	DEBUG_LOG(DBG1, 0xB8, gI2CRxBuf[8] );
 //    	DEBUG_LOG(DBG1, 0xAB,  lI2CReadByteCount);
-
+//
 //    	DEBUG_LOG(DBG2, 0xA2, gI2CRxBuf[lI2CReadByteCount+2] );
 
     	if((gI2CRxBuf[lI2CReadByteCount+2] == CCG3PA_RD_CHKSUM) && (gI2CRxBuf[1] == GET_BATT_S0CTEMPDETAILS_CDWORD))/**Validating for total checksum received and GET_GET_SOP1_RX_PKTDATA_CDWORD keyword(0xD1)*/
@@ -720,6 +722,11 @@ CyU3PReturnStatus_t MsgTimer0ExpiredHandle (uint8_t regMsgTimerValue)
 		{
 			//TBD, what to do if data is not completely read even after retrying ???
 		}
+    	break;
+    case Timer_PDSS_InitGetBatteryCaps:
+
+    	gFunctStruct_t->gPD_Struct.gPollingIterCnt = POLLING_ITER_BATTCAP_INIT_COUNT;//Pranay,29Sept'22, Inorder to reset and initiate GetBatteryCaps everytime after PDC
+
     	break;
     default:
     	break;

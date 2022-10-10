@@ -25,6 +25,10 @@
 #define PGM_MODE	0xFAAA55AF
 uint8_t greadConfigBuf[24];
 
+extern uint8_t gDbgBuf1[BUF_SIZE_1K_BYTE];
+extern uint8_t gDbgBuf2[BUF_SIZE_128BYTE];
+
+
 typedef enum
 {
 	FX3_Programming_mode_selection=0x01,

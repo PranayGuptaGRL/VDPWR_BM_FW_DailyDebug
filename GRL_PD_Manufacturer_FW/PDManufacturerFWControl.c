@@ -8,7 +8,7 @@
 
 #include "PDManufacturerStruct.h"
 
-uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.3.5";
+uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "6.0.6";
 
 gFunctStruct * gFunctStruct_t;
 
@@ -148,6 +148,8 @@ void VBUSDetection_Handler(CyBool_t aVar)
 		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role = PRT_ROLE_SINK;
 		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gAttached_dev_type = 0x00;
 		gFunctStruct_t->gPDCStatus.gPDCStatus_t.isAttachDetach = DETACH;
+
+		memset(gBattStatusBuf,0x00,32);//Pranay, 03Oct'22, Resetting Soc Parameters, Battery status parameters to zero incase of detach
 
 	break;
 
@@ -937,7 +939,7 @@ uint8_t StatusInfoBattCapsDataAppend(uint8_t *aTXBuffer, uint8_t *aRXBuffer)
 	uint8_t lTxBufByteCnt=0, lRxBufPayloadByteCnt =0 ;
 	lTxBufByteCnt = aTXBuffer[1];
 
-	lRxBufPayloadByteCnt = aRXBuffer[2] - CCG3PA_HDR_BYTECNT;//CCG3pA Header Byte count
+	lRxBufPayloadByteCnt = (aRXBuffer[2] - CCG3PA_HDR_BYTECNT);//CCG3pA Header Byte count
 	gBattStatusBuf[0] = lRxBufPayloadByteCnt;
 	CyU3PMemCopy (&aTXBuffer[ (lTxBufByteCnt + HEADER_BYTECOUNT)], &aRXBuffer[CCG3PA_HDR_BYTECNT], lRxBufPayloadByteCnt);//Copying Actual payload data in to polling buffer
 	CyU3PMemCopy(&gBattStatusBuf[1], &aRXBuffer[CCG3PA_HDR_BYTECNT], lRxBufPayloadByteCnt);//Copying received data into global buffer for further using
@@ -1013,10 +1015,10 @@ void CcgI2cdataTransfer(uint8_t *aBuffer)
 	{
 		case GPIO0_INT_TO_FX3://got a interrupt from CCg3PA so should now send APi so that CCg3PA will copy data into I2cBuf than go and read.
 
-				CyU3PGpioSetValue (GPIO1_INT_TO_CCG3PA, 1);//Making High (DQ1) GpIO1 for CCG3PA to handle the interrupt
-				PDSSInterrupt_Validation_Handler();
-				CyU3PGpioSetValue (GPIO1_INT_TO_CCG3PA, 0);//Making low (DQ1) GpIO1 for CCG3PA to handle the interrupt
-				MsgTimerStart(PDSSInterrupt_Validation, TIMER0);
+			CyU3PGpioSetValue (GPIO1_INT_TO_CCG3PA, 1);//Making High (DQ1) GpIO1 for CCG3PA to handle the interrupt
+			PDSSInterrupt_Validation_Handler();
+			CyU3PGpioSetValue (GPIO1_INT_TO_CCG3PA, 0);//Making low (DQ1) GpIO1 for CCG3PA to handle the interrupt
+			MsgTimerStart(PDSSInterrupt_Validation, TIMER0);
 
 			break;
 		case GPIO21_RS485_IRQ:
@@ -1046,7 +1048,7 @@ void CcgI2cdataTransfer(uint8_t *aBuffer)
 }
 /***
  * Function used to toggle the GPIO that generates interrupt to ccg3pa
- * Interrupt is active low i.e. whenever this gpio goes LOW from HIGH ans interrupt will be generated in ccg3pa.
+ * Interrupt is active low i.e. whenever this gpio goes LOW from HIGH an interrupt will be generated in ccg3pa.
  * Once interrupt is generated in ccg3pa I2C read happens, So it is recommended to write required data and than generate interrupt.
  * @param aVar True or 0x01 :: Make GPIO high before writing anydata
  * 				False or 0x00 :: MAke Low to generate interrupt after writing data
@@ -1233,7 +1235,7 @@ void PDSS_InterruptHandler(uint8_t *aBuffer)
 	}
 	else
 	{
-		gFunctStruct_t->gPD_Struct.gPollingIterCnt = POLLING_ITER_BATTCAP_INIT_COUNT;//Pranay,29Sept'22, Inorder to reset and initiate GetBatteryCaps everytime after PDC
+		MsgTimerStart(Timer_PDSS_InitGetBatteryCaps, TIMER0);//Pranay, 07Oct'22, starting a 3Sec timer for initiating GetBatteryCaps messages to ensure that these packets are not blocked by SOP1 packets initation from Src
 
 	}
 
@@ -1336,6 +1338,8 @@ void AttachStateIntrHandler(uint8_t * aBuffer)
 	gPPSi2cTxBuf[1] = 0x0A;
 	gPPSi2cTxBuf[2] = 0x05;
 
+	gFunctStruct_t->gPDCStatus.gPDCStatus_t.isAttachDetach = ATTACH;
+
 	gFunctStruct_t->gPDCStatus.gPDCStatus_t.grole_at_Connect = ((aBuffer[6] & 0b1100) >> 2) ;
 //	gFunctStruct_t->gPDCStatus.gPDCStatus_t.isAttachDetach = ATTACH;
 	/**Decode voltage and add offset if needed incase of No Vltage Feedback*/
@@ -1408,6 +1412,8 @@ void DetachStateVbusHandler()
 	gPPSi2cTxBuf[2] = 0x05;
 	gPPSi2cTxBuf[3] = 0x00;
 	gPPSi2cTxBuf[4] = 0x00;
+
+	memset(gBattStatusBuf,0x00,32);//Pranay, 03Oct'22, Resetting Soc Parameters, Battery status parameters to zero incase of detach
 
 //	gFunctStruct_t->gPDCStatus.gPDCStatus_t.isAttachDetach = DETACH;
 
@@ -2725,6 +2731,27 @@ void Toggle_TxinProgressLEDindicator()
 	DataLockIndicator(counter & 1);//On//PRanay,16Spet'22, Turning on Data lock LED when any transcations are happening
 
 }
+void gTCEventLogBufFetch(uint8_t *aRxBuffer)
+{
+	uint8_t lRxApilength = (aRxBuffer[1] + HEADER_BYTECOUNT);
+
+	aRxBuffer[lRxApilength++] =  gDbgBuf1Index;
+	aRxBuffer[lRxApilength++] =  (gDbgBuf1Index >>8);
+
+//	if(gDbgBuf1Index > RS485MAXDATA_TF_LENGTH)//Max rs485 transfer length in one read cycle
+//	{
+//		gDbgBuf1Index -= RS485MAXDATA_TF_LENGTH;
+//
+//	}
+
+	CyU3PMemCopy (&aRxBuffer[lRxApilength], &gDbgBuf1[0], (RS485MAXDATA_TF_LENGTH - lRxApilength) );
+
+
+	CyU3PMemCopy(&gDbgBuf1[0], &gDbgBuf1[( RS485MAXDATA_TF_LENGTH - lRxApilength)], (gDbgBuf1Index - (RS485MAXDATA_TF_LENGTH - lRxApilength)) );
+//	CyU3PMemSet( &gDbgBuf1[(gDbgBuf1Index - (RS485MAXDATA_TF_LENGTH - lRxApilength))] , 0x00, (gDbgBuf1Index - (RS485MAXDATA_TF_LENGTH - lRxApilength)) );
+	gDbgBuf1Index -= (RS485MAXDATA_TF_LENGTH - lRxApilength);
+	lRxApilength = RS485MAXDATA_TF_LENGTH;
+}
 
 
 /**
@@ -2779,17 +2806,26 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 					SrcCapsUpdateHandler(gMiscBuf);
 					break;
 				case VUP_AS_SINK://0x03
+					HandleEload(Eload_TurnOFF,0);/*Pranay, 05Oct'22,Turning off eload incase if detach**/
+
 					CcgI2cdataTransfer(gMiscBuf);
-		        	DetachStateVbusHandler();
+
+					DetachStateVbusHandler();
 
 					break;
 				case VUP_AS_SRC://0x04
+					HandleEload(Eload_TurnOFF,0);/*Pranay,05Oct'22, Turning off eload incase if detach**/
+
 					CcgI2cdataTransfer(gMiscBuf);
+
 		        	DetachStateVbusHandler();
 
 					break;
 				case VUP_AS_DRP://0x06
+					HandleEload(Eload_TurnOFF,0);/*Pranay,05Oct'22, Turning off eload incase if detach**/
+
 					CcgI2cdataTransfer(gMiscBuf);
+
 		        	DetachStateVbusHandler();
 
 					break;
@@ -3047,6 +3083,14 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 
 						MsgTimerStart(Timer_tGetEventlogBufData, TIMER0);
 						break;
+					case gTCEventLogFetch://0xAB
+						gTCEventLogBufFetch(gRS485RxBuf);
+//						gDbgBuf1Index
+//						gDbgBuf1
+						CyU3PMemCopy(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ], &gDbgBuf1[0], 128);//Copying received data into global buffer for further using
+						gRS485RxBuf[1] += gBattStatusBuf[0];
+						RS485TXDataHandler(gRS485RxBuf, (gRS485RxBuf[1]+HEADER_BYTECOUNT));
+						break;
 					/**Need to discuss whether need to implement timer handlers for these conditions or not*/
 					case getSnkCapabilities://0x02
 					case getPdssVBUSdata://0xF2
@@ -3113,9 +3157,7 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 			case (0x0C): //Reading the Status information of function card .
 
 				//Pranay,16Septt'22, Provsion to configure if GettBattCaps are required to be initiated or not
-				if( (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EnableGetBatteryCapsFetching) &&
-							(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gDUTSpecRev == SPECREV_3_0)
-					)
+				if( gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EnableGetBatteryCapsFetching )
 				{
 					if( (gFunctStruct_t->gPD_Struct.gPollingIterCnt == POLLING_ITER_BATTCAP_INIT_COUNT)
 						&& (gFunctStruct_t->gPDCStatus.gPDCStatus_t.PDCStatus)
@@ -3142,7 +3184,11 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 							break;
 						}
 					}
-
+					//Pranay,03Oct'22, Resetting GetBattery status parameters like, SOC,Batterystatus,Temp data if DUT spec Rev is 2.0
+					if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gDUTSpecRev != SPECREV_3_0)
+					{
+						memset(gBattStatusBuf,0x00,32);
+					}
 					if( (gFunctStruct_t->gPD_Struct.gPollingIterCnt == POLLING_ITER_BATTCAP_INIT_COUNT)
 							&& (gFunctStruct_t->gPDCStatus.gPDCStatus_t.PDCStatus)
 								&& (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gDUTSpecRev == SPECREV_3_0)
@@ -3151,14 +3197,14 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 	//					gFunctStruct_t->gPD_Struct.gPollingIterCnt = 0;
 						gFunctStruct_t->gPD_Struct.gPollingIterCnt++;
 
-						memset(gBattStatusBuf,0x00,32);//Pranay, 06Jun'22,
+//						memset(gBattStatusBuf,0x00,32);//Pranay, 06Jun'22,
 
 						gFunctStruct_t->gPD_Struct.gPDSSDataFetchRetryCount = 0;/**Resetting the Flag to 0 that decides no. of times needs to be retried if complete data in not received*/
-	//					PDSSInterruptGPIOHandler(INTR_CLR);
+//						PDSSInterruptGPIOHandler(INTR_CLR);
 
 						FetchBattStatusDetailsBuff();
 
-	//					PDSSInterruptGPIOHandler(INTR_SET);
+//						PDSSInterruptGPIOHandler(INTR_SET);
 
 	//					PDSSDataReadHandler(greadConfigBuf);/**Function that fills the buffer with checksum and sends it to ccg3pa*/
 
@@ -3169,8 +3215,9 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 						gFunctStruct_t->gPD_Struct.gPollingIterCnt++;
 						if(gFunctStruct_t->gPD_Struct.gPollingIterCnt >= gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PollingIterReachCount)//Pranay,16Sept'22,Making this polling iteration configurable
 							gFunctStruct_t->gPD_Struct.gPollingIterCnt = POLLING_ITER_BATTCAP_INIT_COUNT;
-						CyU3PMemCopy(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ], &gBattStatusBuf[1], gBattStatusBuf[0]);//Copying received data into global buffer for further using
-						gRS485RxBuf[1] += gBattStatusBuf[0];
+						CyU3PMemCopy(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ], &gBattStatusBuf[1], GETBATTCAPS_PL_LENGTH);//Copying received data into global buffer for further using
+//						memset(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ],0x00, (BUF_SIZE_280BYTE-(gRS485RxBuf[1] + HEADER_BYTECOUNT)) );
+						gRS485RxBuf[1] += GETBATTCAPS_PL_LENGTH;
 						RS485TXDataHandler(gRS485RxBuf, (gRS485RxBuf[1]+HEADER_BYTECOUNT));
 					}
 				}
@@ -3192,7 +3239,9 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 							break;
 						}
 					}
-
+					CyU3PMemCopy(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ], &gBattStatusBuf[1], GETBATTCAPS_PL_LENGTH);//Copying received data into global buffer for further using
+					memset(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ],0x00, (BUF_SIZE_280BYTE-(gRS485RxBuf[1] + HEADER_BYTECOUNT)) );
+					gRS485RxBuf[1] += GETBATTCAPS_PL_LENGTH;
 					RS485TXDataHandler(gRS485RxBuf, (gRS485RxBuf[1]+HEADER_BYTECOUNT));
 
 				}
@@ -3790,7 +3839,7 @@ void StatusInformationHandle(uint8_t *aBuffer)
 	}
 	//Filling the whole data except Battery status details here, battery status details will be filled in timer expiry handler
 	lDataLength = gRS485RxBuf[1];
-	lIndex = lDataLength+2;
+	lIndex = lDataLength+HEADER_BYTECOUNT;
 	gRS485RxBuf[1] = lDataLength + lTxIndex;
 	lDataLength += lTxIndex;
 	CyU3PMemCopy (&gRS485RxBuf[lIndex], &lBuffer[0],lTxIndex);

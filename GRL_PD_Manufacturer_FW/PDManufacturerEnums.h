@@ -26,6 +26,7 @@ static uint8_t gI2cSlaveAddrFwCheck 	= 3;
 #define INTR_CLR						1
 #define HEADER_BYTECOUNT				2
 #define DATA_READ_RETRYCOUNT			1
+#define GETBATTCAPS_PL_LENGTH			13
 #define CCG3PA_RD_CHKSUM				0xDC
 #define CCG3PA_WR_CHKSUM				0xCD
 #define GET_DUTCAPS_CDWORD				0xD1
@@ -42,7 +43,7 @@ static uint8_t gI2cSlaveAddrFwCheck 	= 3;
 #define GET_BATTERY_STATUS_INFO_CDWORD		0xA5
 #define OCP_LIMIT_PERCENTAGE				130
 #define OCP_LIMIT_3A_GREATER_P_I			105
-
+#define RS485MAXDATA_TF_LENGTH				128
 volatile uint8_t gErrRetryCount;
 
 #define DBGLOG
@@ -90,6 +91,7 @@ typedef enum FWCtrlTimer0TypeEnum
 	Timer_tGetBatteryS0CTempDetails = 23,//30mS
 	Timer_tGetStatusMsgInfo	 = 24,//Getstatus
 	Timer_tGetBatterystatusInfo = 25,//Get Battery status
+	Timer_PDSS_InitGetBatteryCaps = 26,//For Getting batteryCaps afterPDC
 }FWCtrlTimer0Type;
 typedef enum FWCtrlTimerTypeEnum
 {
@@ -124,6 +126,7 @@ typedef enum
 	getSOP1RxPktData = 0xF8,
 	getDpDmData = 0xF9,
 	getEventlogBufData = 0xAA,
+	gTCEventLogFetch = 0xAB,
 	getBatteryS0CTempDetails = 0xB1, //Custom configuration includes battery status and get status responses
 	getStatusMsgInfo	 = 0xB2,//Getstatus
 	getBatterystatusInfo = 0xB3,//Get Battery status
