@@ -204,5 +204,8 @@ void FetchBattStatusDetailsBuff();
 uint8_t StatusInfoBattCapsDataAppend(uint8_t *aTXBuffer, uint8_t *aRXBuffer);
 void FetchStatusMsgInfoBufFill();
 void FetchBattStatusInfoBufFill();
+void CCG3PA_FWVersion_Fetch();
+void FX3_FWVersion_Fetch();
+void InitOCPHardreset();
 
 #endif /* PDMANUFACTURERFWCONTROL_H_ */

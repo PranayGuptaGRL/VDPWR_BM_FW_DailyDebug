@@ -8,7 +8,7 @@
 #include "Controller.h"
 #include "PD_ControllerStruct.h"
 #include "ControllerMain.h"
-uint8_t glFirmwareID[8] = { '6', '0', '1', '\0' };
+uint8_t glFirmwareID[8] = { '6', '1', '2', '\0' };
 
 
 uint8_t CmDataRxbuf[286];
@@ -175,6 +175,14 @@ __interrupt void sciaRXFIFOISR(void)
 
     if( 0x02 == (rUARTDataA[0] & 0x0F) )
         FWRecvCmdHandler(rUARTDataA);
+
+//    else if( 0xBB == (rUARTDataA[0] ) ) //API Rx Should be  0xBB, 0x01, 0xFF -> 0xFF for All registers read, Else Specific Register data only
+//    {
+ //       IPC_sendCommand(IPC_CPU1_L_CM_R, IPC_FLAG0, IPC_ADDR_CORRECTION_ENABLE,
+ //                         IPC_CMD_READ_MEM, (uint32_t)rUARTDataA, (rUARTDataA[1] + 2 ) );
+//
+//        IPC_waitForAck(IPC_CPU1_L_CM_R, IPC_FLAG0);
+//    }
     else
         RecvDataHandler(rUARTDataA);
 
@@ -360,8 +368,15 @@ void GetDataCmdHandler(uint8_t * aRxBuffer)
         }
         else
         {
-//            grlSpiTransfer (1, lRxByteCnt, aRxBuffer, CmDataRxbuf, READ);
+            //Pranay,18Oct'22, Sending error command word incase if response is not received for FW version fetch aswell, not handled in earlier release so handling now
+            SPI0ReConfig();
+            gRS485RxIntrCount = 0;//Resetting the required variables used while reading.
+            gRS485ByteCount = 255;
+            MsgTimerStop(TIMER0);//Stopping the timers
+            MsgTimerStop(TIMER1);
+
             RS485SpiTransfer(1, lRxByteCnt, aRxBuffer, NULL, WRITE);
+            MsgTimerStart(400, Timer0_Read_Expiry_Timer, TIMER0);
 
         }
         break;
@@ -567,15 +582,34 @@ void isAPI_FWUpdate(uint8_t * aRxBuffer)
 
     switch(lFwController)
     {
-        case 0x01://TC Program mode selection
-        case 0x02://TC FX3 Fw updates
-        case 0x03:
-        case 0x04:
+	//Pranay,20Oct'22,for handling the SSBL FW update of TC, handling in case specific manner 
+        case TC_PGM_MODE_SEL://TC Program mode selection
+
+            switch(aRxBuffer[3])
+            {
+                default:
+                case BOOT_MODE_SELECTION:
+                case PROGRAMMING_MODE:
+                case VIA_2ND_STAGE_BL:
+                    RS485SpiTransfer(1, lRxByteCnt, aRxBuffer, NULL, WRITE);
+                    break;
+                case PMOD_SELECTION_ON:
+                        GPIO_writePin(TC_PMOD_CONTROL_GPIO65, 1);//Making PMOD pin of TC to low
+                    break;
+                case PMOD_SELECTION_OFF:
+                       GPIO_writePin(TC_PMOD_CONTROL_GPIO65, 0);//Making PMOD pin of TC to low
+                   break;
+            }
+
+            break;
+        case TC_PROGRAMMING_FW_PAYLOAD_WRITE://TC FX3 Fw updates
+        case CCG3PA_PGM_MODE_SELECTION:
+        case CCG3PA_PROGRAMMING_FW_PAYLOAD_WRITE:
 
             RS485SpiTransfer(1, lRxByteCnt, aRxBuffer, NULL, WRITE);
 
             break;
-        case 0x06 ://Ti
+        case TI_FW_UPDATES ://Ti
             is_TiFWUpdate(aRxBuffer);
             break;
         default: // ELOAD
@@ -865,9 +899,6 @@ __interrupt void CM_CPU1_IPC_ISR1()
     {
         sDataA[0]=CmDataRxbuf[0] & 0xFF;
         sDataA[1]=CmDataRxbuf[1] & 0xFF ;
-        sDataA[2]=CmDataRxbuf[2] & 0xFF ;
-        sDataA[3]=CmDataRxbuf[3] & 0xFF ;
-        sDataA[4]=CmDataRxbuf[4] & 0xFF ;
         SCI_writeCharArray(SCIA_BASE, sDataA, 10);
     }
 

@@ -14,15 +14,24 @@
 
 #define REQ_DAC_VOLTAGE_CALC(x)      ((32808 - x ) / (float) 10000)
 
-#define REQ_DAC_COUNT(y)             (y / 0.7326)
+//#define REQ_DAC_COUNT(y)             (y / 0.7326)
+#define REQ_DAC_COUNT(y)             (y / 0.7324)//12Dec'22, Pranay, As per rajesh inputs, For APDO Alert message issue debug
 
 #define STATIC_SLOPE_CALC   1
+#define HEADER_BYTECOUNT    2
 
-//#define GPIO_3_GPIO124               124
+/**
+ * Pranay,14Dec'22,
+ * This Value defines the OCP limit breach, As feedback logic is running at 200us resolution,
+ * we need to verify if OCP limit has been reached continuously for 10mS, so 200uS*50x = 10mS
+ */
+#define OCP_LIMIT_BREACH   50 // 200uS * 50times = 10mS, Need to tweak this value w.r.t to VFB resolution time
+#define OCP_TOLERANCE  50
+#define OCP_MIN_LIMIT     100
+#define OCP_MAX_LIMIT     200
+#define OCP_MIN_REQUEST    1000
 
 #define EX_ADC_RESOLUTION    12
-
-
 #define I2C_SLAVE_ADDR      0x70
 #define FIFO_DEPTH          0xA
 
@@ -36,21 +45,31 @@
 #define ADC_VBUS_I_SCALING_FACTOR    2.5
 #define DAC_LOWER_V_LIMIT       1000//1200
 #define DAC_HIGHER_V_LIMIT      3000
-#define BOARD_IR_DROP       0.165//0.180//0.165 //Calculated and Hardcoded TC board IR Drop from TypeC end to PPS End is 0.165mohm/165ohm
+#define BOARD_IR_DROP_VSAFE5V             0.165 //Calculated and Hardcoded TC board IR Drop from TypeC end to PPS End is 0.165mohm/165ohm
+#define BOARD_IR_DROP_BELOW_VSAFE5V       0.220 //Calculated and Hardcoded TC board IR Drop from TypeC end to PPS End is 0.220mohm
+#define LED_BLINK_ITER_COUNT        5000
+#define VSAFE_5V            4750
 #define VBUS_I_OCP_LIMIT    130//130% of received current is the limit for OCP to trigger
 
 #define GPIO12_CTRL_VBUS        12
-
+#define GPIO64_OCP_TRIGGER     64                  // gpio connected between fx3 and PPS always high
+#define OCP_TRIGGER(X)    GPIO_writePin(GPIO64_OCP_TRIGGER, X);
 #define HANDLE_VBUS_CTRL_SWITCH(X)      GPIO_writePin(GPIO12_CTRL_VBUS, X);
 //#define RTOSTIMER
 #define VBUS_TOLR_VALUE     50 //10mv
 #define VFB_STEP_DELAY     100//100uS
 #define VFB_STEP_SIZE_DAC_COUNT       1
+#define CC_PPS_SNO_DATA_READ_BYTECOUNT      6
+#define FRAM_REV_DATA_READ_BYTECOUNT      1
+#define SYSTEM_SNO_BYTECOUNT                2
+
+#define CC_SNO_INDEX_FRAM       0x0A
+#define FRAM_REV_INDEX          0x07
 
 #define VBUS_INCDEC_STEPSIZE        1
-#define VBUS_INCDEC_STEP_TIME       200//50
-#define VFB_INC_DEC_STEP_TIME       2000//75//Feedback logic is running at 75uS frequency
-
+#define VBUS_INCDEC_STEP_TIME       200
+#define VFB_STEP_TIME               200 //Feedback logic is running at 200uS frequency
+#define ADC_CONVERSION_TIME         100//As per the discussions with rajesh, but as per datasheet this value is in nS
 #define VBUS_CURRENT_OCP_TOL        150
 
 #define mS     1000
@@ -90,6 +109,7 @@ float extern gADCAvgedVal;
 uint16_t extern gLastDacValueWritten;
 bool volatile extern gI2CCmdStatus;
 uint8_t extern gPPSOperatingMode;
+#define CUSTOM_OCP_LIMIT_CALC(X,Y)  ( (X / 100) * Y )
 
 #define TIMEOUT 0xFFFFFFFF
 

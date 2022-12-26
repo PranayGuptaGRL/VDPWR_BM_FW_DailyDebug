@@ -13,6 +13,7 @@
 //#define IDLE_THREAD
 #define ERR_QUEUE
 //#define WD_TIMER
+#define PDSS_COMM_THREAD
 
 #define WRITE 0
 #define READ 1

@@ -8,7 +8,7 @@
 
 #include "PDManufacturerStruct.h"
 
-uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "6.0.6";
+uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "6.2.2";
 
 gFunctStruct * gFunctStruct_t;
 
@@ -80,19 +80,21 @@ CyBool_t RS485DataRecvIntrHandle(uint8_t *lReadBuf)
 		}
 		else
 		{
-//			DEBUG_LOG(DBG1, 0xE1, 0);
+			DEBUG_LOG(DBG2, 0xE1, 0);
 			if(gErrRetryCount++ < 2)
 				SPIDataReadErrorHandler();
 			else
 			{
 				RS485DeviceInit();  // RS485 initialization
-//				DEBUG_LOG(DBG1, 0xE2, 0);
+				DEBUG_LOG(DBG2, 0xE3, 0);
 			}
 			return CyFalse;
 		}
 	}
 	if(gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount == gFunctStruct_t->gFwHandle_t.gSystemConfig_t.gRS485ByteCount)	//Entire 255 bytes of data received means then set the event for data handling
 	{
+		DEBUG_LOG(DBG2, 0xE4, 0);
+
 		MsgTimerStop(TIMER2);
 		gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount = 0;
 		gFunctStruct_t->gFwHandle_t.gSystemConfig_t.gRS485ByteCount = RS485_DATA_MAX_COUNT;
@@ -134,9 +136,12 @@ void VBUSDetection_Handler(CyBool_t aVar)
 		PDNegLedIndication(0);
 		MainLinkCommIndicationHandle(NotConnected);
 		LinkSpeedCommIndicationHandle(CY_U3P_NOT_CONNECTED);//1:HighSpped,2.FullSpeed; 3:SuperSpeed,0:NC
-		DpDmSwitchHandle(2);
-		DataErrorLEDIndicator(0);// turn off the data error indicator LED.
 
+		/*Venkat,15Nov'22,When QC mode is true DPDM line control is to be with CCG3PA, if system is in PD mode DP and DM control is
+		  given to Fx3 upon Vbus detection */
+		if(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gIsQCmode == CyFalse)
+			DpDmSwitchHandle(2);
+		DataErrorLEDIndicator(0);// turn1off the data error indicator LED.
 		//DataLockIndicator(1); //off
 		HandleEload(Eload_TurnOFF,0);/*Pranay, Turning off eload incase if detach**/
 		gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBStatus = CyFalse; // USB disconnected.
@@ -148,6 +153,7 @@ void VBUSDetection_Handler(CyBool_t aVar)
 		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role = PRT_ROLE_SINK;
 		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gAttached_dev_type = 0x00;
 		gFunctStruct_t->gPDCStatus.gPDCStatus_t.isAttachDetach = DETACH;
+		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag = CyFalse;
 
 		memset(gBattStatusBuf,0x00,32);//Pranay, 03Oct'22, Resetting Soc Parameters, Battery status parameters to zero incase of detach
 
@@ -1021,6 +1027,7 @@ void CcgI2cdataTransfer(uint8_t *aBuffer)
 			MsgTimerStart(PDSSInterrupt_Validation, TIMER0);
 
 			break;
+		case GPIO34_PPS_GPIO2://Venkat,16Nov'22, For initiating OCP Hard reset I2c data needs to be sent from ccgi2c data transfer so making use of existing impl.
 		case GPIO21_RS485_IRQ:
 			lApiLength = aBuffer[1];
 			PDSSInterruptGPIOHandler(INTR_CLR);
@@ -1077,7 +1084,7 @@ void PDSSDataReadHandler(uint8_t *aBuffer)
 
 	CyU3PMemCopy (&gI2CTxBuf[1], &aBuffer[0],(lApiLength+ HEADER_BYTECOUNT + 4) );
 
-	CyFxUsbI2cTransfer(0x01,CCG3PA_SLAVEADDR,(lApiLength+HEADER_BYTECOUNT),gI2CTxBuf,WRITE);
+	CyFxUsbI2cTransfer(0x01,CCG3PA_SLAVEADDR,(lApiLength + HEADER_BYTECOUNT + 1),gI2CTxBuf,WRITE);//Pranay,19Oct'22, as we're prepending 0x00 to the 0th index, Total bytes of data transfer will increase by 1 count
 
 	PDSSInterruptGPIOHandler(INTR_SET);
 
@@ -1169,7 +1176,10 @@ void BC12_InterruptHandle(uint8_t *aBuffer)
 	gFunctStruct_t->gPDCStatus.gBCStatus_t.BC_CurMode	=	aBuffer[7];
 
 	//PDSS_StatusLEDHandle(2);
-	//DpDmSwitchHandle(1);
+	/*Venkat,15Nov'22,When QC mode is true DPDM line control is to be with CCG3PA, if system is in PD mode DP and DM control is
+		  given to Fx3 upon Vbus detection */
+	if(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gIsQCmode == CyFalse)
+		DpDmSwitchHandle(2);
 
 	if(gFunctStruct_t->gPDCStatus.gBCStatus_t.BC_CurMode == BC_CHARGE_DCP)
 	{
@@ -1288,7 +1298,9 @@ void PDSS_InterruptHandler(uint8_t *aBuffer)
 				TxRxSwitchHandler(gFunctStruct_t->gPD_Struct.gActiveCC);
 			PDNegLedIndication(1);
 			PDSS_StatusLEDHandle(1);
-	 		CyU3PConnectState(CyTrue, CyTrue);					//After getting active CC state Connecting data lines
+    		if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role == PRT_ROLE_SINK)//Pranay,22Dec'22,Only enumerate when we're acting as a device
+    			CyU3PConnectState(CyTrue, CyTrue);					//After getting active CC state Connecting data lines
+
 		}
 	}
 	else if((gFunctStruct_t->gPDCStatus.gPDCStatus_t.PDCStatus == 0x00) && (lIsVbusPresent))
@@ -1319,6 +1331,7 @@ void PDSSInterrupt_Validation_Handler()
 
 void PpsVbusZeroIOHandler(CyBool_t aCtrl )
 {
+	DetachStateVbusHandler();//Pranay,26Oct'22, As part of TC hung issue debug, added this to set vbus to zero
 //	CyU3PGpioSetValue (GPIO33_DETACH_INTR_TO_PPS, aCtrl);
 
 //
@@ -1384,21 +1397,21 @@ void ReqStateIntrHandler(uint8_t * aBuffer)
 	 *  So for Operating currents < 1000mA no need of OCP,
 	 */
 
-	if( (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent > 1000) && (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent <= 3000))
-	{
-//		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent + 150);
-		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = ((gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent * OCP_LIMIT_PERCENTAGE) / 100);
-	}
-	else if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent <= 1000)
-	{
-		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = 1000;
-	}
-	else if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent > 3000)
-	{
-//		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = ((gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent * OCP_LIMIT_3A_GREATER_P_I) / 100);
-		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = ((gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent * OCP_LIMIT_PERCENTAGE) / 100);
-
-	}
+//	if( (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent > 1000) && (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent <= 3000))
+//	{
+////		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent + 150);
+//		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = ((gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent * OCP_LIMIT_PERCENTAGE) / 100);
+//	}
+//	else if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent <= 1000)
+//	{
+//		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = 1000;
+//	}
+//	else if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent > 3000)
+//	{
+////		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = ((gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent * OCP_LIMIT_3A_GREATER_P_I) / 100);
+//		gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit = ((gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrent * OCP_LIMIT_PERCENTAGE) / 100);
+//
+//	}
 	memset(&gPPSi2cTxBuf[7], 0x00, 9);
 
 	CyFxUsbI2cTransfer(0x01,TI_PPS_SLAVEADDR,BUF_SIZE_16BYTE, gPPSi2cTxBuf,WRITE);
@@ -2799,6 +2812,7 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 				switch(aBuffer[4])
 				{
 				case 0x01:
+		    		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag = CyFalse;
 					DetachHandler();
 					CcgI2cdataTransfer(gMiscBuf);
 					break;
@@ -2806,14 +2820,40 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 					SrcCapsUpdateHandler(gMiscBuf);
 					break;
 				case VUP_AS_SINK://0x03
+
+					CyU3PMemCopy (&gSetModeBuf[0], &gRS485RxBuf[0],BUF_SIZE_20BYTE);
+
+					/**Venkat,15Nov'22, Siwtch hanlding incase if received command is related to QC mode*/
+					if(aBuffer[5] == PDmode)
+					{
+						CcgI2cdataTransfer(gMiscBuf);
+
+						  /* Pranay,23Nov'22,DpDm terminations shall be removed
+						 *  before disabling QC mode to make state machine to
+						 * default state so that DUT also considers that there is a detach and hence starting a timer in TC and
+						 * in expiry handling DpDm switches so that
+						 * meanwhile timer gets expired ccg3pa will handle state machine disabling
+						 */
+						if(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gIsQCmode == CyTrue)/**Pranay,14Dec'22, Timer shall be started only if previously QC mode has been enabled and hence need to connect back DpDm to Fx3 otherwise not required*/
+							MsgTimerStart(Timer_QC_MODE_DISABLE, TIMER1);
+					}
+					else if(aBuffer[5] == QCmode)/**QC mode enable situation DPDM lines switched to ccg3pa*/
+					 {
+						gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gIsQCmode = CyTrue ;
+						DpDmSwitchHandle(1);
+						/**Pranay,23Nov'22, connecting DpDm lines first and after 1.5Sec starting state machine in ccg3pa*/
+						MsgTimerStart(Timer_QC_MODE_ENABLE, TIMER1);
+					 }
+
+		    		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag = CyFalse;
+
 					HandleEload(Eload_TurnOFF,0);/*Pranay, 05Oct'22,Turning off eload incase if detach**/
-
-					CcgI2cdataTransfer(gMiscBuf);
-
 					DetachStateVbusHandler();
 
 					break;
 				case VUP_AS_SRC://0x04
+		    		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag = CyFalse;
+
 					HandleEload(Eload_TurnOFF,0);/*Pranay,05Oct'22, Turning off eload incase if detach**/
 
 					CcgI2cdataTransfer(gMiscBuf);
@@ -2822,6 +2862,8 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 
 					break;
 				case VUP_AS_DRP://0x06
+		    		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag = CyFalse;
+
 					HandleEload(Eload_TurnOFF,0);/*Pranay,05Oct'22, Turning off eload incase if detach**/
 
 					CcgI2cdataTransfer(gMiscBuf);
@@ -2846,8 +2888,20 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 			case (0x04)://BC1.2 Handling
 				CcgI2cdataTransfer(gMiscBuf);
 			break;
-			case (0x05)://Testcase execution
-				
+			case (0x05)://pranay,15Nov'22,Added Explicit APis 
+				switch(aBuffer[4])
+				{
+				case 0x01:
+					USBFailSafeCondition();
+					break;
+				case 0x02:
+					VBUSDetection_Handler(0);
+					break;
+				case 0x03:
+					VBUSDetection_Handler(1);
+					break;
+				}
+
 			break;
 			case (0x06): // SPI init & deinit
 				switch(aBuffer[4])
@@ -3170,20 +3224,20 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 
 					StatusInformationHandle(gMiscBuf);
 
-					if( (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit < gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PPSVbusCurrent)
-							 && (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role == PRT_ROLE_SOURCE ) )
-
-					{
-						gFunctStruct_t->gPD_Struct.OCPTriggerCount++;
-						if(gFunctStruct_t->gPD_Struct.OCPTriggerCount > 1)
-						{
-							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyTrue;
-							InitOCPHardreset();
-							gFunctStruct_t->gPD_Struct.OCPTriggerCount = 0;
-							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyFalse;
-							break;
-						}
-					}
+//					if( (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit < gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PPSVbusCurrent)
+//							 && (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role == PRT_ROLE_SOURCE ) )
+//
+//					{
+//						gFunctStruct_t->gPD_Struct.OCPTriggerCount++;
+//						if(gFunctStruct_t->gPD_Struct.OCPTriggerCount > 1)
+//						{
+//							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyTrue;
+//							InitOCPHardreset();
+//							gFunctStruct_t->gPD_Struct.OCPTriggerCount = 0;
+//							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyFalse;
+//							break;
+//						}
+//					}
 					//Pranay,03Oct'22, Resetting GetBattery status parameters like, SOC,Batterystatus,Temp data if DUT spec Rev is 2.0
 					if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gDUTSpecRev != SPECREV_3_0)
 					{
@@ -3225,20 +3279,20 @@ void RS485RXDataHandler(uint8_t *aBuffer)
 				{
 					StatusInformationHandle(gMiscBuf);
 
-					if( (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit < gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PPSVbusCurrent)
-							 && (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role == PRT_ROLE_SOURCE ) )
-
-					{
-						gFunctStruct_t->gPD_Struct.OCPTriggerCount++;
-						if(gFunctStruct_t->gPD_Struct.OCPTriggerCount > 1)
-						{
-							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyTrue;
-							InitOCPHardreset();
-							gFunctStruct_t->gPD_Struct.OCPTriggerCount = 0;
-							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyFalse;
-							break;
-						}
-					}
+//					if( (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gSnkReqCurrentOCPLimit < gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PPSVbusCurrent)
+//							 && (gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role == PRT_ROLE_SOURCE ) )
+//
+//					{
+//						gFunctStruct_t->gPD_Struct.OCPTriggerCount++;
+//						if(gFunctStruct_t->gPD_Struct.OCPTriggerCount > 1)
+//						{
+//							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyTrue;
+//							InitOCPHardreset();
+//							gFunctStruct_t->gPD_Struct.OCPTriggerCount = 0;
+//							gFunctStruct_t->gPD_Struct.isOCPTriggered = CyFalse;
+//							break;
+//						}
+//					}
 					CyU3PMemCopy(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ], &gBattStatusBuf[1], GETBATTCAPS_PL_LENGTH);//Copying received data into global buffer for further using
 					memset(&gRS485RxBuf[ (gRS485RxBuf[1] + HEADER_BYTECOUNT) ],0x00, (BUF_SIZE_280BYTE-(gRS485RxBuf[1] + HEADER_BYTECOUNT)) );
 					gRS485RxBuf[1] += GETBATTCAPS_PL_LENGTH;
@@ -3318,7 +3372,7 @@ CyU3PReturnStatus_t SetUsbPowerState(uint8_t *aBuffer)
  */
 void USBFailSafeCondition()
 {
-	MsgTimerStop(TIMER0);   // Stop the timer 2 if PD interrupt is received to avoid the multiple USB connect state
+	MsgTimerStop(TIMER4);   // Stop the timer4 to avoid the multiple USB connect state
 
 //	CyU3PUsbLPMEnable();
 //	CyU3PConnectState (CyFalse, CyTrue);    // disconnect
@@ -3345,7 +3399,10 @@ void UsbLoopackCommands(uint8_t *aBuffer)
 		CyFxBulkLpApplnStart();
 		break;
 	case 2:  //USB soft disconnect
-//		  DpDmSwitchHandle(1); // Connecting D+/D- lines to CCG3PA
+	/*Venkat,15Nov'22,When QC mode is true DPDM line control is to be with CCG3PA, if system is in PD mode DP and DM control is
+		  given to Fx3 upon Vbus detection */
+		if(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gIsQCmode == CyFalse)
+			DpDmSwitchHandle(2);
 		CyU3PConnectState (CyFalse, CyTrue);    // disconnect
 		CyU3PConnectState (CyFalse, CyFalse);    // disconnect
         DataLockIndicator(1);    // off
@@ -3564,10 +3621,13 @@ void InitFwControlStructInstance()
 	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EloadVbusCurrent = 0x00;
 	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EloadVconnVoltage = 0x00;
 	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EloadVconnCurrent = 0x00;
-
+	//Venkat,15Nov'22, QC mode variable represents the present execution state machine
+	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gIsQCmode = CyFalse;
 	//As of 16Sept'22, Polling freq from SW is every 200mS so initiating GetBattCpas for every 10Secs, this variable is configurable from SW.
-	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PollingIterReachCount = 50;
+	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PollingIterReachCount = POLLING_ITER_REACH_CNT;//50x
 	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EnableGetBatteryCapsFetching = CyTrue;
+	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag = CyFalse;
+
 }
 /**
  * Default FW configuration are to be done in this function
@@ -3817,7 +3877,10 @@ void StatusInformationHandle(uint8_t *aBuffer)
 	lBuffer[++lTxIndex] = (gFunctStruct_t->gPD_Struct.gMinutesCount & 0xFF00) >> 8;
 
 	/**Pranay,16Dec'20, Added 0th bit for informing SW about the Capmismatch status, and once after reading if the value flag is true revert it to false*///14th byte
-	lBuffer[++lTxIndex] = (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.CapMismatchStatusInfoFlag & 0x01);/**0th bit for capmismatch status, remaining[7:1] Reserved*/
+	lBuffer[lTxIndex] = (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.CapMismatchStatusInfoFlag & 0x01);/**0th bit for capmismatch status, remaining[7:1] Reserved*/
+
+	/**pranay,18Oct'22, If in detach/set mode/ NACK/ NotSupported received states set this bit so that application shall treat this SoC/Battery related fields as invalid**/
+	lBuffer[++lTxIndex] |= ( (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag & 0x01) << 1);
 
 	lTxIndex++;
 

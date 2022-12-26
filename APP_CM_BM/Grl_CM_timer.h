@@ -19,7 +19,6 @@ extern uint16_t CPU2_MODE;
 extern uint32_t IPAddr_dhcp;
 uint8_t gTimer0Var;
 uint8_t gTimer1Var;
-
 typedef enum
 {
     TIMER0 = 0,

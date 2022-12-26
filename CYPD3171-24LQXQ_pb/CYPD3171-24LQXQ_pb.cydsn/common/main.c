@@ -60,6 +60,8 @@
 #include <gpio.h>
 #include <instrumentation.h>
 #include <grlapp.h>
+#include <pd_protocol.h>
+
 
 uint16 AUG_TIMER_Count = 0;
 uint16_t AUG_TIMER_Config_Idx = 17;
@@ -798,6 +800,17 @@ int main()
     //gpio_set_value (GPIO_PORT_2_PIN_2,0);//GPIO LOW
     while (1)
     {
+      /*venkat 6Jul'22
+        TaskID - V-1-T314 - QC4.0 implementation
+        This will stop PD policy engine,where PD state machine will be stopped,this is used when user need 
+        to be switched from PD to QC mode.If its executed once it will go back to PD state machine again,
+        it needs to be executed in contineous loop in order to be in Qc mode*/
+        
+        if((g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag != GRL_PD_MODE_SET) )
+        {
+            dpm_pe_stop(0);
+        }
+        
         /* Handle the device policy tasks for each PD port. */
         for (port = PORT_START_IDX ; port < NO_OF_TYPEC_PORTS; port++)
         {

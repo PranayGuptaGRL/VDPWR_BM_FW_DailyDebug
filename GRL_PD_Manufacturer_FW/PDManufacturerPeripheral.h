@@ -132,6 +132,16 @@
 #define CY_FX_GPIOAPP_GPIO_LOW_EVENT     (1 << 1)   /* GPIO low event */
 #define CY_FX_GPIOAPP_GPIO_HIGH_EVENT_1  (1 << 2)   /* GPIO high event 1*/
 #define CY_FX_GPIOAPP_GPIO_HIGH_EVENT_2  (1 << 3)   /* GPIO high event 2*/
+#define CY_FX_GPIOAPP_GPIO_HIGH_EVENT_3  (1 << 4)   /* GPIO high event 2*/
+
+#define CY_FX_RS485_GPIO_LOW_EVT	  	  (1 << 5)
+#define CY_FX_OCP_GPIO_LOW_EVENT		  (1 << 6)
+#define CY_FX_VBUS_HIGH_EVENT			  (1 << 7)
+#define CY_FX_VBUS_LOW_EVENT			  (1 << 8)
+#define CY_FX_PDSS_GPIO_LOW_EVT	  	       (1 << 9)
+
+CyU3PMutex		I2CBusHandlingMutex;
+
 
 
 /*****************************GPIO Peripheral Specfic for Register Access***********/

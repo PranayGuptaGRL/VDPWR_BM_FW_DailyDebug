@@ -227,7 +227,7 @@
 
 /* VBus OVP enable setting. */
 //#define VBUS_OVP_ENABLE                             (1u)
-#define VBUS_OVP_ENABLE                             (1u)//GRL-EDIT
+#define VBUS_OVP_ENABLE                             (0u)//GRL-EDIT
 
 /*
  * OVP mode selection
@@ -260,7 +260,7 @@
 /*
  * VBus SCP feature enable.
  */
-#define VBUS_SCP_ENABLE                             (1u)
+#define VBUS_SCP_ENABLE                             (0u)
 
 /* SCP mode: AUTO Control. */
 #define VBUS_SCP_MODE                               (2u)

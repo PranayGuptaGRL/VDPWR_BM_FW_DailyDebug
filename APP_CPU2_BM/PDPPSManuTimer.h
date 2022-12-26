@@ -30,6 +30,4 @@ void MsgTimerStop(uint8_t aMsgTimer);
  void INIT_CPU_TIMERS(void);
  void Config_CPU_TIMER(uint32_t cpuTimer, float freq, float period);
 
-
-
 #endif /* PDPPSMANUTIMER_H_ */

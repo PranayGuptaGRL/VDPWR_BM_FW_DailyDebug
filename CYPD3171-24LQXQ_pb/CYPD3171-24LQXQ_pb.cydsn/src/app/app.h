@@ -759,7 +759,7 @@ bool mux_ctrl_set_cfg(uint8_t port, mux_select_t cfg, uint8_t polarity);
  */
 void mux_ctrl_bb_enable (uint8_t port, uint8_t polarity);
 
-#include "grl_struct.h"
+#include <grl_struct.h>
 #define EVT_LOG 1
 void PD_BC_i2cBufHandler(uint8_t);
 void PDCStatusBuffFillHandler(uint8_t, uint8_t * );
@@ -788,6 +788,15 @@ extern uint8_t gSOP1AckBuf[64];
 
 typedef enum
 {
+    GRL_DP_PULSE=0xE2,   
+    GRL_DM_PULSE =0xE3,
+    GRL_DPSTAB =0xE4,
+    GRL_DMSTAB =0xE5,
+    GRL_QC_CONT_MODE=0xE6,
+    GRL_QCENUMERATION = 0xE7,
+    GRL_QC_DETACH = 0xE8,
+    GRL_QC_ATTACH = 0xE9,
+
     GRL_APP_SOP1_TIMER = 0xF1,
     GRL_SRC_PSRDY_TIMER,
     GRL_SRC_ATTACH_INTR_TIMER,

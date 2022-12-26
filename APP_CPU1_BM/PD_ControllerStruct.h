@@ -44,10 +44,28 @@ typedef enum
     TIMER2,
 }MsgTimers_t;
 
+typedef enum
+{
+    TC_PGM_MODE_SEL= 0x01,
+    TC_PROGRAMMING_FW_PAYLOAD_WRITE =0x02,
+    CCG3PA_PGM_MODE_SELECTION = 0x03,
+    CCG3PA_PROGRAMMING_FW_PAYLOAD_WRITE = 0x04,
+    ELOAD_PROGRAMMING_MODE_SELECTION = 0x05,
+    TI_FW_UPDATES = 0x06,
+}ControllerPgmSelection;
+
+typedef enum
+{
+    BOOT_MODE_SELECTION = 0x01,
+    PROGRAMMING_MODE = 0x02,
+    PMOD_SELECTION_ON = 0x03,
+    VIA_2ND_STAGE_BL = 0x04,
+    PMOD_SELECTION_OFF=0x05,
+}Functional_Programming_Mode_Sel;
+
+
 typedef struct
 {
-
-
     struct gTestControl
     {
         uint8_t gRS485BusStatus;  //to check the status of RS485 bus is free or busy.

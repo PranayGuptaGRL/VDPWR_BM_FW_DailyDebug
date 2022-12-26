@@ -215,15 +215,11 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
 
     u16_t lAPILength = atcpRxBuf[1] + HEADER_BYTE_CNT;
 
-//    uint32_t lFlashData =  0xFFFFCCDD;
-
-
     Fapi_FlashStatusWordType oFlashStatusWord;
 
     switch(lRxCmdType)
     {
         case RX_API_IS_SET://0x01
-
             isEchobackReq = true;
 #if 0
             if(atcpRxBuf[2] == 0x03)//CPU2
@@ -276,12 +272,12 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
                      lAPILength = ((atcpRxBuf[6] << 8 )| atcpRxBuf[5] );
                      lAPILength += (FW_UPDATE_HEADER_BYTECNT + HEADER_BYTE_CNT);
 
-                     //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to app for validation
+                     //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to SW for validation
 //                     grlTcpDataTx(atcpRxBuf,lAPILength);//Sending back data to client
                   }
                   else
                   {
-                      //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to app for validation
+                      //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to SW for validation
 //                        grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending back data to client
                   }
 
@@ -301,7 +297,6 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
                     IPC_sendCommand(IPC_CM_L_CPU1_R, IPC_FLAG1, IPC_ADDR_CORRECTION_ENABLE,
                                      IPC_CMD_READ_MEM, (uint32_t)atcpRxBuf, lAPILength);
 
-
                     IPC_waitForAck(IPC_CM_L_CPU1_R, IPC_FLAG1);
                   }
 
@@ -318,7 +313,6 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
                     if(atcpRxBuf[4]==0x0A)
                     {
                        Tx_cpu1_intr(0xEE);
-//                       Tx_cpu2_intr(0xAB);
                     }
                     if(atcpRxBuf[4]==0x02)
                        Tx_cpu1_intr(0xDD);
@@ -329,29 +323,12 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
                       if(atcpRxBuf[4]==0x02)
                        {
                           Flash_claimPumpSemaphore(FLASH_CM_WRAPPER);
-//                          delay();
 
                           Example_EraseSector(Bzero_Sector13_start);
-//                          Fapi_issueAsyncCommandWithAddress(Fapi_EraseSector,
-//                                         (uint32 *)Bzero_Sector13_start);
-//                          delay();
 
                           grlFlashBOOTPGMSectorWrite(Bzero_Sector13_start, lPgmData, 8);
-//                          delay();
-//                          delay();
 
-//                          Fapi_doBlankCheck((uint32_t *)0x0027C000, 1, &oFlashStatusWord);
-//                           if((oFlashStatusWord.au32StatusWord[1] & 0xFFFFFFFF) == PGM_MODE_CD_WORD)
-//                           {
-//                               Tx_cpu1_intr(0xE1);
-//                           }
-//                           else
-//                           {
-//                               Tx_cpu1_intr(0xE2);
-//                           }
-                           Flash_releasePumpSemaphore();
-
-//                           Tx_cpu1_intr(0xAA);
+                          Flash_releasePumpSemaphore();
 
                        }
                   }
@@ -359,16 +336,16 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
             else//Any other controller FW update push directly to CPU1 and then on to Rs485
             {
 
-                //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to app for validation
+                //Pranay,01Sep'22,As per discussions with bala for handling data loss during FWupdate so to handle data loss echoeing back the received data to SW for validation
 //                grlTcpDataTx(atcpRxBuf, (atcpRxBuf[1]+HEADER_BYTE_CNT) );//Sending data back to client
 
                 /**Pranay,03Sept'22, Handling the echoback and msg ID sequence during FW udpates, If prev and present MSG ID is same then ignore received FW packet*/
-//                gFWupdPresentRxMsgID = ( (atcpRxBuf[0] & 0xF0) >> 4);
+                gFWupdPresentRxMsgID = ( (atcpRxBuf[0] & 0xF0) >> 4);
 
-//                if(gFWupdPrevMsgID == gFWupdPresentRxMsgID)
-//                    return ;
-//                else
-//                    gFWupdPrevMsgID = gFWupdPresentRxMsgID;
+                if(gFWupdPrevMsgID == gFWupdPresentRxMsgID)
+                    return ;
+                else
+                    gFWupdPrevMsgID = gFWupdPresentRxMsgID;
 
                 //Pranay,03Sept'22, For FW updates we need to replace the upper nibble of 0th Byte i.e., slot ID to 1 always else commands will be ignored
                 atcpRxBuf[0] &= 0x0F;
@@ -382,9 +359,7 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
             break;
 
         case Rx_API_IS_GET://0x07
-
             isEchobackReq = false;
-
 //            GPIO_writePin(37, 1);
 
             //
@@ -406,7 +381,6 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
             else if(atcpRxBuf[2] == 0x83)//For polling data read
             {
                 gReadAPI = true;
-
 //                gReadPollingData = true;
             }
             else if( (atcpRxBuf[2] == 0x01) && (atcpRxBuf[3] == 0x07) )//CM core FW version read
@@ -414,13 +388,34 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
                 TxBuf[0] = 0x0617;
                 TxBuf[1] = 0x0601;
                 TxBuf[2] = 0x0701;
-                TxBuf[3] = 0x0806;//FW Version 6.0
-//                TxBuf[4] = 0x04;//FW Version
-//                TxBuf[5] = 0x00;
-//                memcpy( &TxBuf[4], glFirmwareID, 3);
+                TxBuf[3] = 0x0107;//FW Version 7.1 // LSB First MSB Next
 
                 grlTcpDataTx(TxBuf, 10);
 
+            }
+            //Pranay,19Oct'22, Get System Details Format: GRL-VDPWR-XXXXYYYY (XXXX: MFD YEAR, YYYY:SNo)
+            else if(atcpRxBuf[2] == 0x02)//Controller card Serial number 17 02 0e 01 --> CC, 02 -> TC
+              {
+                uint8_t lBuf[8]= {0};
+                lBuf[3]=gMFDYear>>8;//Change this to LSB First amd MSB nxt
+                lBuf[4]=gMFDYear;
+                lBuf[5]=gSystemID>>8;//Change this to LSB First amd MSB nxt
+                lBuf[6]=gSystemID;
+
+                grlTcpDataTx( (uint16_t *)sys_id_formation(lBuf), SYS_ID_MAXLENGTH);
+
+              }
+            else if( (atcpRxBuf[2] == 0x0E) && (atcpRxBuf[3] == 0x01))//Inorder to get CC Serial number we need to read FRAM data from CPU2
+            {
+                gReadAPI = true;
+
+                //We cant use same buffer for transferring data to CPU1 and CPU2, So copying received data here to CPU2 Tx buffer and pushing to IPC
+                memcpy(buf_tx_CM_to_CPU2, atcpRxBuf, lAPILength);
+
+                IPC_sendCommand(IPC_CM_L_CPU2_R, IPC_FLAG3, IPC_ADDR_CORRECTION_ENABLE,
+                                   IPC_CMD_READ_MEM, (uint32_t)buf_tx_CM_to_CPU2, lAPILength);
+
+                IPC_waitForAck(IPC_CM_L_CPU2_R, IPC_FLAG3);
             }
             else
             {
@@ -439,7 +434,69 @@ void tcpRxdataHandler(u8_t *atcpRxBuf)
     }
 
 }
+uint8_t* sys_id_formation(uint8_t * aRxBuffer)
+{
+    uint16_t year=0, sys_id=0, temp=0, k=11, j=0, i=0;
 
+    static uint8_t sysid[24] = {0, 'G','R','L','-','V','D','P','W','R','-'};
+
+    year= aRxBuffer[3]<<8 |aRxBuffer[4];
+    sys_id = aRxBuffer[5]<<8 |aRxBuffer[6];
+
+    while(year!=0)
+    {
+        j=year%10;
+        year=year/10;
+        sysid[k++]=j+'0';
+    }
+
+    temp=sysid[k-4];
+    sysid[k-4]=sysid[k-1];
+    sysid[k-1]=temp;
+    temp=sysid[k-3];
+    sysid[k-3]=sysid[k-2];
+    sysid[k-2]=temp;
+
+    while(sys_id!=0)
+    {
+        j=sys_id%10;
+        i++;
+        sys_id=sys_id/10;
+        sysid[k++]=j+'0';
+    }
+    if(i<4)
+    {
+        if(i==1)
+        {
+         sysid[k+2] =sysid[k-1];
+         sysid[k+1]='0';
+         sysid[k]='0';
+         sysid[k-1]='0';
+        }
+        else if(i==2)
+        {
+          sysid[k+1] =sysid[k-2];
+          sysid[k]=sysid[k-1];
+          sysid[k-1]='0';
+          sysid[k-2]='0';
+
+        }
+        else if(i==3)
+        {
+          temp=sysid[k-1];
+          sysid[k]=sysid[k-3];
+          sysid[k-1]=sysid[k-2];
+          sysid[k-2]=temp;
+          sysid[k-3]='0';
+        }
+    }
+    sysid[19]='\0';
+    gSysSnoLength = SYS_ID_PAYLOAD_LENGHT; //Response length for sys sno fetch is of 18 Bytes, So hardcoding it
+    sysid[0] = gSysSnoLength;//Overwrite with Length of response
+
+return sysid;
+
+}
 void grlAsciitoHexConvertion(u8_t *aSrcRxBuf, uint32_t *aDestRxBuf, u16_t aPayLoadLength)
 {
     u16_t i =0, j = 0;
@@ -571,8 +628,6 @@ void grl_tcp_recv_data_pop(struct tcp_pcb *tpcb,
         // Handling GRL Application related activity here, mostly differentiating the
         // data either for CPU1/CPU2 and Read/Write/Pgm and further pushing to respective core via IPC
         //
-
-
         tcpRxdataHandler(buf_rx);
 
         return;

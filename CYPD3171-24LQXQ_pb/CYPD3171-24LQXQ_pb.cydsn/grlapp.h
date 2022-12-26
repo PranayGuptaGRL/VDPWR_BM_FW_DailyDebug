@@ -44,5 +44,4 @@ bool gBC12_DataManager(uint8_t * );
 uint8_t g_Decode_Rx_Ack();
 void CableConnectionSimulation(uint8_t isAttach);
 
-
 /* [] END OF FILE */

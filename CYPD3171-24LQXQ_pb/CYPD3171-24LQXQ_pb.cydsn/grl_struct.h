@@ -116,6 +116,18 @@ typedef struct
     uint8_t gCustomConfig;
     uint8_t gDUTSpecRev;
     bool isRuntime_SnkCapsConfigEnabled;
+    
+    /**Pranay, 14Dec'22, 
+    *  Inorder not to generate an interrupt everytime when there is a 
+    *  APDO request from SInk for every 7-13Sec, 
+    *  these variables are being used to track previous APDO req Vbus v and i, 
+    *  supply type and if the request is new request
+    **/
+    volatile uint16_t gPrevReqAPDOVbusVoltage;
+    volatile uint16_t gPrevReqAPDOVbusCurrent;
+    volatile uint16_t gReqSupplyType;
+    volatile bool isNewAPDORequest;
+    
 }grlRequestPacketVar_t;
 
 typedef enum
@@ -123,6 +135,44 @@ typedef enum
     gAptivDetachOverride = 1,
     
 }grlPDStruct_CustomConfig_t;
+typedef enum
+{
+    PDMODE = 0x01,
+    QC2MODE = 0x02,
+    QC3MODE = 0x03,
+}QC4_3_ConfigFlag;
+
+typedef enum
+{
+    GRL_PD_MODE_SET = 0x01,
+    GRL_QC_MODE_SET = 0x02,
+} grl_chgb_snk_Mode_term_t;
+typedef enum
+{
+   //GRL_QC_TESTERMODE =0x01,
+   GRL_SET_VOLTAGE = 0x01,
+}grl_chgb_snkset_term_t;
+/* venkat 6Jul'22
+ * TaskID - V-1-T314 - QC2.0,3.04.0 implementation,
+ * @typedef chgb_snk_term_t
+ * @brief grl custom defined termination options for QC sink mode operations.
+ */
+typedef enum
+{
+    GRL_QC2_mode = 0x02,
+    GRL_QC3_mode = 0x03,
+    //GRL_QC4_mode = 0x04,  
+} grl_chgb_snk_term_t;
+
+typedef enum
+{
+    GRL_QC_REMOVE_TERM = 0x00,
+    GRL_QC_5V = 0x02,
+    GRL_QC_9V = 0x03,
+    GRL_QC_12V = 0x04,
+    GRL_QC_20V = 0x05,
+    //GRL_QC4_mode = 0x04,
+} grl_chgb_QC_term_t;
 
 #if ONLY_PD_SNK_FUNC_EN
 typedef enum 
@@ -161,6 +211,10 @@ typedef struct
     bool gStartSOP1DiscIDAfterPDC;
     bool isCableDataReady;
     uint8_t gSOP1AckBufIndexCount;
+    uint8_t gQC4_3_ConfigFlag;  /**venkat 6Jul'22,flag for PD_negotiation fail case executing variables**/
+    uint16_t gReqPulse_Count ; /*Tracking Required pulse pulse count through globle variable*/
+    uint16_t gTarget_Voltage  ; /*Traking target voltage */
+    uint16_t gCurrent_Pulsecnt; /*Traking current pulses generated */
 }grlControlconfigVar_t;
 #endif
 typedef union
@@ -237,8 +291,12 @@ typedef struct
 
 grl_Struct_t gStruct_t;
 
+#define GRL_QCpulse_voltage           (0xC8)   /*venkat 6Jul'2022,In QC, each D+,D- pulse will make vbus voltage increment or decrement by 200mV-- task-V-1-T314*/
 void schedule_task(uint16_t ,timer_id_t );
 grl_Struct_t *g_Struct_Ptr;
 const grl_Struct_t * get_grl_struct_ptr();
-
+ccg_status_t grl_chgb_apply_sink_term(uint8_t cport, grl_chgb_snkset_term_t testermodeterms,uint8_t  *lAppBuffer);
+ccg_status_t grl_qc4_confighandler(uint8_t cport,uint8_t *lAppBuffer) ;
+ccg_status_t grl_qc2_sink(uint8_t cport,uint8_t *lAppBuffer);
+ccg_status_t grl_chgb_QC3(uint8_t *lAppBuffer) ;
 /* [] END OF FILE */

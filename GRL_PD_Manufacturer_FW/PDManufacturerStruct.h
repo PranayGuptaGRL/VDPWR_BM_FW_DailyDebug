@@ -42,9 +42,10 @@
 	uint8_t extern gPPSi2cRxBuf[BUF_SIZE_16BYTE];
 	uint8_t extern gPPSFWBuf[BUF_SIZE_280BYTE];
 	uint8_t extern gBattStatusBuf[32];
+	uint8_t extern gSetModeBuf[BUF_SIZE_20BYTE];
 
 #ifdef DBGLOG
-	uint8_t extern gDbgBuf1Index;
+	uint16_t extern gDbgBuf1Index;
 #endif
 
 typedef struct
@@ -84,8 +85,11 @@ typedef struct
 		uint8_t gPPSFWBufIndex;
 		uint16_t PPSVConnVoltage;
 		uint16_t PPSVConnCurrent;
+		CyBool_t gIsQCmode;
 		uint16_t PollingIterReachCount;
 		CyBool_t EnableGetBatteryCapsFetching;
+		CyBool_t SoCBatteryStatusValidityInfoFlag;/**pranay,18Oct'22, If in detach/set mode/ NACK/ Notsupported received states set this bit so that application shall treat this Soc/Battery related fields as invalid**/
+
 	}gSystemInfo_t;
 
 	struct gTimerParameters
@@ -93,7 +97,7 @@ typedef struct
 		uint8_t gTimerNo;
 		uint32_t gTimerName;
 		uint32_t gTimerValue;
-	}gTimerParameters_t[BUF_SIZE_5BYTE];
+	}gTimerParameters_t[BUF_SIZE_8BYTE];
 
 	 struct FwTimerInfo
 	{
@@ -160,6 +164,11 @@ typedef enum
 	SPECREV_2_0 = 1,
 	SPECREV_3_0 = 2,
 }DUT_Spec_rev;
+typedef enum
+{
+	PDmode = 0x01,
+	QCmode = 0x02,
+}PdssMode;
 typedef struct
 {
 	struct gPDCStatus

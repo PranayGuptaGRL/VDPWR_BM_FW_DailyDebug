@@ -771,7 +771,7 @@ void psrc_set_voltage(uint8_t port, uint16_t volt_mV)
     app_status_t *app_stat = app_get_status(port);
     app_stat->psrc_volt = volt_mV;
     const dpm_status_t *dpm_stat = dpm_get_info(port);
-    
+    g_Struct_Ptr = (grl_Struct_t *)get_grl_struct_ptr();
     if(dpm_stat->cur_port_role == PRT_ROLE_SOURCE)
     {
        /**
@@ -805,7 +805,7 @@ void psrc_set_voltage(uint8_t port, uint16_t volt_mV)
                 lCurrentPDSSSrcCaps[i] = dpm_stat->src_pdo[i].val;
             }
             lPrReqSupplyType = ((lCurrentPDSSSrcCaps[(lPrReqObjPos-1)] & SRCCAPS_SUPPLYTYPE_EXTRACT) >> SRCCPAS_DO_POS_OFFSET );
-            
+            g_Struct_Ptr->RequestPacketConfig.gReqSupplyType = lPrReqSupplyType;
             switch(lPrReqSupplyType)
             {
                 case PDO_FIXED_SUPPLY:
@@ -845,6 +845,21 @@ void psrc_set_voltage(uint8_t port, uint16_t volt_mV)
                     lPrReqMaxCurrent = (lPresentRequestPacket & REQ_APDO_OP_I_OFFSET);
                     lPrReqMaxCurrent *= 50;//1 uint = 50mA so converting it to 1unit =1mA
                     
+                    /**Pranay, 14Dec'22, 
+                    *  Inorder not to generate an interrupt everytime when there is a 
+                    *  APDO request from Sink for every 7-13Sec, 
+                    *  tracking here if there is any change in previous APDO req Vbus v and i, 
+                    *  only If there is any change in Vbus v or i, then request to be considered as new request and hence set 'isNewAPDORequest' flag 
+                    *  and update gPrevReqAPDOVbusVoltage, gPrevReqAPDOVbusCurrent to the new vbus v and i values and then generate interrupt below
+                    **/
+                    if( (g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusVoltage != lPrReqMaxVoltage) || 
+                            (g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusCurrent != lPrReqMaxCurrent) 
+                        )
+                    {
+                        g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusVoltage = lPrReqMaxVoltage;
+                        g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusCurrent = lPrReqMaxCurrent;
+                        g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest = true;
+                    }
                     break;
             }
             
@@ -879,7 +894,17 @@ void psrc_set_voltage(uint8_t port, uint16_t volt_mV)
             isAttachInterrupt = false;
             schedule_task(20, GRL_SRC_ATTACH_INTR_TIMER);
         }
-        g_PdssGPIOIntrHandler(INTR_SET);
+        /**Pranay,14Dec'22, Generating interrupt only if there is any change in prev requested and present request Vbus v/i incase of APDO*/
+        if( (g_Struct_Ptr->RequestPacketConfig.gReqSupplyType == PDO_AUGMENTED) 
+                && (g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest) )
+        {
+            g_PdssGPIOIntrHandler(INTR_SET);
+        }
+        else if( g_Struct_Ptr->RequestPacketConfig.gReqSupplyType != PDO_AUGMENTED )
+        {
+            g_PdssGPIOIntrHandler(INTR_SET);
+        }
+            
     }
 #if CCG_TYPE_A_PORT_ENABLE
     if (port == TYPE_A_PORT_ID)
@@ -938,7 +963,7 @@ void psrc_set_voltage(uint8_t port, uint16_t volt_mV)
          */
         if ((dpm_stat->attach == true) && (app_stat->is_vbus_on == true))
         {
-            psrc_en_uvp (port);
+           psrc_en_uvp (port);
         }
     }
     

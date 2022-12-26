@@ -45,6 +45,7 @@
 #include <timer.h>
 #include <app.h>
 #include <battery_charging.h>
+#include <grlapp.h>
 
 #if CCG_TYPE_A_PORT_ENABLE
 #include <type_a.h>
@@ -60,6 +61,38 @@
 
 #endif /* ((defined CCG5) || (defined CCG5C) || (defined CCG6)) */
 
+#if(!BC_BlOCK_SIZE_OPTIMIZE)//Venkat,18Nov'22, Inorder to optimize the size but to make QC functionalities work, commenting whole bc statemachine but extracting only required functions as per our usecase so handling that using this macro
+bc_status_t gl_bc_status[1];
+void bc_set_bc_evt(uint8_t cport, uint32_t evt_mask)
+{
+    bc_status_t* bc_stat = &gl_bc_status[cport];
+
+    uint8_t intr_state = CyEnterCriticalSection();
+
+    bc_stat->bc_evt |= evt_mask;
+
+    CyExitCriticalSection(intr_state);
+}
+static void bc_phy_cbk_handler(uint8_t cport, uint32_t event)
+{
+    bc_set_bc_evt(cport, event);
+}
+ccg_status_t bc_init(uint8_t cport)
+{
+    bc_status_t *bc_stat = &gl_bc_status[cport];
+
+    chgb_init(cport, bc_phy_cbk_handler);
+    bc_stat->bc_fsm_state = BC_FSM_OFF;
+
+#if LEGACY_DYN_CFG_ENABLE
+    /* Copy the configuration from the configuration table. */
+    memcpy((uint8_t *)(&gl_bc_cfg[cport]), (uint8_t *)pd_get_ptr_chg_cfg_tbl(cport),
+            sizeof (chg_cfg_params_t));
+#endif /* LEGACY_DYN_CFG_ENABLE */
+
+    return CCG_STAT_SUCCESS;
+}
+#endif /*(BC_BlOCK_SIZE_OPTIMIZE)*/
 #if BATTERY_CHARGING_ENABLE
 
 /**
@@ -135,10 +168,12 @@ static void bc_fsm_sink_apple_charger_detect(uint8_t c_port, bc_fsm_evt_t evt);
 static void bc_fsm_sink_apple_brick_id_detect(uint8_t c_port, bc_fsm_evt_t evt);
 static void bc_fsm_sink_primary_charger_detect(uint8_t c_port, bc_fsm_evt_t evt);
 static void bc_fsm_sink_type_c_only_source_connected(uint8_t c_port, bc_fsm_evt_t evt);
+#if (!GRL_Code_REDUCE)
 static void bc_fsm_sink_secondary_charger_detect(uint8_t c_port, bc_fsm_evt_t evt);
 static void bc_fsm_sink_dcp_connected(uint8_t port, bc_fsm_evt_t evt);
 static void bc_fsm_sink_sdp_connected(uint8_t port, bc_fsm_evt_t evt);
 static void bc_fsm_sink_cdp_connected(uint8_t port, bc_fsm_evt_t evt);
+#endif
 #endif /* (!(CCG_SOURCE_ONLY)) && (!BC_SOURCE_ONLY) */
 
 void (*const bc_fsm_table [BC_FSM_MAX_STATES]) (uint8_t cport, bc_fsm_evt_t evt) =
@@ -742,7 +777,7 @@ bool bc_wakeup(void)
          * If in QC or AFC mode, we might have configured comparators to wakeup device
          * on DP/DM activity. Disable the comparators.
          */
-        bc_status_t* bc_stat = &gl_bc_status[i];
+ //       bc_status_t* bc_stat = &gl_bc_status[i];
 
 #if (!QC_AFC_CHARGING_DISABLED)
         if ((bc_stat->bc_fsm_state == BC_FSM_SRC_QC_OR_AFC) ||
@@ -1915,7 +1950,7 @@ static void bc_fsm_sink_primary_charger_detect(uint8_t c_port, bc_fsm_evt_t evt)
     if (evt == BC_FSM_EVT_ENTRY)
     {
         /* Apply terminations on D+/-. */
-        chgb_apply_sink_term (c_port, CHGB_SINK_TERM_PCD);
+//        chgb_apply_sink_term (c_port, CHGB_SINK_TERM_PCD);
         timer_start (c_port, APP_BC_GENERIC_TIMER1, APP_BC_VDP_DM_SRC_ON_PERIOD, bc_tmr_cbk);
     }
     else if(evt == BC_FSM_EVT_TIMEOUT1)
@@ -1964,7 +1999,7 @@ static void bc_fsm_sink_secondary_charger_detect(uint8_t c_port, bc_fsm_evt_t ev
     if (evt == BC_FSM_EVT_ENTRY)
     {
         /* Apply terminations on D+/-. */
-        chgb_apply_sink_term (c_port, CHGB_SINK_TERM_SCD);
+//        chgb_apply_sink_term (c_port, CHGB_SINK_TERM_SCD);
         /* Start timer to apply VDM_SRC for TVDM_SRC_ON */
         timer_start (c_port, APP_BC_GENERIC_TIMER1, APP_BC_VDP_DM_SRC_ON_PERIOD, bc_tmr_cbk);
     }

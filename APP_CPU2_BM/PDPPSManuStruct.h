@@ -93,8 +93,11 @@ struct gVbusDefs
     volatile uint16_t gTypeCendVbusVoltage;
     volatile uint16_t gADCLiveVbusCurrent;
     uint16_t gRxVbusCurrentValue;
-    uint16_t gRxVbus_i_OCPLimitVal;
+    volatile uint16_t gRxVbus_i_OCPLimitVal;
     uint16_t gReqVbusFinalDACCount;
+    volatile bool gOCP_trigger_indicator;
+    volatile bool gCustom_OCP_set;
+    uint16_t gRX_OCP_value;
 };
 
 struct gMiscDefs
@@ -102,12 +105,12 @@ struct gMiscDefs
     bool gIsVfbEnabled;
 //    bool gIsCalibEnabled;
     bool gIsRxVbusSet;
+//    uint8_t gOCP_check_count;//Variable that checks how many times in a single request current drawing has been crossed the OCP set limit
+    uint8_t gMfdMonth;
     uint16_t gFramCurrentByteAddress;
     uint16_t gFramByteCount;
     uint16_t gSystemID;
-    uint8_t gMfdMonth;
     uint16_t gMfdYear;
-
 };
 typedef struct gPPSConfig
 {
@@ -149,6 +152,8 @@ typedef enum
 {
     SET_SNK_MODE     = 0x04,
     SET_VBUS         = 0x0A,
+    SET_CUSTOM_OCP_lIMIT = 0xF8,
+    RESET_CUSTOM_OCP_lIMIT = 0xF9,
 }I2CRxAPIs_t;
 typedef enum
 {
@@ -164,7 +169,16 @@ typedef enum
 
 }I2CCmds;
 
+typedef enum
+{
+    GET_FRAM_DATA = 0x80,
+    GET_SNO_BOARD_REV = 0x0E,
+}get_commands;
 
+typedef enum
+{
+    CONTROL_CARD_INFO = 0x01,
+}get_FRAM_Data_ControlCard;
 typedef enum
 {
     TURN_OFF = 0,
@@ -172,6 +186,12 @@ typedef enum
 
 }GPIOCtrlCmds_t;
 
+typedef enum
+{
+    GPIO_RESET = 0,
+    GPIO_SET = 1,
+
+}GPIOCmds_t;
 typedef enum
 {
     TIMER1_BOOTUP_VBUSHANDLER = 0,

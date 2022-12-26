@@ -61,7 +61,14 @@ CyU3PReturnStatus_t MsgTimerStart(uint16_t lTimerIndex, uint8_t lTimerNo)
 		retStatus = CyU3PTimerStart (&gMsgTimer3);
 
 		break;
+	case TIMER4:
 
+		msgTimerValue = GetMsgTimer4Count(lTimerIndex);
+		SetCurrentRunningTimer(lTimerIndex,msgTimerValue, TIMER4);	//Set the current timer, to send event upon timer expires
+		MsgTimerStop(TIMER4);					//Stop current running timer
+		retStatus = CyU3PTimerModify (&gMsgTimer4, msgTimerValue, 0);	//Change current timer to new Time Period
+		retStatus = CyU3PTimerStart (&gMsgTimer4);
+		break;
 	default:
 
 		break;
@@ -107,6 +114,11 @@ const uint16_t Timer3Count[]=
 
 };
 
+const uint16_t Timer4Count[]=
+{
+		800,            //Timer4_Connect_State,USB connect state handling       //0
+};
+
 uint32_t GetMsgTimer0Count(uint16_t lTimerIndex)
 {
 	return (Timer0Count[lTimerIndex]);
@@ -129,6 +141,12 @@ uint32_t GetMsgTimer1Count(uint16_t lTimerIndex)
 	case Timer_TempLimitExceedHandle:
 		lRetTimerval = 1000;
 		break;
+    case Timer_QC_MODE_DISABLE :
+		lRetTimerval = 1500;
+    	break;
+    case Timer_QC_MODE_ENABLE :
+		lRetTimerval = 1500;
+    	break;
 	default:
 		lRetTimerval = 200;//Timer1Count[lTimerIndex];
 		break;
@@ -140,6 +158,11 @@ uint32_t GetMsgTimer1Count(uint16_t lTimerIndex)
 uint32_t GetMsgTimer3Count(uint16_t lTimerIndex)
 {
 	return (Timer3Count[lTimerIndex]);
+}
+
+uint32_t GetMsgTimer4Count(uint16_t lTimerIndex)
+{
+	return (Timer4Count[lTimerIndex]);
 }
 /**
  *
@@ -194,6 +217,9 @@ CyU3PReturnStatus_t MsgTimerStop(uint8_t lTimerNo)
 		case TIMER3:
 			CyU3PTimerStop (&gMsgTimer3);
 			break;
+		case TIMER4:
+			CyU3PTimerStop (&gMsgTimer4);
+			break;
 
 	}
 	return retStatus;
@@ -229,6 +255,10 @@ CyU3PReturnStatus_t MsgTimerModify(uint32_t lTimerValue,uint8_t timerNo)
 			CyU3PTimerStop (&gMsgTimer3);
 			retStatus = CyU3PTimerModify (&gMsgTimer3, lTimerValue, 0);
 			break;
+		case TIMER4:
+			CyU3PTimerStop (&gMsgTimer4);
+			retStatus = CyU3PTimerModify (&gMsgTimer4, lTimerValue, 0);
+			break;
 	}
 	return retStatus;
 }
@@ -243,6 +273,7 @@ CyU3PReturnStatus_t MsgTimer0ExpiredHandle (uint8_t regMsgTimerValue)
     uint8_t lI2CReadByteCount = 0, byteCount = 0;
     lTimerIndex = GetCurrentRunningTimer(TIMER0);
 	CyU3PGpioGetValue (GPIO44_VBUS_VBUS_DETECT, &lIsVbusPresent);
+	DEBUG_LOG(DBG1, 0xD6, 0);
 
     switch(lTimerIndex)
     {
@@ -373,15 +404,15 @@ CyU3PReturnStatus_t MsgTimer0ExpiredHandle (uint8_t regMsgTimerValue)
     	EloadFRAM_DataWrite();
     	break;
 
-    case Timer_Connect_State:              // USB connect state handling
-    	CyU3PGpioGetValue (GPIO44_VBUS_VBUS_DETECT, &lIsVbusPresent);
-    	if(lIsVbusPresent )
-    	{
-     		CyU3PConnectState(CyFalse, CyTrue);					//If the PD fails also make sure the USB connection is established.
-     		CyFx3BusyWait(10);
-     		CyU3PConnectState(CyTrue, CyTrue);//Connecting data lines
-    	}
-     	break;
+//    case Timer_Connect_State:              // USB connect state handling
+//    	CyU3PGpioGetValue (GPIO44_VBUS_VBUS_DETECT, &lIsVbusPresent);
+//    	if(lIsVbusPresent )
+//    	{
+//     		CyU3PConnectState(CyFalse, CyTrue);					//If the PD fails also make sure the USB connection is established.
+//     		CyFx3BusyWait(10);
+//     		CyU3PConnectState(CyTrue, CyTrue);//Connecting data lines
+//    	}
+//     	break;
     case Timer_tGetPDCInfo:/**Pranay15march'2020,Handling Data that which needs to be read from ccg3pa in separate handlers */
     		memset(gI2CRxBuf,0x00,BUF_SIZE_256BYTE);
         	CyFxUsbI2cTransfer(0x01,CCG3PA_SLAVEADDR,64,gI2CRxBuf,READ);/**Reading I2cData from ccg3pa*/
@@ -651,6 +682,7 @@ CyU3PReturnStatus_t MsgTimer0ExpiredHandle (uint8_t regMsgTimerValue)
 
     	if((gI2CRxBuf[lI2CReadByteCount+2] == CCG3PA_RD_CHKSUM) && (gI2CRxBuf[1] == GET_BATT_S0CTEMPDETAILS_CDWORD))/**Validating for total checksum received and GET_GET_SOP1_RX_PKTDATA_CDWORD keyword(0xD1)*/
 		{
+    		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.SoCBatteryStatusValidityInfoFlag = CyTrue;
 //        	DEBUG_LOG(DBG1, 0xB9, 0xBE );
 			gFunctStruct_t->gPD_Struct.gPDSSDataFetchRetryCount = 0;
 			byteCount = StatusInfoBattCapsDataAppend(gRS485RxBuf,gI2CRxBuf);
@@ -741,6 +773,8 @@ CyU3PReturnStatus_t MsgTimer1ExpiredHandle (uint8_t regMsgTimerValue)
     CyU3PReturnStatus_t retStatus = CY_U3P_SUCCESS;
     gFunctStruct_t = (gFunctStruct *)GetStructPtr();
     lTimerIndex = GetCurrentRunningTimer(TIMER1);
+	DEBUG_LOG(DBG1, 0xD7, 0);
+
     switch(lTimerIndex)
     {
     case Timer_Debug_LED_Toggle:
@@ -764,6 +798,14 @@ CyU3PReturnStatus_t MsgTimer1ExpiredHandle (uint8_t regMsgTimerValue)
     	updateLEDToggleStatus(GPIO8_LED4_BI_A);
 
 		MsgTimerStart(Timer_TempLimitExceedHandle, TIMER1);
+
+    	break;
+    case Timer_QC_MODE_DISABLE :
+    	gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gIsQCmode = CyFalse;
+		DpDmSwitchHandle(2);
+    	break;
+    case Timer_QC_MODE_ENABLE :
+    	CcgI2cdataTransfer(gSetModeBuf);
 
     	break;
     default:
@@ -832,6 +874,7 @@ CyU3PReturnStatus_t MsgTimer2ExpiredHandle (uint8_t regMsgTimerValue)
     CyU3PReturnStatus_t retStatus = CY_U3P_SUCCESS;
     gFunctStruct_t = (gFunctStruct *)GetStructPtr();
     lTimerIndex = GetCurrentRunningTimer(TIMER2);
+	DEBUG_LOG(DBG1, 0xD8, 0);
 
     switch(gFunctStruct_t->gFwHandle_t.FwTimerInfoStruct.gTimer2Info)
     {
@@ -855,7 +898,6 @@ CyU3PReturnStatus_t MsgTimer3ExpiredHandle (uint8_t regMsgTimerValue)
 	uint16_t lTimerIndex = 0;
     gFunctStruct_t = (gFunctStruct *)GetStructPtr();
     CyU3PReturnStatus_t retStatus = CY_U3P_SUCCESS;
-
     lTimerIndex = GetCurrentRunningTimer(TIMER3);
     switch(lTimerIndex)
     {
@@ -877,4 +919,34 @@ CyU3PReturnStatus_t MsgTimer3ExpiredHandle (uint8_t regMsgTimerValue)
 
 
 }
+CyU3PReturnStatus_t MsgTimer4ExpiredHandle (uint8_t regMsgTimerValue)
+{
+	uint16_t lTimerIndex = 0;
+    gFunctStruct_t = (gFunctStruct *)GetStructPtr();
+    CyU3PReturnStatus_t retStatus = CY_U3P_SUCCESS;
+    lTimerIndex = GetCurrentRunningTimer(TIMER4);
+	CyBool_t lIsVbusPresent = 0;
 
+    switch(lTimerIndex)
+    {
+		case Timer4_Connect_State :
+	    	CyU3PGpioGetValue (GPIO44_VBUS_VBUS_DETECT, &lIsVbusPresent);
+	    	if(lIsVbusPresent )
+	    	{
+	     		CyU3PConnectState(CyFalse, CyTrue);					//If the PD fails also make sure the USB connection is established.
+	     		CyFx3BusyWait(10);
+			//Pranay,26Dec'22, FX3 shall connect data lines only if Testers port role is Sink else Dont connect
+	    		if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role == PRT_ROLE_SINK)
+	    		{
+	    			CyU3PConnectState(CyTrue, CyTrue);//Connecting data lines
+	    		}
+	    		else
+	    		{
+		     		CyU3PConnectState(CyFalse, CyTrue);					//If the PD fails also make sure the USB connection is established.
+	    		}
+	    	}
+		break;
+    }
+    return retStatus;
+
+}

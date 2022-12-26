@@ -490,7 +490,14 @@ void ControllerGpioInit_CPU2()
     GPIO_setMasterCore(CPU2_CTRL_VBUS_GPIO12, GPIO_CORE_CPU2);
     GPIO_setQualificationMode(CPU2_CTRL_VBUS_GPIO12, GPIO_QUAL_SYNC);
     GPIO_setPinConfig(GPIO_12_GPIO12);
-
+    //
+    //Venkat,15Nov'22, CPU2 : OCP trigger gpio to Fx3, when pulled low an interrupt will be generated on Fx3 end
+    //
+    GPIO_setDirectionMode(CPU2_OCP_TRIGGER_GPIO64, GPIO_DIR_MODE_OUT);
+    GPIO_setPadConfig(CPU2_OCP_TRIGGER_GPIO64, GPIO_PIN_TYPE_STD);
+    GPIO_setMasterCore(CPU2_OCP_TRIGGER_GPIO64, GPIO_CORE_CPU2);
+    GPIO_setQualificationMode(CPU2_OCP_TRIGGER_GPIO64, GPIO_QUAL_SYNC);
+    GPIO_setPinConfig(GPIO_64_GPIO64);
     EDIS;
 
 //I2C A initialization to CPU2
@@ -945,7 +952,7 @@ void lcd_init()
     display_data_command(DISPLAY_DATA,0x00);
     display_data_command(DISPLAY_COMMAND,0x28);  //function set (fundamental command set)
     display_data_command(DISPLAY_COMMAND,0x08);  //display off, cursor off, blinku off
-    display_data_command(DISPLAY_COMMAND,0x2A);  //fnction set (extended command set)
+    display_data_command(DISPLAY_COMMAND,0x2A);  //function set (extended command set)
     display_data_command(DISPLAY_COMMAND,0x79);  //OLED command set enabled
     display_data_command(DISPLAY_COMMAND,0xD5);  //set display clock divide ratio/oscillator frequency
     display_data_command(DISPLAY_COMMAND,0x70);  //set display clock divide ratio/oscillator frequency

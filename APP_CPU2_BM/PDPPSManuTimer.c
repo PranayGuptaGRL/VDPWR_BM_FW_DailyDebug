@@ -9,14 +9,12 @@
 #include "PDPPSManufacturerMain.h"
 #include "FRAM.h"
 gPPSStruct *pStructPtr;
+static uint32_t gLedBlinkCount;
+volatile uint8_t gOCP_check_count;//Variable that checks how many times in a single request current drawing has been crossed the OCP set limit
 
 
 void Config_CPU_TIMER(uint32_t cpuTimer, float freq, float period)
 {
-//    uint32_t temp;
-//    // Initialize timer period:
-//    temp = (uint32_t) (freq / 1000000 * period);
-//    CPUTimer_setPeriod(cpuTimer, temp);
     // Set pre-scale counter to divide by 1 (SYSCLKOUT):
     CPUTimer_setPreScaler(cpuTimer, 0);
 
@@ -102,6 +100,26 @@ void EloadFRAM_DataWrite()
 
     }
 }
+void ledToggle(uint8_t aLED)
+{
+    static uint32_t counter = 0;
+
+    counter++;
+    GPIO_writePin(aLED, counter & 1);
+
+}
+
+/*Venkat 14'NOV 2022 , Function that checks for OCP and triggers respective GPIO to Fx3*/
+void OCPCheckMechanism()
+{
+    if( gOCP_check_count++ >= OCP_LIMIT_BREACH) //check for constant 10mS OCP limit breach,200uS * 50times = 10mS
+    {
+        OCP_TRIGGER(GPIO_RESET);
+        pStructPtr->gVbusHandler.gOCP_trigger_indicator = true;
+        gOCP_check_count = 0;
+    }
+}
+
 __interrupt void MsgTimer0ExpiryHandler( void )
 {
 
@@ -109,12 +127,14 @@ __interrupt void MsgTimer0ExpiryHandler( void )
     switch(gTimer0Var)
     {
     case ADC_DATA_READ:
-
         Task_ADC_DataRead();
 
-        GPIO_togglePin(38);
-
-        MsgTimerStart(10000, ADC_DATA_READ, TIMER0);//
+        if(gLedBlinkCount++ >= LED_BLINK_ITER_COUNT)//Venkat,15NOv'22, To make the LED blinking visible, so toggling it for every 500mS
+        {
+            GPIO_togglePin(38);
+            gLedBlinkCount = 0;
+        }
+        MsgTimerStart(ADC_CONVERSION_TIME, ADC_DATA_READ, TIMER0);
 
         break;
     case I2C_FRAM_BYTECOUNT_DECODE:
@@ -144,6 +164,7 @@ __interrupt void MsgTimer0ExpiryHandler( void )
     }
 
 }
+
 __interrupt void MsgTimer1ExpiryHandler( void )
 {
 
@@ -216,13 +237,45 @@ __interrupt void MsgTimer1ExpiryHandler( void )
               if( abs(pStructPtr->gVbusHandler.gTypeCendVbusVoltage - gRxVbusVoltage) > VBUS_TOLR_VALUE )
               {
                   VfbHandler();
+                  if( !pStructPtr->gVbusHandler.gOCP_trigger_indicator )
+                  {
+                      if(pStructPtr->gVbusHandler.gADCLiveVbusCurrent + OCP_TOLERANCE >= pStructPtr->gVbusHandler.gRxVbus_i_OCPLimitVal )  //Ignoring OCP check if current level is less than  the expected OCP Limit
+                      {
+                          OCPCheckMechanism();
+                      }
+                      else
+                      {
+                          gOCP_check_count = 0;
+                      }
+                  }
+                  else
+                  {
+                        OCP_TRIGGER(GPIO_SET);
+                  }
 
-                  MsgTimerStart(VFB_INC_DEC_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//200uS
+
+                  MsgTimerStart(VFB_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//2000uS
 
               }
               else
               {
-                  MsgTimerStart(VFB_INC_DEC_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//200uS
+                  if( !pStructPtr->gVbusHandler.gOCP_trigger_indicator )
+                  {
+                      if(pStructPtr->gVbusHandler.gADCLiveVbusCurrent + OCP_TOLERANCE >= pStructPtr->gVbusHandler.gRxVbus_i_OCPLimitVal )  //Ignoring OCP check if current level is less than  the expected OCP Limit
+                      {
+                          OCPCheckMechanism();
+                      }
+                      else
+                      {
+                          gOCP_check_count = 0;
+                      }
+                  }
+                  else
+                  {
+                        OCP_TRIGGER(GPIO_SET);
+                  }
+
+                  MsgTimerStart(VFB_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//2000uS
 
               }
         }
@@ -231,7 +284,7 @@ __interrupt void MsgTimer1ExpiryHandler( void )
            //Do nothing if Vfb not enabled or any API command is received or if received Vbus is not yet set
         }
         break;
-
+#if 0/**Pranay,14Dec'22, Not using these cases anymore so commented out*/
     case TIMER1_VBUS_DAC_STEP_INC:
         pStructPtr->gVbusHandler.gReqVbusStartingDACCount -= VBUS_INCDEC_STEPSIZE;
 
@@ -296,7 +349,7 @@ __interrupt void MsgTimer1ExpiryHandler( void )
             }
         }
         break;
-
+#endif
     case TIMER1_VBUS_VOL_STEP_INC:
 
         gCurrentVbusSetting += VBUS_STEP_INC_DEC_SIZE;
@@ -324,7 +377,7 @@ __interrupt void MsgTimer1ExpiryHandler( void )
 //
 //              TriggerVbusVfb();
 
-              MsgTimerStart(VBUS_INCDEC_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//200uS
+              MsgTimerStart(VFB_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//200uS
           }
 
         break;
@@ -335,29 +388,23 @@ __interrupt void MsgTimer1ExpiryHandler( void )
             if(gCurrentVbusSetting <= pStructPtr->gVbusHandler.gPresentRxVbusCount)//Final voltage setting
             {
                 gLastDacValueWritten = SetLiveValue(PPS_DAC_VBUS_VOLTAGE, pStructPtr->gVbusHandler.gPresentRxVbusCount);
-
-//                DACSetShadowValue( SetLiveValue(PPS_DAC_VBUS_VOLTAGE, gRxVbusVoltage) );
                 DACSetShadowValue( gLastDacValueWritten );
                 HANDLE_VBUS_CTRL_SWITCH(TURN_ON);
 
                 gI2CCmdStatus = I2C_CMD_HANDLED;
                 pStructPtr->gMiscStruct.gIsRxVbusSet = true;
 
-//                DEVICE_DELAY_US(VBUS_INCDEC_STEP_TIME);
-//
-//                TriggerVbusVfb();
-
-                MsgTimerStart(VBUS_INCDEC_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//200uS
+                MsgTimerStart(VFB_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);//200uS
 
             }
             else
             {
-                gLastDacValueWritten =  SetLiveValue(PPS_DAC_VBUS_VOLTAGE, gCurrentVbusSetting) ;
+                gLastDacValueWritten =  SetLiveValue(PPS_DAC_VBUS_VOLTAGE, gCurrentVbusSetting);
 //                DACSetShadowValue( SetLiveValue(PPS_DAC_VBUS_VOLTAGE, gCurrentVbusSetting) );
                 DACSetShadowValue( gLastDacValueWritten );
                 HANDLE_VBUS_CTRL_SWITCH(TURN_ON);
 
-                MsgTimerStart(VBUS_INCDEC_STEP_TIME, TIMER1_VBUS_DEC, TIMER1);//10uS
+                MsgTimerStart(VBUS_INCDEC_STEP_TIME, TIMER1_VBUS_VOL_STEP_DEC, TIMER1);//200uS
             }
 
         break;

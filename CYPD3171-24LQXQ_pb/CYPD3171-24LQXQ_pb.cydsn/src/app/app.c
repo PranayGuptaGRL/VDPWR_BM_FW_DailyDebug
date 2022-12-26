@@ -53,6 +53,7 @@
 #include <hal_ccgx.h>
 #include <gpio.h>
 #include <system.h>
+#include <grlapp.h>
 #if CCG_LOAD_SHARING_ENABLE
 #include <loadsharing.h>
 #endif /* CCG_LOAD_SHARING_ENABLE */
@@ -1477,7 +1478,7 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
     bool  typec_only = false;
     const dpm_status_t *dpm_stat = dpm_get_info(port);
 #if CCG_PD_REV3_ENABLE
-    pd_do_t alert_ado;
+    //pd_do_t alert_ado;
 #endif /* CCG_PD_REV3_ENABLE */
     //gBufLog(false,evt);
     switch(evt)
@@ -1518,6 +1519,11 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
 #endif /* (VBUS_OCP_ENABLE | VBUS_SCP_ENABLE | VBUS_OVP_ENABLE| VBUS_UVP_ENABLE) */
             gl_app_previous_polarity[port] = dpm_stat->polarity;
             isAttachInterrupt = true;  
+            /*venkat 11Jul'2022, QC mode Switch case Handle when sink is in detach state, so that immediately after attach QC mode switch sequence will commence*/
+            if((g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag !=PDMODE))
+            {
+                schedule_task(500,GRL_QCENUMERATION);
+            }
             break;
 
         case APP_EVT_CONNECT:
@@ -1712,34 +1718,6 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
             app_pps_sink_disable (port);
 #endif /* APP_PPS_SINK_SUPPORT */
 
-            //Pranay,23Sept'22,
-            /*if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd != PRT_DUAL)
-            {
-                dpm_update_port_config (TYPEC_PORT_0_IDX, 
-                g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
-                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, false, false);
-            
-                CyDelay(2);
-                
-                dpm_update_port_config (TYPEC_PORT_0_IDX, 
-                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
-                        g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, false, false);
-            }
-            else
-            {
-                            
-                dpm_update_port_config (TYPEC_PORT_0_IDX, 
-                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
-                        g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, true, false);
-                
-                CyDelay(2);
-                                            
-                dpm_update_port_config (TYPEC_PORT_0_IDX, 
-                    g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, 
-                        g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd, true, false);
-
-            }*/
-            
             AUG_TIMER_Stop();/**Turning off timer if we get detach/hardreset */
             timer_stop(0,GRL_APP_SOP1_TIMER); /**Stopping SOP1 timer in detach event*/
             /** Pranay,27Sept'19,to resolve issue i.e., after requesting PDOx if we send Attach/Detach, 
@@ -1876,14 +1854,36 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
             }
 #endif /* (CCG_TEMP_BASED_VOLTAGE_THROTTLING || CCG_VIN_BASED_VOLTAGE_THROTTLING || CCG_LOAD_SHARING_ENABLE) */
             
-            i2cBuf[2] = 0x00;
-            i2cBuf[2] |= (g_Struct_Ptr->RequestPacketConfig.gDUTSpecRev << 1);//[b2:1]
-            i2cBuf[3]  = (dpm_stat->cur_port_role & 0x03);
-            i2cBuf[3]  |= ((dpm_stat->role_at_connect & 0x03) << 2);
-            i2cBuf[3]  |= ((dpm_stat->attached_dev & 0x0F) << 4);
+            /**Pranay,14Dec'22, 
+            *  Generating interrupt only if there is any change in prev requested and 
+            *  present request Vbus v/i incase of APDO 
+            *  else for all othe supply types handle in regular way
+            **/
+            if( ( g_Struct_Ptr->RequestPacketConfig.gReqSupplyType == PDO_AUGMENTED)
+                && (g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest == true) )
+            {
+                i2cBuf[2] = 0x00;
+                i2cBuf[2] |= (g_Struct_Ptr->RequestPacketConfig.gDUTSpecRev << 1);//[b2:1]
+                i2cBuf[3]  = (dpm_stat->cur_port_role & 0x03);
+                i2cBuf[3]  |= ((dpm_stat->role_at_connect & 0x03) << 2);
+                i2cBuf[3]  |= ((dpm_stat->attached_dev & 0x0F) << 4);
 
-            g_PdssGPIOIntrHandler(INTR_SET);
-            PD_BC_i2cBufHandler(INTR_PD);
+                g_PdssGPIOIntrHandler(INTR_SET);
+                PD_BC_i2cBufHandler(INTR_PD);
+                g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest = false;
+            }
+            else if( g_Struct_Ptr->RequestPacketConfig.gReqSupplyType != PDO_AUGMENTED)
+            {
+                i2cBuf[2] = 0x00;
+                i2cBuf[2] |= (g_Struct_Ptr->RequestPacketConfig.gDUTSpecRev << 1);//[b2:1]
+                i2cBuf[3]  = (dpm_stat->cur_port_role & 0x03);
+                i2cBuf[3]  |= ((dpm_stat->role_at_connect & 0x03) << 2);
+                i2cBuf[3]  |= ((dpm_stat->attached_dev & 0x0F) << 4);
+
+                g_PdssGPIOIntrHandler(INTR_SET);
+                PD_BC_i2cBufHandler(INTR_PD);
+                g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest = false;
+            }
             memset(&gBattStatBuf[0], 0x00, 16);//Pranay,07Oct'22,BatteryStatus Buffer clearing in detach interrupt
             /** DUT fall back flag will be TRUE only after every Ps_Rdy and will be false each time when we send API.*/
             g_Struct_Ptr->RequestPacketConfig.isDUT_FallBack = true;
@@ -1896,7 +1896,9 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
             }
             
             if(dpm_stat->cur_port_role == PRT_ROLE_SINK)
+            {
                 g_SrcCapsDecode(&g_Struct_Ptr->gPrev_SRCCaps);
+            }
 #if ONLY_PD_SNK_FUNC_EN            
 	    /**Pranay,15Jul'21,By default Initiating SOP1 DiscID immediately after Every PDC unless configured otherwise
             * also if cable data is ready no need to explicitly initiate SOP1 again and again (ex:in case of APDO request PDC success will be for every 8sec so no need to init SOP1 for every PDC)
@@ -1979,7 +1981,21 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
             break;
 
         case APP_EVT_ALERT_RECEIVED:
-            /* Respond to ALERT message only if there is the number of object is one. */
+            /**Pranay,13Dec'22, Response Messages can't be initiated from event handler directly so starting a timer and initiating in expiry works only 10mS after Alert packet received, 
+             if lesser then 10mS packet initiation doesn't work*/
+            schedule_task(10, GRL_INIT_GET_STATUS);
+            
+            //if(dpm_get_info (TYPEC_PORT_0_IDX)->cur_port_role == PRT_ROLE_SINK)
+            //{
+                //alert_ado = ((pd_packet_t*)dat)->dat[0];
+            //    if( /*(alert_ado.ado_alert.op_cond_change == true) && */((dpm_stat->snk_sel_pdo.src_gen.supply_type ) == PDO_AUGMENTED) )
+            //    {
+            //        gTimerVar = APDO_TIMER;
+            //        MsgTimerStart(5000);
+            //    }
+            //}
+            #if 0
+        /* Respond to ALERT message only if there is the number of object is one. */
             if (((pd_packet_t*)dat)->len == 1)
             {
                 alert_ado = ((pd_packet_t*)dat)->dat[0];
@@ -2009,6 +2025,7 @@ void app_event_handler(uint8_t port, app_evt_t evt, const void* dat)
                     dpm_pd_command(port, DPM_CMD_SEND_EXTENDED, &cmd, NULL);
                 }
             }
+            #endif
             break;
 #endif /* CCG_PD_REV3_ENABLE */
 
@@ -2309,7 +2326,12 @@ void PD_BC_i2cBufHandler(uint8_t Var)
         break;
         case INTR_ATTACHSTATE:
             i2cBuf[0] = 0xFB;
-            i2cBuf[1] = 0x08; 
+            i2cBuf[1] = 0x08;
+            /**Pranay,14Dec'22,Variables related to APDO handling to be set to default state when received an Detach & Attach**/
+            g_Struct_Ptr->RequestPacketConfig.gReqSupplyType = 0x00;
+            g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusVoltage = 0x00;
+            g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusCurrent = 0x00;
+            g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest = false;
             break;
         case INTR_REQ_STATE:
             i2cBuf[0] = 0xFB;
@@ -2317,7 +2339,12 @@ void PD_BC_i2cBufHandler(uint8_t Var)
             break;
         case INTR_DETACH:
             i2cBuf[0] = 0xFB;
-            i2cBuf[1] = 0x0A; 
+            i2cBuf[1] = 0x0A;
+            /**Pranay,14Dec'22,Variables related to APDO handling to be set to default state when received an Detach & Attach**/
+            g_Struct_Ptr->RequestPacketConfig.gReqSupplyType = 0x00;
+            g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusVoltage = 0x00;
+            g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusCurrent = 0x00;
+            g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest = false;
             break;
     }
 }
@@ -2919,7 +2946,7 @@ bool vbus_is_present(uint8_t port, uint16_t volt, int8 per)
             (per == VSAFE_5V_SNK_TURN_OFF_MARGIN)
        )
     {
-        volt = 3000/*dpm_stat->contract.min_volt*/;
+        volt = 2000/*dpm_stat->contract.min_volt*/;//Pranay,09Dec'22, Min voltage level to be considered for the Detach is 2.0V, AS per VDPWR nad VUP Requirement
         per = VSAFE_SNK_TURN_OFF_MARGIN;
     }
 

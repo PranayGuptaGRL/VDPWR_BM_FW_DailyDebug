@@ -29,21 +29,23 @@
 #include "cyu3usbconst.h"
 #include "cyu3externcstart.h"
 
-#define CY_FX_BULKLP_DMA_BUF_COUNT      (64)                       /* Bulk loop channel buffer count */
-#define CY_FX_BULKLP_DMA_TX_SIZE        (0)                       /* DMA transfer size is set to infinite */
-#define CY_FX_BULKLP_THREAD_STACK       (0x400)                  /* Bulk loop application thread stack size */
-#define CY_FX_BULKLP_THREAD_PRIORITY    (7)                       /* Bulk loop application thread priority */
+#define CY_FX_PDPWR_DMA_BUF_COUNT      (64)                       /* PDPWR loop channel buffer count */
+#define CY_FX_PDPWR_DMA_TX_SIZE        (0)                       /* PDPWR transfer size is set to infinite */
+#define CY_FX_PDPWR_THREAD_STACK       (0x400)                  /* PD PWR application thread stack size */
+#define CY_FX_PDPWR_THREAD_PRIORITY    (8)                       /* PD PWR application thread priority */
 
 #define CY_FX_I2C_DMA_BUF_COUNT      		(8)                       /* I2C channel buffer count */
 #define CY_FX_I2C_DMA_TX_SIZE        		(0)                       /* DMA transfer size is set to infinite */
-#define CY_FX_DATA_RX_THREAD_STACK       	(0x2000)                  /*  application thread stack size */
-#define CY_FX_DATA_RX_THREAD_PRIORITY    	(8)                       /* I2C application thread priority */
+#define CY_FX_DATA_RX_THREAD_STACK       	(0x2000)                  /*  RS485 application thread stack size */
+#define CY_FX_DATA_RX_THREAD_PRIORITY    	(9)                       /* RS485 application thread priority */
 
-#define CY_FX_TIMER_THREAD_STACK       	(0x800)                  /*  application thread stack size */
-#define CY_FX_TIMER_THREAD_PRIORITY    	(9)                       /* I2C application thread priority */
+#define CY_FX_TIMER_THREAD_STACK       	(0x1000)                  /*  TIMER application thread stack size */
+#define CY_FX_TIMER_THREAD_PRIORITY    	(10)                       /* TIMER application thread priority */
 
 #define CY_FX_DATA_QUEUE_SIZE		(64)
 
+#define CY_FX_PDSS_COMM_THREAD_STACK       (0x800)				/*  PD Communication application thread stack size */
+#define CY_FX_PDSS_COMM_THREAD_PRIORITY    (7)					/* PD Communication application thread priority */
 #ifdef IDLE_THREAD
 
 #define CY_FX_IDLE_THREAD_PRIORITY    	(20)                       /* IDLE thread priority */

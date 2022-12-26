@@ -15,7 +15,7 @@ uint8_t CMDataRxbuf[286];
 //uint8_t FRAMReadData[286];
 uint8_t FRAM_Misc_buf[16];
 
-uint8_t glFirmwareID[6] = { '4', '2', '\1' };
+uint8_t glFirmwareID[6] = { '4', '8', '\1'};
 
 
 //gPPSStruct *pStructPtr_t;
@@ -61,9 +61,12 @@ void FWInitializations()
 
     pStructPtr->gMiscStruct.gIsVfbEnabled = false;
     pStructPtr->gMiscStruct.gIsRxVbusSet = false;
-
+    pStructPtr->gVbusHandler.gCustom_OCP_set = false;
+    pStructPtr->gVbusHandler.gRX_OCP_value = OCP_MIN_REQUEST;
+//    pStructPtr->gMiscStruct.gOCP_check_count = 0;
+    pStructPtr->gVbusHandler.gOCP_trigger_indicator = false;
     gI2CCmdStatus = I2C_CMD_RECEIVED;
-
+    pStructPtr->gVbusHandler.gPresentRxVbusCount = 0;
 }
 uint16_t DecodeBootTimeDACCount(uint16_t aReqVoltage)
 {
@@ -247,7 +250,10 @@ void Task_ADC_DataRead()
         pStructPtr->gVbusHandler.gADCLiveVbusCurrent = round(lLiveADCVal);
 
         //As TypeC end voltage and ADC voltage at PPS controller is different because of board IR drop, So to compensate Baord IR drop applying this formula
-        pStructPtr->gVbusHandler.gTypeCendVbusVoltage =  (pStructPtr->gVbusHandler.gADCLiveVbusVoltage - (pStructPtr->gVbusHandler.gADCLiveVbusCurrent * BOARD_IR_DROP) ); //Vc = Vp - I * Rb (V at Typec  = V at ADC - I being drawn * Board R)
+        if(pStructPtr->gVbusHandler.gPresentRxVbusCount >= VSAFE_5V) //Pranay,14Dec'22,For handling greater IR drop for lesser voltages, IR drop for voltages above 5v is different than voltages below 5v, So handling it accordingly as per rajesh inputs
+            pStructPtr->gVbusHandler.gTypeCendVbusVoltage =  (pStructPtr->gVbusHandler.gADCLiveVbusVoltage - (pStructPtr->gVbusHandler.gADCLiveVbusCurrent * BOARD_IR_DROP_VSAFE5V) ); //Vc = Vp - I * Rb (V at Typec  = V at ADC - I being drawn * Board R)
+        else
+            pStructPtr->gVbusHandler.gTypeCendVbusVoltage =  (pStructPtr->gVbusHandler.gADCLiveVbusVoltage - (pStructPtr->gVbusHandler.gADCLiveVbusCurrent * BOARD_IR_DROP_BELOW_VSAFE5V) ); //Vc = Vp - I * Rb (V at Typec  = V at ADC - I being drawn * Board R)
 
         //For calibration need to push the data read from ADC directly so no need to push calculated Vbus values
         if((gPPSOperatingMode == PPS_IN_CALIB_MODE_v) || (gPPSOperatingMode == PPS_IN_CALIB_MODE_i))
@@ -383,17 +389,33 @@ void VbusStepIncDec(uint8_t aPar)
          if(pStructPtr->gMiscStruct.gIsVfbEnabled)//Enabling Feedback logic
          {
              gI2CCmdStatus = I2C_CMD_HANDLED;
-             //MsgTimerStart(VBUS_INCDEC_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);
+             MsgTimerStart(VBUS_INCDEC_STEP_TIME, TIMER1_VBUS_FB_TRIGGER, TIMER1);
              pStructPtr->gMiscStruct.gIsRxVbusSet = true;
          }
 
     }
 }
-
+/**
+ *  Venkat,16NOV'22, Modifying as per spec,
+ *  iPpsCLNew -- Current Limit accuracy Section -- 7.1.4.4
+ *  if 1A <= Operating Current <= 3A  ------   +-150mA
+ *  for Operating currents > 3A          ------     +- 5%
+ *  So for Operating currents < 1000mA no need of OCP,
+ */
+uint16_t locpLimitVal = 0;
 uint16_t Vbus_i_OCPLimitCalc(uint16_t aRxCurrent)
 {
 
-    return ( (aRxCurrent * VBUS_I_OCP_LIMIT) / 100);
+    if(aRxCurrent <= OCP_MIN_REQUEST )
+        aRxCurrent = OCP_MIN_REQUEST;
+
+    if( !pStructPtr->gVbusHandler.gCustom_OCP_set )//If Custom OCP has not been set, then configure OCP limit as per PD Spec
+        return (aRxCurrent > 3000) ? ( (aRxCurrent * 1.05)) : ( (aRxCurrent + 150));
+    else//If Custom OCP has been set
+    {
+        locpLimitVal = CUSTOM_OCP_LIMIT_CALC (aRxCurrent, pStructPtr->gVbusHandler.gRX_OCP_value);
+        return locpLimitVal ;
+    }
 }
 
 void RecvVbusSetCmdHandler(uint8_t * aBuffer)
@@ -404,6 +426,7 @@ void RecvVbusSetCmdHandler(uint8_t * aBuffer)
 
     //Vbus Current received
     pStructPtr->gVbusHandler.gRxVbusCurrentValue = (aBuffer[5] | (aBuffer[6] << 8));
+    pStructPtr->gVbusHandler.gOCP_trigger_indicator = false;
 
     pStructPtr->gVbusHandler.gRxVbus_i_OCPLimitVal = Vbus_i_OCPLimitCalc(pStructPtr->gVbusHandler.gRxVbusCurrentValue);
 
@@ -413,7 +436,6 @@ void RecvVbusSetCmdHandler(uint8_t * aBuffer)
 
 //    gRxVbusVoltage = RxVbusVolt; //Tracking input received voltage in a global variable
 
-
     pStructPtr->gVbusHandler.gReqVbusFinalDACCount =  SetLiveValue(PPS_DAC_VBUS_VOLTAGE, lRxVbusVolt);
     pStructPtr->gVbusHandler.LiveVbusDACCount = SetLiveValue(PPS_DAC_VBUS_VOLTAGE, pStructPtr->gVbusHandler.gADCLiveVbusVoltage);
 
@@ -421,7 +443,7 @@ void RecvVbusSetCmdHandler(uint8_t * aBuffer)
 
     gCurrentVbusSetting = pStructPtr->gVbusHandler.gADCLiveVbusVoltage;
 
-    if(lRxVbusVolt <= 3300)
+    if(lRxVbusVolt < 3300)//Pranay,03Nov'22, Dropping the Vbus only if requested voltage is lesser than 3v3
     {
         if(pStructPtr->gVbusHandler.gADCLiveVbusVoltage > VBUS_5V)//If current Vbus Value is greater than 5v then set it to 5v and turn off switch
         {
@@ -525,24 +547,39 @@ void I2CSetCmdHandler(uint8_t * aBuffer)
 
      //Some miscellaneous APIs for internal/Debug purposes
      case 0xF1:
-         DAC_setShadowValue(DACB_BASE, (aBuffer[1] | (aBuffer[2] << 8))); //Setting voltage to DAC
+         DAC_setShadowValue(DACB_BASE, (aBuffer[3] | (aBuffer[4] << 8))); //Setting voltage to DAC
          break;
 
      case 0xF2:
-         SetDACVoltage( (aBuffer[1] | (aBuffer[2] << 8)) );
+         SetDACVoltage( (aBuffer[3] | (aBuffer[4] << 8)) );
          break;
      case 0xF3:
          HANDLE_VBUS_CTRL_SWITCH(TURN_OFF);
          break;
-     case 0xF4:
-         HANDLE_VBUS_CTRL_SWITCH(TURN_ON);
+
+     case SET_CUSTOM_OCP_lIMIT://Exposed to SW via API
+//         pStructPtr->gVbusHandler.gCustom_OCP_set = true;
+         pStructPtr->gVbusHandler.gRX_OCP_value = (aBuffer[3] | (aBuffer[4] << 8));
+
+         if(pStructPtr->gVbusHandler.gRX_OCP_value >= OCP_MIN_LIMIT && pStructPtr->gVbusHandler.gRX_OCP_value < OCP_MAX_LIMIT)
+         {
+             pStructPtr->gVbusHandler.gCustom_OCP_set = true;
+         }
          break;
-     case 0xF5:
-         gBootTime = true;
+     case RESET_CUSTOM_OCP_lIMIT:
+
+         pStructPtr->gVbusHandler.gCustom_OCP_set = false;
          break;
-     case 0xF6:
-         gBootTime = false;
+
+     case 0xFA://Added for internal debug
+         pStructPtr->gVbusHandler.gRX_OCP_value = (aBuffer[3] | (aBuffer[4] << 8));
+         pStructPtr->gVbusHandler.gCustom_OCP_set = true;
          break;
+     case 0xFB:
+         pStructPtr->gVbusHandler.gCustom_OCP_set = false;
+
+         break;
+     
      }
 }
 void I2CRXHandler(uint8_t * aBuffer)
@@ -591,14 +628,10 @@ bool VfbHandler()
     uint16_t lDacValue = gLastDacValueWritten;
     uint16_t lRxVbusVoltage = gRxVbusVoltage;
 
-    if((abs(pStructPtr->gVbusHandler.gTypeCendVbusVoltage - lRxVbusVoltage) < VBUS_TOLR_VALUE ) || ( gI2CCmdStatus != I2C_CMD_HANDLED))
+    if( (abs(pStructPtr->gVbusHandler.gTypeCendVbusVoltage - lRxVbusVoltage) < VBUS_TOLR_VALUE ) || ( gI2CCmdStatus != I2C_CMD_HANDLED) )
     {
-        // if I2C command not received but vbus tolerance is well within limits of 100mv tolerance than consider vbus is set so start feedback logic in ADC task
-//        if( gI2CCmdStatus == I2C_CMD_HANDLED )
-//            pStructPtr->gMiscStruct.gIsRxVbusSet = true;
         return true;
     }
-
     else if (pStructPtr->gVbusHandler.gTypeCendVbusVoltage < lRxVbusVoltage)
     {
         lDacValue -= VFB_STEP_SIZE_DAC_COUNT;// Incrementing / decrementing interms of 10mV
@@ -739,11 +772,53 @@ void SetDataCmd(uint8_t * aRxBuffer)
 
 }
 
+/**
+ * @date 18Nov,22
+ * @brief This Function is being used for returning the System Details to CM like CC Sno,CC Board Rev, PPS Sno, PPS Board Rec and FRAM rev when requested via API
+ * @aRxBuffer Buffer that has received API
+ * @note   Below are the FRAM Details
+ * API expected :17 02 0E 01
+ * FRAM_REV                  7   1   1   FRAM Rev
+ * SYSTEM_SERIAL_NUMBER      8   2   10  Serial Number of System
+ * CC_SERIAL_NUMBER          10  2   5   Serial Number of DPWR Control Card
+ * CC_BOARD_REV              12  1   1   DPWR Control card Board Revision
+ * PPS_BOARD_REV             15  1   2    PPS Board Revision
+ * @author Pranay
+ *
+ */
+void CC_PPS_FramDetailsFetch (uint8_t * aRxBuffer)
+{
+
+    // Pranay,14Nov'22, Apart from System Serial number tracking rest all data from FRAM sheet similar to above, so reading from 7th Index of FRAM and handling data below
+    uint8_t lBufIndex = 0;
+
+    if(aRxBuffer[3] == CONTROL_CARD_INFO)//Get CC, PPS Serial number details from FRAM
+    {
+        lBufIndex = (CMDataRxbuf[1] + HEADER_BYTECOUNT);
+        memset(&CPU2DataRxbuf[0], 0x00, BUF_SIZE_12BYTE);//Memsetting only 12Bytes to zero to save time
+
+        FRAM_I2C_read( (CC_PPS_SNO_DATA_READ_BYTECOUNT + FRAM_REV_DATA_READ_BYTECOUNT + SYSTEM_SNO_BYTECOUNT), FRAM_REV_INDEX, &CPU2DataRxbuf[0]);//Pranay,03NOv'22,CC SNO and Rev, PPS Sno and Rev (B10 to B15 -> 6Bytes) fetching from FRAM
+
+        memcpy(&CMDataRxbuf[lBufIndex], &CPU2DataRxbuf[3], CC_PPS_SNO_DATA_READ_BYTECOUNT);//Pranay,14Nov'22, CC Sno will be stored from 3rd Index so copying only relevant data
+        lBufIndex += CC_PPS_SNO_DATA_READ_BYTECOUNT;
+
+        CMDataRxbuf[lBufIndex++] = CPU2DataRxbuf[0]; //Pranay,14Nov'22,FRAM Revision will be in 0th Index but as per API sheet to make it backward compatible it will be stored in last Byte
+
+        CMDataRxbuf[1] = lBufIndex + HEADER_BYTECOUNT; //2 Bytes Header + 3 Bytes Payload of Controlcard SNo and Rev + 3Bytes for PPS SNO & Rev + 1Byte FRAM REV
+
+        IPC_sendCommand(IPC_CPU2_L_CM_R, IPC_FLAG3, IPC_ADDR_CORRECTION_ENABLE,
+                   IPC_CMD_READ_MEM, (uint32_t)CMDataRxbuf, CMDataRxbuf[1]);
+
+        IPC_waitForAck(IPC_CPU2_L_CM_R, IPC_FLAG3);
+    }
+
+}
+
 void GetDataCmdHandler(uint8_t * aRxBuffer)
 {
     switch(aRxBuffer[2])
     {
-    case 0x80://Get FRAM DATA
+    case GET_FRAM_DATA://Get FRAM DATA
 
         FRAM_I2C_read(aRxBuffer[3], (aRxBuffer[4] | aRxBuffer[5] << 8), CPU2DataRxbuf);
 
@@ -755,6 +830,11 @@ void GetDataCmdHandler(uint8_t * aRxBuffer)
                    IPC_CMD_READ_MEM, (uint32_t)CMDataRxbuf, CMDataRxbuf[1]);
 
         IPC_waitForAck(IPC_CPU2_L_CM_R, IPC_FLAG3);
+
+        break;
+    case GET_SNO_BOARD_REV://Pranay,20Oct'22, For Fetching Control card Sno
+
+        CC_PPS_FramDetailsFetch(aRxBuffer);
 
         break;
     }
@@ -793,7 +873,7 @@ __interrupt void IPC_ISR1()
 
     uint32_t command, addr, data;
 
-    uint16_t aByteCount = 0;
+//    uint16_t aByteCount = 0;
     //
     // Read the command
     //
@@ -1085,6 +1165,7 @@ void main()
     setupMsgTimer1();
 
     HANDLE_VBUS_CTRL_SWITCH(TURN_OFF);
+    OCP_TRIGGER(GPIO_SET);//Default state setting
 
     //
     // Enables CPU interrupts
@@ -1096,6 +1177,7 @@ void main()
 
     while(1)
     {
+	//Pranay,20Oct'22,Removing delays in main while(1 )loop to avoid interrupt missing if controller is in sleep 
 //        GPIO_writePin(38, 0);
 //        DEVICE_DELAY_US(100000);//it was 10us
 //        GPIO_writePin(38, 1);

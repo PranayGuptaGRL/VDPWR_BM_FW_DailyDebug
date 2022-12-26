@@ -15,6 +15,9 @@
 #include <grlapp.h>
 #include <grlabstraction.h>
 #include <pdo.h>
+#include <battery_charging.h>
+
+
 uint8_t gI2cTransBuffer[512] = {0};
 uint8_t gLogBuffer[256] = {0};
 uint8_t greadConfigBuf[16] = {0};
@@ -141,57 +144,115 @@ static void timer_expiry_callback(uint8_t instance, timer_id_t id)
             break;
                     
         case GRL_PORT_ATTACH:
-                
-                gBufLog(false,0xAB);
+
                 gpio_set_value (GPIO_PORT_2_PIN_1, 1);
-                
                 CableConnectionSimulation(GRL_ATTACH_NO_CHECK_PDC);
-                //pd_phy_refresh_roles(0);                
             break;
         case GRL_PORT_DETACH:
+                g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag = GRL_PD_MODE_SET;
                 CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
                 schedule_task(60,GRL_ATTACH_STATE_POLL);
                 break;
         case GRL_ATTACH_STATE_POLL:
                 
-                gBufLog(false,0xBA);
-                gBufLog(false, dpm_get_info(G_PORT0)->typec_fsm_state);
-                gBufLog(false, dpm_get_info(G_PORT0)->contract_exist);
-                gBufLog(false, dpm_get_info(G_PORT0)->port_role);
-                gBufLog(false, dpm_get_info(G_PORT0)->attach);
-                gBufLog(false, dpm_get_info(G_PORT0)->cc_live.cc[0]);
-                gBufLog(false, dpm_get_info(G_PORT0)->cc_live.cc[1]);
-                gBufLog(false,0xBB);
-                
-                if(dpm_get_info(G_PORT0)->attach != true)
+                if(dpm_get_info(G_PORT0)->attach != true)//Poll if transitioned in to detach state or not for 3 times * 640mS
                 {
-                    
-                    if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd == PRT_ROLE_SINK)
+                    //Pranay,If transitioned into Detach state then only set mode to sink/src/DRp based on API received
+                    switch(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd)
                     {
-                        gBufLog(false,0xB1);
-                        schedule_task(640,GRL_PORT_ROLE_SNK);
-                    }
-                    else if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd == PRT_ROLE_SOURCE)
-                    {
-                        gBufLog(false,0xB2);
-                        schedule_task(640,GRL_PORT_ROLE_SRC);
-                    }
-                    else if(g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd == PRT_DUAL)
-                    {
-                        gBufLog(false,0xB3);
-                        schedule_task(640,GRL_PORT_ROLE_DRP);
+                        case PRT_ROLE_SINK:
+                            schedule_task(640,GRL_PORT_ROLE_SNK);//650mS is tDetach as per TypeC Cable Spec
+                        break;
+                        case PRT_ROLE_SOURCE:
+                            schedule_task(640,GRL_PORT_ROLE_SRC);
+                        break;
+                        case PRT_DUAL:
+                            schedule_task(640,GRL_PORT_ROLE_DRP);
+                        break;
                     }
                 }
-                else if(gRetryCount++ >= 2)
+                else if(gRetryCount++ >= 2)//Retrying for 3 times
                 {
-                    gBufLog(false,0xBD);
                     schedule_task(2,GRL_PORT_DETACH);
                 }
                 else
                 {
-                    gBufLog(false,0xBE);
+                    //TBD, what to do if not been to detach state even after 3 times retrying
                 }
                 break;
+                /*venkat 6Jul'2022,D+ line from 0.6v to 3.3v by considering current and required pulse count criteria*/
+        case  GRL_DP_PULSE : 
+          if(g_Struct_Ptr->gPDSSConfigCtrl.gCurrent_Pulsecnt < g_Struct_Ptr->gPDSSConfigCtrl.gReqPulse_Count)
+            {
+                PDSS->bch_det_0_ctrl[0] |=  PDSS_BCH_DET_0_CTRL_RDP_PU_EN;
+                PDSS->bch_det_0_ctrl[0] &= ~(PDSS_BCH_DET_0_CTRL_VDP_SRC_EN);
+                schedule_task(2,GRL_DPSTAB);
+                g_Struct_Ptr->gPDSSConfigCtrl.gCurrent_Pulsecnt ++;
+            }
+            break;
+        /*venkat 6Jul'2022, D- line from 3.3v to 0.6v by considering current and required pulse count criteria*/
+        case GRL_DM_PULSE: 
+            if(g_Struct_Ptr->gPDSSConfigCtrl.gCurrent_Pulsecnt < g_Struct_Ptr->gPDSSConfigCtrl.gReqPulse_Count)
+            {
+                PDSS->bch_det_0_ctrl[0] |= PDSS_BCH_DET_0_CTRL_VDM_SRC_EN;
+                PDSS->bch_det_0_ctrl[0] &= ~(PDSS_BCH_DET_0_CTRL_RDM_PU_EN );
+                schedule_task(2,GRL_DMSTAB);
+                g_Struct_Ptr->gPDSSConfigCtrl.gCurrent_Pulsecnt ++;
+            }
+            
+            break;
+        /*venkat 6Jul'2022,bring back pulse of D+ line from 3.3v to 0.6v*/
+        case GRL_DPSTAB:  
+            PDSS->bch_det_0_ctrl[0] |= PDSS_BCH_DET_0_CTRL_VDP_SRC_EN;
+            PDSS->bch_det_0_ctrl[0] &= ~(PDSS_BCH_DET_0_CTRL_RDP_PU_EN);
+            schedule_task(1,GRL_DP_PULSE);
+        
+            break;
+        /*venkat 6Jul'2022,make D- high again from 0.6v to 3.3v*/
+        case  GRL_DMSTAB:  
+              PDSS->bch_det_0_ctrl[0] |= PDSS_BCH_DET_0_CTRL_RDM_PU_EN ;
+              PDSS->bch_det_0_ctrl[0] &= ~(PDSS_BCH_DET_0_CTRL_VDM_SRC_EN);
+              schedule_task(1,GRL_DM_PULSE);
+            break;
+        /*venkat 11Jul'2022,QC contineouse mode task,  used to make QC3.0 mode change automatic both in Attach state and Detach state */    
+        case GRL_QC_CONT_MODE:
+            /* 0.6 on D+, D- 3.3 */
+            PDSS->bch_det_0_ctrl[0] |= PDSS_BCH_DET_0_CTRL_VDP_SRC_EN;
+            
+            PDSS->bch_det_0_ctrl[0] |= PDSS_BCH_DET_0_CTRL_RDM_PU_EN ;
+            
+            /* Remove other terms */
+            PDSS->bch_det_0_ctrl[0] &= ~(PDSS_BCH_DET_0_CTRL_RDP_PU_EN|PDSS_BCH_DET_0_CTRL_VDM_SRC_EN);
+            break;
+        /*venkat 6Jul'2022,Enumeration task, used to make QC mode change automatic both in Attach state and Detach state*/
+        case GRL_QCENUMERATION:
+            /* 0.6 on D+, D- HiZ */
+            PDSS->bch_det_0_ctrl[0] |= PDSS_BCH_DET_0_CTRL_VDP_SRC_EN;
+            
+            /* Remove other terms */
+            PDSS->bch_det_0_ctrl[0] &= ~ (PDSS_BCH_DET_0_CTRL_RDP_PU_EN |
+                                    PDSS_BCH_DET_0_CTRL_RDM_PU_EN |
+                                    PDSS_BCH_DET_0_CTRL_VDM_SRC_EN |
+                                    PDSS_BCH_DET_0_CTRL_IDM_SNK_EN);
+            
+            if(g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag == QC3MODE)
+            {
+                schedule_task(2000,GRL_QC_CONT_MODE);
+            }
+            
+            break;
+
+        case GRL_QC_DETACH:
+    
+            break;
+        /*venkat 6Jul'2022,Attach task, Specifically used for QC mode change from PD mode*/
+        case GRL_QC_ATTACH:
+            CableConnectionSimulation(GRL_CABLE_ATTACH);
+            //dpm_start (G_PORT0);
+            if(g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag != PDMODE)
+                schedule_task(500,GRL_QCENUMERATION);
+            
+            break;
     }
   
 }
@@ -404,7 +465,9 @@ void g_update_srcs_caps(uint8_t * aBuffer)
     uint32_t lPDOPayload = 0;
     uint8_t lSupplytype = 0;
     uint8_t lApilength = aBuffer[1];
-
+    
+    if(!lPDOCount)/**Pranay,14Dec'22, If no pdos are configured for SrcCaps then dont execute that API call*/
+        return;
     //gBufLog(false,lApilength);
     
     //dpm_pd_cmd_buf_t lSrcCapsBuf;
@@ -805,6 +868,11 @@ void g_grl_custom_config_handler(uint8_t * lAppBuffer)
             g_Struct_Ptr->RequestPacketConfig.isDUT_FallBack = false;
             dpm_send_hard_reset(0, PD_HARDRES_REASON_VBUS_OCP);
         break;
+                
+        case 0x0B:
+            grl_chgb_apply_sink_term(0,lAppBuffer[6],lAppBuffer);
+    
+        break;
             
         case GET_BATTERY_SOC_TEMP_DETAILS://0x0D
             //InitGetBattStatusExtndMsg(lAppBuffer);
@@ -846,24 +914,7 @@ bool gPD_DataManager(uint8_t * lAppBuffer)
 
         break;
         case GRL_TesterMode_SINK ://0x03
-            gBufLog(true,0);
-            gBufLog(false,0xA5);
-            gBufLog(false,lAppBuffer[4]);
-    
-           // if( (dpm_get_info (TYPEC_PORT_0_IDX)->cur_port_role != PRT_ROLE_SINK) &&
-           //     (dpm_stat->contract_exist)
-           //    )
-            //    break;
-            gpio_set_value (GPIO_PORT_2_PIN_1,0);
-            gRetryCount = 0;
-            g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd = PRT_ROLE_SINK;
-            
-            //CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
-            
-            schedule_task(2,GRL_PORT_DETACH);
-            //schedule_task(700,GRL_PORT_ROLE_SNK);
-            //SinkConfiguration();
-            
+            grl_qc4_confighandler(0,lAppBuffer);
          
         break;
             
@@ -871,39 +922,24 @@ bool gPD_DataManager(uint8_t * lAppBuffer)
             gBufLog(true,0);
             gBufLog(false,0xA5);
             gBufLog(false,lAppBuffer[4]);
-           // if( (dpm_get_info (TYPEC_PORT_0_IDX)->cur_port_role != PRT_ROLE_SOURCE) &&
-           //     (dpm_stat->contract_exist)
-           //    )
-           //     break;
+            g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag = GRL_PD_MODE_SET;// Venkat 16'NOV'2022 ,setting PD mode flag
             gpio_set_value (GPIO_PORT_2_PIN_1,0);
             gRetryCount = 0;
             g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd = PRT_ROLE_SOURCE;
-            //CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
             
-        
             schedule_task(2,GRL_PORT_DETACH);
             
-            
-            //SrcConfiguration();
         break;
             
         case GRL_TesterMode_DRP://0x06
-            gBufLog(true,0);
-            gBufLog(false,0xA5);
-            gBufLog(false,lAppBuffer[4]);
-            //if( (dpm_get_info (TYPEC_PORT_0_IDX)->cur_port_role != PRT_DUAL) &&
-             //   (dpm_stat->contract_exist)
-             //  )
-             //   break;
+
             gpio_set_value (GPIO_PORT_2_PIN_1,0);
             gRetryCount = 0;
             g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd = PRT_DUAL;
-            
-            //CableConnectionSimulation(GRL_DETACH_WITH_RP_RD_DISABLE);
+            g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag = GRL_PD_MODE_SET;// Venkat 16'NOV'2022 ,setting PD mode flag
             
             schedule_task(2,GRL_PORT_DETACH);
-            //schedule_task(700,GRL_PORT_ROLE_DRP);
-            //DrpConfiguration();
+      
             break;
 
 #if ONLY_PD_SNK_FUNC_EN            
@@ -938,7 +974,7 @@ bool gPD_DataManager(uint8_t * lAppBuffer)
         case GRL_CUSTOM_CONFIG_HANDLE://0xF2
             g_grl_custom_config_handler(lAppBuffer);
         break;
-            
+        
 #if ONLY_PD_SNK_FUNC_EN        
 /*        case GRL_APP_CMD_INIT ://0x10
         
@@ -1100,7 +1136,19 @@ void grlapp_Initialization()
     
     
     memset(&gBattStatBuf[0], 0x00, 16);
-    
+      /*PDflag initialy set ,for PD contract negotiation when attach is observed*/
+    g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag = PDMODE;
+
+    bc_init(0);
+    CyDelay(200);
+    chgb_enable(0);
+    CyDelay(200);
+    chgb_remove_term(0);
+    /**Pranay,14Dec'22,Variables related to APDO handling to be set to default state**/
+    g_Struct_Ptr->RequestPacketConfig.gReqSupplyType = 0x00;
+    g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusVoltage = 0x00;
+    g_Struct_Ptr->RequestPacketConfig.gPrevReqAPDOVbusCurrent = 0x00;
+    g_Struct_Ptr->RequestPacketConfig.isNewAPDORequest = false;
 #endif /**ONLY_PD_SNK_FUNC_EN*/
 
 }
@@ -1117,7 +1165,159 @@ void grlSystem_init()
     gpio_hsiom_set_config (GPIO_PORT_2_PIN_1, HSIOM_MODE_GPIO, GPIO_DM_RES_UP, true); 
 }
 
+/*GRL Custom QC implementations*/
+/* venkat 6Jul'22 
+   GRL custom QC3 D+/D- pulse generation function , From current voltage anf required voltage from API
+   no.of pulses needed is calculated and task is scheduled to generate pulse*/
+ccg_status_t grl_chgb_QC3(uint8_t *lAppBuffer)  
+{
+    g_Struct_Ptr = (grl_Struct_t *)get_grl_struct_ptr();
+    uint16_t tvol;
+    g_Struct_Ptr->gPDSSConfigCtrl.gReqPulse_Count = 0;
+    g_Struct_Ptr->gPDSSConfigCtrl.gCurrent_Pulsecnt = 0;
+    uint16_t current_vbus;    
+    uint16_t diffVoltage;
+    current_vbus = vbus_get_value(0);
+    tvol = ( (lAppBuffer[8] << 8) | lAppBuffer[7] );
+    /*inc vbus by calculating required pulse count from present 
+    and target voltage and schediling task for pulse generation*/
+    if(current_vbus < tvol)
+    {   
+        g_Struct_Ptr->gPDSSConfigCtrl.gTarget_Voltage  = tvol - current_vbus;
+        diffVoltage  = tvol - current_vbus;
+      
 
+        g_Struct_Ptr->gPDSSConfigCtrl.gReqPulse_Count = (diffVoltage/GRL_QCpulse_voltage) ;
+        schedule_task(1, GRL_DP_PULSE);
+        
+    }
+    /*dec vbus by calculating required pulse count from present
+    and target voltage and schediling task for pulse generation*/
+    else if(current_vbus > tvol)
+    {
+        g_Struct_Ptr->gPDSSConfigCtrl.gTarget_Voltage = current_vbus - tvol;
+        diffVoltage = current_vbus - tvol;
+
+        g_Struct_Ptr->gPDSSConfigCtrl.gReqPulse_Count = (diffVoltage/GRL_QCpulse_voltage) ;
+        schedule_task(1, GRL_DM_PULSE);
+    }
+    else
+    {
+        //no pulses
+    }
+    
+   return CCG_STAT_SUCCESS;     
+}
+
+/*  venkat 11Jul'22
+    This is GRL Custom function for setting QC2.0 voltages as per spec changing D+ and D- lines therfore source will provide 5V,9V,12V,20V.
+*/
+ccg_status_t grl_qc2_sink(uint8_t cport,uint8_t *lAppBuffer)
+{
+    g_Struct_Ptr = (grl_Struct_t *)get_grl_struct_ptr();
+    switch(lAppBuffer[7])
+    {
+        case GRL_QC_REMOVE_TERM:
+            chgb_remove_term(cport);
+        break;
+        case GRL_QC_5V:
+
+            /* 0.6 on D+, D- HiZ */
+            PDSS->bch_det_0_ctrl[cport] |= PDSS_BCH_DET_0_CTRL_VDP_SRC_EN;
+            
+            /* Remove other terms */
+            PDSS->bch_det_0_ctrl[cport] &= ~ (PDSS_BCH_DET_0_CTRL_RDP_PU_EN |
+                                    PDSS_BCH_DET_0_CTRL_RDM_PU_EN |
+                                    PDSS_BCH_DET_0_CTRL_VDM_SRC_EN |
+                                    PDSS_BCH_DET_0_CTRL_IDM_SNK_EN);
+           
+        break;
+        case GRL_QC_9V:
+
+            PDSS->bch_det_0_ctrl[cport] |= PDSS_BCH_DET_0_CTRL_RDP_PU_EN;
+            
+            PDSS->bch_det_0_ctrl[cport] |= PDSS_BCH_DET_0_CTRL_VDM_SRC_EN;
+            
+
+            /* Remove other terms */
+            PDSS->bch_det_0_ctrl[cport] &= ~ ( PDSS_BCH_DET_0_CTRL_RDM_PU_EN |
+                                PDSS_BCH_DET_0_CTRL_VDP_SRC_EN);
+        break;
+        case GRL_QC_12V:
+
+            PDSS->bch_det_0_ctrl[cport] |= PDSS_BCH_DET_0_CTRL_VDP_SRC_EN;
+            
+            PDSS->bch_det_0_ctrl[cport] |= PDSS_BCH_DET_0_CTRL_VDM_SRC_EN;
+            
+             /* Remove other terms */
+            PDSS->bch_det_0_ctrl[cport] &= ~(PDSS_BCH_DET_0_CTRL_RDP_PU_EN|
+                                    PDSS_BCH_DET_0_CTRL_RDM_PU_EN);
+        break;
+        case GRL_QC_20V:
+            PDSS->bch_det_0_ctrl[cport] |= PDSS_BCH_DET_0_CTRL_RDP_PU_EN;
+            
+            PDSS->bch_det_0_ctrl[cport] |= PDSS_BCH_DET_0_CTRL_RDM_PU_EN;
+            
+            /* Remove other terms */
+            PDSS->bch_det_0_ctrl[cport] &= ~ ( PDSS_BCH_DET_0_CTRL_VDM_SRC_EN |
+                                PDSS_BCH_DET_0_CTRL_VDP_SRC_EN);
+        break;
+            
+    }
+    return CCG_STAT_SUCCESS;
+}
+
+/* venkat 6Jul'22
+   TaskID - V-1-T314 - QC4.0 implementation,
+   Switch for user from PD mode to qc mode,if Qc mode we can switch for QC2.0 or Qc3.0 modes*/
+ccg_status_t grl_qc4_confighandler(uint8_t cport,uint8_t *lAppBuffer) 
+{
+    g_Struct_Ptr = (grl_Struct_t *)get_grl_struct_ptr();            
+    
+    switch(lAppBuffer[5])
+    {
+        case GRL_PD_MODE_SET://only PD,0x01
+        default:
+            /* Pranay,23Nov'22,DpDm terminations shall be removed 
+             * before disabling QC mode to make state machine to 
+             * default state so that DUT also considers that there is a detach 
+             */
+            chgb_remove_term(cport);
+            gRetryCount = 0;
+
+            g_Struct_Ptr->gCustomConfig.gReceivedSetPortRoleCmd = PRT_ROLE_SINK;
+            /* Pranay,23Nov'22, 
+            *  After removing terminations, it is taking 1.5Secs for terminations 
+            *  to be properly removed and for source to detect respective changes
+            *  (based on observation from scope captures with duracell DUT)
+            *  4.5sec Timer shall be started only if QC mode was enabled earlier 
+            *  else start 2ms timer just to detach and handle rest scenario as similar to SRC/DRP mode set
+            */
+            
+            if(g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag != GRL_PD_MODE_SET)
+                schedule_task(1500,GRL_PORT_DETACH);
+            else
+                schedule_task(2,GRL_PORT_DETACH);
+        break;
+            
+        case GRL_QC_MODE_SET://Only QC Enable,0x02
+            
+            /*   venkat 11Jul'2022,Detach task, 
+             *   Specifically used for QC mode change from PD mode 
+             *   where sink need to get detached in order to undergo BC enumeration sequence
+             *   where it is the first sequence in QC mode as per the spec
+             **/
+            g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag = lAppBuffer[6];
+            CableConnectionSimulation(GRL_CABLE_DETACH);
+            CyDelay(5);
+            SinkConfiguration();//Venkat,18Nov'22, Inorder to handle transiting from PD Src mode to QC Sink mode fist we need to change CCG3 mode to Sinkmode then only QC mode can be set
+            schedule_task(650,GRL_QC_ATTACH);
+            
+        break;
+ 
+    }
+    return CCG_STAT_SUCCESS; 
+}
 const grl_Struct_t * get_grl_struct_ptr()
 {
     return (&gStruct_t);

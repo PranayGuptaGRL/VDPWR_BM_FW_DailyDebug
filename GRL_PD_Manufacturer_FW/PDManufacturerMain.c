@@ -61,15 +61,21 @@
 //uint8_t gi2cTxBuf[BUF_SIZE_256BYTE] = {0};
 //uint8_t gtestDataBuf[BUF_SIZE_1K_BYTE] = {0};
 
-CyU3PThread     DataRxThread;           /*I2C thread*/
-CyU3PEvent      DataRxEvent;        /*I2C event for data transfer to CCG3PA*/
-CyU3PThread     TimerThread;           /*I2C thread*/
-CyU3PEvent      gTimerEvent;           /* Event group used to signal the application thread. */
+CyU3PThread     DataRxThread;           /**Data handling Thread*/
+CyU3PEvent      DataRxEvent;        /**I2C,RS485 event for data transfer*/
+CyU3PEvent      PdPowerEvent;        /**Event being used for Vbus and OCP events**/
+CyU3PEvent      pdssRxEvent;
 
-CyU3PThread     BulkLpAppThread;	 /* Bulk loop application thread structure */
-CyU3PEvent      glAppEvent;              /* Event group used to signal the application thread. */
-CyU3PEvent      gErrHandleEvent;         /* RS485 Recv Interrupt is received. */
-CyU3PDmaChannel glChHandleBulkLp;        /* DMA Channel handle */
+CyU3PThread     TimerThread;
+CyU3PEvent      gTimerEvent;           /** Event group used to signal the application thread. */
+
+CyU3PThread     pdPowerThread;	 		/** VBUS High/Low and OCP GPIO application thread structure */
+CyU3PEvent      glAppEvent;              /** Event group used to signal the application thread. */
+CyU3PEvent      gErrHandleEvent;         /** RS485 Recv Interrupt is received. */
+CyU3PDmaChannel glChHandleBulkLp;        /** DMA Channel handle */
+#ifdef PDSS_COMM_THREAD
+CyU3PThread     PdssCommThread;
+#endif/**PDSS_COMM_THREAD*/
 #ifdef IDLE_THREAD
 
 CyU3PThread		IdleThread;		/*Idle thread*/
@@ -86,6 +92,8 @@ CyBool_t glForceLinkU2      = CyFalse;   /* Whether the device should try to ini
 CyBool_t glLPMSupported      = CyTrue;   /* LPM is supported or not. */
 uint8_t glUSBTxnCnt = 0;
 CyBool_t gIsSuperSpeed      = CyFalse;   /* LPM is supported or not. */
+
+volatile CyBool_t gRs485EvtSetinRetry;//Pranay,If event is set as part of the retry mechanism, no need to again set in callback function
 
 CyU3PUsbEventType_t glAppLastEvent = CY_U3P_USB_EVENT_DISCONNECT;       /* Last USB event notification received. */
 
@@ -113,12 +121,13 @@ uint8_t gPPSi2cTxBuf[BUF_SIZE_16BYTE];
 uint8_t gPPSi2cRxBuf[BUF_SIZE_16BYTE];
 uint8_t gPPSFWBuf[BUF_SIZE_280BYTE];
 uint8_t gBattStatusBuf[32];
+uint8_t gSetModeBuf[BUF_SIZE_20BYTE];
 
 #ifdef DBGLOG
 uint8_t gDbgBuf1[BUF_SIZE_1K_BYTE];
 uint8_t gDbgBuf2[BUF_SIZE_128BYTE];
-uint8_t gDbgBuf1Index = 0;
-uint8_t gDbgBuf2Index = 0;
+uint16_t gDbgBuf1Index = 0;
+uint16_t gDbgBuf2Index = 0;
 #endif
 CyBool_t isWdTimerSet = CyFalse;
 
@@ -148,7 +157,7 @@ void DEBUG_LOG(uint8_t lDbg, uint8_t lStage, uint32_t lValue)
 		break;
 
 	case DBG2:
-		if((gDbgBuf2Index + 2) >= BUF_SIZE_64BYTE)
+		if((gDbgBuf2Index + 2) >= BUF_SIZE_128BYTE)
 			gDbgBuf2Index = 0;
 
 		gDbgBuf2[gDbgBuf2Index++] = lStage;
@@ -351,7 +360,7 @@ CyFxBulkLpApplnStart (
     /* Create a DMA Auto Channel between two sockets of the U port.
      * DMA size is set based on the USB speed. */
     dmaCfg.size = size;
-    dmaCfg.count = (usbSpeed == CY_U3P_SUPER_SPEED) ? CY_FX_BULKLP_DMA_BUF_COUNT : (2 * CY_FX_BULKLP_DMA_BUF_COUNT);
+    dmaCfg.count = (usbSpeed == CY_U3P_SUPER_SPEED) ? CY_FX_PDPWR_DMA_BUF_COUNT : (2 * CY_FX_PDPWR_DMA_BUF_COUNT);
     dmaCfg.prodSckId = CY_FX_EP_PRODUCER_SOCKET;
     dmaCfg.consSckId = CY_FX_EP_CONSUMER_SOCKET;
     dmaCfg.dmaMode = CY_U3P_DMA_MODE_BYTE;
@@ -386,7 +395,7 @@ CyFxBulkLpApplnStart (
     CyU3PUsbFlushEp(CY_FX_EP_CONSUMER);
 
     /* Set DMA Channel transfer size */
-    apiRetStatus = CyU3PDmaChannelSetXfer (&glChHandleBulkLp, CY_FX_BULKLP_DMA_TX_SIZE);
+    apiRetStatus = CyU3PDmaChannelSetXfer (&glChHandleBulkLp, CY_FX_PDPWR_DMA_TX_SIZE);
     if (apiRetStatus != CY_U3P_SUCCESS)
     {
         CyU3PDebugPrint (4, "CyU3PDmaChannelSetXfer Failed, Error code = %d\n", apiRetStatus);
@@ -540,7 +549,7 @@ CyFxBulkLpApplnUSBSetupCB (
      * This application does not support any class or vendor requests. */
 
     uint8_t  bRequest, bReqType,lTxIndex,lBuffer[16] = {0};
-    uint32_t lReadRegVal = 0;
+    uint32_t lReadRegVal = 0, eventFlag = 0;
     uint8_t  bType, bTarget;
     uint16_t wValue, wIndex, wLength;
     CyBool_t isHandled = CyFalse;
@@ -621,7 +630,7 @@ CyFxBulkLpApplnUSBSetupCB (
                     CyU3PUsbFlushEp (CY_FX_EP_CONSUMER);
                     CyU3PUsbResetEp (CY_FX_EP_PRODUCER);
                     CyU3PUsbResetEp (CY_FX_EP_CONSUMER);
-                    CyU3PDmaChannelSetXfer (&glChHandleBulkLp, CY_FX_BULKLP_DMA_TX_SIZE);
+                    CyU3PDmaChannelSetXfer (&glChHandleBulkLp, CY_FX_PDPWR_DMA_TX_SIZE);
                     CyU3PUsbStall (wIndex, CyFalse, CyTrue);
 
                     CyU3PUsbSetEpNak (CY_FX_EP_PRODUCER, CyFalse);
@@ -713,12 +722,12 @@ CyFxBulkLpApplnUSBSetupCB (
 
 				CyFxUsbI2cTransfer(0x01,TI_PPS_SLAVEADDR,10,gRS485RxBuf,READ);
 				CyU3PMemCopy(lBuffer,gRS485RxBuf,10);
-        		lRetStatus = CyU3PUsbSendEP0Data(BYTE_5,lBuffer);
+        		lRetStatus = CyU3PUsbSendEP0Data(10,lBuffer);
 
         		lRetStatus = CyTrue;
 
     			break;
-    		case 0x08:
+    		case 0x08://Get PPS whole data
         		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
 
     			GetPPSVbusValues();
@@ -727,7 +736,7 @@ CyFxBulkLpApplnUSBSetupCB (
 
 				lRetStatus = CyTrue;
     			break;
-    		case 0x09:
+    		case 0x09://Detach, Vbus drop
     			PpsVbusZeroIOHandler(wIndex);
     			break;
     		case 0x0A:
@@ -739,7 +748,14 @@ CyFxBulkLpApplnUSBSetupCB (
     			lBuffer[3] = gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PPSVbusCurrent;
 				lBuffer[4] = gFunctStruct_t->gFwHandle_t.gSystemInfo_t.PPSVbusCurrent >> 8;
     			lBuffer[5] = 0xBB;
-				lRetStatus = CyU3PUsbSendEP0Data(10,lBuffer);
+    			lBuffer[6] = (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EloadVbusVoltage);       //LSB
+    			lBuffer[7] = (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EloadVbusVoltage >> 8);  //MSB
+
+    			lBuffer[8] = (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EloadVbusCurrent);       //LSB
+    			lBuffer[9] = (gFunctStruct_t->gFwHandle_t.gSystemInfo_t.EloadVbusCurrent >> 8);  //MSB
+    			lBuffer[10] = 0xCC;
+
+				lRetStatus = CyU3PUsbSendEP0Data(11,lBuffer);
 
 				lRetStatus = CyTrue;
     			break;
@@ -750,11 +766,256 @@ CyFxBulkLpApplnUSBSetupCB (
     		break;
 
     	case 3:
+    		switch(wValue)
+			{
+    		case 0x00://CCg i2c data TF
+        		lRetStatus = CyTrue;
+        		//memset(gFunctStruct_t->gDataBuf_t.rs485RxBuf, 0x00,BUF_SIZE_256BYTE);
+        		lRetStatus = CyU3PUsbGetEP0Data(wLength, gRS485RxBuf, NULL);
+        		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType = GPIO21_RS485_IRQ;
+        		CcgI2cdataTransfer(gRS485RxBuf);
+    			break;
+    		//writing to different slaves can be done using this Function call alone ensure that API remains intact as per API sheeet
+    		case 0x01:
+        		lRetStatus = CyTrue;
+        		gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBCmdWriteFlag = CyTrue;
+        		//memset(gFunctStruct_t->gDataBuf_t.rs485RxBuf, 0x00,BUF_SIZE_256BYTE);
+        		lRetStatus = CyU3PUsbGetEP0Data(wLength, gRS485RxBuf, NULL);
 
-    		lRetStatus = CyU3PUsbGetEP0Data(BUF_SIZE_256BYTE, gRS485TxBuf,NULL);
-    		CyFxUsbI2cTransfer (1,CCG3PA_SLAVEADDR,8,gRS485TxBuf,WRITE);
+        		gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType = GPIO21_RS485_IRQ;
+        		DataHandler(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType);
+    //    		if((gFunctStruct_t->gDataBuf_t.rs485RxBuf[0] & Cmd_Get) == Cmd_Get)
+    //    			lRetStatus = CyU3PUsbSendEP0Data(gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gByteSize, gFunctStruct_t->gDataBuf_t.rs485RxBuf);
+        		gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBCmdWriteFlag = CyFalse;
+    			break;
+    		case 0x02:
+				memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+
+				GetPPSVbusValues();
+				CyU3PMemCopy(lBuffer,gRS485TxBuf,10);
+				lRetStatus = CyU3PUsbSendEP0Data(16,lBuffer);
+
+				lRetStatus = CyTrue;
+    			break;
+    		case 0x03:
+				memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+				lReadRegVal = 0;
+    			switch(wLength)
+    			{
+    			case 0x01:
+    				lReadRegVal = CyU3PThreadSuspend(&TimerThread);
+    				break;
+    			case 0x02:
+    				lReadRegVal= CyU3PThreadSuspend(&DataRxThread);
+    				break;
+    			case 0x03:
+    				lReadRegVal = CyU3PThreadSuspend(&pdPowerThread);
+    				break;
+    			case 0x04:
+    				lReadRegVal = CyU3PThreadResume(&TimerThread);
+    				break;
+    			case 0x05:
+    				lReadRegVal = CyU3PThreadResume(&DataRxThread);
+    				break;
+    			case 0x06:
+    				lReadRegVal = CyU3PThreadResume(&pdPowerThread);
+    				break;
+    			case 0x07:
+    				lReadRegVal = CyU3PThreadWaitAbort(&TimerThread);
+    				break;
+    			case 0x08:
+    				lReadRegVal = CyU3PThreadWaitAbort(&DataRxThread);
+    				break;
+    			case 0x09:
+    				lReadRegVal = CyU3PThreadWaitAbort(&pdPowerThread);
+    				break;
+    			case 0x0A:
+    				lReadRegVal = CyU3PEventGet (&DataRxEvent,
+    		                    (CY_FX_GPIOAPP_GPIO_HIGH_EVENT | CY_FX_GPIOAPP_GPIO_LOW_EVENT | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_1 | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_2),
+    		                    CYU3P_EVENT_OR_CLEAR, &eventFlag, CYU3P_WAIT_FOREVER);
+    				break;
+    			case 0x0B:
+    					tx_thread_resume(&DataRxThread);
+    				break;
+    			case 0x0C:
+    					tx_thread_resume(&pdPowerThread);
+    				break;
+    			}
+
+    			lBuffer[0] = 0xAA;
+    			lBuffer[1] = lReadRegVal;
+    			lBuffer[2] = lReadRegVal >> 8;
+    			lBuffer[3] = lReadRegVal >> 16;
+    			lBuffer[4] = lReadRegVal >> 24;
+    			lBuffer[5] = 0xAB;
+    			lBuffer[6] = eventFlag;
+				lBuffer[7] = eventFlag >> 8;
+				lBuffer[8] = eventFlag >> 16;
+				lBuffer[9] = eventFlag >> 24;
+    			lBuffer[10] = 0xAC;
+				lRetStatus = CyU3PUsbSendEP0Data(11,lBuffer);
+
+				lRetStatus = CyTrue;
+
+    			break;
+			case 0x04:
+    			switch(wLength)
+    			{
+
+    			case 0x01:
+    				CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_LOW_EVENT,CYU3P_EVENT_OR);
+    				break;
+    			case 0x02:
+    				CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_HIGH_EVENT,CYU3P_EVENT_OR);
+    				break;
+    			}
+				lRetStatus = CyTrue;
+				break;
+
+			case 0x05:
+				switch(wValue)
+				{
+				case 0x00://reading rs485 buffer data, that would've already been populated in gpiocb/ can also be used for reading get commands response from ccg3pa
+
+					lRetStatus = CyU3PUsbSendEP0Data( (gRS485RxBuf[1]+HEADER_BYTECOUNT), gRS485RxBuf);
+					lRetStatus = CyTrue;
+					break;
+
+				case 0x01:
+					lRetStatus = CyU3PUsbSendEP0Data( (gRS485RxBuf[1]+HEADER_BYTECOUNT), gRS485RxBuf);
+					lRetStatus = CyTrue;
+					gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType = GPIO21_RS485_IRQ;
+					CyU3PEventSet(&DataRxEvent, CY_FX_RS485_GPIO_LOW_EVT, CYU3P_EVENT_OR);
+					break;
+
+				case 0x02:
+					lRetStatus = CyU3PUsbSendEP0Data( (gRS485RxBuf[1]+HEADER_BYTECOUNT), gRS485RxBuf);
+					lRetStatus = CyTrue;
+					gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType = GPIO21_RS485_IRQ;
+	        		DataHandler(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType);
+					break;
+				case 0x03://Read the populated data from ccg3pa over i2c using threads
+					lRetStatus = CyU3PUsbSendEP0Data( (gI2CRxBuf[1]+HEADER_BYTECOUNT), gI2CRxBuf);
+					lRetStatus = CyTrue;
+					break;
+				}
+
+
+				break;
+
+			case 0x06:
+    			//FRAM data reading; Reading only function card serial number,board revision, FRAM revision
+        		memset(gI2CRxBuf, 0, BUF_SIZE_256BYTE);
+        		CyFxUsbI2cTransfer(0x00,FRAM_SLAVEADDR,20,gI2CRxBuf,READ);  // reading the Fram data
+        		lTxIndex = 0;
+        		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+        		memcpy(&lBuffer[lTxIndex],&gI2CRxBuf[8],BYTE_2);    //copy function card serial number.
+        		lBuffer[lTxIndex + 2] = gI2CRxBuf[10];              //copy function card board revision.
+        		lBuffer[lTxIndex + 3] = gI2CRxBuf[7];                //copy function card FRAM revision.
+        		lRetStatus = CyU3PUsbSendEP0Data(BYTE_7,lBuffer);            // send data to host control in endpoint.
+        		lRetStatus = CyTrue;
+
+        		break;
+    		case 0x07:
+    			//Reading from Eload
+    			CyFxUsbI2cTransfer(0x01,ELOAD_SLAVEADDR,17,greadConfigBuf,READ);//Only reading 17 bytes as said in API sheet
+        		lRetStatus = CyU3PUsbSendEP0Data(16,greadConfigBuf);            // send data to host control in endpoint.
+
+        		lRetStatus = CyTrue;
+
+    			break;
+    		case 0x08:
+    			//Reading from ccg3p
+    			CCG3PA_FWVersion_Fetch();
+
+        		lRetStatus = CyU3PUsbSendEP0Data(15,gI2CRxBuf);            // send data to host control in endpoint.
+
+        		lRetStatus = CyTrue;
+    			break;
+    		case 0x09:
+    			//Reading TC FW version
+    			FX3_FWVersion_Fetch();
+
+        		lRetStatus = CyU3PUsbSendEP0Data(15,gI2CRxBuf);            // send data to host control in endpoint.
+
+        		lRetStatus = CyTrue;
+    			break;
+    		case 0x0A:
+    			lBuffer[0] = 0xAA;
+    			lBuffer[1] = gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType;
+    			lBuffer[2] = 0xAB;
+
+    			lRetStatus = CyU3PUsbSendEP0Data(BYTE_7,lBuffer);            // send data to host control in endpoint.
+				lRetStatus = CyTrue;
+    			break;
+    		case 0x0B:
+    			lBuffer[0] = 0xAA;
+
+    			lReadRegVal = CyU3PDeviceGetDriverLoad();
+    			lBuffer[1] = lReadRegVal;
+    			lBuffer[2] = lReadRegVal >> 8;
+    			lBuffer[3] = lReadRegVal >> 16;
+    			lBuffer[4] = lReadRegVal >> 24;
+
+    			lBuffer[5] = 0xAB;
+
+    			lRetStatus = CyU3PUsbSendEP0Data(BYTE_7,lBuffer);            // send data to host control in endpoint.
+				lRetStatus = CyTrue;
+    			break;
+    		case 0x0C:
+
+    			lBuffer[0] = 0xAA;
+
+				lReadRegVal = CyU3PDeviceGetCpuLoad();
+				lBuffer[1] = lReadRegVal;
+				lBuffer[2] = lReadRegVal >> 8;
+				lBuffer[3] = lReadRegVal >> 16;
+				lBuffer[4] = lReadRegVal >> 24;
+
+				lBuffer[5] = 0xAB;
+
+				lRetStatus = CyU3PUsbSendEP0Data(BYTE_7,lBuffer);            // send data to host control in endpoint.
+				lRetStatus = CyTrue;
+    			break;
+    		case 0x0D:
+    			switch(wLength)
+				{
+    			case 0:
+    				lReadRegVal = CyU3PDeviceGetThreadLoad(&TimerThread);
+
+    				break;
+    			case 1:
+    				lReadRegVal = CyU3PDeviceGetThreadLoad(&DataRxThread);
+
+    				break;
+    			case 2:
+    				lReadRegVal = CyU3PDeviceGetThreadLoad(&pdPowerThread);
+
+    				break;
+    			case 3:
+    				lReadRegVal = DataRxThread.tx_thread_state ;
+
+    				break;
+    			case 4:
+    				lReadRegVal = pdPowerThread.tx_thread_state ;
+    				break;
+				}
+    			lBuffer[0] = 0xAA;
+				lBuffer[1] = lReadRegVal;
+				lBuffer[2] = lReadRegVal >> 8;
+				lBuffer[3] = lReadRegVal >> 16;
+				lBuffer[4] = lReadRegVal >> 24;
+				lBuffer[5] = 0xAB;
+
+				lRetStatus = CyU3PUsbSendEP0Data(BYTE_7,lBuffer);            // send data to host control in endpoint.
+				lRetStatus = CyTrue;
+    			break;
+    			default:
+    				break;
+			}
 
     		break;
+
     	case 4:  //Read SPI configuration register
     		switch(wValue)
     		{
@@ -858,38 +1119,23 @@ CyFxBulkLpApplnUSBSetupCB (
     		    lRetStatus = CyU3PUsbSendEP0Data(lTxIndex,lBuffer);
     			break;
     		default:
+    			lRetStatus = CyTrue;
 
     			break;
+
     		}
+
+    		lRetStatus = CyTrue;
     		break;
+		case 5:
 
-    	case 5:  // get Test card ID
 
-//    		lRetStatus = CyU3PUsbGetEP0Data(BUF_SIZE_256BYTE, gFunctStruct_t->gDataBuf_t.rs485TxBuf,NULL);
-    		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+			lRetStatus = CyTrue;
+			break;
+		case 6:
 
-    		lBuffer[0] = gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gSystemID;  // copy card ID to TX buffer.
-    		lRetStatus = CyU3PUsbSendEP0Data(BYTE_8,lBuffer);  // send data to host control in endpoint.
-//    		memset(gRS485TxBuf, 0, BUF_SIZE_256BYTE); // after sending data to host clear the buffer.
-
-    		break;
-
-    	case 6: // Get test card number (From Fram)
-
-    		//lRetStatus = CyU3PUsbGetEP0Data(BUF_SIZE_256BYTE, gRS485TxBuf,NULL);
-
-    		memset(gI2CRxBuf, 0, BUF_SIZE_256BYTE);
-    		CyFxUsbI2cTransfer(0x00,FRAM_SLAVEADDR,20,gI2CRxBuf,READ);  // reading the Fram data
-
-    		lTxIndex = 0;
-    		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
-    		memcpy(&lBuffer[lTxIndex],&gI2CRxBuf[8],BYTE_2);    //copy function card serial number.
-    		lBuffer[lTxIndex + 2] = gI2CRxBuf[10];              //copy function card board revision.
-    		lBuffer[lTxIndex + 3] = gI2CRxBuf[7];                //copy function card FRAM revision.
-    		lRetStatus = CyU3PUsbSendEP0Data(BYTE_7,lBuffer);            // send data to host control in endpoint.
-
-    		break;
-
+			lRetStatus = CyTrue;
+			break;
     	case 7:   // Device reset & Interrupt configuration
 			switch(wValue)
 			{
@@ -910,62 +1156,31 @@ CyFxBulkLpApplnUSBSetupCB (
 					CyU3PConnectState (CyFalse, CyTrue);    // USB disconnect
 					CyU3PDeviceReset(CyFalse); // soft reset
 					break;
+				case 0x05:// SPI init
+		    		CyFxSpiInit (1);
+					break;
+				case 0x06:// SPI de-init
+		    		CyU3PSpiDeInit();
+					break;
+				case 0x07:// RS485 initialization
+		        	RS485DeviceInit();
+					break;
+				case 0x08:// RS485 TX disable
+		        	RS485WriteDataDriverDisable();
+					break;
+				case 0x09:
+					gFunctStruct_t->gFwHandle_t.gSystemConfig_t.gRS485ByteCount = RS485_DATA_MAX_COUNT;
+					gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount = 0;
+					break;
+				case 0x0A:
+					break;
 				default:
+					lRetStatus = CyTrue;
 
 					break;
 			}
+			lRetStatus = CyTrue;
 			break;
-
-    	case 8:  // loopback status & speed.
-
-    		lTxIndex = 0;
-    		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
-    		lBuffer[1] = gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBSpeed;
-    		lBuffer[2] = gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBStatus;
-    		lRetStatus = CyU3PUsbSendEP0Data(BYTE_5,lBuffer);
-
-    		break;
-    	case 9:      // LPM enable
-
-    		MainLinkCommIndicationHandle(1); // Turn on the DataEnumeration LED
-    		DataErrorLEDIndicator(0);       // Turn off the Data error LED
-            CyU3PUsbLPMEnable();            //
-            glLPMSupported = CyTrue;
-
-    		break;
-
-    	case 0x0A:  // SPI init
-
-    		CyFxSpiInit (1);
-
-    		break;
-
-    	case 0x0B:  // Read Intrcount & Bytecount
-    		lTxIndex = 0;
-    		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
-
-    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount);      // LSB
-    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount >> 8); // MSB
-    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemConfig_t.gRS485ByteCount);       //LSB
-    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemConfig_t.gRS485ByteCount >> 8);  //MSB
-    		lRetStatus = CyU3PUsbSendEP0Data(lTxIndex,lBuffer);
-
-    		break;
-
-    	case 0x0C:   // SPI de-init
-
-    		CyU3PSpiDeInit();
-
-    		break;
-
-        case 0x0D:  // RS485 TX disable
-        	RS485WriteDataDriverDisable();
-        	break;
-
-        case 0x0E:  // RS485 initialization
-        	RS485DeviceInit();
-        	break;
-
         case 0x0F:  // Interrupt count disable
     		switch(wValue)
     		{
@@ -1005,27 +1220,33 @@ CyFxBulkLpApplnUSBSetupCB (
 
     				break;
 
-    			case 0x08: // Clear Interrupt count
+    			case 0x03: // Clear Interrupt count
     		    	gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount = 0;
 
     				break;
 
-    			case 0x0A: //Error buffer read
+    			case 0x04: //Error buffer read
 #ifdef DBGLOG
 
-    	    		CyU3PUsbSendEP0Data(BUF_SIZE_64BYTE,&gDbgBuf1[wIndex]);
+    	    		CyU3PUsbSendEP0Data(BUF_SIZE_128BYTE,&gDbgBuf1[wIndex]);
 #endif
     				break;
-    			case 0x0B: //Reset error buffer
+    			case 0x05: //Reset error buffer
     				DebuglogInit();
-
     				break;
-    			case 0xB1:
-    	    		CyU3PUsbSendEP0Data(BUF_SIZE_128BYTE,&gDbgBuf2[0]);
-
-    				break;
-
     			case 0x0C:
+    				gDbgBuf1Index = 0;
+    				memset(gDbgBuf1, 0, BUF_SIZE_1K_BYTE);
+    				break;
+    			case 0x0D:
+    				gDbgBuf2Index = 0;
+    				memset(gDbgBuf2, 0, BUF_SIZE_128BYTE);
+    				break;
+    			case 0x6:
+    	    		CyU3PUsbSendEP0Data(BUF_SIZE_128BYTE,&gDbgBuf2[0]);
+    				break;
+
+    			case 0x07:
     	    		lTxIndex = 0;
 					memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
 
@@ -1037,7 +1258,7 @@ CyFxBulkLpApplnUSBSetupCB (
 
     				break;
 
-    			case 0xF1:  //Physical & Link error count read
+    			case 0x8:  //Physical & Link error count read
     	    		lTxIndex = 0;
     	    		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
 
@@ -1059,32 +1280,81 @@ CyFxBulkLpApplnUSBSetupCB (
     	    		lRetStatus = CyU3PUsbSendEP0Data(lTxIndex,lBuffer);
 
     				break;
+    			case 0x09:
+    	    		lTxIndex = 0;
+    	    		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+
+    	    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount);      // LSB
+    	    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemControl_t.gRS485RxIntrCount >> 8); // MSB
+    	    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemConfig_t.gRS485ByteCount);       //LSB
+    	    		lBuffer[lTxIndex++] = (gFunctStruct_t->gFwHandle_t.gSystemConfig_t.gRS485ByteCount >> 8);  //MSB
+    	    		lRetStatus = CyU3PUsbSendEP0Data(lTxIndex,lBuffer);
+    				break;
+    			case 0x0A:
+    	    		MainLinkCommIndicationHandle(1); // Turn on the DataEnumeration LED
+    	    		DataErrorLEDIndicator(0);       // Turn off the Data error LED
+    	            CyU3PUsbLPMEnable();            //
+    	            glLPMSupported = CyTrue;
+    				break;
+    			case 0x0B:
+
+    	    		lTxIndex = 0;
+    	    		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+    	    		lBuffer[1] = gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBSpeed;
+    	    		lBuffer[2] = gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBStatus;
+    	    		lRetStatus = CyU3PUsbSendEP0Data(BYTE_5,lBuffer);
+    				break;
     			default:
 
     				break;
     		}
+			lRetStatus = CyTrue;
         	break;
-        	case 0xF1:/**Write*/
-        		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+		case 0xF1:/**Write*/
+			memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
 
-        		lRetStatus = CyU3PUsbGetEP0Data(wLength, lBuffer, NULL);
+			lRetStatus = CyU3PUsbGetEP0Data(wLength, lBuffer, NULL);
 
-    			CyFxUsbI2cTransfer(0x01,CLK_PROG_SLAVE_ADDR, 4, lBuffer,WRITE);
+			CyFxUsbI2cTransfer(0x01,CLK_PROG_SLAVE_ADDR, 4, lBuffer,WRITE);
+			lRetStatus = CyTrue;
 
-        		break;
-        	case 0xF2:/**read*/
-        		memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+			break;
+		case 0xF2:/**read*/
+			memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
 
-        		lRetStatus = CyU3PUsbGetEP0Data(wLength, lBuffer, NULL);
+			lRetStatus = CyU3PUsbGetEP0Data(wLength, lBuffer, NULL);
 
-    			CyFxUsbI2cTransfer(lBuffer[0],CLK_PROG_SLAVE_ADDR,1,lBuffer,WRITE);
+			CyFxUsbI2cTransfer(lBuffer[0],CLK_PROG_SLAVE_ADDR,1,lBuffer,WRITE);
 
-    			CyFxUsbI2cTransfer(lBuffer[0],CLK_PROG_SLAVE_ADDR,1,lBuffer,READ);
+			CyFxUsbI2cTransfer(lBuffer[0],CLK_PROG_SLAVE_ADDR,1,lBuffer,READ);
 
-        		lRetStatus = CyU3PUsbSendEP0Data(BYTE_8,lBuffer);  // send data to host control in endpoint.
+			lRetStatus = CyU3PUsbSendEP0Data(BYTE_8,lBuffer);  // send data to host control in endpoint.
+			lRetStatus = CyTrue;
 
-        		break;
-            default:
+			break;
+		case 0xF3:
+
+
+			break;
+		case 0xF4:
+			memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+
+			lRetStatus = CyU3PUsbGetEP0Data(wLength, lBuffer, NULL);
+
+			CyFxUsbI2cTransfer(lBuffer[0],0x50,1,lBuffer,WRITE);
+			lRetStatus = CyTrue;
+
+			break;
+		case 0xF5:
+			memset(lBuffer, 0, BYTE_16);   // clear the local buffer.
+
+				lRetStatus = CyU3PUsbGetEP0Data(wLength, lBuffer, NULL);
+
+				CyFxUsbI2cTransfer(lBuffer[0],0xA0,wLength,lBuffer,WRITE);
+				lRetStatus = CyTrue;
+
+			break;
+		default:
                 /* This is unknown request. */
                 isHandled = CyFalse;
                 break;
@@ -1275,7 +1545,11 @@ void MsgTimerHandling3 (uint32_t arg)
 	CyU3PEventSet(&gTimerEvent, CY_FX_GPIOAPP_GPIO_HIGH_EVENT_2,
 			CYU3P_EVENT_OR);
 }
-
+void MsgTimerHandling4 (uint32_t arg)
+{
+	CyU3PEventSet(&gTimerEvent, CY_FX_GPIOAPP_GPIO_HIGH_EVENT_3,
+			CYU3P_EVENT_OR);
+}
 /**
  * Function to invoke the thread if there is RS485 error
  * @author Harsha
@@ -1299,13 +1573,14 @@ void RS485ErrHandler()
 #endif
 }
 
+
 void SPIDataReadErrorHandler()
 {
 	gFunctStruct_t = (gFunctStruct *)GetStructPtr();
 	uint8_t readBuffer[8] = {0};
+	gRs485EvtSetinRetry = CyFalse;
 //	DEBUG_LOG(DBG1, 0xEA, 0);
 
-	CyBool_t lRs485EvtSet = CyFalse;
 
 	SPI->lpp_spi_config &= ~CY_U3P_LPP_SPI_SSN_BIT;	//Set SS Line Low
 	readBuffer[0] = RS485_READ_DATA;
@@ -1313,10 +1588,14 @@ void SPIDataReadErrorHandler()
 	SPI->lpp_spi_config |= CY_U3P_LPP_SPI_SSN_BIT;	//Set SS Line High
 
 	if(readBuffer[0] != 0)
-		lRs485EvtSet = RS485DataRecvIntrHandle(readBuffer);
-	if(lRs485EvtSet)
+		gRs485EvtSetinRetry = RS485DataRecvIntrHandle(readBuffer);
+	if(gRs485EvtSetinRetry)
+	{
+		DEBUG_LOG(DBG2, 0xE2, 0);
 		CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_LOW_EVENT,
 						CYU3P_EVENT_OR);
+	}
+
 }
 
 /* GPIO interrupt callback handler. This is received from
@@ -1329,8 +1608,9 @@ void CyFxGpioIntrCb (
 {
 //	CyBool_t RetVal = CyTrue;
 	gFunctStruct_t = (gFunctStruct *)GetStructPtr();
-
-	CyBool_t gpioValue = CyFalse, lSetEvent = CyFalse;
+	gRs485EvtSetinRetry = CyFalse;
+	CyBool_t gpioValue = CyFalse;
+	volatile CyBool_t lSetEvent = CyFalse;
     CyU3PReturnStatus_t apiRetStatus = CY_U3P_SUCCESS;
 
     uint8_t readBuffer[8] = {0};
@@ -1338,16 +1618,16 @@ void CyFxGpioIntrCb (
     /* Get the status of the pin */
     gpioValue = (CyBool_t)((GPIO->lpp_gpio_simple[gpioId] & CY_U3P_LPP_GPIO_IN_VALUE) >> 1);
     gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType = gpioId;
+	DEBUG_LOG(DBG1, 0xD1, gpioId);
+	DEBUG_LOG(DBG1, 0xD2, gpioValue);
 
-	if (!gpioValue)
+	if (!gpioValue)//GPIO LOW interrupt
 	{
 		switch(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType)
 		{
 		case GPIO0_INT_TO_FX3:		/*Interrupt received from the PD Subsystem Need to get the data over I2C from PDSS*/
 
-			lSetEvent = CyTrue;
-//			CyU3PEventSet(&glFxGpioAppEvent, CY_FX_GPIOAPP_GPIO_LOW_EVENT,
-//							CYU3P_EVENT_OR);
+			CyU3PEventSet( &pdssRxEvent, CY_FX_PDSS_GPIO_LOW_EVT, CYU3P_EVENT_OR);//PDSS interrupt received
 
 			break;
 
@@ -1362,32 +1642,36 @@ void CyFxGpioIntrCb (
 				lSetEvent = RS485DataRecvIntrHandle(readBuffer);
 
 			break;
+
 		case GPIO44_VBUS_VBUS_DETECT:
-//			VBUSDetection_Handler(0);/**Handling the Vbus removed interrupt */
-//			CyU3PEventSet (&glAppEvent, CYFX_APP_VBUS_RMVD_TASK, CYU3P_EVENT_OR);
-			CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_LOW_EVENT,CYU3P_EVENT_OR);
-//			lSetEvent = CyTrue;
+			//Pranay,15'Nov'22,setting respective events for respective gpio interrupts
+			CyU3PEventSet( &PdPowerEvent, CY_FX_VBUS_LOW_EVENT, CYU3P_EVENT_OR);//Vbus Detach HW interrupt received, so setting respective event
+
+			break;
+		case GPIO34_PPS_GPIO2:
+			//Pranay,15'Nov'22,setting respective events for respective gpio interrupts from PPS
+			CyU3PEventSet( &PdPowerEvent, CY_FX_OCP_GPIO_LOW_EVENT, CYU3P_EVENT_OR);//Vbus Detach HW interrupt received, so setting respective event
+
 			break;
 		default:
 
 			break;
 		}
 
-		if(lSetEvent)
+		if(lSetEvent && (!gRs485EvtSetinRetry))//Pranay,26Oct'22, If event is set while in debug then dont set again after that
 		{
-			CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_LOW_EVENT,
+			CyU3PEventSet(&DataRxEvent, CY_FX_RS485_GPIO_LOW_EVT,
 						CYU3P_EVENT_OR);
 		}
 	}
-	else
+	else//GPIO HIGH Interrupt
 	{
 		switch(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType)
 		{
 		case GPIO0_INT_TO_FX3:		/*Interrupt received from the PD Subsystem Need to get the data over I2C from PDSS*/
 
-			lSetEvent = CyTrue;
-			CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_LOW_EVENT,
-						CYU3P_EVENT_OR);
+			CyU3PEventSet( &pdssRxEvent, CY_FX_PDSS_GPIO_LOW_EVT, CYU3P_EVENT_OR);//PDSS Interrrupt received
+
 			break;
 		case GPIO21_RS485_IRQ:		/*Interrupt received from the RS485 block, get the data over SPI*/
 
@@ -1400,33 +1684,66 @@ void CyFxGpioIntrCb (
 				lSetEvent = RS485DataRecvIntrHandle(readBuffer);
 
 			break;
+
 		case GPIO44_VBUS_VBUS_DETECT:
-//				apiRetStatus = CyU3PConnectState(CyTrue, CyTrue);
-//				VBUSDetection_Handler(1); /**Handling the Vbus attached interrupt here*/
-//				CyU3PEventSet (&glAppEvent, CYFX_APP_VBUS_CONNECT_TASK, CYU3P_EVENT_OR);
-				CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_HIGH_EVENT,CYU3P_EVENT_OR);
+			//Pranay,15'Nov'22,setting respective events for respective gpio interrupts
+			CyU3PEventSet( &PdPowerEvent, CY_FX_VBUS_HIGH_EVENT, CYU3P_EVENT_OR);//Vbus Attach HW interrupt received, so setting respective event
+
 			break;
 		default:
+
 			break;
 		}
-		if(lSetEvent)
+
+		if(lSetEvent && (!gRs485EvtSetinRetry))//Pranay,26Oct'22, If event is set while in debug then dont set again after that
 		{
-			CyU3PEventSet(&DataRxEvent, CY_FX_GPIOAPP_GPIO_LOW_EVENT,
+			CyU3PEventSet(&DataRxEvent, CY_FX_RS485_GPIO_LOW_EVT,
 						CYU3P_EVENT_OR);
 		}
 	}
 }
 
+#ifdef PDSS_COMM_THREAD
 /* Entry function for the BulkLpAppThread. */
 CyU3PReturnStatus_t
-BulkLpAppThread_Entry (
+PdssCommAppThread_Entry (
+        uint32_t input)
+{
+    CyU3PReturnStatus_t status = CY_U3P_SUCCESS;
+    uint32_t eventFlag;
+    for (;;)
+    {
+	//Pranay,15Nov'22,Handling only Rs485Data rx and I2C data rx events in this thread
+        status = CyU3PEventGet (&pdssRxEvent,
+                    (CY_FX_PDSS_GPIO_LOW_EVT ), CYU3P_EVENT_OR_CLEAR, &eventFlag, CYU3P_WAIT_FOREVER);
+            if (status == CY_U3P_SUCCESS)
+            {
+            	gFunctStruct_t = (gFunctStruct *)GetStructPtr();
+            	if(eventFlag & CY_FX_PDSS_GPIO_LOW_EVT)
+            	{
+            		CcgI2cdataTransfer(gRS485RxBuf);
+            	}
+            }
+    }
+
+handle_error:
+    CyU3PDebugPrint (4, "%x: Application failed to initialize. Error code: %d.\n", status);
+    while (1);
+
+
+}
+
+#endif /**PDSS_COMM_THREAD**/
+/* Entry function for the BulkLpAppThread. */
+CyU3PReturnStatus_t
+pdPowerThread_Entry (
         uint32_t input)
 {
 	CyBool_t lSetEvent = CyFalse;
     CyU3PReturnStatus_t status = CY_U3P_SUCCESS;
     uint32_t eventFlag;
-    uint8_t readBuffer[8] = {0};
-	uint32_t RxMsgQueue[10];
+//    uint8_t readBuffer[8] = {0};
+//	uint32_t RxMsgQueue[10];
 
     /* Initialize the debug module */
     CyFxBulkLpApplnDebugInit();
@@ -1454,21 +1771,6 @@ BulkLpAppThread_Entry (
 
     /* Initialize the bulk loop application */
     CyU3PBusyWait (10000);
-
-//	CyU3PBusyWait (50000);
-//	CyU3PBusyWait (50000);
-//
-//	CyU3PBusyWait (50000);
-//	CyU3PBusyWait (50000);
-//
-//	CyU3PBusyWait (50000);
-//	CyU3PBusyWait (50000);
-//
-//	CyU3PBusyWait (50000);
-//	CyU3PBusyWait (50000);
-//
-//	CyU3PBusyWait (50000);
-//	CyU3PBusyWait (50000);
 
 #if 0
 	InitFWConfigControl();	/** Initiating FW Default values to GPIO/Switches */
@@ -1508,6 +1810,55 @@ BulkLpAppThread_Entry (
 #ifdef ERR_QUEUE
     for (;;)
     {
+        status = CyU3PEventGet (&PdPowerEvent,
+                    (CY_FX_OCP_GPIO_LOW_EVENT | CY_FX_VBUS_HIGH_EVENT | CY_FX_VBUS_LOW_EVENT), CYU3P_EVENT_OR_CLEAR, &eventFlag, CYU3P_WAIT_FOREVER);
+        if (status == CY_U3P_SUCCESS)
+        {
+        	gFunctStruct_t = (gFunctStruct *)GetStructPtr();
+
+        	if(eventFlag & CY_FX_OCP_GPIO_LOW_EVENT)//OCP event received so initiating Hard reset
+        	{
+        		InitOCPHardreset();
+        	}
+        	else if(eventFlag & CY_FX_VBUS_HIGH_EVENT)
+        	{
+				VBUSDetection_Handler(1); /**Handling the Vbus attached interrupt here*/
+
+				if(gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBConnectTimer)
+				{
+					MsgTimerStart(Timer4_Connect_State,TIMER4);
+				}
+				else
+				{
+		    		if(gFunctStruct_t->gPDCStatus.gPDCStatus_t.gcur_port_role == PRT_ROLE_SINK)//Pranay,22Dec'22,Only enumerate when we're acting as a device
+						CyU3PConnectState(CyTrue, CyTrue);//Connecting data lines
+				}
+        	}
+        	else if(eventFlag & CY_FX_VBUS_LOW_EVENT)
+        	{
+      			gFunctStruct_t->gPDCStatus.gPDCStatus_t.PDCStatus = CyFalse;
+				gFunctStruct_t->gPDCStatus.gPDCStatus_t.IsPDCdone = CyFalse;
+				if (glIsApplnActive)
+				{
+					CyFxBulkLpApplnStop ();
+				}
+				if(!glLPMSupported)
+				{
+					CyU3PUsbLPMEnable();
+					glLPMSupported = CyTrue;
+				}
+
+				CyU3PConnectState(CyFalse, CyTrue);
+				glUSBTxnCnt = 0;
+				USBFailSafeCondition();
+				DEBUG_LOG(DBG1, 0xD3, 0);
+        	}
+        }
+
+
+
+
+#if 0
     	status = CyU3PQueueReceive(&gEvtQueue, RxMsgQueue, CYU3P_WAIT_FOREVER);
         if(status == CY_U3P_SUCCESS)
         {
@@ -1525,6 +1876,7 @@ BulkLpAppThread_Entry (
 //        	DEBUG_LOG(DBG1, 0xE4, status);
         	/* Mutex Get Failed*/
         }
+#endif
     }
 
 //handle_error:
@@ -1641,51 +1993,18 @@ DataRxHandlerThread_Entry (
 {
     CyU3PReturnStatus_t status = CY_U3P_SUCCESS;
     uint32_t eventFlag;
-    CyU3PThreadSleep (100);
+//    CyU3PThreadSleep (100);
     for (;;)
     {
+	//Pranay,15Nov'22,Handling only Rs485Data rx and I2C data rx events in this thread
         status = CyU3PEventGet (&DataRxEvent,
-                    (CY_FX_GPIOAPP_GPIO_HIGH_EVENT | CY_FX_GPIOAPP_GPIO_LOW_EVENT | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_1 | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_2),
-                    CYU3P_EVENT_OR_CLEAR, &eventFlag, CYU3P_WAIT_FOREVER);
+                    (CY_FX_RS485_GPIO_LOW_EVT), CYU3P_EVENT_OR_CLEAR, &eventFlag, CYU3P_WAIT_FOREVER);
             if (status == CY_U3P_SUCCESS)
             {
             	gFunctStruct_t = (gFunctStruct *)GetStructPtr();
-            	if(eventFlag & CY_FX_GPIOAPP_GPIO_LOW_EVENT)
+            	if(eventFlag & CY_FX_RS485_GPIO_LOW_EVT)
             	{
-            		if(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType == GPIO44_VBUS_VBUS_DETECT)
-            		{
-            			gFunctStruct_t->gPDCStatus.gPDCStatus_t.PDCStatus = CyFalse;
-            			gFunctStruct_t->gPDCStatus.gPDCStatus_t.IsPDCdone = CyFalse;
-                        if (glIsApplnActive)
-                        {
-                            CyFxBulkLpApplnStop ();
-                        }
-                        if(!glLPMSupported)
-                        {
-                			CyU3PUsbLPMEnable();
-                			glLPMSupported = CyTrue;
-                        }
-
-                        CyU3PConnectState(CyFalse, CyTrue);
-            			glUSBTxnCnt = 0;
-            			USBFailSafeCondition();
-            		}
-            		else
-            		{
-            			DataHandler(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType);
-            		}
-            	}
-            	else if(eventFlag & CY_FX_GPIOAPP_GPIO_HIGH_EVENT)
-            	{
-            		if(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType == GPIO44_VBUS_VBUS_DETECT)
-            			{
-							VBUSDetection_Handler(1); /**Handling the Vbus attached interrupt here*/
-
-							if(gFunctStruct_t->gFwHandle_t.gSUSBControl_t.gUSBConnectTimer)
-								MsgTimerStart(Timer_Connect_State,TIMER0);
-							else
-								CyU3PConnectState(CyTrue, CyTrue);//Connecting data lines
-            			}
+            		DataHandler(gFunctStruct_t->gFwHandle_t.gSystemInfo_t.gEventType);
             	}
             }
     }
@@ -1726,7 +2045,7 @@ TimerHandlerThread_Entry (
    for (;;)
    {
        status = CyU3PEventGet (&gTimerEvent,
-               (CY_FX_GPIOAPP_GPIO_HIGH_EVENT | CY_FX_GPIOAPP_GPIO_LOW_EVENT | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_1 | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_2),
+               (CY_FX_GPIOAPP_GPIO_HIGH_EVENT | CY_FX_GPIOAPP_GPIO_LOW_EVENT | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_1 | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_2 | CY_FX_GPIOAPP_GPIO_HIGH_EVENT_3),
                CYU3P_EVENT_OR_CLEAR, &eventFlag, CYU3P_WAIT_FOREVER);
        if (status == CY_U3P_SUCCESS)
        {
@@ -1746,6 +2065,10 @@ TimerHandlerThread_Entry (
 			{
 				MsgTimer3ExpiredHandle (NULL);
 			}
+			else if(eventFlag & CY_FX_GPIOAPP_GPIO_HIGH_EVENT_3)//Pranay,15NOv'22,Timer 4 handling for USB connect events 
+			{
+				MsgTimer4ExpiredHandle (NULL);
+			}
        }
    }
 
@@ -1764,6 +2087,7 @@ CyFxApplicationDefine (
     void *ptr_i2c=NULL;
     void *ptr_timer=NULL;
     void *ptr_Queue = NULL;
+    void *ptr_pdss = NULL;
 #ifdef IDLE_THREAD
     void *ptr_idle = NULL;
 #endif
@@ -1771,17 +2095,17 @@ CyFxApplicationDefine (
     uint32_t ret = CY_U3P_SUCCESS;
 
     /* Allocate the memory for the threads */
-    ptr = CyU3PMemAlloc (CY_FX_BULKLP_THREAD_STACK);
+    ptr = CyU3PMemAlloc (CY_FX_PDPWR_THREAD_STACK);
 
     /* Create the thread for the application */
-    ret = CyU3PThreadCreate (&BulkLpAppThread,           /* Bulk loop App Thread structure */
+    ret = CyU3PThreadCreate (&pdPowerThread,           /* Bulk loop App Thread structure */
                           "21:Bulk_loop_AUTO",                     /* Thread ID and Thread name */
-                          BulkLpAppThread_Entry,                   /* Bulk loop App Thread Entry function */
+                          pdPowerThread_Entry,                   /* Bulk loop App Thread Entry function */
                           0,                                       /* No input parameter to thread */
                           ptr,                                     /* Pointer to the allocated thread stack */
-                          CY_FX_BULKLP_THREAD_STACK,               /* Bulk loop App Thread stack size */
-                          CY_FX_BULKLP_THREAD_PRIORITY,            /* Bulk loop App Thread priority */
-                          CY_FX_BULKLP_THREAD_PRIORITY,            /* Bulk loop App Thread priority */
+                          CY_FX_PDPWR_THREAD_STACK,               /* Bulk loop App Thread stack size */
+                          CY_FX_PDPWR_THREAD_PRIORITY,            /* Bulk loop App Thread priority */
+                          CY_FX_PDPWR_THREAD_PRIORITY,            /* Bulk loop App Thread priority */
                           CYU3P_NO_TIME_SLICE,                     /* No time slice for the application thread */
                           CYU3P_AUTO_START                         /* Start the Thread immediately */
                           );
@@ -1841,6 +2165,25 @@ CyFxApplicationDefine (
 
     /*I2C event for data transfer*/
     ret = CyU3PEventCreate (&DataRxEvent);
+    if (ret != 0)
+    {
+        /* Creation of event group failed. Loop indefinitely because the application
+           cannot function normally.
+         */
+        while (1);
+    }
+
+    ret = CyU3PEventCreate (&pdssRxEvent);
+    if (ret != 0)
+    {
+        /* Creation of event group failed. Loop indefinitely because the application
+           cannot function normally.
+         */
+        while (1);
+    }
+
+    /**Pranay, 15Nov'22, Evetn for handling PD power events such as Vbus attach/detach and OCP events*/
+    ret = CyU3PEventCreate (&PdPowerEvent);
     if (ret != 0)
     {
         /* Creation of event group failed. Loop indefinitely because the application
@@ -1917,6 +2260,15 @@ CyFxApplicationDefine (
     {
     	while(1);
     }
+#ifdef TIMER_THREAD
+    ret = CyU3PTimerCreate (&gMsgTimer4, MsgTimerHandling4, 0, DEFAULT_TIMER_VALUE, 0, CYU3P_NO_ACTIVATE);
+#else
+    ret = CyU3PTimerCreate (&gMsgTimer1, MsgTimer1ExpiredHandle, 0, DEFAULT_TIMER_VALUE, 0, CYU3P_NO_ACTIVATE);
+#endif
+    if (ret != 0)
+    {
+    	while(1);
+    }
 #ifdef ERR_QUEUE
     ptr_Queue = CyU3PMemAlloc (CY_FX_DATA_QUEUE_SIZE);
 
@@ -1927,6 +2279,42 @@ CyFxApplicationDefine (
     }
 #endif
 
+    /* Pranay,15Nov'22,Create the mutex object for handling I2C data. */
+    ret = CyU3PMutexCreate (&I2CBusHandlingMutex, CYU3P_NO_INHERIT);
+     if (ret != 0)
+     {
+     	while(1);
+     }
+
+#ifdef PDSS_COMM_THREAD
+     /* Allocate the memory for the threads */
+     ptr_pdss = CyU3PMemAlloc (CY_FX_PDSS_COMM_THREAD_STACK);
+
+     /* Create the thread for the application */
+     ret = CyU3PThreadCreate (&PdssCommThread,           /* Bulk loop App Thread structure */
+                           "22:PDSS_COMM_AUTO",                     /* Thread ID and Thread name */
+                           PdssCommAppThread_Entry,                   /* Bulk loop App Thread Entry function */
+                           0,                                       /* No input parameter to thread */
+                           ptr_pdss,                                     /* Pointer to the allocated thread stack */
+                           CY_FX_PDSS_COMM_THREAD_STACK,               /* Bulk loop App Thread stack size */
+                           CY_FX_PDSS_COMM_THREAD_PRIORITY,            /* Bulk loop App Thread priority */
+                           CY_FX_PDSS_COMM_THREAD_PRIORITY,            /* Bulk loop App Thread priority */
+                           CYU3P_NO_TIME_SLICE,                     /* No time slice for the application thread */
+                           CYU3P_AUTO_START                         /* Start the Thread immediately */
+                           );
+
+     /* Check the return code */
+     if (ret != 0)
+     {
+         /* Thread Creation failed with the error code ret */
+
+         /* Add custom recovery or debug actions here */
+
+         /* Application cannot continue */
+         /* Loop indefinitely */
+         while (1);
+     }
+#endif/**PDSS_COMM_THREAD*/
 #ifdef IDLE_THREAD
     ptr_idle = CyU3PMemAlloc (CY_FX_IDLE_THREAD_STACK);
     ret = CyU3PThreadCreate ( &IdleThread,           /* Bulk loop App Thread structure */

@@ -55,7 +55,7 @@
 #include <system.h>
 #include <app.h>
 #include <srom_vars.h>
-
+#include <grlapp.h>
 /**
  * Type C voltage thresholds (in mV) as per Section 4.11.3 of Type C
  * specification Rev1.
@@ -181,6 +181,10 @@ static uint8_t  gl_ccgx_cfet_on[NO_OF_TYPEC_PORTS] = {false};
 #define LSCSA_CF_CUR_HIGH_LIMIT      (300)
 #define LSCSA_CF_CUR_HIGH_THRES      (10)
 
+/*QC related declerations*/
+uint16_t gQCPrVBUS;
+#define PULSE_VOLTAGE           (0xC8)   /*QC3.0 pulse voltage increment*/
+#define TEST_pulse              (0x1900)
 #if VBUS_OCP_ENABLE
 
 /* VBus OCP mode. */
@@ -343,7 +347,8 @@ typedef struct
      * Read memory location where the HAL should read the next portion of data from.
      */
     uint8_t volatile rx_read_location;
-
+/** BC phy callback. */
+bc_phy_cbk_t bc_phy_cbk;
 #if BATTERY_CHARGING_ENABLE
     /** BC phy callback. */
     bc_phy_cbk_t bc_phy_cbk;
@@ -2822,7 +2827,7 @@ bool pd_phy_is_busy(uint8_t port)
 
     return false;
 }
-
+#if (0)                // 19'OCT'2022 Reducing Flash Size Debug
 #if ((defined(CCG3PA) || defined(CCG3PA2)) && (BATTERY_CHARGING_ENABLE))
 void pdss_qc3_handle_intr(uint8_t cport)
 {
@@ -2923,6 +2928,7 @@ void pdss_afc_handle_reset_intr(uint8_t cport)
 }
 #endif /* ((defined(CCG3PA) || defined(CCG3PA2)) && (BATTERY_CHARGING_ENABLE)) */
 
+#endif/**#if 0 to reduce code size*/
 void pdss_intr0_handler(uint8_t port)
 {
     PPDSS_REGS_T pd = gl_pdss[port];
@@ -3336,6 +3342,7 @@ void pdss_intr0_handler(uint8_t port)
     }
 
 #if ((defined(CCG3PA) || defined(CCG3PA2)) && (BATTERY_CHARGING_ENABLE))
+#if (!QC_AFC_CHARGING_DISABLED)                   //19'OCT'2022 Venkata reducing flash size Debug
     if(pd->intr4_masked != 0)
     {
         if (pd->intr4_masked & (1 << PDSS_INTR4_UPDATE_PING_PONG_POS))
@@ -3387,6 +3394,7 @@ void pdss_intr0_handler(uint8_t port)
             pdss_qc3_handle_intr(BC_PORT_1_IDX);
         }
     }
+#endif  /*#if (!QC_AFC_CHARGING_DISABLED)//19'OCT'2022 Venkata reducing flash size Debug**/
 #endif /* ((defined(CCG3PA) || defined(CCG3PA2)) && (BATTERY_CHARGING_ENABLE)) */
 }
 
@@ -7611,6 +7619,164 @@ sbu_switch_state_t get_sbu2_switch_state(uint8_t port)
 
 #endif /* defined (CCG5) || defined(CCG6) || defined(CCG5C) */
 
+//Venkat,18Nov'22, Inorder to optimize the size but to make QC functionalities work, 
+//commenting whole bc statemachine but extracting only required functions as per our usecase so handling that using this macro
+#if(!BC_BlOCK_SIZE_OPTIMIZE)
+ccg_status_t chgb_init(uint8_t cport, bc_phy_cbk_t cbk)
+{
+    pdss_status_t* pdss_stat = &gl_pdss_status[cport];
+    PPDSS_REGS_T pd = gl_pdss[cport];
+
+    if (cbk == NULL)
+    {
+        return CCG_STAT_BAD_PARAM;
+    }
+
+    pdss_stat->bc_phy_cbk = cbk;
+
+#if (defined(CCG3PA) || defined(CCG3PA2)) || (defined(CCG6)) || defined(CCG5C)
+    pd->intr9_cfg_bch_det[cport] &= ~(PDSS_INTR9_CFG_BCH_DET_BCH_DET_COMP0_FILT_EN |
+               PDSS_INTR9_CFG_BCH_DET_BCH_DET_COMP0_CFG_MASK |
+               PDSS_INTR9_CFG_BCH_DET_BCH_DET_COMP0_FILT_SEL_MASK |
+               PDSS_INTR9_CFG_BCH_DET_BCH_DET_COMP1_FILT_EN  |
+               PDSS_INTR9_CFG_BCH_DET_BCH_DET_COMP1_CFG_MASK |
+               PDSS_INTR9_CFG_BCH_DET_BCH_DET_COMP1_FILT_SEL_MASK);
+#elif defined(CCG5)
+    pd->intr3_cfg_chgdet &= ~(PDSS_INTR3_CFG_CHGDET_CHGDET_FILT_EN|
+                PDSS_INTR3_CFG_CHGDET_CHGDET_CFG_MASK |
+                PDSS_INTR3_CFG_CHGDET_CHGDET_FILT_SEL_MASK |
+                PDSS_INTR3_CFG_CHGDET_CHGDET_FILT_EN  |
+                PDSS_INTR3_CFG_CHGDET_CHGDET_CFG_MASK |
+                PDSS_INTR3_CFG_CHGDET_CHGDET_FILT_SEL_MASK);
+#endif /* (defined(CCG3PA) || defined(CCG3PA2)) || (defined(CCG6)) || (defined(CCG5C) */
+
+    return CCG_STAT_SUCCESS;
+}
+ccg_status_t chgb_enable(uint8_t cport)
+{
+    PPDSS_REGS_T pd = gl_pdss[cport];
+
+#if (defined(CCG3PA) || defined(CCG3PA2)) || (defined(CCG6)) || (defined(CCG5C))
+    /* Enable Charger detect block */
+    pd->bch_det_0_ctrl[cport] = PDSS_BCH_DET_0_CTRL_EN_CHGDET;
+    pd->bch_det_1_ctrl[cport] = PDSS_BCH_DET_1_CTRL_CHGDET_ISO_N;
+
+    /*
+     * Clock to this block is required for wakeup functionality via
+     * QCOM_RCVR_Dx_CHANGED interrupt. Enabling this at the beginning.
+     */
+#if (defined(CCG6) || defined(CCG5C))
+    pd->ctrl |= (PDSS_CTRL_AFC_ENABLED);
+
+    /* Connect the charger detect block to the D+/D- signals on the appropriate side of the Type-C connector. */
+    if(dpm_get_status(cport)->polarity)
+    {
+        pd->dpdm_ctrl = (pd->dpdm_ctrl & ~PDSS_DPDM_CTRL_DPDM_T_DPDM_MASK) | (2 << PDSS_DPDM_CTRL_DPDM_T_DPDM_POS);
+    }
+    else
+    {
+        pd->dpdm_ctrl = (pd->dpdm_ctrl & ~PDSS_DPDM_CTRL_DPDM_T_DPDM_MASK) | (8 << PDSS_DPDM_CTRL_DPDM_T_DPDM_POS);
+    }
+#else
+    /* CCG3PA and CCG3PA2 */
+    PDSS->ctrl |= (1 << (PDSS_CTRL_AFC_ENABLED_POS + cport));
+#endif /*CCGx*/
+
+#elif (defined(CCG5))
+    /* Enable Charger detect block */
+    pd->chgdet_0_ctrl = PDSS_CHGDET_0_CTRL_EN_CHGDET;
+    pd->chgdet_1_ctrl = PDSS_CHGDET_1_CTRL_CHGDET_ISO_N;
+#endif /* CCGx */
+
+    CyDelayUs(50);
+    return CCG_STAT_SUCCESS;
+}
+ccg_status_t chgb_remove_term(uint8_t cport)
+{
+    PPDSS_REGS_T pd = gl_pdss[cport];
+
+#if (defined(CCG3PA) || defined(CCG3PA2))
+    pd->bch_det_0_ctrl[cport] &= ~(PDSS_BCH_DET_0_CTRL_IDP_SNK_EN |
+            PDSS_BCH_DET_0_CTRL_IDM_SNK_EN |
+            PDSS_BCH_DET_0_CTRL_VDP_SRC_EN |
+            PDSS_BCH_DET_0_CTRL_VDM_SRC_EN |
+            PDSS_BCH_DET_0_CTRL_IDP_SRC_EN |
+            PDSS_BCH_DET_0_CTRL_DCP_EN |
+            PDSS_BCH_DET_0_CTRL_RDM_PD_EN |
+            PDSS_BCH_DET_0_CTRL_RDM_PU_EN |
+            PDSS_BCH_DET_0_CTRL_RDP_PD_EN |
+            PDSS_BCH_DET_0_CTRL_RDP_PU_EN |
+            PDSS_BCH_DET_0_CTRL_RDAT_LKG_DP_EN |
+            PDSS_BCH_DET_0_CTRL_RDAT_LKG_DM_EN );
+    pd->bch_det_1_ctrl[cport] = PDSS_BCH_DET_1_CTRL_CHGDET_ISO_N;
+#elif defined (CCG5)
+    pd->chgdet_0_ctrl &= ~(PDSS_CHGDET_0_CTRL_IDP_SNK_EN |
+            PDSS_CHGDET_0_CTRL_IDM_SNK_EN |
+            PDSS_CHGDET_0_CTRL_VDP_SRC_EN |
+            PDSS_CHGDET_0_CTRL_VDM_SRC_EN |
+            PDSS_CHGDET_0_CTRL_IDP_SRC_EN |
+            PDSS_CHGDET_0_CTRL_DCP_EN |
+            PDSS_CHGDET_0_CTRL_RDM_PD_EN |
+            PDSS_CHGDET_0_CTRL_RDM_PU_EN |
+            PDSS_CHGDET_0_CTRL_RDP_PD_EN |
+            PDSS_CHGDET_0_CTRL_RDP_PU_EN |
+            PDSS_CHGDET_0_CTRL_RDAT_LKG_DP_EN |
+            PDSS_CHGDET_0_CTRL_RDAT_LKG_DM_EN );
+    pd->chgdet_1_ctrl = PDSS_CHGDET_1_CTRL_CHGDET_ISO_N;
+
+#elif (defined (CCG5C) || defined (CCG6))
+    pd->bch_det_0_ctrl[cport] &= ~(PDSS_BCH_DET_0_CTRL_IDP_SNK_EN |
+            PDSS_BCH_DET_0_CTRL_IDM_SNK_EN |
+#ifdef CCG6
+            PDSS_BCH_DET_0_CTRL_VDP_SRC_EN |
+#endif /* CCG6 */
+            PDSS_BCH_DET_0_CTRL_VDM_SRC_EN |
+            PDSS_BCH_DET_0_CTRL_IDP_SRC_EN |
+            PDSS_BCH_DET_0_CTRL_DCP_EN |
+            PDSS_BCH_DET_0_CTRL_RDM_PD_EN |
+            PDSS_BCH_DET_0_CTRL_RDM_PU_EN |
+            PDSS_BCH_DET_0_CTRL_RDP_PD_EN |
+            PDSS_BCH_DET_0_CTRL_RDP_PU_EN |
+            PDSS_BCH_DET_0_CTRL_RDAT_LKG_DP_EN |
+            PDSS_BCH_DET_0_CTRL_RDAT_LKG_DM_EN );
+    pd->bch_det_1_ctrl[cport] = PDSS_BCH_DET_1_CTRL_CHGDET_ISO_N;
+    pd->dpdm_ctrl           &= ~(PDSS_DPDM_CTRL_DCP_SHORT_DPDM_BOTTOM | PDSS_DPDM_CTRL_DCP_SHORT_DPDM_BOTTOM);
+#endif /* CCGx */
+
+    return CCG_STAT_SUCCESS;
+}
+#endif /**(!BC_BlOCK_SIZE_OPTIMIZE)*/
+/* venkat 6Jul'22
+   TaskID - V-1-T314 - Set voltage for QC2.0,3.0,4.0 implementation, 
+   GRL custom QC sink term application block where this api is specificaly ment to set voltage for QC mode operation
+   this block consists of all Qc2.0,Qc.3.0,QC4.0 implementations by changing D+and D- lines voltage results 
+   in 5v,9v,12v,20v from source depending on switch case choosen*/
+
+ccg_status_t grl_chgb_apply_sink_term(uint8_t cport,grl_chgb_snkset_term_t testermodeterms,uint8_t * lAppBuffer)
+{
+    
+    g_Struct_Ptr = (grl_Struct_t *)get_grl_struct_ptr();
+    
+    switch(testermodeterms)
+    {
+        case GRL_SET_VOLTAGE://01
+            if(g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag == QC2MODE)
+            {
+              gBufLog(false,0xD1);
+              grl_qc2_sink(cport,lAppBuffer);  
+            }
+            else if(g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag == QC3MODE)
+            {
+              gBufLog(false,0xD2);
+
+                grl_chgb_QC3(lAppBuffer);
+            }
+             
+        break;
+            
+    }
+    return CCG_STAT_SUCCESS;
+}
 #if BATTERY_CHARGING_ENABLE
 
 ccg_status_t chgb_init(uint8_t cport, bc_phy_cbk_t cbk)
@@ -7966,7 +8132,6 @@ ccg_status_t chgb_isolate_dpdm(uint8_t cport)
     return CCG_STAT_SUCCESS;
 }
 #endif /* (defined(CCG6) || defined(CCG5C)) */
-
 ccg_status_t chgb_apply_dp_pd(uint8_t cport)
 {
     PPDSS_REGS_T pd = gl_pdss[cport];
@@ -8146,7 +8311,37 @@ void chgb_disable_apple_det(uint8_t port)
     PPDSS_REGS_T pd = gl_pdss[port];
     pd->bch_det_1_ctrl[port] &= ~PDSS_BCH_DET_1_CTRL_CHGDET_APP_DET;
 }
+/* venkat 6Jul'22
+   TaskID - V-1-T314 - Set voltage for QC2.0,3.0,4.0 implementation, 
+   GRL custom QC sink term application block where this api is specificaly ment to set voltage for QC mode operation
+   this block consists of all Qc2.0,Qc.3.0,QC4.0 implementations by changing D+and D- lines voltage results 
+   in 5v,9v,12v,20v from source depending on switch case choosen*/
 
+ccg_status_t grl_chgb_apply_sink_term(uint8_t cport,grl_chgb_snkset_term_t testermodeterms,uint8_t * lAppBuffer)
+{
+    
+    g_Struct_Ptr = (grl_Struct_t *)get_grl_struct_ptr();
+    
+    switch(testermodeterms)
+    {
+        case GRL_SET_VOLTAGE://01
+            if(g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag == QC2MODE)
+            {
+              gBufLog(false,0xD1);
+              grl_qc2_sink(cport,lAppBuffer);  
+            }
+            else if(g_Struct_Ptr->gPDSSConfigCtrl.gQC4_3_ConfigFlag == QC3MODE)
+            {
+              gBufLog(false,0xD2);
+
+                grl_chgb_QC3(lAppBuffer);
+            }
+             
+        break;
+            
+    }
+    return CCG_STAT_SUCCESS;
+}
 ccg_status_t chgb_apply_sink_term(uint8_t cport, chgb_snk_term_t charger_term)
 {
     PPDSS_REGS_T pd = gl_pdss[cport];

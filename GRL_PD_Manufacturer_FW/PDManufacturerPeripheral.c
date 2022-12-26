@@ -593,7 +593,7 @@ CyFxGpioInit (void)
 	/**PPS GPIOs : DQ16, DQ17, DQ18*/
 	GpioConfigure (GPIO33_PPS_PGM_MODE_SELECTION,CyTrue, CyTrue,CyTrue,CyFalse,CyFalse,CyTrue);//Default mode should be in Boot mode =1
 
-	GpioConfigure (GPIO34_PPS_GPIO2,CyFalse, CyTrue,CyTrue,CyFalse,CyFalse,CyTrue);
+	GpioConfigure (GPIO34_PPS_GPIO2,CyTrue, CyFalse,CyFalse,CyTrue,CyTrue,CyTrue);         //Gpio Handling OCP trigger
 	//Pranay,15March'22.IO expander Input
 	GpioConfigure (GPIO35_PPS_RESET,CyTrue, CyTrue,CyTrue,CyTrue,CyTrue,CyTrue);
 
@@ -830,6 +830,9 @@ CyFxUsbI2cTransfer (
                  preamble.ctrlMask  = 0x0002;
                  break;
         	}
+
+            CyU3PMutexGet (&I2CBusHandlingMutex, CYU3P_WAIT_FOREVER);/**Pranay,15Nov'22, protecting the i2c bus until written completely*/
+
             status = CyU3PI2cReceiveBytes (&preamble, buffer, byteCount, 0);
 //          status = CyU3PI2cReceiveBytes (&preamble, buffer, (pageCount == 1) ? resCount : glI2cPageSize, 0);
             if (status != CY_U3P_SUCCESS)
@@ -840,6 +843,9 @@ CyFxUsbI2cTransfer (
 
             	return status;
             }
+
+            CyU3PMutexPut (&I2CBusHandlingMutex);/**Pranay,15Nov'22,Release the lock for i2c mutex variable*/
+
         }
         else /* Write */
         {
@@ -878,6 +884,8 @@ CyFxUsbI2cTransfer (
             }
 #endif
 //#if 0
+            CyU3PMutexGet (&I2CBusHandlingMutex, CYU3P_WAIT_FOREVER);/**Pranay,15Nov'22, protecting the i2c bus until written completely*/
+
             status = CyU3PI2cTransmitBytes (&preamble, buffer, byteCount, 0);
             if (status != CY_U3P_SUCCESS)
             {
@@ -888,6 +896,8 @@ CyFxUsbI2cTransfer (
 
                 return status;
             }
+
+            CyU3PMutexPut (&I2CBusHandlingMutex);/**Pranay,15Nov'22,Release the lock for i2c mutex variable*/
 //#endif
             /* Wait for the write to complete. */
 #if 0

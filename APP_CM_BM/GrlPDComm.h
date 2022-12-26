@@ -63,6 +63,11 @@ extern unsigned char pucMACArray[8];
 #define PROGRAM   0xFFFF
 #define BOOT      0xAAAA
 
+
+#define SYS_ID_PAYLOAD_LENGHT   18 //MAx of 18 Bytes being filled into sysID buffer when requested for GetSysID details - buffer being filled is GRL-VDPWR-XXXXYYYY(XXXX: MFD YEAR,YYYY:SYS ID)
+#define SYSID_HEADER_LENGTH     1 //1Byte of Header is being pushed . header will be total payload lenght of system serial ID
+#define SYS_ID_MAXLENGTH    SYS_ID_PAYLOAD_LENGHT + SYSID_HEADER_LENGTH //system serial number details length includes payload lenght and header length
+
 extern uint32_t buf_rx_cm[150] ;
 extern u8_t buf_rx[PAYLOAD];
 extern u8_t buf_tx[PAYLOAD];
@@ -70,7 +75,7 @@ extern u8_t buf_tx[PAYLOAD];
 
 struct tcp_pcb *Rxtcb;
 struct tcp_pcb *Rxtcb_5003;
-
+static uint8_t gSysSnoLength;
 volatile bool gReadAPI;
 volatile bool isEchobackReq;
 //volatile bool gReadPollingData;
@@ -112,6 +117,7 @@ void DecodeSystemDetails(uint16_t * aBuffer);
 void sys_id();
 void TxIPAddr();
 void delay();
+uint8_t* sys_id_formation(uint8_t * aRxBuffer);
 
 err_t grlTcpDataTx(uint16_t * aTxBuf, uint16_t aDataLength);
 

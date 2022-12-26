@@ -131,7 +131,7 @@ uint32_t GetLiveVbusVoltageValue(uint8_t aAdcNumber, float aAvgValue)
         }
     }
 
-    lLiveValue = ((aAvgValue - lOffset)/lGradient);
+    lLiveValue = ((aAvgValue - lOffset)/lGradient);//(x = y-c / m)
     return lLiveValue;
 
 }

@@ -697,11 +697,16 @@ static void tcp_echoserver_send(struct tcp_pcb *tpcb, struct tcp_echoserver_stru
     ptr = es->p;
 
     /* enqueue data for transmission */
-    wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
+	//Pranay,20Oct'22, Handling Echoback for commands that re required to be echoed back only, 
+	//else remianing all buffer clearing functionalities shall be remained same, so handling here
+    if( isEchobackReq )//Set && PGM mode APIs
+        wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
+    else//For Get Mode commands
+        wr_err = ERR_OK;
 
     if (wr_err == ERR_OK) {
       u16_t plen;
-
+      u8_t freed;
       plen = ptr->len;
 
       /* continue with next pbuf in chain (if any) */
@@ -713,8 +718,13 @@ static void tcp_echoserver_send(struct tcp_pcb *tpcb, struct tcp_echoserver_stru
       }
 
       /* free pbuf: will free pbufs up to es->p (because es->p has a reference count > 0) */
-      pbuf_free(ptr);
-
+      /* chop first pbuf from chain */
+       do
+       {
+         /* try hard to free pbuf */
+         freed = pbuf_free(ptr);
+       }
+       while(freed == 0);
       /* Update tcp window size to be advertized : should be called when received
       data (with the amount plen) has been processed by the application layer */
       tcp_recved(tpcb, plen);
@@ -757,7 +767,8 @@ static err_t tcp_echoserver_poll(void *arg, struct tcp_pcb *tpcb)
       if(g_tcp_active_cnt >= 5)
       {
           g_tcp_active_cnt = 0;
-          tcp_close(tpcb);//Sending FIN
+//          tcp_close(tpcb);//Sending FIN
+//          tcp_abort(tpcb);//Sending RST
       }
 //
 //      ulUser0 = GRL_MAC_0 ;
@@ -852,6 +863,8 @@ static err_t tcp_echoserver_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
 
   es = (struct tcp_echoserver_struct *)arg;
 
+   pbuf_free(es->p);//Pranay,20Oct'22, As per dicussion with Km, adding this as part of the memory management after ACK received from Client
+
 //  if (es->p != NULL) {
 //    /* still got pbufs to send */
 //    tcp_echoserver_send(tpcb, es);
@@ -862,9 +875,9 @@ static err_t tcp_echoserver_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
 //    }
 //  }
     /* if no more data to send and client closed connection*/
-    if (es->state == ES_CLOSING) {
-      tcp_echoserver_connection_close(tpcb, es);
-    }
+//    if (es->state == ES_CLOSING) {
+//      tcp_echoserver_connection_close(tpcb, es);
+//    }
   return ERR_OK;
 }
 
@@ -999,19 +1012,19 @@ static err_t grltcpServerRecv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, e
 
         grl_tcp_recv_data_pop(tpcb,p);
 
-        g_tcp_active_cnt = 0; /* Re-init the tcp activity status to close the in-active connection */
+//        tpcb->so_options |= SOF_KEEPALIVE;
+//        tpcb->keep_intvl = 5000;
+//        tpcb->keep_idle = 60000;
+//        g_tcp_active_cnt = 0; /* Re-init the tcp activity status to close the in-active connection */
 
-        if( isEchobackReq )//Dont echo back
             tcp_echoserver_send(tpcb, es);
-        else
-        {
-
-            //Pranay,20Sep'22
-            tcp_recved(tpcb, p->tot_len);
-
-            //Pranay,18March'22
-            pbuf_free(p);
-        }
+//        else//For Get Mode commands
+//        {
+//            //Pranay,20Sep'22
+//            tcp_recved(tpcb, p->tot_len);
+//            //Pranay,18March'22
+//            pbuf_free(p);
+//        }
 
 
         ret_err = ERR_OK;
@@ -1033,6 +1046,8 @@ static err_t tcp_echoserver_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 
   LWIP_UNUSED_ARG(arg);
   LWIP_UNUSED_ARG(err);
+
+  tcp_nagle_disable(newpcb);
 
   /* set priority for the newly accepted tcp connection newpcb */
   tcp_setprio(newpcb, TCP_PRIO_MIN);
@@ -1293,7 +1308,6 @@ err_t grlTcpDataTx_5003(uint16_t * aTxBuf, uint16_t aDataLength)
 err_t grlTcpDataTx(uint16_t * aTxBuf, uint16_t aDataLength)
 {
     err_t err;
-//    gReadAPI = false;
 
 #if 0
     gReadAPI = false;
@@ -1518,6 +1532,15 @@ __interrupt void IPC_CPU1_CM_POLLING_ISR()
 //        grlTcpDataTx_5003(&PollingRxBuf[1],data);
 //    }
 }
+void grlGetPhyRegInfo(uint16_t aGetRegVal)
+{
+    uint16_t phyRegContent=0;
+    uint8_t luArtTxBuf[16] = {0};
+    luArtTxBuf[0] = 0xBB;
+    luArtTxBuf[1] = 0x01;
+    phyRegContent= Ethernet_readPHYRegister(EMAC_BASE,aGetRegVal);
+
+}
 //
 // Pranay, 11March,22
 // IPC ISR for communication between CM and CPU1,
@@ -1583,6 +1606,10 @@ __interrupt void IPC_CPU1_CM_ISR0()
 //        grlTcpDataTx_5003(PollingRxBuf,data);
 //    }
 //    grlUdpDataTransfer(buf_rx_cm,data);
+//    if( (CPU1RxBuf[0] ) == 0xBB)
+ //   {
+//        grlGetPhyRegInfo(CPU1RxBuf[2]);
+//    }
     if( (CPU1RxBuf[0] & 0x0F) == 0x02)//if related to PGM
     {
         uint8_t lBuf[24] = {0};
@@ -1848,9 +1875,6 @@ int main(void)
     delay();
     TxIPAddr();
     GPIO_togglePin(DEVICE_GPIO_PIN_GREENLED36);
-
-//    tcp_nagle_enable(tcp_echoserver_pcb);
-
     MsgTimerStart(1000, 0, TIMER0);
 
     while (1)

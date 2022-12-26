@@ -11,7 +11,9 @@
 
 
 #define CPU2_CTRL_VBUS_GPIO12          12
-
+//Venkat,18Nov'22, GPIO64 is being used for OCP triggering between PPS and FX3,
+//PPS is source and FX3 is configured for Falling edge interrupt, default value is High
+#define CPU2_OCP_TRIGGER_GPIO64        64
 #define TC_BOARD_DET_GPIO14            14
 
 #define SPIA_MOSI_GPIO16               16

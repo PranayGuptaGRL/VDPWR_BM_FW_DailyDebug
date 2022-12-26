@@ -291,7 +291,7 @@
 #define LWIP_SOCKET                     0           // default is 1
 //#define LWIP_COMPAT_SOCKETS             1
 //#define LWIP_POSIX_SOCKETS_IO_NAMES     1
-//#define LWIP_TCP_KEEPALIVE              0
+#define LWIP_TCP_KEEPALIVE              1
 //#define LWIP_SO_RCVTIMEO                0
 //#define LWIP_SO_RCVBUF                  0
 //#define SO_REUSE                        0

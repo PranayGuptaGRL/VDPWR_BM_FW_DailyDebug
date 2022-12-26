@@ -18,7 +18,7 @@
 static uint16_t glogBufIndex;
 dpm_pd_cmd_buf_t vdm_cmd_buf;
 
-uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "5.4.5";
+uint8_t glFirmwareID[24] __attribute__ ((aligned(32))) = "1.1.1";
 #if ONLY_PD_SNK_FUNC_EN
 void g_CapabilityMismatchHandler(uint8_t * aBuffer)
 {
@@ -760,7 +760,7 @@ void g_Get_PDNegotiationInfo(uint8_t * RecvBuffer,uint8_t * aBuffer)
             aBuffer[glogBufIndex++] = 0xD4;
             aBuffer[glogBufIndex++] = 0xFD;
             aBuffer[glogBufIndex] = (dpm_stat->contract_exist & 0x01);//PDC status
-            aBuffer[glogBufIndex] |= (dpm_stat->cur_port_role & 0x03) << 1;//Current port power role
+            aBuffer[glogBufIndex] |= (dpm_stat->cur_port_role & 0x03) << 1;//Current port power role,Src/Sink
             aBuffer[glogBufIndex++] |= ((dpm_stat->attached_dev & 0x0F) << 4); //Attached device type
 
             g_PresentPDCInfo(dpm_stat/*dpm_stat->contract*/,aBuffer);//PDC Voltage/Current details
@@ -811,7 +811,8 @@ void g_Get_PDNegotiationInfo(uint8_t * RecvBuffer,uint8_t * aBuffer)
             aBuffer[glogBufIndex++] = dpm_stat->cur_port_type;
             /**Current POWER Role*/
             aBuffer[glogBufIndex++] = dpm_stat->cur_port_role;
-            
+             /**< Port role: Sink, Source or Dual. *///Pranay,19OCt'22, To track Port role irrespecive of PDC status
+            aBuffer[glogBufIndex++] = dpm_stat->port_role;
             break;
 #if ONLY_PD_SNK_FUNC_EN            
         case 0xF6:/**GET_UVDM_DATA**/

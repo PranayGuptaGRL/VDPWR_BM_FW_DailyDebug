@@ -59,6 +59,8 @@ typedef enum FWCtrlTimer1TypeEnum
 {
 	Timer_CCG3PA_Pgm_I2C_Read = 1,
 	Timer_TempLimitExceedHandle = 2,
+	Timer_QC_MODE_DISABLE = 3,
+	Timer_QC_MODE_ENABLE  = 4,
 	Timer_Debug_LED_Toggle = 0xAA,
 
 }FWCtrlTimer1Type;
@@ -76,7 +78,7 @@ typedef enum FWCtrlTimer0TypeEnum
 	PDSSInterrupt_Validation = 8,
 	BC12_InterruptHandling  = 9,//1000mSec
 	Eload_Sync_Handling		= 10,
-	Timer_Connect_State      = 11,
+//	Timer_Connect_State      = 11,
 	Timer_tGetDUTCapabilities = 12,//30mS
 	Timer_tGetPDCInfo 		= 13,//30mS
 	Timer_tGetCCGxPortRole = 14,//30mS
@@ -93,11 +95,19 @@ typedef enum FWCtrlTimer0TypeEnum
 	Timer_tGetBatterystatusInfo = 25,//Get Battery status
 	Timer_PDSS_InitGetBatteryCaps = 26,//For Getting batteryCaps afterPDC
 }FWCtrlTimer0Type;
+
 typedef enum FWCtrlTimerTypeEnum
 {
 	Timer_tSampleCheck	= 0,//60000mSec (2^16 timer)
 
-};
+}FWCtrlTimerTypeEnum;
+
+typedef enum FWCtrTimer4TypeEnum
+{
+	Timer4_Connect_State      = 0,
+
+}FWCtrTimer4TypeEnum;
+
 typedef enum
 {
 	VUP_AS_SINK = 0x03,
@@ -158,6 +168,7 @@ typedef enum
 	TIMER1,
 	TIMER2,
 	TIMER3,
+	TIMER4,
 }timers_t;
 
 typedef enum
